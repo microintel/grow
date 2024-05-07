@@ -1,0 +1,35 @@
+
+<html>
+      
+<head>
+</head>
+  
+<body>
+    <input id="sch" oninput="ch()" type="text">
+      
+    <div>
+    <div class="u">avatar</div>
+    <div class="u">ironman</div>
+    <div class="u">ironman2</div>
+    </div>
+    <script>
+    function ch() {
+    let inp = document.getElementById('sch').value
+    inp=inp.toLowerCase();
+  
+    let x = document.getElementsByClassName('u');
+   
+    for (let i=0;i<x.length; i++){ 
+    let cg=x[i].innerHTML.toLowerCase();
+    if (!cg.includes(inp)) {
+    x[i].style.display="none";
+    }
+    else {
+    x[i].style.display="block";                 
+    }
+    }
+    }
+    </script>
+</body>
+  
+</html>

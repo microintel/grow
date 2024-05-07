@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<title>encryption</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+       margin:0px;
+       background-color:#e62425;
+       text-align:left;
+       color: white;
+       font-family: "Arial", sans-serif;
+    }
+a{
+    
+    color: black;
+    text-decoration: none;
+    font-size:22px;
+ }
+td{
+   margin:10px;
+   width:300px;
+   padding: 10px;
+   text-align: center;
+   
+
+}
+.icimg{
+height:330px;
+width:250px;
+border-radius:10px;
+box-shadow:3px 3px 20px black;
+}
+#head{
+position:relative;
+margin:0px;
+height:150px;
+background-color:black;
+width:1100px;
+
+}
+</style>
+</head>
+<body>
+<p id="head"><img src="https://microintel.github.io/MicroDisk/md.jpg" width="200px" height="100px" style="margin:25px 0px 0px 0px;"></img></p>
+<table border="0">
+<tr>
+   <th></th>
+   <th></th>
+   <th></th>
+   <th></th>
+</tr>
+<tr>
+    <td onclick="mv('IronMan')" id="iu" ><img class="icimg" src="">      <p></p><a>Iron Man 2008</a><p></p></td>
+    <td onclick="mv('TIH2008')"><img class="icimg" src="">      <p></p><a>The Incredible Hulk 2008</a><p></p></td>
+    <td onclick="mv('IronMan2')"><img class="icimg" src="">      <p></p><a>Iron Man 2</a><p></p></td>
+    <td onclick="mv('Thor')"><img class="icimg" src="">      <p></p><a>Thor</a><p></p></td>
+</tr>
+<tr>
+    <td onclick="mv('CATFA')"><img class="icimg" src="">      <p></p><a>Captain America: The First Avenger</a><p></p></td>
+    <td onclick="mv('TheAvengers')"><img class="icimg" src="">      <p></p><a>The Avengers</a><p></p></td>
+    <td onclick="mv('IronMan3')"><img class="icimg" src="">      <p></p><a>Iron Man 3</a><p></p></td>
+    <td onclick="mv('ThorTDW')"><img class="icimg" src="">      <p></p><a>Thor: The Dark World</a><p></p></td>
+</tr>
+<tr>
+    <td onclick="mv('CATWS')"><img class="icimg" src="">      <p></p><a>Captain America: The Winter Soldier</a><p></p></td>
+    <td onclick="mv('GGV1')"><img class="icimg" src="">      <p></p><a>Guardians Of The Galaxy</a><p></p></td>
+    <td onclick="mv('AvengersAOU')"><img class="icimg" src="">      <p></p><a>Avengers: Age Of Ultron</a><p></p></td>
+    <td onclick="mv('AntMan')"><img class="icimg" src="">      <p></p><a>Ant-Man</a><p></p></td>
+</tr>
+<tr>
+    <td onclick="mv('CACW')"><img class="icimg" src="">      <p></p><a>Captain America: Civil War</a><p></p></td>
+    <td onclick="mv('DoctorS')"><img class="icimg" src="">      <p></p><a>Doctor Strange</a><p></p></td>
+    <td onclick="mv('GGV2')"><img class="icimg" src="">      <p></p><a>Guardians Of The Galaxy Vol.2</a><p></p></td>
+    <td onclick="mv('SMHC')"><img class="icimg" src="">      <p></p><a>Spyder Man: HomeComing</a><p></p></td>
+</tr>
+<tr>
+    <td onclick="mv('THORR')"><img class="icimg" src="">      <p></p><a>Thor: Ragnork</a><p></p></td>
+    <td onclick="mv('BlackPanther')"><img class="icimg" src="">      <p></p><a>Black Panther</a><p></p></td>
+    <td onclick="mv('AIW')"><img class="icimg" src="">      <p></p><a>Avengers: Infinity War</a><p></p></td>
+    <td onclick="mv('AntMTW')"><img class="icimg" src="">      <p></p><a>Ant-Man and The Wasp</a><p></p></td>
+</tr>
+<tr>
+    <td onclick="mv('CaptainMarvel')"><img class="icimg" src="">      <p></p><a>Captain Marvel</a><p></p></td>
+    <td onclick="mv('AvengersEndgame')"><img class="icimg" src="">      <p></p><a>Avengers Endgame</a><p></p></td>
+    <td onclick="mv('SMFFH')"><img class="icimg" src="">      <p></p><a>Spyder Man: Far From Home</a><p></p></td>
+    <td onclick="mv('BlackWidow')"><img class="icimg" src="">      <p></p><a>Black Widow</a><p></p></td>
+</tr>
+<tr>
+    <td onclick="mv('SCTLOTR')"><img class="icimg" src="">      <p></p><a>Shang Chi and The Legend Of The Ten Rings</a><p></p></td>
+    <td onclick="mv('')"><img class="icimg" src="">      <p></p><a></a><p></p></td>
+    <td onclick="mv('')"><img class="icimg" src="">      <p></p><a></a><p></p></td>
+    <td onclick="mv('')"><img class="icimg" src="">      <p></p><a></a><p></p></td>
+</tr>
+</table>
+<script>
+            function mv(minfo){
+            
+            let mvi= {
+                       IronMan:["IronMan","","",""],
+                       TIH2008:["The Incredible Hulk 2008","","",""],
+                       IronMan2:["Iron Man 2","","",""],
+                       Thor:["Thor","","",""],
+                       CATFA:["Captain America: The First Avenger","","",""],
+                       TheAvengers:["The Avengers","","",""],
+                       IronMan3:["Iron Man 3","","",""],
+                       ThorTDW:["Thor: The Dark World","","",""],
+                       CATWS:["Captain America: The Winter Soldier","","",""],
+                       GGV1:["Guardians Of The Galaxy","","",""],
+                       AvengersAOU:["Avengers: Age Of Ultron","","",""],
+                       AntMan:["Ant-Man","","",""],
+                       CACW:["Captain America: Civil War","","",""],
+                       DoctorS:["Doctor Strange","","",""],
+                       GGV2:["Guardians Of The Galaxy Vol.2","","",""],
+                       SMHC:["Spyder Man: HomeComing","","",""],
+                       THORR:["Thor: Ragnork","","",""],
+                       BlackPanther:["Black Panther","","",""],
+                       AIW:["Avengers: Infinity War","","",""],
+                       AntMTW:["Ant-Man and The Wasp","","",""],
+                       CaptainMarvel:["Captain Marvel","","",""],
+                       AvengersEndgame:["Avengers Endgame","","",""],
+                       SMFFH:["Spyder Man: Far From Home","","",""],
+                       BlackWidow:["Black Widow"],
+                       SCTLOTR:["Shang Chi and The Legend Of The Ten Rings","","",""],
+                       };
+            let form = `<html>
+            <body id='im' background="">
+            <center><div>
+            <h1 style="size: 100PX; font-family: Georgia, 'Times New Roman', Times, serif; color:red;text-align:center;" id='titl'> </h1>
+            <h2 style="color:red;" id='tril' > </h2>
+            <iframe id="yousrc" src="" frameborder="0"  width="620" height="415"> </iframe>
+            </div></center>
+            </body>
+            </html>`;
+            document.write(form);
+            
+            var bimg = document.getElementById("im");
+            bimg.background= mvi[minfo][1];
+            document.getElementById('titl').innerHTML="Title : "+mvi[minfo][0];
+            document.getElementById('tril').innerHTML="Watch "+mvi[minfo][0]+" Trialer";
+            document.getElementById('yousrc').src=mvi[minfo][2];
+            }
+</script>    
+</body>
+</html>

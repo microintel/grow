@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+body {
+    background-color: lightgreen;
+    padding: 10px;
+}
+
+@media screen and (max-width: 800px) {
+  body {
+    background-color: lavender;
+  }
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.container .h {
+    flex: 1;
+    text-align: center;
+    margin: 5px;
+    padding: 10px;
+    max-width: calc(50% - 20px); /* For desktop view, each item takes 50% of the container width */
+}
+
+.container .h img {
+    max-width: 100%;
+    height: auto;
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="h">
+        <img src="image1.jpg" alt="Image 1">
+        <p>nsns</p>
+    </div>
+    <div class="h">
+        <img src="image2.jpg" alt="Image 2">
+        <p>nsns</p>
+    </div>
+    <div class="h">
+    <img src="image3.jpg" alt="Image 3">
+    <p>nsns</p>
+    </div>
+    <div class="h">
+    <img src="image4.jpg" alt="Image 4">
+    <p>nsns</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="h">
+        <img src="image3.jpg" alt="Image 3">
+        <p>nsns</p>
+    </div>
+    <div class="h">
+        <img src="image4.jpg" alt="Image 4">
+        <p>nsns</p>
+    </div>
+    <div class="h">
+        <img src="image5.jpg" alt="Image 5">
+        <p>nsns</p>
+    </div>
+    <div class="h">
+        <img src="image6.jpg" alt="Image 6">
+        <p>nsns</p>
+    </div>
+</div>
+</body>
+</html>

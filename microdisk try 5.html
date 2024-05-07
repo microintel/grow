@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<title>microdisk</title>
+<head>
+  <style>
+    .item{
+      display: inline-block;
+      padding-inline: 50px;
+      position: relative;
+      transform: 05.s;
+   
+    }
+    p{
+     
+     text-align: center;
+     margin-top: 20px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      padding: 10px;
+    }
+    input{
+      height: 50px;
+      width: 500px;
+      border-radius: 50px;
+      margin-bottom: 50px;
+      background-color: transparent;
+      margin-left: 30%;
+      animation-name: inp;
+      animation-duration: 3s;
+      animation-timing-function: ease;
+      animation-iteration-count: infinite;
+    
+
+    }
+   a:hover{
+    color: rgb(255, 0, 98);
+   }
+   a:active{
+    color: red;
+    
+   }
+
+    @keyframes inp{
+      0% {border-color: rgb(4, 2, 7);}
+      50% {border-color: rgb(209, 14, 14);}
+      75% {border-color: rgb(226, 43, 134);}
+      100% {border-color: rgb(241, 6, 104);}
+
+    }
+    .bc{
+      margin-left: 0px;
+    margin-top: 0px;
+    }
+    
+  </style>
+  <body>
+    <div class="bc"><p style="background-color: black;"><img src="v2.gif" height="200px" width="200px"></p></div>
+    <div><input type="text" placeholder="Search"></div>
+    <div class="item" ><img style="box-shadow: 3px 3px 20px black;" src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQA_-tL18_rj9zEcjN6n41NEaJm-kRNF9UeOtvksZ4z_OW6jRA9"  height="300px" width="200px">
+      <p><a onclick="mv('AvengerEndGame')" > Avengers Endgame </br>{480p}{720p}{1080p}</a></p>
+    </div>
+    <div class="item">
+      <img style="box-shadow: 3px 3px 20px black;"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmE2vwxy5KaCu7cRuYYdgNdQKddux5OYgGwsPo0kqP_xzLnsDV"  height="300px" width="200px"></br>
+           <p> <a onclick="mv('InfinityWar')">Avengers Infinity War </br>{480p}{720p}{1080p}</a></p>
+    </div>
+    <div class="item">
+      <img  style="box-shadow: 3px 3px 20px black;"  src="https://cdn.marvel.com/content/1x_masonry/thorloveandthunder_lob_crd_03.jpg" id="m1" height="300px" width="200px">
+      <p><a onclick="mv('TLT')">Thor Love and Thunder </br> {480p}{720p}{1080p}</a></p>
+      </div>
+      <div class="item">
+        <img  style="box-shadow: 3px 3px 20px black;"  src="https://www.movienewsletters.net/photos/113522R1.jpg" id="m1" height="300px" width="200px">
+        <p><a onclick="mv('Thor')">Thor </br> {480p}{720p}{1080p}  </a></p>
+        </div>
+        <div class="item">
+          <img style="box-shadow: 3px 3px 20px black;"  src="https://www.movienewsletters.net/photos/169119R1.jpg" id="m1" height="300px" width="200px">
+          <p><a onclick="mv('TTDW')">Thor: The Dark World </br> {480p}{720p}{1080p}</a>
+            </p>
+          </div>
+          <div class="item">
+            <img style="box-shadow: 3px 3px 20px black;"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6FUUtxQRnUSbCnhmWv-n4vCuDkJXHxZ5qRHIpI4aaEpnUCfuc" id="m1" height="300px" width="200px">
+            <p><a onclick="mv('TR')">An Avenger </br> {480p}{720p}{1080p}</a></p>
+            </div>
+            <div class="item">
+              <img style="box-shadow: 3px 3px 20px black;"  src="https://www.movienewsletters.net/photos/277216R1.jpg" id="m1" height="300px" width="200px">
+              <p>
+              <a onclick="mv('IronMan')">Iron Man 2008 </br> {480p}{720p}{1080p}</a></p>
+              </div>
+              <div class="item">
+                <img style="box-shadow: 3px 3px 20px black;"  src="https://www.movienewsletters.net/photos/065116R1.jpg" id="m1" height="300px" width="200px">
+                <p>
+                <a onclick="mv('IronMan2')"> IronMan2 </br>{480p}{720p}{1080p}</a></p>
+                </div>
+                <div class="item">
+                  <img style="box-shadow: 3px 3px 20px black;"  src="https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcSK0mRgxk6RD6AXbkAzpQRs7FCh9J0FiOxC9eIHCqoxAgpBeywiPrFjbAcGKbCaVYkc" id="m1" height="300px" width="200px">
+                  <p>
+                  <a onclick="mv('TheAvengers')">Marvel's The Avengers</br> {480p}{720p}{1080p}</a></p>
+                  </div>
+                  <div class="item">
+                    <img style="box-shadow: 3px 3px 20px black;"  src="https://www.movienewsletters.net/photos/183976R1.jpg" id="m1" height="300px" width="200px">
+                    <p>
+                    <a onclick="mv('AgeofUltron')">Avengers: Age of Ultron </br>{480p}{720p}{1080p}</a></p>
+                    </div>
+                    <div class="item">
+                      <img style="box-shadow: 3px 3px 20px black;"  src="https://contentserver.com.au/assets/511728_p10989225_p_v8_ak.jpg" id="m1" height="300px" width="200px">
+                      <p>
+                      <a onclick="mv('Civilwar')">Captain America: Civil War </br>{480p}{720p}{1080p}</a></p>
+                      </div>
+                      <div class="item">
+                        <img style="box-shadow: 3px 3px 20px black;"  src="https://www.movienewsletters.net/photos/181326R1.jpg" id="m1" height="300px" width="200px">
+                        <p>
+                        <a onclick="mv('WinterSoldier')">The Winter Soldier </br>{480p}{720p}{1080p}</a></p>
+                        </div>
+                        <div class="item">
+                          <img style="box-shadow: 3px 3px 20px black;"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRloJasRJfjL5X5UsSi96lpROHWeADYMZtsvnQQ8tiR&usqp=CAE&s" id="m1" height="300px" width="200px">
+                          <p>
+                          <a onclick="mv('BlackPanther')">Black Panther 2018</br> {480p}{720p}{1080p}</a>
+                          </p>
+                          </div>
+                          <div class="item">
+                            <img style="box-shadow: 3px 3px 20px black;"  src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSzNzI5w3iKM-KdasCDvlOEUgD2ojlf7IW5b-e3tqFmhW2JRSCz" id="m1" height="300px" width="200px">
+                            <p>
+                            <a onclick="mv('WakandaForever')">Wakanda Forever</br>{480p}{720p}{1080p}</a></p>
+                            </div>
+                            <div class="item">
+                              <img style="box-shadow: 3px 3px 20px black;"  src="https://contentserver.com.au/assets/491602_p11214341_p_v8_ap.jpg" id="m1" height="300px" width="200px">
+                              <p>
+                              <a onclick="mv('DoctorStrange')">Doctor Strange 2016</br>{480p}{720p}{1080p}</a></p>
+                              </div>
+                              <div class="item">
+                                <img style="box-shadow: 3px 3px 20px black;"  src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTb-iTrAmE_x35oWfFcFpgMbFtuG59NXUUoiOn0jMp93POq5YDH" id="m1" height="300px" width="200px">
+                                <p>
+                                <a onclick="mv('SpiderMan')">Spider-Man  2002 </br>{480p}{720p}{1080p}</a></p>
+                                </div>
+                                <div class="item">
+                                  <img style="box-shadow: 3px 3px 20px black;"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP85OVMLU-Wa8wx6E3ntRjzeVjRaUGPziJ6y_78iMhT1W0_yTh" id="m1" height="300px" width="200px">
+                                  <p>
+                                  <a onclick="mv('SpiderMan2')">SpiderMan2</br>{480p}{720p}{1080p}</a></p>
+
+                                  </div>
+                                  <div class="item">
+                                    <img style="box-shadow: 3px 3px 20px black;"  src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcT1PzOT_nEfzWzOKqNH3JP3pB_x6mWPjlxbEzygsNzZ7c5iwoOu" id="m1" height="300px" width="200px">
+                                    <p>
+                                    <a onclick="mv('SpiderMan3')">SpiderMan3</br>{480p}{720p}{1080p}</a></p>
+                                    </div>
+                                    <div class="item">
+                                      <img style="box-shadow: 3px 3px 20px black;"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrdPsGJEBxBev7gKo_EMp0Pgk7Q7su_xTUxf3vo8dE9S_CiG2Z" id="m1" height="300px" width="200px">
+                                      <p>
+                                      <a onclick="mv('NoWayHome')">No Way Home </br>{480p}{720p}{1080p}</a></p>
+                                      </div>
+                                      <div class="item">
+                                        <img style="box-shadow: 3px 3px 20px black;"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJ5IuxfEt-WmUIrpJldszdRJFfTubSEeQVMVNuv63Z0PNfvbWV" id="m1" height="300px" width="200px">
+                                        <p>
+                                        <a onclick="mv('Multiverse')">Multiverse of Madness</br>{480p}{720p}{1080p}</a></p>
+                                        </div>
+    </div>
+    <script src="movies1.js">
+
+    </script>
+  </body>
+</head>

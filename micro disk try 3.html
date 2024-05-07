@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Encryption</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            background-color: #e62425; /* Marvel Red background */
+            color: white;
+            font-family: "Arial", sans-serif;
+        }
+
+        a {
+            color: #3498db; /* Blue link color */
+            text-decoration: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .icimg {
+            height: 200px;
+            width: 150px;
+            border-radius: 15px;
+        }
+
+        div {
+            background-color: #111; /* Dark background for the header */
+            width: 100%;
+        }
+
+        /* Header styling with Marvel logo background */
+        header {
+            background-image: url('marvel-logo.png'); /* Replace with your Marvel logo */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 50px 0;
+            text-align: center;
+            font-size: 24px;
+            color: #e62425; /* Marvel Red text color */
+            text-shadow: 2px 2px 4px #000; /* Text shadow for the logo */
+        }
+
+        td a {
+            color: #ffcc00; /* Vibrant yellow link color */
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        td a:hover {
+            color: #ffd700; /* Brighter yellow on hover */
+        }
+
+        /* Add a subtle box shadow to table cells for depth */
+        td {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Center the table */
+        .table-container {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <header>Marvel Movie Selection</header>
+</div>
+<div class="table-container">
+    <table border="0">
+        <!-- Your table content here -->
+        <tr>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        </tr>
+        <tr>
+        <td onclick="mv('AvengerEndGame')">
+        <img class="icimg" src="https://cdn.marvel.com/content/1x/avengersendgame_lob_crd_05_2.jpg"><p></p>
+        <a> Avengers: Endgame</a>
+        <p></p>
+        </td>
+        <td onclick="mv('InfinityWar')"> 
+        <img class="icimg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmE2vwxy5KaCu7cRuYYdgNdQKddux5OYgGwsPo0kqP_xzLnsDV"><p></p>
+        <a>Avengers: Infinity War</a>
+        <p></p>
+        </td>
+        <td onclick="mv('TLT')"> 
+        <img class="icimg" src="https://cdn.marvel.com/content/1x_masonry/thorloveandthunder_lob_crd_03.jpg"><p></p>
+        <a>Thor: Love and Thunder </a>
+        <p></p>
+        </td>
+        <td onclick="mv('Thor')"> 
+        <img class="icimg" src="https://www.movienewsletters.net/photos/113522R1.jpg"><p></p>
+        <a>Thor </a>
+        <p></p>
+        </td>
+        </tr>
+        <tr>
+        <td onclick="mv('TTDW')"> 
+        <img class="icimg" src="https://www.movienewsletters.net/photos/169119R1.jpg"><p></p>
+        <a>Thor: The Dark World</a>
+        <p></p>
+        </td>
+        <td onclick="mv('TR')"> 
+        <img class="icimg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6FUUtxQRnUSbCnhmWv-n4vCuDkJXHxZ5qRHIpI4aaEpnUCfuc"><p></p>
+        <a>Thor Ragnork</a>
+        <p></p>
+        </td>
+        <td onclick="mv('IronMan')">
+        <img class="icimg" src="https://www.movienewsletters.net/photos/277216R1.jpg"><p></p>
+        <a>Iron Man</a>
+        <p></p>
+        </td>
+        <td onclick="mv('IronMan2')">
+        <img class="icimg" src="https://www.movienewsletters.net/photos/065116R1.jpg"><p></p>
+        <a>Iron Man 2</a>
+        <p></p>
+        </td>
+        </tr>
+    </table>
+</div>
+<script>
+    // Your JavaScript code here
+    function mv(minfo){
+    let mvi= {
+    AvengerEndGame:["Avengers EndGame","https://images6.alphacoders.com/948/948861.jpg","https://www.youtube.com/embed/TcMBFSGVi1c"],
+    InfinityWar:["Infinity War","https://wallpapers.com/images/featured/avengers-infinity-war-4k-q2mik92nipxepl5i.webp","https://www.youtube.com/embed/6ZfuNTqbHE8"],
+    TLT:["Thor Love & Thunder","https://images3.alphacoders.com/124/1241167.png","https://www.youtube.com/embed/Go8nTmfrQd8"],
+    Thor:["Thor","https://images5.alphacoders.com/487/487234.jpg","https://www.youtube.com/embed/JOddp-nlNvQ"],
+    TTDW:["Thor Dark World","https://wallpaperaccess.com/full/645154.jpg","https://www.youtube.com/embed/npvJ9FTgZbM"],
+    TR:["Thor Ragnork","https://images6.alphacoders.com/115/thumb-1920-1156339.jpg","https://www.youtube.com/embed/ue80QwXMRHg"],
+    IronMan:["IronMan","https://wallpapercave.com/wp/wp2547005.jpg","https://www.youtube.com/embed/8ugaeA-nMTc"],
+    IronMan2:["IronMan2","https://wallpapercave.com/wp/AFtCNLt.jpg","https://www.youtube.com/embed/wKtcmiifycU"]
+    };
+    let form = `
+    <html>
+    <body style="margin: 0; padding: 0; overflow: hidden;">
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2;">
+    <center>
+    <h1 id="titl" style="font-family: Georgia, 'Times New Roman', Times, serif; color: red; text-align: center;"></h1>
+    <h2 id="tril" style="color:red;"></h2>
+    <iframe id="yousrc" src="" frameborder="0"  width="90%" height="30%"></iframe>
+    </center>
+    </div>
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index: 1;">
+    <img id="im" style="height:100%;width:100%;object-fit:cover;" src="">
+    </div>
+    </body>
+    </html>`;
+    document.write(form);
+    
+    var bimg = document.getElementById("im");
+    bimg.src = mvi[minfo][1];
+    document.getElementById('titl').innerHTML="Title : "+mvi[minfo][0];
+    document.getElementById('tril').innerHTML="Watch "+mvi[minfo][0]+" Trialer";
+    document.getElementById('yousrc').src=mvi[minfo][2];
+    
+    
+    }
+</script>
+</body>
+</html>

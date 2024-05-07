@@ -1,0 +1,46 @@
+<html>
+<body>
+<div>
+    <div class="u">avatar</div>
+    <div class="u">ironman</div>
+    <div class="u">ironman2</div>
+</div>
+<p id="r"></p>
+<input type="text" id="d"/>
+<button onclick="c()">check</button>
+<script type="text/javascript">
+function c(){
+let f=document.getElementById('d').value;
+// f= avatar
+let t=document.getElementsByClassName('u');
+if (t[0].innerHTML.includes(f)){
+t[0].style.display="block";
+t[1].style.display="none";
+t[2].style.display="none";
+document.getElementById('r').innerHTML="";
+}
+else if (t[1].innerHTML.includes(f)){
+t[1].style.display="block";
+t[0].style.display="none";
+t[2].style.display="none";
+document.getElementById('r').innerHTML="";
+}
+else if (t[2].innerHTML.includes(f)){
+t[2].style.display="block";
+t[0].style.display="none";
+t[1].style.display="none";
+document.getElementById('r').innerHTML="";
+}
+else{
+t[0].style.display="none";
+t[1].style.display="none";
+t[2].style.display="none";
+document.getElementById('r').innerHTML="not found";
+}
+
+
+
+}
+</script>
+</body>
+</html>

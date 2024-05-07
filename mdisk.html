@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<title>encryption</title>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+       margin:0px;
+       background-color:#e62425;
+       text-align:left;
+       color: white;
+       font-family: "Arial", sans-serif;
+    }
+a{
+    
+    color: black;
+    text-decoration: none;
+    font-size:22px;
+ }
+td{
+   margin:10px;
+   width:300px;
+   padding: 10px;
+   text-align: center;
+}
+td:hover{
+margin:10px;
+   width:300px;
+   padding: 10px;
+   text-align: center;
+   transform:translateY(-20px);
+   box-shadow:10px 10px 20px black;
+   border-radius:20px;
+   opacity:0.9;
+   color:white;
+   
+}
+.icimg{
+height:330px;
+width:250px;
+border-radius:10px;
+box-shadow:3px 3px 20px black;
+}
+#head{
+position:relative;
+margin:0px;
+height:150px;
+background-color:black;
+width:1100px;
+
+}
+</style>
+</head>
+<body>
+<p id="head"><img src="https://microintel.github.io/MicroDisk/md.jpg" width="200px" height="100px" style="margin:25px 0px 0px 0px;"></img></p>
+<br><br>
+<table border="0">
+<tr>
+   <th></th>
+   <th></th>
+   <th></th>
+   <th></th>
+</tr>
+<tr>
+    <td onclick="tr('IronMan','iu')" id="iu"><img class="icimg" src="https://www.movienewsletters.net/photos/277216R1.jpg">      <p></p><a>Iron Man 2008</a><p></p></td>
+    <td onclick="mv('TIH2008')"><img class="icimg" src="https://cdn.marvel.com/content/1x/theincrediblehulk_lob_crd_03.jpg">      <p></p><a>The Incredible Hulk 2008</a><p></p></td>
+    <td onclick="mv('IronMan2')"><img class="icimg" src="https://www.movienewsletters.net/photos/065116R1.jpg">      <p></p><a>Iron Man 2</a><p></p></td>
+    <td onclick="mv('Thor')"><img class="icimg" src="https://www.movienewsletters.net/photos/113522R1.jpg">      <p></p><a>Thor</a><p></p></td>
+</tr>
+<tr>
+    <td onclick="mv('CATFA')"><img class="icimg" src="https://cdn.marvel.com/content/1x/captainamerica_lob_crd_01.jpg">      <p></p><a>Captain America: The First Avenger</a><p></p></td>
+    <td onclick="mv('TheAvengers')"><img class="icimg" src="https://t2.gstatic.com/licensed-image?q=tbn:ANd9GcSK0mRgxk6RD6AXbkAzpQRs7FCh9J0FiOxC9eIHCqoxAgpBeywiPrFjbAcGKbCaVYkc">      <p></p><a>The Avengers</a><p></p></td>
+    <td onclick="mv('IronMan3')"><img class="icimg" src="https://cdn.marvel.com/content/1x/ironman3_lob_crd_01_10.jpg">      <p></p><a>Iron Man 3</a><p></p></td>
+    <td onclick="mv('ThorTDW')"><img class="icimg" src="https://www.movienewsletters.net/photos/169119R1.jpg">      <p></p><a>Thor: The Dark World</a><p></p></td>
+</tr>
+<tr>
+    <td onclick="mv('CATWS')"><img class="icimg" src="https://cdn.marvel.com/content/1x/captainamericathewintersoldier_lob_crd_01_1.jpg">      <p></p><a>Captain America: The Winter Soldier</a><p></p></td>
+    <td onclick="mv('GGV1')"><img class="icimg" src="https://cdn.marvel.com/content/1x/guardiansofthegalaxy_lob_crd_03.jpg">      <p></p><a>Guardians Of The Galaxy</a><p></p></td>
+    <td onclick="mv('AvengersAOU')"><img class="icimg" src="https://www.movienewsletters.net/photos/183976R1.jpg">      <p></p><a>Avengers: Age Of Ultron</a><p></p></td>
+    <td onclick="mv('AntMan')"><img class="icimg" src="https://cdn.marvel.com/content/1x/ant-man_lob_crd_01_8.jpg">      <p></p><a>Ant-Man</a><p></p></td>
+</tr>
+<tr>
+    <td onclick="mv('CACW')"><img class="icimg" src="https://cdn.marvel.com/content/1x/captainamericacivilwar_lob_crd_01_9.jpg">      <p></p><a>Captain America: Civil War</a><p></p></td>
+    <td onclick="mv('DoctorS')"><img class="icimg" src="https://cdn.marvel.com/content/1x/doctorstrange_lob_crd_01_6.jpg">      <p></p><a>Doctor Strange</a><p></p></td>
+    <td onclick="mv('GGV2')"><img class="icimg" src="https://cdn.marvel.com/content/1x/guardiansofthegalaxyvol.2_lob_crd_01.jpg">      <p></p><a>Guardians Of The Galaxy Vol.2</a><p></p></td>
+    <td onclick="mv('SMHC')"><img class="icimg" src="https://cdn.marvel.com/content/1x/spider-manhomecoming_lob_crd_02.jpg">      <p></p><a>Spyder Man: HomeComing</a><p></p></td>
+</tr>
+<tr>
+    <td onclick="mv('THORR')"><img class="icimg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6FUUtxQRnUSbCnhmWv-n4vCuDkJXHxZ5qRHIpI4aaEpnUCfuc">      <p></p><a>Thor: Ragnork</a><p></p></td>
+    <td onclick="mv('BlackPanther')"><img class="icimg" src="https://cdn.marvel.com/content/1x/blackpanther_lob_crd_01_4.jpg">      <p></p><a>Black Panther</a><p></p></td>
+    <td onclick="mv('AIW')"><img class="icimg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmE2vwxy5KaCu7cRuYYdgNdQKddux5OYgGwsPo0kqP_xzLnsDV">      <p></p><a>Avengers: Infinity War</a><p></p></td>
+    <td onclick="mv('AntMTW')"><img class="icimg" src="https://cdn.marvel.com/content/1x/ant-manthewasp_lob_crd_01.jpg">      <p></p><a>Ant-Man and The Wasp</a><p></p></td>
+</tr>
+<tr>
+    <td onclick="mv('CaptainMarvel')"><img class="icimg" src="https://cdn.marvel.com/content/1x/captainmarvel_lob_crd_06.jpg">      <p></p><a>Captain Marvel</a><p></p></td>
+    <td onclick="mv('AvengersEndgame')"><img class="icimg" src="https://cdn.marvel.com/content/1x/avengersendgame_lob_crd_05_2.jpg">      <p></p><a>Avengers Endgame</a><p></p></td>
+    <td onclick="mv('SMFFH')"><img class="icimg" src="https://cdn.marvel.com/content/1x/spider-manfarfromhome_lob_crd_04_3.jpg">      <p></p><a>Spyder Man: Far From Home</a><p></p></td>
+    <td onclick="mv('BlackWidow')"><img class="icimg" src="https://cdn.marvel.com/content/1x/blackwidow_lob_crd_06.jpg">      <p></p><a>Black Widow</a><p></p></td>
+</tr>
+<tr>
+    <td onclick="mv('SCTLOTR')"><img class="icimg" src="https://cdn.marvel.com/content/1x/shangchi_lob_crd_07.jpg">      <p></p><a>Shang Chi and The Legend Of The Ten Rings</a><p></p></td>
+    <td onclick="mv('')"><img class="icimg" src="">      <p></p><a></a><p></p></td>
+    <td onclick="mv('')"><img class="icimg" src="">      <p></p><a></a><p></p></td>
+    <td onclick="mv('')"><img class="icimg" src="">      <p></p><a></a><p></p></td>
+</tr>
+</table>
+<script>
+function tr(x, y) {
+  var element = document.getElementById(y).style.transform = "translateY(-20px)";;
+  function late(){mv(x);}
+  setTimeout(late, 500);
+  }
+            function mv(minfo){
+            
+            let mvi= {
+                       IronMan:["IronMan","https://wallpapercave.com/wp/wp2547005.jpg","https://www.youtube.com/embed/8ugaeA-nMTc",""],
+                       TIH2008:["The Incredible Hulk 2008","","",""],
+                       IronMan2:["Iron Man 2","https://wallpapercave.com/wp/AFtCNLt.jpg","https://www.youtube.com/embed/wKtcmiifycU",""],
+                       Thor:["Thor","https://images5.alphacoders.com/487/487234.jpg","https://www.youtube.com/embed/JOddp-nlNvQ",""],
+                       CATFA:["Captain America: The First Avenger","","",""],
+                       TheAvengers:["The Avengers","","",""],
+                       IronMan3:["Iron Man 3","","",""],
+                       ThorTDW:["Thor: The Dark World","https://wallpaperaccess.com/full/645154.jpg","https://www.youtube.com/embed/npvJ9FTgZbM",""],
+                       CATWS:["Captain America: The Winter Soldier","https://c4.wallpaperflare.com/wallpaper/183/764/44/captain-america-the-winter-soldier-captain-america-nick-fury-black-widow-wallpaper-preview.jpg","https://www.youtube.com/embed/7SlILk2WMTI",""],
+                       GGV1:["Guardians Of The Galaxy","","",""],
+                       AvengersAOU:["Avengers: Age Of Ultron","https://images2.alphacoders.com/589/thumbbig-589553.webp","https://www.youtube.com/embed/tmeOjFno6Do",""],
+                       AntMan:["Ant-Man","","",""],
+                       CACW:["Captain America: Civil War","https://c4.wallpaperflare.com/wallpaper/328/294/532/iron-man-and-captain-america-civil-war-movie-hd-desktop-wallpaper-2560%C3%971440-wallpaper-preview.jpg","https://www.youtube.com/embed/dKrVegVI0Us",""],
+                       DoctorS:["Doctor Strange","https://c4.wallpaperflare.com/wallpaper/356/594/366/dr-strange-marvel-comics-marvel-cinematic-universe-marvel-super-heroes-hd-wallpaper-preview.jpg","https://www.youtube.com/embed/h7gvFravm4A",""],
+                       GGV2:["Guardians Of The Galaxy Vol.2","","",""],
+                       SMHC:["Spyder Man: HomeComing","https://cdn.wallpapersafari.com/96/12/v5ZkSV.jpg","https://www.youtube.com/embed/_yhFofFZGcc",""],
+                       THORR:["Thor: Ragnork","","",""],
+                       BlackPanther:["Black Panther","https://wallpaperaccess.com/full/54038.png","https://www.youtube.com/embed/xjDjIWPwcPU",""],
+                       AIW:["Avengers: Infinity War","https://wallpapers.com/images/featured/avengers-infinity-war-4k-q2mik92nipxepl5i.webp","https://www.youtube.com/embed/6ZfuNTqbHE8",""],
+                       AntMTW:["Ant-Man and The Wasp","","",""],
+                       CaptainMarvel:["Captain Marvel","","",""],
+                       AvengersEndgame:["Avengers Endgame","https://images6.alphacoders.com/948/948861.jpg","https://www.youtube.com/embed/TcMBFSGVi1c",""],
+                       SMFFH:["Spyder Man: Far From Home","https://images7.alphacoders.com/131/1317406.jpeg","https://www.youtube.com/embed/1s9Yln0YwCw",""],
+                       BlackWidow:["Black Widow"],
+                       SCTLOTR:["Shang Chi and The Legend Of The Ten Rings","","",""],
+                       };
+            let form = `<html>
+            <body id='im' background="" style="background-position: center center;background-repeat: no-repeat;background-attachment: fixed;background-size: cover;">
+            <center><div>
+            <h1 style="size: 100PX; font-family: Georgia, 'Times New Roman', Times, serif; color:red;text-align:center;" id='titl'> </h1>
+            <h2 style="color:red;" id='tril' > </h2>
+            <iframe id="yousrc" src="" frameborder="0"  width="620" height="415"> </iframe>
+            </div></center>
+            </body>
+            </html>`;
+            document.write(form);
+            
+            var bimg = document.getElementById("im");
+            bimg.background= mvi[minfo][1];
+            document.getElementById('titl').innerHTML="Title : "+mvi[minfo][0];
+            document.getElementById('tril').innerHTML="Watch "+mvi[minfo][0]+" Trialer";
+            document.getElementById('yousrc').src=mvi[minfo][2];
+            }
+</script>    
+</body>
+</html>
