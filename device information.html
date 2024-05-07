@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Device Information</title>
+</head>
+<body>
+  <h1>Device Information</h1>
+  <ul>
+    <li><strong>Device Name:</strong> <span id="device-name"></span></li>
+    <li><strong>Platform:</strong> <span id="platform"></span></li>
+    <li><strong>Operating System:</strong> <span id="os"></span></li>
+    <li><strong>Browser:</strong> <span id="browser"></span></li>
+    <li><strong>Language:</strong> <span id="language"></span></li>
+    <li><strong>Screen Resolution:</strong> <span id="resolution"></span></li>
+    <li><strong>Cookies Enabled:</strong> <span id="cookies"></span></li>
+    <li><strong>Online Status:</strong> <span id="online"></span></li>
+  </ul>
+
+  <script>
+   
+    function getDeviceInfo() {
+      var deviceInfo = {
+        name: navigator.userAgent,
+        platform: navigator.platform,
+        os: navigator.platform + ' ' + navigator.appVersion,
+        browser: navigator.appCodeName + ' ' + navigator.appVersion,
+        language: navigator.language,
+        resolution: window.screen.width + 'x' + window.screen.height,
+        cookies: navigator.cookieEnabled ? 'Enabled' : 'Disabled',
+        online: navigator.onLine ? 'Online' : 'Offline'
+      };
+      return deviceInfo;
+    }
+
+   
+    window.onload = function() {
+      var deviceInfo = getDeviceInfo();
+      document.getElementById("device-name").textContent = deviceInfo.name;
+      document.getElementById("platform").textContent = deviceInfo.platform;
+      document.getElementById("os").textContent = deviceInfo.os;
+      document.getElementById("browser").textContent = deviceInfo.browser;
+      document.getElementById("language").textContent = deviceInfo.language;
+      document.getElementById("resolution").textContent = deviceInfo.resolution;
+      document.getElementById("cookies").textContent = deviceInfo.cookies;
+      document.getElementById("online").textContent = deviceInfo.online;
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battery Information</title>
+</head>
+<body>
+  <h1>Battery Information</h1>
+  <p id="battery-level">Battery Level: </p>
+  <p id="charging-status">Charging: </p>
+  <p id="charging-time">Charging Time: </p>
+  <p id="discharging-time">Discharging Time: </p>
+
+  <script>
+    async function getBatteryInfo() {
+      try {
+        const battery = await navigator.getBattery();
+
+       
+        let batteryLevel = battery.level * 100;
+        document.getElementById("battery-level").textContent = "Battery Level: " + batteryLevel + "%";
+
+      
+        let charging = battery.charging;
+        document.getElementById("charging-status").textContent = "Charging: " + (charging ? "Yes" : "No");
+
+        
+        let chargingTime = battery.chargingTime;
+        document.getElementById("charging-time").textContent = "Charging Time: " + (chargingTime == Infinity ? "Calculating..." : chargingTime + " seconds");
+
+       
+        let dischargingTime = battery.dischargingTime;
+        document.getElementById("discharging-time").textContent = "Discharging Time: " + (dischargingTime == Infinity ? "Calculating..." : dischargingTime + " seconds");
+      } catch (error) {
+        console.error("Battery information could not be retrieved:", error);
+      }
+    }
+
+    window.onload = function() {
+      getBatteryInfo();
+    };
+  </script>
+</body>
+</html>

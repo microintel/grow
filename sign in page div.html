@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mi login</title>
+    <link rel="icon" type="image/png" href="fav.png">
+
+    <style>
+        body {
+            background-image: url(p1.jpg);
+            background-attachment: fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            font-family: cursive;
+            text-align: center;
+            color: white;
+        }
+
+        input {
+        background-color: rgba(255, 255, 255, 0.7);
+        margin-top: 2%;
+        border-radius: 25px;
+        padding: 10px;
+        border: none;
+        outline: none;
+        color: black; /* Set text color */
+        }
+        
+
+        button {
+            background-color: transparent;
+            border-radius: 10px;
+            font-family: cursive;
+            margin-top: 2%;
+            padding: 10px 20px;
+            border: 1px solid white;
+            color: white;
+            cursor: pointer;
+        }
+
+        a {
+            margin-top: 2%;
+            color: white;
+            text-decoration: none;
+            display: block;
+            text-align: center;
+        }
+
+        #drama {
+            font-family: cursive;
+            border-radius: 25px;
+            width: fit-content;
+            height: fit-content;
+            padding: 40px;
+            box-shadow: 3px 3px 20px;
+            margin-top: 12%;
+            animation-name: d1;
+            animation-duration: 1.5s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in;
+            backdrop-filter: blur(0px);
+        }
+
+        @keyframes d1 {
+            0% {
+                backdrop-filter: blur(0px);
+            }
+            20% {
+                backdrop-filter: blur(2px);
+            }
+            40% {
+                backdrop-filter: blur(4px);
+            }
+            60% {
+                backdrop-filter: blur(6px);
+            }
+            80% {
+                backdrop-filter: blur(8px);
+            }
+            100% {
+                backdrop-filter: blur(10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>WELCOME TO MICROINTEL</h1>
+    <center>
+        <div id="drama">
+            <h2>Login</h2>
+            <form action="login.php" method="post" style="padding: 20px;">
+                <label for="user" style="color: white;">Username:</label>
+                <br>
+                <input type="text" name="user" id="user">
+                <br>
+                <label for="pass" style="color: white;">Password:</label>
+                <br>
+                <input type="password" name="pass" id="pass">
+                <br>
+                <button type="submit">LOGIN</button>
+                <br>
+                <a href="new.php">Sign Up</a>
+            </form>
+        </div>
+    </center>
+</body>
+</html>

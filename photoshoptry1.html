@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<style type="text/css">
+body {
+    margin: 0;
+}
+
+.par1 {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    background-color: #f0f0f0;
+}
+
+.par2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30vh;
+    background-color: #333;
+}
+
+.chld1 {
+    width: 100%;
+    background-color: #222;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.chld1 button {
+    margin-bottom: 10px;
+}
+
+.chld2 {
+    width: 100%;
+    background-color: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.chld21 {
+    width: 70%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#canv {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+.chld22 {
+    color: white;
+    padding: 10px;
+}
+
+.par2 button {
+    margin: 0 5px;
+}
+
+/* Responsive Styling */
+@media screen and (min-width: 768px) {
+    .par1, .par2 {
+        flex-direction: row;
+        height: auto;
+    }
+
+    .chld1, .chld2 {
+        width: 30%;
+    }
+
+    .chld2 .chld21 {
+        width: 100%;
+    }
+}
+</style>
+</head>
+<body>
+<div class="par1">
+    <div class="chld1">
+        <button class="btn btn-primary btn-sm">Margin</button>
+        <button class="btn btn-primary btn-sm">Padding</button>
+        <button class="btn btn-primary btn-sm" onclick="put('hig')">Height</button>
+        <button class="btn btn-primary btn-sm" onclick="put('wid')">Width</button>
+        <button class="btn btn-primary btn-sm">Outline</button>
+    </div>
+
+    <div class="chld2">
+        <div class="chld21">
+            <div id="canv"></div>
+        </div>
+        <div id="opt" class="chld22"></div>
+    </div>
+
+    <div class="chld3"></div>
+</div>
+
+<div class="par2">
+    <button class="btn btn-primary" onclick="put('bagc')">Background Color</button>
+    <button class="btn btn-primary">Color</button>
+    <button class="btn btn-primary">Border</button>
+    <button class="btn btn-primary" onclick="put('brad')">Border Radius</button>
+    <button class="btn btn-primary">Image</button>
+    <button class="btn btn-primary">Gradient</button>
+    <button class="btn btn-primary">Shadow</button>
+    <button class="btn btn-primary">Text Effect</button>
+    <button class="btn btn-primary">2D</button>
+    <button class="btn btn-primary">3D</button>
+    <button class="btn btn-primary">Image Size</button>
+</div>
+
+<script type="text/javascript">
+let opt=document.getElementById("opt");
+let area=document.getElementById("canv");
+let bagc=`<center><font>Select BgColor  </font><br><br>
+          <input type="color" oninput="chan(this.value,'bgc')"></center>`;
+let wid=`<center>
+         <font>Set width  </font><br><br>
+         <input type="range" min="0" max="200" oninput="chan(this.value,'wid')">
+         <font>Or</font><br>
+         <input type="number" placeholder="width" oninput="chan(this.value,'wid')">
+         </center>`;
+let brad=`<center>
+         <font>Set border radius </font><br><br>
+         <input type="range" min="0" max="200" oninput="chan(this.value,'brad')">
+         <font>Or</font><br>
+         <input type="number" placeholder="enter radius" oninput="chan(this.value,'brad')">
+         </center>`;
+let hig=`<center>
+         <font>Set height  </font><br><br>
+         <input type="range" min="0" max="200" oninput="chan(this.value,'hig')">
+         <font>Or</font><br>
+         <input type="number" placeholder="height" oninput="chan(this.value,'hig')">
+         </center>`;
+function put(wht){
+opt.innerHTML=wht;
+}
+function chan(x,which){
+if(which=="bgc"){
+area.style.backgroundColor=x;
+}
+else if(which=="wid"){
+area.style.width=x+"px";
+  }
+else if(which=="hig"){
+area.style.height=x+"px";
+  }
+  
+else if(which=="brad"){
+area.style.borderRadius=x+"px";
+  }
+  
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+body { background-color:black;
+}
+
+.con
+ {
+  display: flex; flex-wrap: wrap;
+  justify-content: center;
+}
+
+.con > div
+ {
+  margin: 10px;
+  width: 300px;
+}
+
+.con > div input, .con > div select {
+  width: 100%;
+}
+
+div 
+{
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+p {color:white;
+  width: 120px;
+  margin-right: 10px;
+}
+
+.di{
+display:flex;
+justify-content:space-between;
+}
+</style>
+</head>
+<body>
+<div class="di">
+<input style="display:block;" id="che" onclick="document.body.style.backgroundColor='white';" type="checkbox">
+<input style="display:block;" id="che" onclick="document.body.style.backgroundColor='black';" type="checkbox">
+</div>
+<hr>
+<br>
+<center>
+<div id="p"></div>
+</center>
+<br><br>
+<center>
+<div class="con">
+  <div>
+    <p>Background Color</p>
+    
+    <input type="color" oninput="divbg(this.value)">
+  </div>
+
+  <div>
+    <p>Width</p>
+    
+   <input id="ran" placeholder="width" style="width:100px;" type="range" min="0" max="300" oninput="divw(this.value)">
+  </div>
+
+  <div>
+    <p>Height</p>
+    <input placeholder="height" style="width:100px;" type="range" min="0" max="300" oninput="divh(this.value)">
+  </div>
+
+  <div>
+    <p>Border Radius</p>
+    <input type="range" min="0" max="100" oninput="divra(this.value)">
+  </div>
+
+  <div>
+    <p>Border Color</p>
+    <input type="color" oninput="divbc(this.value)">
+  </div>
+
+  <div>
+    <p>Border Size</p>
+    <input type="range" min="0" max="100" oninput="divbs(this.value)">
+  </div>
+
+  <div>
+    <p>Padding</p>
+    <input type="range" min="0" max="100" oninput="divpad(this.value)">
+  </div>
+
+  <div>
+    <p>Margin</p>
+    <input type="range" min="0" max="100" oninput="divmar(this.value)">
+  </div>
+
+  <div>
+    <p>Border Style</p>
+    <select onchange="divstyle(this.value)">
+      <option value="solid">Solid</option>
+      <option value="dotted">Dotted</option>
+      <option value="dashed">Dashed</option>
+    </select>
+  </div>
+
+  <div>
+    <p>Border Left</p>
+    <input type="range" min="0" max="100" oninput="divbl(this.value)">
+  </div>
+
+  <div>
+    <p>Border Right</p>
+    <input type="range" min="0" max="100" oninput="divbr(this.value)">
+  </div>
+
+  <div>
+    <p>Border Top</p>
+    <input type="range" min="0" max="100" oninput="divbt(this.value)">
+  </div>
+
+  <div>
+    <p>Border Bottom</p>
+    <input type="range" min="0" max="100" oninput="divbb(this.value)">
+  </div>
+
+  <div>
+    <p>Box Shadow</p>
+    <input type="range" min="0" max="100" oninput="divshadow(this.value)">
+  </div>
+
+  <div>
+    <p>Background Image</p>
+    <input type="file" accept="image/*" onchange="divimg(event)">
+  </div>
+
+  <div>
+    <p>Image Adjust</p>
+    <select onchange="divimgadjust(this.value)">
+      <option value="auto">Auto</option>
+      <option value="cover">Cover</option>
+      <option value="contain">Contain</option>
+    </select>
+  </div>
+
+  <div>
+    <p>Opacity</p>
+    <input type="range" min="0" max="1" step="0.1" oninput="divop(this.value)">
+  </div>
+</div>
+<br><br><br>
+<button onclick="gen()">Generate Style Code</button>
+<button onclick="downloadDivContent()">Download Div Content as Image</button>
+</center>
+<br><br>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script type="text/javascript">
+let chek=document.getElementById("che").value;
+
+
+let pa=document.getElementById("p").style;
+
+function divra(rad){
+  pa.borderRadius=rad+"px";
+  wri(rad+"px");
+}
+
+function divbg(xbg){
+  pa.backgroundColor=xbg;
+  wri(xbg);
+}
+
+function divbc(xbg){
+  pa.borderColor=xbg;
+  wri(xbg);
+}
+
+function divbs(x){
+  pa.borderWidth=x+"px";
+  wri(x+"px");
+}
+
+function divw(x){
+  pa.width=x+"px";
+  wri(x+"px");
+}
+
+function divh(x){
+  pa.height=x+"px";
+  wri(x+"px");
+}
+
+function divpad(x){
+  pa.padding=x+"px";
+  wri(x+"px");
+}
+
+function divmar(x){
+  pa.margin=x+"px";
+  wri(x+"px");
+}
+
+function divstyle(x){
+  pa.borderStyle=x;
+  wri(x);
+}
+
+function divbl(x){
+  pa.borderLeftWidth=x+"px";
+  wri(x+"px");
+}
+
+function divbr(x){
+  pa.borderRightWidth=x+"px";
+  wri(x+"px");
+}
+
+function divbt(x){
+  pa.borderTopWidth=x+"px";
+  wri(x+"px");
+}
+
+function divbb(x){
+  pa.borderBottomWidth=x+"px";
+  wri(x+"px");
+}
+
+function divshadow(x){
+  pa.boxShadow="0px 0px "+x+"px rgba(0,0,0,0.5)";
+  wri(x+"px");
+}
+
+function divimg(event){
+  var url = URL.createObjectURL(event.target.files[0]);
+  pa.backgroundImage = "url('" + url + "')";
+  wri(url);
+}
+
+function divimgadjust(x){
+  pa.backgroundSize=x;
+  wri(x);
+}
+
+function divop(x){
+  pa.opacity=x;
+  wri(x);
+}
+
+function wri(x){
+  let pa=document.getElementById("p").innerHTML=x;
+}
+
+function gen(){
+  let xx=document.getElementById("p").style;
+  let bg="background-color:"+xx.getPropertyValue("background-color")+";";
+  let wid="width:"+xx.getPropertyValue("width")+";";
+  let hig="height:"+xx.getPropertyValue("height")+";";
+  let rad="border-radius:"+xx.getPropertyValue("border-radius")+";";
+  let pad="padding:"+xx.getPropertyValue("padding")+";";
+  let mar="margin:"+xx.getPropertyValue("margin")+";";
+  let bcolor="border-color:"+xx.getPropertyValue("border-color")+";";
+  let bwidth="border-width:"+xx.getPropertyValue("border-width")+";";
+  let bstyle="border-style:"+xx.getPropertyValue("border-style")+";";
+  let bleft="border-left-width:"+xx.getPropertyValue("border-left-width")+";";
+  let bright="border-right-width:"+xx.getPropertyValue("border-right-width")+";";
+  let btop="border-top-width:"+xx.getPropertyValue("border-top-width")+";";
+  let bbottom="border-bottom-width:"+xx.getPropertyValue("border-bottom-width")+";";
+  let shadow="box-shadow:"+xx.getPropertyValue("box-shadow")+";";
+  let img="background-image:"+xx.getPropertyValue("background-image")+";";
+  let imgadjust="background-size:"+xx.getPropertyValue("background-size")+";";
+  let op="opacity:"+xx.getPropertyValue("opacity")+";";
+
+  alert(bg+"\n"+wid+"\n"+hig+"\n"+rad+"\n"+pad+"\n"+mar+"\n"+bcolor+"\n"+bwidth+"\n"+bstyle+"\n"+bleft+"\n"+bright+"\n"+btop+"\n"+bbottom+"\n"+shadow+"\n"+img+"\n"+imgadjust+"\n"+op);
+}
+
+function downloadDivContent() {
+    html2canvas(document.getElementById('p')).then(function(canvas) {
+        var link = document.createElement('a');
+        link.download = 'div_content.png';
+        link.href = canvas.toDataURL('image/png');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+}
+</script>
+<br><br><br>
+<hr>
+<center>
+<h6 style="margin:0px;color:orange;">Developed By</h6>
+<b><h1 style="margin:0px;color:white;">Microintel</h1></b>
+</center>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BigB Browser</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.5">
+    <style>
+        body {
+        background-color: #1a1a1a;
+        background-image: url("https://microintel.github.io/Resources/images/spybgimg.jpg");
+        background-size: cover;
+        background-attachment: fixed;
+        margin-top: 10%;
+        font-family: 'Arial', sans-serif;
+        }
+        
+        h1, MARQUEE {
+        color: #ffffff;
+        }
+        
+        div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        }
+        
+        img {
+        width: 100px;
+        }
+        
+        div input{
+        color: #ffffff;
+        border: none;
+        border-bottom: 2px solid #ffffff;
+        background-color: transparent;
+        border-radius: 22px;
+        padding: 8px;
+        }
+        
+        div button{
+        color: #ffffff;
+        border: none;
+        border-bottom: 2px solid red;
+        background-color: transparent;
+        border-radius: 22px;
+        padding: 8px;
+        }
+        
+        div input::placeholder {
+        color: #ffffff;
+        }
+        
+        MARQUEE {
+        color:white;
+        font-size: 18px;
+        margin-top: 20px;
+        }
+        
+        
+        div button:hover {
+        background-color:transparent;
+        color:white;
+        border-bottom:2px solid white;
+        transition: background-color 0.3s ease;
+        }
+        h6{
+        color:red;
+        margin-top:99%;
+        margin-bottom:0px;
+        }
+        h2{
+        color:white;
+        margin:0px;
+        }
+    </style>
+</head>
+<body>
+ <center>
+ <div>
+ <img src="https://microintel.github.io/Resources/images/BigBS.jpg">
+  <input type="text" id="inp" placeholder="Enter  here">
+  <br>
+    <button onclick="ser()">Search</button>
+</center>
+</div>
+<br>
+<br>
+    <MARQUEE>"The features and fixes are on the way..."</MARQUEE>
+<center><h6>Powerd By</h6>
+<h2>DUCKDUCKGO & AMITH</h2>
+</center>
+
+<script>
+function ser(){
+window.open("https://www.duckduckgo.com/?q="+document.getElementById("inp").value);
+}
+
+</script>
+</body>
+</html>

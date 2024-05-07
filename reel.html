@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scrolling Video Reels</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    .video-container {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .video-wrapper {
+      flex: 0 0 auto;
+      margin-right: 20px;
+      scroll-snap-align: start;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .video {
+      width: 100%;
+      display: block;
+    }
+
+    .video-wrapper:hover {
+      transform: scale(1.05);
+    }
+
+    @media screen and (max-width: 600px) {
+      .video-container {
+        padding: 10px;
+      }
+
+      .video-wrapper {
+        margin-right: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="video-container">
+    <!-- Videos will be dynamically added here -->
+  </div>
+
+  <script>
+    const videoSources = [
+      '/storage/emulated/0/videos/.short/No 𝘞𝘢𝘯𝘥𝘢 she can do it all! 🫣.mp4',
+      '/storage/emulated/0/videos/.short/No 𝘞𝘢𝘯𝘥𝘢 she can do it all! 🫣.mp4',
+      // Add more video sources as needed
+    ];
+
+    const videoContainer = document.querySelector('.video-container');
+
+    function addVideo(src) {
+      fetch(src)
+        .then(response => response.blob())
+        .then(blob => {
+          const videoWrapper = document.createElement('div');
+          videoWrapper.classList.add('video-wrapper');
+
+          const video = document.createElement('video');
+          video.classList.add('video');
+          video.src = URL.createObjectURL(blob);
+          video.controls = true;
+
+          videoWrapper.appendChild(video);
+          videoContainer.appendChild(videoWrapper);
+        });
+    }
+
+    videoSources.forEach(src => {
+      addVideo(src);
+    });
+
+    function isScrolledIntoView(el) {
+      const rect = el.getBoundingClientRect();
+      const elemTop = rect.top;
+      const elemBottom = rect.bottom;
+
+      const isVisible = elemTop < window.innerHeight && elemBottom >= 0;
+      return isVisible;
+    }
+
+    function toggleVideoPlayback() {
+      const videos = document.querySelectorAll('.video');
+      videos.forEach(video => {
+        if (isScrolledIntoView(video.parentElement)) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      toggleVideoPlayback();
+
+      window.addEventListener('scroll', toggleVideoPlayback);
+    });
+  </script>
+</body>
+</html>

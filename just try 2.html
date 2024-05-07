@@ -1,0 +1,16 @@
+<html>
+<head>
+</head>
+<body>
+<button onclick="jos()">dnns</button>
+<script type="text/javascript">
+async function jos(){
+let x= await fetch("https://official-joke-api.appspot.com/random_joke");
+let c=await x.json();
+let u=c.puncj;
+document.write(u);
+
+}
+</script>
+</body>
+</html>

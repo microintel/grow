@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Layout Editor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+    input[type="color"],
+    input[type="range"],
+    select {
+      width: 100%;
+      margin-top: 5px;
+    }
+    input[type="file"] {
+      margin-top: 10px;
+    }
+    #preview {
+      width: 100%;
+      height: 200px;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-size: cover;
+      background-position: center;
+    }
+    @media only screen and (max-width: 600px) {
+      .container {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Layout Editor</h1>
+    <div class="input-group">
+      <label for="a">Background Color</label>
+      <input type="color" id="a" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="b">Width</label>
+      <input type="range" id="b" min="0" max="300" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="c">Height</label>
+      <input type="range" id="c" min="0" max="300" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="d">Border Radius</label>
+      <input type="range" id="d" min="0" max="300" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="e">Border Color</label>
+      <input type="color" id="e" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="f">Border Size</label>
+      <input type="range" id="f" min="0" max="300" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="g">Padding</label>
+      <input type="range" id="g" min="0" max="100" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="h">Margin</label>
+      <input type="range" id="h" min="0" max="100" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="i">Border Style</label>
+      <select id="i" onchange="updatePreview()">
+        <option value="solid">Solid</option>
+        <option value="dotted">Dotted</option>
+        <option value="dashed">Dashed</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label for="j">Border Left</label>
+      <input type="range" id="j" min="0" max="100" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="k">Border Right</label>
+      <input type="range" id="k" min="0" max="100" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="l">Border Top</label>
+      <input type="range" id="l" min="0" max="100" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="m">Border Bottom</label>
+      <input type="range" id="m" min="0" max="100" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="n">Box Shadow</label>
+      <input type="range" id="n" min="0" max="100" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="o">Gradient (2D)</label>
+      <input type="color" id="o" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="p">Gradient (3D)</label>
+      <input type="color" id="p" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="q">Background Image</label>
+      <input type="file" accept="image/*" id="q" onchange="updateImage(event)">
+    </div>
+    <div class="input-group">
+      <label for="r">Opacity</label>
+      <input type="range" id="r" min="0" max="1" step="0.1" oninput="updatePreview()">
+    </div>
+    <div class="input-group">
+      <label for="s">Image Sizing Adjustment</label>
+      <select id="s" onchange="updatePreview()">
+        <option value="cover">Cover</option>
+        <option value="contain">Contain</option>
+        <option value="auto">Auto</option>
+      </select>
+    </div>
+    <div id="preview"></div>
+  </div>
+
+  <script>
+    function updatePreview() {
+      const preview = document.getElementById("preview");
+      const bgColor = document.getElementById("a").value;
+      const width = document.getElementById("b").value;
+      const height = document.getElementById("c").value;
+      const borderRadius = document.getElementById("d").value;
+      const borderColor = document.getElementById("e").value;
+      const borderSize = document.getElementById("f").value;
+      const padding = document.getElementById("g").value;
+      const margin = document.getElementById("h").value;
+      const borderStyle = document.getElementById("i").value;
+      const borderLeft = document.getElementById("j").value;
+      const borderRight = document.getElementById("k").value;
+      const borderTop = document.getElementById("l").value;
+      const borderBottom = document.getElementById("m").value;
+      const boxShadow = document.getElementById("n").value;
+      const gradient2D = document.getElementById("o").value;
+      const gradient3D = document.getElementById("p").value;
+      const opacity = document.getElementById("r").value;
+      const imageSizing = document.getElementById("s").value;
+
+      preview.style.backgroundColor = bgColor;
+      preview.style.width = width + "px";
+      preview.style.height = height + "px";
+      preview.style.borderRadius = borderRadius + "px";
+      preview.style.borderColor = borderColor;
+      preview.style.borderWidth = borderSize + "px";
+      preview.style.padding = padding + "px";
+      preview.style.margin = margin + "px";
+      preview.style.borderStyle = borderStyle;
+      preview.style.borderLeftWidth = borderLeft + "px";
+      preview.style.borderRightWidth = borderRight + "px";
+      preview.style.borderTopWidth = borderTop + "px";
+      preview.style.borderBottomWidth = borderBottom + "px";
+      preview.style.boxShadow = "0px 0px " + boxShadow + "px rgba(0, 0, 0, 0.5)";
+      preview.style.background = "linear-gradient(to right, " + gradient2D + ", #000)";
+      preview.style.background = "radial-gradient(circle, " + gradient3D + ", #000)";
+      preview.style.opacity = opacity;
+      preview.style.backgroundSize = imageSizing;
+    }
+
+    function updateImage(event) {
+      const preview = document.getElementById("preview");
+      const url = URL.createObjectURL(event.target.files[0]);
+      preview.style.backgroundImage = "url('" + url + "')";
+    }
+  </script>
+</body>
+</html>

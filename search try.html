@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<title>MICRO-BROWSER</title>
+<style>
+    input{
+        border-radius: 25px;
+        background-color: black;
+        color: white;
+        width: 50%;
+        margin-top: 10%;
+        border: hidden;
+      padding: 2%;
+    }
+    button{
+        background-color: black;
+        color: white;
+        width: 100px;
+        border-radius: 25px;
+        border: hidden;
+        padding: 2%;
+    }
+</style>
+<head>
+    <body>
+        <img src="im1.png" height="10%" width="10%" style="border-radius: 25%; margin-top: 0px;" >
+        <input id="s1" type="text" placeholder="search here">
+        <button onclick="search()">Search</button>
+        <script>
+        
+            function search(){
+                var a=document.getElementById("s1").value
+                var b="https://duckduckgo.com/?q="+a+"&ia=web"
+           window.open(b)
+            }
+             </script>
+
+
+</head>

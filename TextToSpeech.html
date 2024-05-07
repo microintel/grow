@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text to Speech</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+    }
+    #text-input {
+        width: 80%;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    #speak-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+    #speak-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+    <h1>Text to Speech</h1>
+    <textarea id="text-input" placeholder="Enter text to be spoken..."></textarea><br>
+    <label for="voice-select">Select Voice:</label>
+    <select id="voice-select">
+        <option value="default">Default</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+    </select><br>
+    <button id="speak-btn">Speak</button>
+
+    <script>
+       
+        function speakText() {
+          
+            var text = document.getElementById("text-input").value;
+            
+           
+            var utterance = new SpeechSynthesisUtterance(text);
+            
+         
+            var selectedVoice = document.getElementById("voice-select").value;
+            if (selectedVoice !== 'default') {
+                var voices = window.speechSynthesis.getVoices();
+                utterance.voice = voices.find(voice => voice.name.toLowerCase().includes(selectedVoice));
+            }
+            
+          
+            window.speechSynthesis.speak(utterance);
+        }
+        
+      
+        document.getElementById("speak-btn").addEventListener("click", speakText);
+    </script>
+</body>
+</html>
