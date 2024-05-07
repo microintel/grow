@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Line Chart</title>
+    <!-- Include Chart.js library from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Canvas element to render the chart -->
+    <canvas id="m" width="600" height="400"></canvas>
+
+    <!-- JavaScript code to create the chart -->
+    <script>
+        var ctx = document.getElementById('m').getContext('2d');
+        var mn = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: [1, 2, 3, 4],
+                datasets: [
+                    {
+                        label: 'Dataset 1',
+                        data: [100, 200, 500, 520]
+                    },
+                    {
+                        label: 'Dataset 2',
+                        data: [50, 300, 500, 520]
+                    }
+                ]
+            }
+        });
+    </script>
+</body>
+</html>

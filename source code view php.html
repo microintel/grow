@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Display</title>
+    <style>
+        body {
+            background-color: #1f1f1f;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            margin: 20px 0;
+        }
+
+        label {
+            color: #ffffff;
+            margin-right: 10px;
+        }
+
+        input, button {
+            padding: 8px;
+            margin-right: 10px;
+            background-color: #333333;
+            color: #ffffff;
+            border: 1px solid #555555;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        input:focus, button:focus {
+            outline: none;
+        }
+
+        button:hover {
+            background-color: #555555;
+            color: #ffffff;
+            border-color: #777777;
+        }
+
+        pre {
+            background-color: #333333;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .clear-button {
+            background-color: #555555;
+            color: #ffffff;
+            border: 1px solid #777777;
+            border-radius: 5px;
+            padding: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        .clear-button:hover {
+            background-color: #777777;
+            color: #ffffff;
+            border-color: #999999;
+        }
+    </style>
+</head>
+<body>
+
+<form method="post" action="">
+    <label for="url">Enter URL:</label>
+    <input type="text" id="url" name="url">
+    <button type="submit" name="submitUrl">Display URL Content</button>
+</form>
+
+<form method="post" action="" enctype="multipart/form-data">
+    <label for="file">Upload File:</label>
+    <input type="file" id="file" name="file">
+    <button type="submit" name="submitFile">Display File Content</button>
+</form>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['submitUrl'])) {
+        $url = $_POST['url'];
+
+        // cURL with SSL verification
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Disable SSL verification (for development only)
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+
+        $content = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            echo 'Error fetching content: ' . curl_error($ch);
+        } else {
+            echo '<pre>' . htmlspecialchars($content) . '</pre>';
+        }
+
+        curl_close($ch);
+    } elseif (isset($_POST['submitFile'])) {
+        $file = $_FILES['file']['tmp_name'];
+
+        if (file_exists($file)) {
+            $content = file_get_contents($file);
+            echo '<pre>' . htmlspecialchars($content) . '</pre>';
+        } else {
+            echo 'File not found.';
+        }
+    }
+}
+?>
+
+<button class="clear-button" onclick="clearContent()">Clear Content</button>
+
+<script>
+    function clearContent() {
+        // Reset the content area
+        document.querySelector('pre').innerHTML = '';
+    }
+</script>
+
+</body>
+</html>

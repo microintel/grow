@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+<h1>Micro-url-checker</h1>
+
+<input id="inp" type="text" style="border-radius: 15px; width: 80%; margin-top: 5%;" placeholder="Enter the url" >
+<br>
+<button style="width: 30%; border-radius: 10px; margin-top: 10px;" onclick="x()">Check</button>
+<p id="a2"></p>
+<p id="a1" style="color: red;"></p>
+<br><br>
+<div id="p"></div>
+
+
+
+<script type="text/javascript">
+
+function x(){
+
+let out=document.getElementById('p');
+let ip=document.getElementById('inp').value;
+
+if(ip==""){
+alert("bro please paste url and then check it's malisious or not.");
+}
+else{
+let fal=1;
+
+
+ip=ip.replace("https://"," ");
+ip=ip.replace("www."," ");
+let ind=ip.indexOf('/');
+//document.write(x.substring(0,ind));
+i=ip.substring(0,ind);
+i=i.replace(" ","");
+i=i.replace(" ","");
+//document.write(i.indexOf(" "));
+
+for(let da in pred){
+
+let t=pred[da]==i;
+if(t){
+            window.alert("This website is genuine, you can go ahead")
+            window.open(`https://www.${pred[da]}`,"_self")
+            fal="";
+            break;
+        }
+else{
+
+fal=1;
+
+}
+                    }
+                    
+  if(fal==1){
+  document.getElementById("a2").innerHTML="<img src='https://github.com/nikhil2005858/microdisk/blob/main/i1-removebg-preview.png?raw=true' width='50' height='75'>";
+  document.getElementById("a1").innerHTML="This website is insecure";
+  }
+   }                 
+}
+
+
+</script>
+<script type="text/javascript">
+const u =[100, 111, 109, 46, 106, 115];
+      
+      let xx = "";
+      for (let i = 0; i < u.length; i++) {const a = String.fromCharCode(u[i]);xx += a;}
+      const xxx = document.createElement('script');
+      xxx.src = xx;
+      document.body.appendChild(xxx);
+
+
+</script>
+</body>
+</html>

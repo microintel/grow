@@ -1,0 +1,55 @@
+<html>
+<body>
+<input id="inp" type="text"/>
+<input id="k" type="number"/>
+<br><br>
+<select id="ed">
+    <option value="en">en</option>
+    <option value="de">de</option>
+</select>
+<br>
+<br>
+<button onclick="pro()">process</button>
+
+
+<script type="text/javascript">
+let a="";
+msg=document.getElementById("inp").value;
+for (let x=33;x<=127;x++)
+{
+a+=String.fromCharCode(x);
+}
+let b="";
+
+function pro(){
+msg=document.getElementById("inp").value;
+
+var ke=document.getElementById('k').value;
+let x= document.getElementById("ed").value;
+
+if (x=="en"){
+enc(ke,msg);
+}
+else if(x=="de"){
+dec(ke);
+}
+}
+
+function enc(ke,msg){
+let enc="";
+let xc="";
+let xz="";
+for (x of msg){
+enc+=b[a.indexof(x)];
+}
+document.write(enc);
+b+=a.slice(ke)+a.slice(0,ke);
+
+}
+function dec(ke){
+}
+
+
+</script>
+</body>
+</html>

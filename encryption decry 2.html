@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Encryption and Decryption</title>
+    <script>
+        function encryptDecrypt() {
+            const inp = document.getElementById("input").value;
+            let xc = "", xz = "", ax = "", dy = [];
+            
+            // Populate dy array with ASCII characters
+            for (let x = 33; x < 126; x++) {
+                dy.push(String.fromCharCode(x));
+            }
+            dy.push(" ");
+            
+            // Create en array by reversing dy
+            const en = dy.slice().reverse();
+            
+            // Convert input characters to encrypted characters
+            for (let i = 0; i < inp.length; i++) {
+                ax += en[dy.indexOf(inp[i])];
+            }
+            
+            // Get index of the first character in input
+            const f = dy.indexOf(inp[0]);
+            
+            // Extract specific characters for constructing encrypted message
+            for (let i = f + 19; i < f + 23; i++) {
+                xc += en[i];
+            }
+            for (let i = f + 9; i < f + 13; i++) {
+                xz += dy[i];
+            }
+            
+            // Construct the encrypted message
+            const xg = xz.slice(0, 2) + xc.slice(0, 2) + ax + xz.slice(2) + xc.slice(2);
+            
+            // Display the encrypted message
+            document.getElementById("encrypted").innerHTML = "The encrypted message of '" + inp + "' is " + xg;
+            
+            const ab = prompt("Do you want to decrypt? Y/N: ");
+            if (ab === "Y") {
+                let decryptedMsg = "";
+                for (let i = 0; i < ax.length; i++) {
+                    decryptedMsg += dy[en.indexOf(ax[i])];
+                }
+                document.getElementById("decrypted").innerHTML = decryptedMsg;
+            } else {
+                document.getElementById("decrypted").innerHTML = "Exited";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Encryption and Decryption</h1>
+    <label for="input">Enter message: </label>
+    <input type="text" id="input">
+    <button onclick="encryptDecrypt()">Encrypt/Decrypt</button>
+    <p id="encrypted"></p>
+    <p id="decrypted"></p>
+</body>
+</html>

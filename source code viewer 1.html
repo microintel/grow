@@ -1,0 +1,34 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the form was submitted
+
+    // Check if there is no file upload error
+    if ($_FILES['fileInput']['error'] === UPLOAD_ERR_OK) {
+        $uploadedFile = $_FILES['fileInput']['tmp_name'];
+
+        // Read the contents of the uploaded text file
+        $fileContents = file_get_contents($uploadedFile);
+
+        // Display the contents
+        echo '<pre>' . htmlspecialchars($fileContents) . '</pre>';
+    } else {
+        echo 'Error during file upload. Error code: ' . $_FILES['fileInput']['error'];
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        <label for="fileInput">Choose a file:</label>
+        <input type="file" name="fileInput" id="fileInput">
+        <button type="submit">Upload</button>
+    </form>
+</body>
+</html>

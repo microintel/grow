@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Encryption and Decryption</title>
+    <style>
+        /* CSS styles remain the same */
+    </style>
+    <script>
+        function encryptDecrypt() {
+            const inp = document.getElementById("input").value;
+            let xc = "", xz = "", ax = "", dy = [];
+
+            // JavaScript logic remains the same
+            
+            const ab = prompt("Do you want to decrypt? Y/N: ");
+            if (ab === "Y") {
+                let decryptedMsg = "";
+                for (let i = 0; i < ax.length; i++) {
+                    decryptedMsg += dy[en.indexOf(ax[i])];
+                }
+                document.getElementById("decrypted").innerHTML = decryptedMsg;
+            } else {
+                document.getElementById("decrypted").innerHTML = "Exited";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Encryption and Decryption</h1>
+        <label for="input">Enter message:</label>
+        <input type="text" id="input">
+        <button onclick="encryptDecrypt()">Encrypt/Decrypt</button>
+        <p id="encrypted"></p>
+        <p id="decrypted"></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #user-info {
+      display: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 10px;
+    }
+  </style>
+  <title>Login/Logout Example</title>
+</head>
+<body>
+  <h1>Login/Logout Example</h1>
+
+  <div id="user-info">
+    <p>Welcome, <span id="username"></span>!</p>
+    <button id="logout">Logout</button>
+  </div>
+
+  <div id="login-form">
+    <input type="text" id="usernameInput" placeholder="Username">
+    <input type="password" id="passwordInput" placeholder="Password">
+    <button id="login">Login</button>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('login-form');
+    const userInfo = document.getElementById('user-info');
+    const usernameSpan = document.getElementById('username');
+    const logoutButton = document.getElementById('logout');
+    const loginButton = document.getElementById('login');
+
+    const users = [
+      { username: 'user1', password: 'pass1' },
+      { username: 'user2', password: 'pass2' },
+      // Add more users here
+    ];
+
+    loginButton.addEventListener('click', () => {
+      const usernameInput = document.getElementById('usernameInput').value;
+      const passwordInput = document.getElementById('passwordInput').value;
+
+      const user = users.find(u => u.username === usernameInput && u.password === passwordInput);
+
+      if (user) {
+        loginForm.style.display = 'none';
+        userInfo.style.display = 'block';
+        usernameSpan.textContent = user.username;
+      }
+    });
+
+    logoutButton.addEventListener('click', () => {
+      loginForm.style.display = 'block';
+      userInfo.style.display = 'none';
+      document.getElementById('usernameInput').value = '';
+      document.getElementById('passwordInput').value = '';
+    });
+  </script>
+</body>
+</html>

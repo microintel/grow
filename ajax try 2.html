@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>hii</h1>
+    <h1 id="i"></h1>
+    <button onclick="f()">send</button>
+    <script type="text/javascript">
+      function f() {
+        let x = new XMLHttpRequest();
+        let d="pr.php?k=hii";
+        x.open("GET",d, true);
+        x.send();
+
+        x.onreadystatechange = function () {
+          if (x.readyState == 4 && x.status == 200) {
+            document.getElementById('i').innerHTML+='<br>'+x.responseText;
+          }
+        };
+      }
+    </script>
+  </body>
+</html>
