@@ -1,0 +1,85 @@
+<html>
+<head>
+<style type="text/css">
+body{
+width:100%;
+margin:0px;
+padding:0px;
+background-color:black;
+color:white;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+
+#di{
+margin-top:1px;
+display:flex;
+flex-direction:column;
+width:100%;
+height:50vh;
+justify-content:center;
+align-items:center;
+background-color:red;
+overflow:hidden;
+
+
+}
+
+#dii{
+display:flex;
+flex-direction:coloumn;
+overflow-y:auto;
+
+}
+a{
+padding:10px;
+color:white;
+text-decoration:none;
+
+}
+
+
+
+</style>
+</head>
+<body>
+<div id="di">loading
+
+<div id="dii">
+
+
+</div>
+</div>
+<script type="text/javascript">
+
+async function xx(){
+
+let fet=await fetch("https://api.github.com/repos/microintel/grow/contents");
+let js=await fet.json();
+
+
+for(let c in js){
+//document.write(c);
+let igc= await js[c];
+let ig=await igc.name;
+
+//let ig="jssjsn.html";
+//ig.replace(".html"," ");
+
+document.getElementById("dii").innerHTML+="<p><a href='https://microintel.github.io/grow/"+ig+"'>"+ig+"</a></p>";
+
+
+}
+
+
+}
+
+xx();
+</script>
+
+</body>
+</html>

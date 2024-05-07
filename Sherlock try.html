@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <title>sherlock</title>
+    <body>
+        <h1>sherlock</h1>
+        <div>
+            <input id="a1" placeholder="Enter the username">
+            <button onclick="myfun()">search</button>
+            <p id="a3"></p>
+            <p id="a2" ></p>
+        </div>
+        <script>
+            function myfun(){
+                var a= document.getElementById("a1").value;
+                links=[`<a href="https://www.instagram.com/${a}/">instagram.com</a>`,` <a href=" https://www.facebook.com/${a}/">facebook.com</a>`,
+                ` <a href="https://www.snapchat.com/explore/${a}">snapchat.com</a>`,` <a href="https://twitter.com/${a}">twitter.com</a>`,
+                ` <a href="https://www.youtube.com/${a}">youtube.com</a>`,` <a href="https://t.me/s/${a}">telligram.com</a>`,` <a href="https://in.linkedin.com/company/${a}">linkedin.com</a>`,
+                ` <a href="https://www.quora.com/topic/${a}">quora.com</a>`,` <a href="https://sharechat.com/${a}">sharechat.com</a>`,` <a href="https://www.threads.net/${a}">threads.net</a>`]
+                ab=``
+                for (i in links){
+                    ab=ab+links[i]+'</br>'
+        
+                    
+                }
+                document.getElementById('a3').innerHTML="checking on:-"+a;
+                document.getElementById('a2').innerHTML=ab
+                
+
+            }
+        </script>
+        <b>Developed by microintel</b>
+    </body>
+</head>

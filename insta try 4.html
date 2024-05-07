@@ -1,0 +1,261 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<style type="text/css">
+body{
+padding:0;
+margin:0;
+}
+
+.ins{
+padding:15px;
+display:flex;
+justify-content:space-between;
+background-color:black;
+color:white;
+font-size:20px;
+}
+.sto{
+background-color:black;
+display:flex;
+flex-direction: row;
+
+overflow-x:auto;
+min-width:100%;
+}
+
+.im{
+margin:5px 5px;
+display:flex;
+gap:10px;
+}
+.sto img{
+
+width:80px;
+height:80px;
+border-radius:100px;
+border:6px red solid;
+}
+
+.im> img:active{
+width:80px;
+height:80px;
+border-radius:100px;
+border:6px white dashed;
+}
+
+.po >.post>img{
+width:100%;
+max-height:400px;
+border-radius:15px;
+border:1px solid white;
+
+}
+
+.po{
+height:500px;
+display:flex;
+flex-direction:column;
+padding:10px;
+background-color:#111111;
+color:white;
+font-size:20px;
+overflow-y:auto;
+}
+
+.po .post{
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.nav{
+display:flex;
+position:relative;
+z-index:0;
+background-color:black;
+color:white;
+justify-content:space-around;
+
+}
+
+hr{
+margin:0;
+padding:0;
+}
+#str{
+margin:0;
+padding:10px;
+position:absolute;
+z-index:2;
+top:50px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+
+width:94%;
+background-color:#111111;
+color:white;
+height:95vh;
+display:none;
+
+}
+
+.strlc{
+display:flex;
+flex-direction:row;
+left:50px;
+padding:10px;
+justify-content:space-between;
+align-items:center;
+}
+
+.strlc >input[type="text"]{
+padding:10px;
+max-width:300px;
+border-radius:10px;
+border:1px solid white;
+}
+#spa{
+font-size:30px;
+}
+
+.strim{
+border-radius:15px;
+
+}
+.from{
+margin:0;
+padding:0;
+
+color:white;
+position:absolute;
+z-index:1;
+width:100vw;
+height:100vh;
+display:flex;
+background-color:black;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+.from >h5,h1{
+
+margin:0;
+}
+
+.from>h1{
+background:linear-gradient(74deg, rgb(36, 133, 244), rgb(160, 114, 203), rgb(217, 60, 121));
+    color:transparent;
+    background-clip:text;
+
+}
+
+</style>
+</head>
+<body onclick="hide()">
+
+<div>
+<div id="frommi" class="from">
+<h5>from</h5>
+<h1>MICROINTEL</h1>
+</div>
+<div id="str"><center>
+<span onclick="document.getElementById('str').style.display='none'" style="font-size:40px;margin-left:90%;">×</span><hr>
+<p id="strp"></p>
+<img style="max-width:350px;max-height:400px;boder-radius:30px;"  id="strim"></img>
+</center>
+<div class="strlc">
+<input type="text" placeholder="Comment">
+<span id="sth" onclick="this.innerHTML='&hearts;'" style="font-size:50px;color:white;">&#9825;</span>
+
+</div>
+
+</div>
+
+
+
+
+<div class="ins">
+<div>vista</div>
+<div id="spa" style="display:flex;justify-content:space-between;"><span>&plus;</span><span>@</span><span>=</span></div>
+</div>
+
+
+
+
+
+<div class="sto">
+<div class="im">
+<img src="https://microintel.github.io/Resources/images/MCU.jpg" onclick="disto('MCU')" value="MCU">
+<img src="https://microintel.github.io/Resources/images/babygrrot.jpg" onclick="disto('babygrrot')" value="babygrrot">
+<img src="https://microintel.github.io/Resources/images/ceo.jpg" onclick="disto('ceo')" value="ceo">
+<img src="https://microintel.github.io/Resources/images/dheenu.jpg" onclick="disto('dheenu')" value="dheenu">
+<img src="https://microintel.github.io/Resources/images/tony.jpg" onclick="disto('tony')" value="tony">
+<img src="https://microintel.github.io/Resources/images/guided.jpg" onclick="disto('guided')" value="guided">
+</div>
+</div>
+<hr>
+
+<div class="nav">
+<span>+</span><span>#</span><span>-</span><span>@</span>
+
+</div>
+
+
+
+
+
+
+<div class="po">
+
+<div class="post">
+
+<img src="https://microintel.github.io/Resources/images/tony.jpg">
+<div style="display:flex;justify-content:space-around;"><span>%</span><span>@</span><span>#</span></div>
+<img src="https://microintel.github.io/Resources/images/giphy.gif">
+<div style="display:flex;justify-content:space-around;"><span>%</span><span>@</span><span>#</span></div>
+<img src="https://microintel.github.io/Resources/images/microdisk.gif">
+<div style="display:flex;justify-content:space-around;"><span>%</span><span>@</span><span>#</span></div>
+
+<img src="https://microintel.github.io/Resources/images/mintel.jpg">
+<div style="display:flex;justify-content:space-around;"><span>%</span><span>@</span><span>#</span></div>
+
+<img src="https://microintel.github.io/Resources/images/mjio.jpg">
+<div style="display:flex;justify-content:space-around;"><span>%</span><span>@</span><span>#</span></div>
+
+<img src="https://microintel.github.io/Resources/images/devs.jpg">
+<div style="display:flex;justify-content:space-around;"><span>%</span><span>@</span><span>#</span></div>
+
+<img src="https://microintel.github.io/Resources/images/loop.gif">
+<div style="display:flex;justify-content:space-around;"><span>%</span><span>@</span><span>#</span></div>
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<script type="text/javascript">
+
+function hide(){
+document.getElementById("frommi").style.display="none";
+}
+
+
+function disto(xxx){
+document.getElementById('sth').innerHTML='&#9825;';
+document.getElementById('str').style.display='block';
+document.getElementById('strp').innerHTML="Hi This is "+xxx+"'s new Stoery";
+document.getElementById('strim').src="https://microintel.github.io/Resources/images/"+xxx+".jpg";
+
+}
+
+
+</script>
+</body>
+</html>

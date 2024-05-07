@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>AJAX</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      margin-top:5vh;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color:black;
+    }
+    
+    .cont {
+      background-color:black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 50vh;
+    }
+    
+    .mdiv {
+      background-color:white;
+      width: 80%;
+      max-width: 400px;
+    
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      margin: 0;
+      color: #333333;
+      text-align: center;
+    }
+    
+    h6 {
+      margin: 0;
+      color:black;
+      text-align: center;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      height: 40px;
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid black;
+      border-radius: 15px;
+      box-sizing: border-box;
+    }
+    
+    button {
+      width: 100%;
+      height: 40px;
+      margin-top: 10px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #45a049;
+    }
+    
+    #resu {
+    
+      margin-top:10px;
+      margin-left:6vw;
+      padding: 10px;
+      max-width:400px;
+      max-height:400px;
+      color:black;
+      border-radius: 5px;
+    }
+    #inp{
+    
+   
+    margin-top: 10px;
+    margin-left:6vw;
+    padding: 10px;
+    max-width:400px;
+    max-height:400px;
+    color:black;
+    border-radius: 5px;
+    }
+    #sup{
+    
+    font-family:Times new roman;
+    color:green;
+    margin-bottom:2px;
+    padding:0;
+    }
+    #punc{
+    
+    font-family:Times new roman;
+    color:green;
+    margin-bottom:2px;
+    padding:0;
+    }
+    
+    
+  </style>
+</head>
+<body onload="search()">
+<div class="cont">
+  <div class="mdiv">
+    <h6>microintel</h6>
+    <h1>AJAX</h1>
+    <div id="md">
+    <p id="sup">setup</p>
+    <p id="resu"></p>
+    <p id="punc">punch</p>
+    <p  id="inp"></p>
+    </div>
+    <button onclick="search()">Another</button>
+    
+  </div>
+</div>
+<script>
+ async  function search() {
+
+    let fet=await fetch("https://official-joke-api.appspot.com/random_joke");
+    let cjs=await fet.json();
+    let sup=await cjs.setup;
+    let pch=await cjs.punchline;
+    
+    document.getElementById("resu").innerHTML=sup;
+    document.getElementById("inp").innerHTML=pch;
+  }
+
+  
+</script>
+</body>
+</html>
