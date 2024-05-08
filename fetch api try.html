@@ -1,0 +1,22 @@
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+</head>
+<body>
+<script type="text/javascript">
+async function xxx(){
+let g=prompt("enter u r name");
+let f= await fetch("https://microintel.000webhostapp.com/pro.php?name='"+g+"'");
+let xc= await f.json();
+
+
+document.write(xc["message"]);
+}
+
+xxx();
+</script>
+</body>
+</html>
