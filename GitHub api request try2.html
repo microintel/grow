@@ -1,0 +1,39 @@
+<html>
+<head>
+</head>
+<body>
+<div id="imageContainer"></div>
+<script type="text/javascript">
+
+async function fetchImages(){
+  let response = await fetch("https://api.github.com/repos/microintel/Resources/contents/images");
+  let images = await response.json();
+
+  let imageContainer = document.getElementById("imageContainer");
+  let observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        let img = document.createElement("img");
+        img.src = entry.target.dataset.src;
+        img.width = "100";
+        img.height = "100";
+
+        entry.target.appendChild(img);
+        observer.unobserve(entry.target);
+      }
+    });
+  });
+
+  images.forEach(image => {
+    let imageWrapper = document.createElement("div");
+    imageWrapper.dataset.src = image.download_url;
+    observer.observe(imageWrapper);
+    imageContainer.appendChild(imageWrapper);
+  });
+}
+
+fetchImages();
+
+</script>
+</body>
+</html>

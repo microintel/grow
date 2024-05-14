@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTTP Error Simulation</title>
+</head>
+<body>
+  <h1>HTTP Error Simulation</h1>
+
+  <script>
+    // Simulate 404 Not Found error
+    fetch('https://www.instagram.com/smsnn')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('404 Not Found');
+        }
+        return response.json();
+      })
+      .catch(error => console.error(error));
+
+    // Simulate 503 Service Unavailable error
+    fetch('https://example.com/service-unavailable')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('503 Service Unavailable');
+        }
+        return response.json();
+      })
+      .catch(error => console.error(error));
+  </script>
+</body>
+</html>

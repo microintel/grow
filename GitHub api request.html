@@ -1,0 +1,54 @@
+<!--
+<html>
+<head>
+
+</head>
+<body>
+<script type="text/javascript">
+
+async function xx(){
+
+let get=await fetch("https://api.github.com/repos/microintel/Resources/contents/images");
+let js=await get.json();
+
+for(let x in js){
+let el=document.createElement("img");
+el.src=js[x].download_url;
+el.width="100px";
+el.height="100px";
+
+document.body.appendChild(el);
+
+}
+}
+ xx();
+
+</script>
+</body>
+</html>
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fetch GitHub Content</title>
+</head>
+<body>
+  <script type="text/javascript">
+    async function fetchData() {
+      try {
+        let res = await fetch("https://api.github.com/repos/microintel/Resources/contents/images/im");
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        let data = await res.json();
+        console.log(data); // or do something else with the data
+      } catch (error) {
+        console.error('There was a problem fetching the data:', error);
+      }
+    }
+
+    fetchData();
+  </script>
+</body>
+</html>

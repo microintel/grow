@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location Permission</title>
+</head>
+<body>
+  <h1>Location Permission</h1>
+  <button onclick="requestLocation()">Request Location</button>
+  
+  <script>
+    function requestLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+      } else {
+        console.log("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function successCallback(position) {
+      // Do something with the position data
+      console.log("Latitude: " + position.coords.latitude + " Longitude: " + position.coords.longitude);
+    }
+
+    function errorCallback(error) {
+      console.log("Error getting geolocation: " + error.message);
+    }
+  </script>
+</body>
+</html>
