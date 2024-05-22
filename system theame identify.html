@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detect System Theme</title>
+</head>
+<body>
+    <h1>System Theme Detection</h1>
+    <p id="theme-status">Detecting theme...</p>
+
+    <script>
+     
+        function updateThemeStatus() {
+            const themeStatusElement = document.getElementById('theme-status');
+            if (prefersDarkScheme.matches) {
+                themeStatusElement.textContent = "Dark mode";
+            } else {
+                themeStatusElement.textContent = "Light mode";
+            }
+        }
+
+        
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: white)");
+
+        
+        updateThemeStatus();
+
+       
+        prefersDarkScheme.addEventListener('change', updateThemeStatus);
+    </script>
+</body>
+</html>

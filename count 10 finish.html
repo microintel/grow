@@ -1,0 +1,37 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<body>
+
+<p id="p"></p>
+
+<script type="text/javascript">
+
+let x=0;
+
+let va=document.getElementById("p");
+
+
+function xx(){
+x+=1
+
+va.innerHTML=x;
+
+if(x<10){
+
+setTimeout(xx,1000);
+}
+
+else{
+va.innerHTML="11111";
+
+}
+}
+
+xx();
+
+
+</script>
+</body>
+</html>

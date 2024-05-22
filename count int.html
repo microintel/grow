@@ -1,0 +1,56 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+
+body{
+
+background-color:black;
+color:white;
+
+display:flex;
+
+justify-content:center;
+align-items:center;
+
+}
+
+p{
+
+color:white;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<p id="p">0</p>
+
+<script type="text/javascript">
+
+let x=0;
+let va=document.getElementById('p');
+va.innerHTML=x;
+function xx(){
+
+va.innerHTML=x;
+x+=1;
+
+if(x<30){
+setTimeout(xx,1000);
+}
+else{
+va.innerHTML="count finished";
+}
+
+}
+xx();
+
+
+</script>
+
+</body>
+</html>

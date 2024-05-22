@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+
+body{
+  background-color:black;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+p{
+  color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<p id="p"></p>
+
+<script type="text/javascript">
+
+let x = 0;
+let va = document.getElementById('p');
+
+function xx() {
+  x += 1;
+  va.innerHTML = x;
+
+  if (x < 50) {
+    setTimeout(xx, 1000); 
+  }
+}
+
+xx();
+
+</script>
+
+</body>
+</html>
