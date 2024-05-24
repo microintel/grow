@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style type="text/css">
+
+.ma{
+display:flex;
+flex-direction:column;
+width:100%;
+height:100%;
+
+}
+.vidd{
+width:100%;
+height:100%;
+}
+#vid{
+
+width:100%;
+height:100%;
+
+}
+
+.cha{
+
+position:absolute;
+display:flex;
+margin-left:40%;
+margin-top:100%;
+
+z-index:10;
+}
+button{
+
+}
+
+</style>
+
+
+</head>
+<body>
+<div class="ma">
+<div class="vidd">
+<video onclick="c()" id="vid" src="/storage/emulated/0/videos/.short/run jack.mp4">
+</video>
+</div>
+
+<button onclick="cx()">Change</button>
+</div>
+<script type="text/javascript">
+
+let vi = document.getElementById('vid');
+let li = "/storage/emulated/0/videos/.short/";
+
+function c(){
+    if (vi.paused) {
+        vi.play();
+    } else {
+        vi.pause();
+    }
+}
+
+function cx() {
+    let randomIndex = Math.floor(Math.random() *11); // Generates a random number between 0 and 4
+    vi.src = li + randomIndex + ".mp4";
+    vi.load(); // Load the new video source
+    vi.play();
+}
+
+</script>
+
+</body>
+</html>
