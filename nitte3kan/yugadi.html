@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಯುಗಾದಿ ಕಥೆ - ಪೂರ್ಣ ರಸಪ್ರಶ್ನೆ</title>
+    <style>
+        /* CSS ಗಾಗಿ ಶೈಲಿ (Style for CSS) */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f7;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4a708a;
+            border-bottom: 3px solid #4a708a;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        .question-container {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #ffffff;
+        }
+        .question-text {
+            font-size: 1.15em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #000;
+        }
+        .options label {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .options label:hover {
+            background-color: #e6f0ff;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.3em;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #4cae4c;
+        }
+        #result {
+            margin-top: 30px;
+            padding: 25px;
+            border: 2px solid #4a708a;
+            border-radius: 8px;
+            font-size: 1.4em;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+        .correct-score { color: green; }
+        .incorrect-score { color: red; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌼 ಯುಗಾದಿ ಕಥೆ - ೩೩ ಪ್ರಶ್ನೆಗಳ ಪೂರ್ಣ ರಸಪ್ರಶ್ನೆ 🌼</h1>
+        <form id="quizForm">
+
+            <div class="question-container">
+                <div class="question-text">೧. ಯುಗಾದಿ ಕಥೆಯ ಲೇಖಕರು ಯಾರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="ವಸುಧೇಂದ್ರ"> ಅ) ವಸುಧೇಂದ್ರ</label>
+                    <label><input type="radio" name="q1" value="ದ.ರಾ.ಬೇಂದ್ರೆ"> ಆ) ದ.ರಾ.ಬೇಂದ್ರೆ</label>
+                    <label><input type="radio" name="q1" value="ಶಿವರಾಮ ಕಾರಂತರು"> ಇ) ಶಿವರಾಮ ಕಾರಂತರು</label>
+                    <label><input type="radio" name="q1" value="ಅ.ನ.ಕೃ"> ಈ) ಅ.ನ.ಕೃ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೨. ವಸುಧೇಂದ್ರರವರು ಹುಟ್ಟೂರು ಯಾವುದು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="ಬೆಂಗಳೂರು"> ಅ) ಬೆಂಗಳೂರು</label>
+                    <label><input type="radio" name="q2" value="ಮೈಸೂರು"> ಆ) ಮೈಸೂರು</label>
+                    <label><input type="radio" name="q2" value="ಶಿವಮೊಗ್ಗ"> ಇ) ಶಿವಮೊಗ್ಗ</label>
+                    <label><input type="radio" name="q2" value="ಬಳ್ಳಾರಿಸಂಡೂರು"> ಈ) ಬಳ್ಳಾರಿಸಂಡೂರು</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೩. ವಸುಧೇಂದ್ರರವರು 20 ವರ್ಷಗಳಿಂದ ಯಾವ ಉದ್ಯೋಗದಲ್ಲಿದ್ದರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="ಪತ್ರಕರ್ತ"> ಅ) ಪತ್ರಕರ್ತ</label>
+                    <label><input type="radio" name="q3" value="ಛಾಯಾಗ್ರಹಕ"> ಆ) ಛಾಯಾಗ್ರಹಕ</label>
+                    <label><input type="radio" name="q3" value="ಇಂಗ್ಲೀಷ್ ಪ್ರೊಫೆಸರ್"> ಇ) ಇಂಗ್ಲೀಷ್ ಪ್ರೊಫೆಸರ್</label>
+                    <label><input type="radio" name="q3" value="ಮಾಹಿತಿತಂತ್ರಜ್ಞಾನ"> ಈ) ಮಾಹಿತಿತಂತ್ರಜ್ಞಾನ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೪. ವಸುಧೇಂದ್ರರವರು ಎಲ್ಲಿ ಇಂಜಿನಿಯರಿಂಗ್‌ನಲ್ಲಿ ಮಾಸ್ಟರ್ಸ್ಟ್ ಪದವಿ ಪಡೆದರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="ಇಂಡಿಯನ್ ಇನ್‌ಸ್ಟಿಟ್ಯೂಟ್ ಆಫೈನ್ಸ್"> ಅ) ಇಂಡಿಯನ್ ಇನ್‌ಸ್ಟಿಟ್ಯೂಟ್ ಆಫೈನ್ಸ್</label>
+                    <label><input type="radio" name="q4" value="ನ್ಯಾಷನಲ್ ಇನ್ಸಸ್ಟಿಟ್ಯೂಟ್ ಆಫೈನ್ಸ್"> ಆ) ನ್ಯಾಷನಲ್ ಇನ್ಸಸ್ಟಿಟ್ಯೂಟ್ ಆಫೈನ್ಸ್</label>
+                    <label><input type="radio" name="q4" value="ಜರ್ಮನ್ ಇನ್ಸಸ್ಟಿಟ್ಯೂಟ್ ಆಫೈನ್ಸ್"> ಇ) ಜರ್ಮನ್ ಇನ್ಸಸ್ಟಿಟ್ಯೂಟ್ ಆಫೈನ್ಸ್</label>
+                    <label><input type="radio" name="q4" value="ಆಕ್ಸಫರ್ಡ್ ಇನ್ಸಸ್ಟಿಟೂಟ್ ಆಫೈನ್ಸ್"> ಈ) ಆಕ್ಸಫರ್ಡ್ ಇನ್ಸಸ್ಟಿಟೂಟ್ ಆಫೈನ್ಸ್</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೫. ವಸುಧೇಂದ್ರರವರ ಕಾದಂಬರಿ ಯಾವುದು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="ಚೇಳು"> ಅ) ಚೇಳು</label>
+                    <label><input type="radio" name="q5" value="ಯುಗಾದಿ"> ಆ) ಯುಗಾದಿ</label>
+                    <label><input type="radio" name="q5" value="ಕೋತಿಗಳು"> ಇ) ಕೋತಿಗಳು</label>
+                    <label><input type="radio" name="q5" value="ಹರಿಚಿತ್ತ ಸತ್ಯ"> ಈ) ಹರಿಚಿತ್ತ ಸತ್ಯ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೬. ವಸುಧೇಂದ್ರರವರು ಬರೆದ ಕಥೆ ಯಾವುದು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="ಗಾಂದಿ"> ಅ) ಗಾಂದಿ</label>
+                    <label><input type="radio" name="q6" value="ಯುಗಾದಿ"> ಆ) ಯುಗಾದಿ</label>
+                    <label><input type="radio" name="q6" value="ಅಕ್ಕು"> ಇ) ಅಕ್ಕು</label>
+                    <label><input type="radio" name="q6" value="ಸಂಬಂದ"> ಈ) ಸಂಬಂದ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೭. ಗೋಪಣ್ಣ ಮಾಸ್ತರು ಯಾವ ಹುದ್ದೆಯಲ್ಲಿದ್ದರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="ಕನ್ನಡ ಶಾಲೆಯ ಮಾಸ್ತರು"> ಅ) ಕನ್ನಡ ಶಾಲೆಯ ಮಾಸ್ತರು</label>
+                    <label><input type="radio" name="q7" value="ಆಂಗ್ಲ ಶಾಲೆಯ ಶಿಕ್ಷಕರು"> ಆ) ಆಂಗ್ಲ ಶಾಲೆಯ ಶಿಕ್ಷಕರು</label>
+                    <label><input type="radio" name="q7" value="ಇಂಜಿನಿಯರ್"> ಇ) ಇಂಜಿನಿಯರ್</label>
+                    <label><input type="radio" name="q7" value="ತಮಿಳು ಶಾಲೆಯ ಮಾಸ್ತರು"> ಈ) ತಮಿಳು ಶಾಲೆಯ ಮಾಸ್ತರು</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೮. ಗೋಪಣ್ಣ ಮಾಸ್ತರು ಶಾಲೆಯಲ್ಲಿ ಏನೆಂದು ಪ್ರಸಿದ್ಧಿ ಪಡೆದಿದ್ದರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="ಖಡಕ್‌ಮಾಸ್ತರು"> ಅ) ಖಡಕ್‌ಮಾಸ್ತರು</label>
+                    <label><input type="radio" name="q8" value="ಒಳ್ಳೆಯಮಾಸ್ತರು"> ಆ) ಒಳ್ಳೆಯಮಾಸ್ತರು</label>
+                    <label><input type="radio" name="q8" value="ಹಾಸ್ಯಮಾಸ್ತರು"> ಇ) ಹಾಸ್ಯಮಾಸ್ತರು</label>
+                    <label><input type="radio" name="q8" value="ಗಣಿತಮಾಸ್ತರು"> ಈ) ಗಣಿತಮಾಸ್ತರು</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೯. ಗೋಪಣ್ಣಮಾಸ್ತರ ಹೆಂಡತಿಯ ಹೆಸರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="ಕಲ್ಯಾಣಮ್ಮ"> ಅ) ಕಲ್ಯಾಣಮ್ಮ</label>
+                    <label><input type="radio" name="q9" value="ರುಕ್ಕಿಣಮ್ಮ"> ಆ) ರುಕ್ಕಿಣಮ್ಮ</label>
+                    <label><input type="radio" name="q9" value="ಜಾನಕಮ್ಮ"> ಇ) ಜಾನಕಮ್ಮ</label>
+                    <label><input type="radio" name="q9" value="ಸಾವಿತ್ರಮ್ಮ"> ಈ) ಸಾವಿತ್ರಮ್ಮ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೧೦. ಕಾಸಿಂ ಸಾಬ್ ಯಾರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="ಪೋಲಿಸ್"> ಅ) ಪೋಲಿಸ್</label>
+                    <label><input type="radio" name="q10" value="ರಾಧತಂದೆ"> ಆ) ರಾಧತಂದೆ</label>
+                    <label><input type="radio" name="q10" value="ಪ್ರಹ್ಲಾದನ ಗೆಳೆಯ"> ಇ) ಪ್ರಹ್ಲಾದನ ಗೆಳೆಯ</label>
+                    <label><input type="radio" name="q10" value="ಗೋಪಣ್ಣನಗೆಳೆಯ"> ಈ) ಗೋಪಣ್ಣನಗೆಳೆಯ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೧೧. ರೇಖಾ ಯಾರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="ಗೋಪಣ್ಯಮಗಳು"> ಅ) ಗೋಪಣ್ಯಮಗಳು</label>
+                    <label><input type="radio" name="q11" value="ದಾದಿ"> ಆ) ದಾದಿ</label>
+                    <label><input type="radio" name="q11" value="ಪ್ರಹ್ಲಾದನ ಹೆಂಡತಿ"> ಇ) ಪ್ರಹ್ಲಾದನ ಹೆಂಡತಿ</label>
+                    <label><input type="radio" name="q11" value="ರಂಗಣ್ಣಮಗಳು"> ಈ) ರಂಗಣ್ಣಮಗಳು</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೧೨. ರೇಖಾ ಹೆರಿಗೆ ಎಲ್ಲಿ ಆಯಿತು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="ಮನೆಯಲ್ಲಿ"> ಅ) ಮನೆಯಲ್ಲಿ</label>
+                    <label><input type="radio" name="q12" value="ರಸ್ತೆಯಲ್ಲಿ"> ಆ) ರಸ್ತೆಯಲ್ಲಿ</label>
+                    <label><input type="radio" name="q12" value="ಕಾರಿನಲ್ಲಿ"> ಇ) ಕಾರಿನಲ್ಲಿ</label>
+                    <label><input type="radio" name="q12" value="ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆಯಲ್ಲಿ"> ಈ) ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆಯಲ್ಲಿ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೧೩. ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆಯಲ್ಲಿ ಗೋಪಣ್ಣನವರನ್ನು ಯಾರು ಗುರುತಿಸಿದರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="ದಾದಿರಾಧ"> ಅ) ದಾದಿರಾಧ</label>
+                    <label><input type="radio" name="q13" value="ಡಾಕ್ಟರ್"> ಆ) ಡಾಕ್ಟರ್</label>
+                    <label><input type="radio" name="q13" value="ವಾಚ್‌ಮ್ಯಾನ್"> ಇ) ವಾಚ್‌ಮ್ಯಾನ್</label>
+                    <label><input type="radio" name="q13" value="ಪೇದೆ"> ಈ) ಪೇದೆ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೧೪. ಗೋಪಣ್ಣ ಮಾಸ್ತರು ಯಾರಿಗೆ ಔಟ್ ಡೇಟೆಡ್‌ ವಿಷಯ ಕಲಿಸಲು ಹೋಗಿ ಆಕ್ಷೇಪಣೆಗೊಳಗಾದರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="ಹಳ್ಳಿಯಮಕ್ಕಳಿಗೆ"> ಅ) ಹಳ್ಳಿಯಮಕ್ಕಳಿಗೆ</label>
+                    <label><input type="radio" name="q14" value="ಪಕ್ಕದಊರಿನ ಮಕ್ಕಳಿಗೆ"> ಆ) ಪಕ್ಕದಊರಿನ ಮಕ್ಕಳಿಗೆ</label>
+                    <label><input type="radio" name="q14" value="ತನ್ನ ಸೋಸೆಗೆ"> ಇ) ತನ್ನ ಸೋಸೆಗೆ</label>
+                    <label><input type="radio" name="q14" value="ಅಪಾರ್ಟಮೆಂಟಿನಚಿಕ್ಕಮಕ್ಕಳಿಗೆ"> ಈ) ಅಪಾರ್ಟಮೆಂಟಿನಚಿಕ್ಕಮಕ್ಕಳಿಗೆ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೧೫. ಕಾಸಿಂಸಾಬ್ ಬೆಂಗಳೂರಿಗೆ ಬರಲು ಕಾರಣವೇನು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q15" value="ಗೋಪಣ್ಣ ಮಾಸ್ತರ ಆರೋಗ್ಯವಿಚಾರಿಸಲು"> ಅ) ಗೋಪಣ್ಣ ಮಾಸ್ತರ ಆರೋಗ್ಯವಿಚಾರಿಸಲು</label>
+                    <label><input type="radio" name="q15" value="ಮಗಳ ಮದುವೆಗೆ ಕರೆಯಲು"> ಆ) ಮಗಳ ಮದುವೆಗೆ ಕರೆಯಲು</label>
+                    <label><input type="radio" name="q15" value="ಹಣ ಸಾಲ ಕೇಳಲು"> ಇ) ಹಣ ಸಾಲ ಕೇಳಲು</label>
+                    <label><input type="radio" name="q15" value="ಮಗನಿಗೆ ಕೆಲಸದ ಸಲುವಾಗಿ"> ಈ) ಮಗನಿಗೆ ಕೆಲಸದ ಸಲುವಾಗಿ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೧೬. ಯುಗಾದಿ ಕಥೆಯ ಗೋಪಣ್ಣ ಮಾಸ್ತರ ಮಗನ ಹೆಸರೇನು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q16" value="ರವೀಂದ್ರ"> ಅ) ರವೀಂದ್ರ</label>
+                    <label><input type="radio" name="q16" value="ಪ್ರಕಾಶ್"> ಆ) ಪ್ರಕಾಶ್</label>
+                    <label><input type="radio" name="q16" value="ಪ್ರಹ್ಲಾದ"> ಇ) ಪ್ರಹ್ಲಾದ</label>
+                    <label><input type="radio" name="q16" value="ಪುದೀಪ್"> ಈ) ಪುದೀಪ್</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೧೭. ಗೋಪಣ್ಣ ಮಾಸ್ತರ ಹೆಂಡತಿ ಯಾವಾಗ ತೀರಿಕೊಂಡಿದ್ದರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q17" value="20 ವರ್ಷದಕೆಳಗೆ"> ಅ) 20 ವರ್ಷದಕೆಳಗೆ</label>
+                    <label><input type="radio" name="q17" value="10 ವರ್ಷದಕೆಳಗೆ"> ಆ) 10 ವರ್ಷದಕೆಳಗೆ</label>
+                    <label><input type="radio" name="q17" value="25 ವರ್ಷದಕೆಳಗೆ"> ಇ) 25 ವರ್ಷದಕೆಳಗೆ</label>
+                    <label><input type="radio" name="q17" value="15 ವರ್ಷದಕೆಳಗೆ"> ಈ) 15 ವರ್ಷದಕೆಳಗೆ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೧೮. ಗೋಪಣ್ಣಮಾಸ್ತರು ತನ್ನ ಮೂರು ವರ್ಷದ ಮಗನಿಗೆ ಮಾತು ಬಾರದಿದ್ದಾಗ ದರ್ಗಾಕ್ಕೆ ಕರೆದುಕೊಂಡು ಹೋಗಲು ಹೇಳಿದವರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q18" value="ಇಸ್ಮಾಯಿಲ್"> ಅ) ಇಸ್ಮಾಯಿಲ್</label>
+                    <label><input type="radio" name="q18" value="ರುಕ್ಕಿಣಮ್ಮ"> ಆ) ರುಕ್ಕಿಣಮ್ಮ</label>
+                    <label><input type="radio" name="q18" value="ಕಾಸಿಂಸಾಬ್"> ಇ) ಕಾಸಿಂಸಾಬ್</label>
+                    <label><input type="radio" name="q18" value="ಕರಿಂಸಾಬ್"> ಈ) ಕರಿಂಸಾಬ್</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೧೯. ಗೋಪಣ್ಣ ಮಾಸ್ತರ ಸೋಸೆಯ ಹೆಸರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q19" value="ರಾಧ"> ಅ) ರಾಧ</label>
+                    <label><input type="radio" name="q19" value="ರೇಖಾ"> ಆ) ರೇಖಾ</label>
+                    <label><input type="radio" name="q19" value="ಸುರೇಕಾ"> ಇ) ಸುರೇಕಾ</label>
+                    <label><input type="radio" name="q19" value="ಶಶಿರೇಖಾ"> ಈ) ಶಶಿರೇಖಾ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೨೦. ಕಾಸಿಂಸಾಬ್‌ರವರ ಮಗನ ಹೆಸರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q20" value="ಇಸ್ಮಾಯಿಲ್"> ಅ) ಇಸ್ಮಾಯಿಲ್</label>
+                    <label><input type="radio" name="q20" value="ವಸೀಮ್"> ಆ) ವಸೀಮ್</label>
+                    <label><input type="radio" name="q20" value="ಫಾಯಾಜ್"> ಇ) ಫಾಯಾಜ್</label>
+                    <label><input type="radio" name="q20" value="ಮಹ್ಮದ್"> ಈ) ಮಹ್ಮದ್</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೨೧. ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆಯ ನರ್ಸ್ ಯಾರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q21" value="ರಾಧ"> ಅ) ರಾಧ</label>
+                    <label><input type="radio" name="q21" value="ರೇಖಾ"> ಆ) ರೇಖಾ</label>
+                    <label><input type="radio" name="q21" value="ಅನುರಾಧ"> ಇ) ಅನುರಾಧ</label>
+                    <label><input type="radio" name="q21" value="ರುಕ್ಕಿಣಿ"> ಈ) ರುಕ್ಕಿಣಿ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೨೨. ಗೋಪಣ್ಣಮಾಸ್ತರ ಆತ್ಮೀಯ ಗೆಳೆಯ ಯಾರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q22" value="ಕಾಸಿಂಸಾಬ್"> ಅ) ಕಾಸಿಂಸಾಬ್</label>
+                    <label><input type="radio" name="q22" value="ಸಾಹೇಬ್"> ಆ) ಸಾಹೇಬ್</label>
+                    <label><input type="radio" name="q22" value="ಕರಿಂಕಾನ್"> ಇ) ಕರಿಂಕಾನ್</label>
+                    <label><input type="radio" name="q22" value="ಖಾನ್‌ಸಾಬೇಬ್"> ಈ) ಖಾನ್‌ಸಾಬೇಬ್</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೨೩. ಯುಗಾದಿ ಕಥೆಯ ಪ್ರಹ್ಲಾದ ಯಾವ ಇಂಜಿನಿಯರ್?</div>
+                <div class="options">
+                    <label><input type="radio" name="q23" value="ಹಾರ್ಡವೇರ್‌ಇಂಜಿನಿಯ‌ರ್"> ಅ) ಹಾರ್ಡವೇರ್‌ಇಂಜಿನಿಯ‌ರ್</label>
+                    <label><input type="radio" name="q23" value="ಸಾಫ್ಟ್‌ವೇರ್‌ಇಂಜಿನಿಯರ್"> ಆ) ಸಾಫ್ಟ್‌ವೇರ್‌ಇಂಜಿನಿಯರ್</label>
+                    <label><input type="radio" name="q23" value="ಸಿವಿಲೋ ಇಂಜಿನಿಯರಾ"> ಇ) ಸಿವಿಲೋ ಇಂಜಿನಿಯರಾ</label>
+                    <label><input type="radio" name="q23" value="ಮೆಕ್ಯಾನಿಕಲ್‌ಇಂಜಿನಿಯರ್"> ಈ) ಮೆಕ್ಯಾನಿಕಲ್‌ಇಂಜಿನಿಯರ್</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೨೪. ಅಪಾರ್ಟ್‌ಮೆಂಟಿನ ಜನರು ಗೋಪಣ್ಣ ಮಾಸ್ತರನ್ನು ಕರೆದದ್ದು ಹೇಗೆ?</div>
+                <div class="options">
+                    <label><input type="radio" name="q24" value="ತಾತ"> ಅ) ತಾತ</label>
+                    <label><input type="radio" name="q24" value="ಮುದುಕ"> ಆ) ಮುದುಕ</label>
+                    <label><input type="radio" name="q24" value="ಮಾಸ್ತರು"> ಇ) ಮಾಸ್ತರು</label>
+                    <label><input type="radio" name="q24" value="ಓಲ್ಡ್ ಮ್ಯಾನ್"> ಈ) ಓಲ್ಡ್ ಮ್ಯಾನ್</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೨೫. ಯುಗಾದಿ ಕಥೆಯ ರಾಧ ಯಾರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q25" value="ನರ್ಸ್"> ಅ) ನರ್ಸ್</label>
+                    <label><input type="radio" name="q25" value="ಶಿಕ್ಷಕಿ"> ಆ) ಶಿಕ್ಷಕಿ</label>
+                    <label><input type="radio" name="q25" value="ಸೇವಕಿ"> ಇ) ಸೇವಕಿ</label>
+                    <label><input type="radio" name="q25" value="ಸಿಬ್ಬಂದಿ"> ಈ) ಸಿಬ್ಬಂದಿ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೨೬. ಯುಗಾದಿ ಕಥೆಯ ರಾಧ ಯಾರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q26" value="ಅಕ್ಕಸಾಲಿಗರ ಗಂಗಣ್ಯಮಗಳು"> ಅ) ಅಕ್ಕಸಾಲಿಗರ ಗಂಗಣ್ಯಮಗಳು</label>
+                    <label><input type="radio" name="q26" value="ಅಕ್ಕಸಾಲಿಗರ ರಂಗಣ್ಣ ಮಗಳು"> ಆ) ಅಕ್ಕಸಾಲಿಗರ ರಂಗಣ್ಣ ಮಗಳು</label>
+                    <label><input type="radio" name="q26" value="ಅಕ್ಕಸಾಲಿಗರ ರಮೇಶನ ಮಗಳು"> ಇ) ಅಕ್ಕಸಾಲಿಗರ ರಮೇಶನ ಮಗಳು</label>
+                    <label><input type="radio" name="q26" value="ಅಕ್ಕಸಾಲಿಗರ ರಾಮಣ್ಣನಮಗಳು"> ಈ) ಅಕ್ಕಸಾಲಿಗರ ರಾಮಣ್ಣನಮಗಳು</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೨೭. “ಮಾಸ್ತರರ, ಬದುಕು ಮಾಡೋದು ಹೆಂಗೆ ಅಂತ ಕಲಿಸಿ ಕೊಟ್ಟಿರಿ. ಅದಕ್ಕಿಂತ ದೊಡ್ಡದು ಬೇರೆ ಏನು ಮಾಡಲಿಕ್ಕೆ ಆಗೈತೆಬಿಡ್ರಿ” ಎಂದವರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q27" value="ರಾಧ"> ಅ) ರಾಧ</label>
+                    <label><input type="radio" name="q27" value="ರೇಖಾ"> ಆ) ರೇಖಾ</label>
+                    <label><input type="radio" name="q27" value="ಅನುರಾಧ"> ಇ) ಅನುರಾಧ</label>
+                    <label><input type="radio" name="q27" value="ರುಕ್ಕಿಣಿ"> ಈ) ರುಕ್ಕಿಣಿ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೨೮. “ರಾದಳಂತಹ ವ್ಯಕ್ತಿ ನನ್ನ ಜೀವನದಲ್ಲಿ ಖಂಡಿತಾ ಸಿಗಂಗಿಲ್ಲ ಅನಿಸ್ತದೆ....” ಎಂದವರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q28" value="ಗೋಪಣ್ಣಮಾಸ್ತರು"> ಅ) ಗೋಪಣ್ಣಮಾಸ್ತರು</label>
+                    <label><input type="radio" name="q28" value="ಕಾಸಿಂಸಾಬ್"> ಆ) ಕಾಸಿಂಸಾಬ್</label>
+                    <label><input type="radio" name="q28" value="ಪ್ರಹ್ಲಾದ"> ಇ) ಪ್ರಹ್ಲಾದ</label>
+                    <label><input type="radio" name="q28" value="ಇಸ್ಮಾಯಿಲ್"> ಈ) ಇಸ್ಮಾಯಿಲ್</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೨೯. ವಸುಧೇಂದ್ರರವರ ಕಥಾ ಸಂಕಲನಗಳು ಯಾವುವು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q29" value="ಯುಗಾದಿ, ಚೇಳು, ಹಂಪಿಎಕ್ಸಪ್ರೆಸ್, ಮೋಹನಸ್ವಾಮಿ"> ಅ) ಯುಗಾದಿ, ಚೇಳು, ಹಂಪಿಎಕ್ಸಪ್ರೆಸ್, ಮೋಹನಸ್ವಾಮಿ</label>
+                    <label><input type="radio" name="q29" value="ಹರಿಚಿತ್ತ ಸತ್ಯ"> ಆ) ಹರಿಚಿತ್ತ ಸತ್ಯ</label>
+                    <label><input type="radio" name="q29" value="ಕೋತಿಗಳಯ, ಐದುಪೈಸೆ ವರದಕ್ಷಣೆ"> ಇ) ಕೋತಿಗಳಯ, ಐದುಪೈಸೆ ವರದಕ್ಷಣೆ</label>
+                    <label><input type="radio" name="q29" value="ಮಿಥುನ, ಎವರೆಸ್ಟ್"> ಈ) ಮಿಥುನ, ಎವರೆಸ್ಟ್</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೩೦. “ಮೊಮ್ಮಗಹುಟ್ಟಾನೆ...ನೋಡಬರ್ರಿ ಮಾಸ್ತರರ...ಬಳ್ಳಾರಿ ಬೆರಕಿ ಮುಖದಾಗೆ ಎದ್ದು ಹೊಡಿತದೆ" ಎಂದವರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q30" value="ರುಕ್ಷ್ಮೀಣಮ್ಮ"> ೧) ರುಕ್ಷ್ಮೀಣಮ್ಮ</label>
+                    <label><input type="radio" name="q30" value="ರೇಖಾ"> ೨) ರೇಖಾ</label>
+                    <label><input type="radio" name="q30" value="ರಾಧ"> ಇ) ರಾಧ</label>
+                    <label><input type="radio" name="q30" value="ರೂಪಮ್ಮ"> ಈ) ರೂಪಮ್ಮ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೩೧. "ದೊಡ್ಡಸ್ಕಾಂಡಲ್ ಆಗೈತೆ ಸಾರ್... ಎಲ್ಲಾ ಬಂದ್ ಡಾಕ್ಟರಮ್ಮನ ಅರೆಸ್ಟ್ ಮಾಡ್ತಾರೆ" ಎಂದವರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q31" value="ಪೇದೆಯೊಬ್ಬ"> ಅ) ಪೇದೆಯೊಬ್ಬ</label>
+                    <label><input type="radio" name="q31" value="ನರ್ಸ್"> ಆ) ನರ್ಸ್</label>
+                    <label><input type="radio" name="q31" value="ದಾರಿ ಹೋಕ"> ಇ) ದಾರಿ ಹೋಕ</label>
+                    <label><input type="radio" name="q31" value="ವಾಚ್‌ಮ್ಯಾನ್"> ಈ) ವಾಚ್‌ಮ್ಯಾನ್</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೩೨. ಅಕ್ಕಸಾಲಿಗರ ಗಂಗಣ್ಣನ ಮಗಳು ಯಾರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q32" value="ರಾಧ"> ಅ) ರಾಧ</label>
+                    <label><input type="radio" name="q32" value="ರೇಖಾ"> ಆ) ರೇಖಾ</label>
+                    <label><input type="radio" name="q32" value="ವಸುಂಧರ"> ಇ) ವಸುಂಧರ</label>
+                    <label><input type="radio" name="q32" value="ರಮ್ಯ"> ಈ) ರಮ್ಯ</label>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text">೩೩. ಸ್ಮಾರ್ಟ್ ಹೋಟಲಿನಲ್ಲಿ ಪಾರ್ಟಿಯಲ್ಲಿ ಗೋಪಣ್ಣ ಮಾಸ್ತರು ಏನನ್ನು ತಿಂದರು?</div>
+                <div class="options">
+                    <label><input type="radio" name="q33" value="ಚಿತ್ರಾನ್ನ"> ಅ) ಚಿತ್ರಾನ್ನ</label>
+                    <label><input type="radio" name="q33" value="ಮೊಸರನ್ನ"> ಆ) ಮೊಸರನ್ನ</label>
+                    <label><input type="radio" name="q33" value="ಪಲಾವ್"> ಇ) ಪಲಾವ್</label>
+                    <label><input type="radio" name="q33" value="ಬಿರಿಯಾನಿ"> ಈ) ಬಿರಿಯಾನಿ</label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">ಫಲಿತಾಂಶವನ್ನು ನೋಡಿ (Submit)</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // JavaScript ಗಾಗಿ ಕೋಡ್ (Code for JavaScript)
+        document.getElementById('quizForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // ಸರಿಯಾದ ಉತ್ತರಗಳು (Correct Answers Mapping)
+            const answers = {
+                q1: 'ವಸುಧೇಂದ್ರ',
+                q2: 'ಬಳ್ಳಾರಿಸಂಡೂರು',
+                q3: 'ಮಾಹಿತಿತಂತ್ರಜ್ಞಾನ',
+                q4: 'ನ್ಯಾಷನಲ್ ಇನ್ಸಸ್ಟಿಟ್ಯೂಟ್ ಆಫೈನ್ಸ್',
+                q5: 'ಹರಿಚಿತ್ತ ಸತ್ಯ',
+                q6: 'ಯುಗಾದಿ',
+                q7: 'ಕನ್ನಡ ಶಾಲೆಯ ಮಾಸ್ತರು',
+                q8: 'ಖಡಕ್‌ಮಾಸ್ತರು',
+                q9: 'ರುಕ್ಕಿಣಮ್ಮ',
+                q10: 'ಗೋಪಣ್ಣನಗೆಳೆಯ',
+                q11: 'ಪ್ರಹ್ಲಾದನ ಹೆಂಡತಿ',
+                q12: 'ಸರ್ಕಾರಿ ಆಸ್ಪತ್ರೆಯಲ್ಲಿ',
+                q13: 'ದಾದಿರಾಧ',
+                q14: 'ಅಪಾರ್ಟಮೆಂಟಿನಚಿಕ್ಕಮಕ್ಕಳಿಗೆ',
+                q15: 'ಮಗನಿಗೆ ಕೆಲಸದ ಸಲುವಾಗಿ',
+                q16: 'ಪ್ರಹ್ಲಾದ',
+                q17: '20 ವರ್ಷದಕೆಳಗೆ',
+                q18: 'ಕಾಸಿಂಸಾಬ್',
+                q19: 'ರೇಖಾ',
+                q20: 'ಇಸ್ಮಾಯಿಲ್',
+                q21: 'ರಾಧ',
+                q22: 'ಕಾಸಿಂಸಾಬ್',
+                q23: 'ಸಾಫ್ಟ್‌ವೇರ್‌ಇಂಜಿನಿಯರ್',
+                q24: 'ಓಲ್ಡ್ ಮ್ಯಾನ್',
+                q25: 'ನರ್ಸ್',
+                q26: 'ಅಕ್ಕಸಾಲಿಗರ ರಂಗಣ್ಣ ಮಗಳು',
+                q27: 'ರಾಧ',
+                q28: 'ಪ್ರಹ್ಲಾದ',
+                q29: 'ಯುಗಾದಿ, ಚೇಳು, ಹಂಪಿಎಕ್ಸಪ್ರೆಸ್, ಮೋಹನಸ್ವಾಮಿ',
+                q30: 'ರಾಧ',
+                q31: 'ಪೇದೆಯೊಬ್ಬ',
+                q32: 'ರಾಧ',
+                q33: 'ಮೊಸರನ್ನ'
+            };
+
+            let score = 0;
+            const form = e.target;
+            const totalQuestions = Object.keys(answers).length;
+
+            // ಪ್ರತಿ ಪ್ರಶ್ನೆಗೆ ಉತ್ತರವನ್ನು ಪರಿಶೀಲಿಸಿ (Check answer for each question)
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = 'q' + i;
+                const selectedOption = form.elements[questionName];
+
+                if (selectedOption) {
+                    const userAnswer = selectedOption.value;
+                    const correctAnswer = answers[questionName];
+
+                    if (userAnswer === correctAnswer) {
+                        score++;
+                    }
+                }
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `ನಿಮ್ಮ ಅಂಕ: ${score} / ${totalQuestions}`;
+
+            if (score === totalQuestions) {
+                resultDiv.classList.add('correct-score');
+                resultDiv.classList.remove('incorrect-score');
+                resultDiv.innerHTML += "<br>ಅದ್ಭುತ! ನೀವು ಎಲ್ಲ ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿದ್ದೀರಿ. 🎉";
+            } else {
+                resultDiv.classList.add('incorrect-score');
+                resultDiv.classList.remove('correct-score');
+                resultDiv.innerHTML += `<br>ಇನ್ನೂ ಪ್ರಯತ್ನಿಸಿ. ಸರಿಯಾದ ಉತ್ತರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ.`;
+            }
+        });
+    </script>
+</body>
+</html>
