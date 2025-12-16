@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ - ರಸಪ್ರಶ್ನೆ</title>
+    <style>
+        /* ವೆಬ್ ಪುಟದ ವಿನ್ಯಾಸ (CSS) */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fcfcfc;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #a0522d; /* Sienna Brown */
+            border-bottom: 3px solid #a0522d;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .question-block {
+            margin-bottom: 25px;
+            padding: 18px;
+            border: 1px solid #e0e0e0;
+            border-left: 5px solid #a0522d;
+            border-radius: 8px;
+            background-color: #fff9f6; /* Very light reddish brown */
+        }
+
+        .question-block h3 {
+            margin-top: 0;
+            color: #4b0082; /* Indigo */
+            font-size: 16px;
+        }
+
+        .options label {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 15px;
+        }
+
+        .options label:hover {
+            background-color: #f0e6da;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #20b2aa; /* Light Sea Green */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #1a8b84;
+        }
+
+        #score-card {
+            margin-top: 30px;
+            padding: 25px;
+            border: 2px solid #a0522d;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 22px;
+            display: none; /* ಆರಂಭದಲ್ಲಿ ಅಂಕಪಟ್ಟಿ ಅಡಗಿರುತ್ತದೆ */
+            background-color: #f8f9fa;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+            color: #6c757d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ - ರಸಪ್ರಶ್ನೆ</h1>
+
+        <form id="quiz-form">
+            <div class="question-block">
+                <h3>1. ಡಿ.ವಿ.ಗುಂಡಪ್ಪನವರ ಕಾವ್ಯನಾಮ ಯಾವುದು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="a"> ಅ) ಮಂಕುತಿಮ್ಮ</label>
+                    <label><input type="radio" name="q1" value="b"> ಆ) ಮಹಂತಲಿಂಗ</label>
+                    <label><input type="radio" name="q1" value="c"> ಇ) ಶ್ರೀವಿವಾಸ</label>
+                    <label><input type="radio" name="q1" value="d"> ಈ) ಅಂಬಿಕಾತನಯದತ್ತ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>2. ಡಿ.ವಿ.ಜಿಯವರ ಪೂರ್ಣ ಹೆಸರು</h3>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="a"> ಅ) ದೇವನಹಳ್ಳಿ ವೆಂಕಟರಮಣಯ್ಯ ಗುಂಡಪ್ಪ</label>
+                    <label><input type="radio" name="q2" value="b"> ಆ) ದೇವನಹಳ್ಳಿ ವೆಂಕಟಪ್ಪ</label>
+                    <label><input type="radio" name="q2" value="c"> ಇ) ದುಂಡಪ್ಪ ವಿಠಲ ಗುಂಡಪ್ಪ</label>
+                    <label><input type="radio" name="q2" value="d"> ಈ) ದೇವನಹಳ್ಳಿ ವಿಠಲ ಗುಂಡಪ್ಪ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>3. ಡಿ.ವಿ.ಗುಂಡಪ್ಪನವರ ಹುಟ್ಟೂರು ಯಾವುದು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="a"> ಅ) ದೇವನಹಳ್ಳಿ</label>
+                    <label><input type="radio" name="q3" value="b"> ಆ) ದೇವರಾಯನ ದುರ್ಗ</label>
+                    <label><input type="radio" name="q3" value="c"> ಇ) ರಾಮದುರ್ಗ</label>
+                    <label><input type="radio" name="q3" value="d"> ಈ) ದೇವದುರ್ಗ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>4. ನಗುವುದು ಸಹಜದ ಧರ್ಮ : ನಗಿಸುವುದು ಯಾವ ಧರ್ಮ?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="a"> ಅ) ಸ್ವಧರ್ಮ</label>
+                    <label><input type="radio" name="q4" value="b"> ಆ) ಮನುಷ್ಯಧರ್ಮ</label>
+                    <label><input type="radio" name="q4" value="c"> ಇ) ಪರಧರ್ಮ</label>
+                    <label><input type="radio" name="q4" value="d"> ಈ) ಕುಲಧರ್ಮ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>5. 'ಆರದೋ ಜಗವೆಂದು ಎಣಿಸದಿರರು' — ಇಲ್ಲಿ ಯಾವುದು ಆರದೋ?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="a"> ಅ) ಬೇದ</label>
+                    <label><input type="radio" name="q5" value="b"> ಆ) ಮಾತು</label>
+                    <label><input type="radio" name="q5" value="c"> ಇ) ಕೆಲಸ</label>
+                    <label><input type="radio" name="q5" value="d"> ಈ) ಭೂಮಿ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>6. "ಹೊತ್ತು ಕಣಕಣದಿ ಮಣ್ಣನು ಗೆದ್ದಲಿರುವೆಗಳು ! ಮೆತ್ತು ಬಿಡದೆ ದುಡಿದಾಗಿಸಿದನಗೂಡು!" - ಈ ಕಗ್ಗದ ಸಾರಾಂಶ.</h3>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="a"> ಅ) ಮಾನವನ ಯತ್ನ</label>
+                    <label><input type="radio" name="q6" value="b"> ಆ) ಗುರು ಯತ್ನ</label>
+                    <label><input type="radio" name="q6" value="c"> ಇ) ಜಂಗಮ ಯತ್ನ</label>
+                    <label><input type="radio" name="q6" value="d"> ಈ) ಪಕ್ಷಿಗಳ ಯತ್ನ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>7. "ನಗುವು ಸಹಜ ಧರ್ಮ ನಗಿಸುವುದು ಪರಧರ್ಮ ನಗುತ ಕೇಳುತ ನಗುವುದಶಯದ ಧರ್ಮ !" - ಈ ಕಗ್ಗದ ಸಾರಾಂಶ.</h3>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="a"> ಅ) ನಗುತ ಬಾಳು</label>
+                    <label><input type="radio" name="q7" value="b"> ಆ) ಅಳುತ ಬಾಳು</label>
+                    <label><input type="radio" name="q7" value="c"> ಇ) ಆಡುತಾ ಬಾಳು</label>
+                    <label><input type="radio" name="q7" value="d"> ಈ) ಕುಣಿಯುತ ಬಾಳು</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>8. "ಹುಲ್ಲಾಗು ಬೆಟ್ಟದಡಿ, ಮನೆಗೆ ಮಲ್ಲಿಗೆಯಾಗು ! ಕಲ್ಲಾಗು ಕಷ್ಟಗಳ ವಿಧಿ ಸುರಿಯೆ” - ಈ ಕಗ್ಗದ ಸಾರಾಂಶ.</h3>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="a"> ಅ) ಜ್ಞಾನದ ತತ್ವ</label>
+                    <label><input type="radio" name="q8" value="b"> ಆ) ಸ್ವಾಮಿ ತತ್ವ</label>
+                    <label><input type="radio" name="q8" value="c"> ಇ) ಜೀವನತತ್ವ</label>
+                    <label><input type="radio" name="q8" value="d"> ಈ) ವಿದ್ಯಾ ತತ್ತ್ವ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>9. ಡಿ.ವಿ.ಜಿ ಯವರು ಹುಟ್ಟಿದ್ದು ಯಾವಾಗ?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="a"> ಅ) 1778</label>
+                    <label><input type="radio" name="q9" value="b"> ಆ) 1887</label>
+                    <label><input type="radio" name="q9" value="c"> ಇ) 1987</label>
+                    <label><input type="radio" name="q9" value="d"> ಈ) 1963</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>10. ಡಿ.ವಿ.ಜಿ ಯವರ ಪ್ರಸಿದ್ದ ಕೃತಿ ಯಾವುದು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="a"> ಅ) ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ</label>
+                    <label><input type="radio" name="q10" value="b"> ಆ) ವಚನ ಸಾಹಿತ್ಯ</label>
+                    <label><input type="radio" name="q10" value="c"> ಇ) ಗದುಗುಗಿನ ಭಾರತ</label>
+                    <label><input type="radio" name="q10" value="d"> ಈ) ನಾಕುತಂತಿ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>11. "ಹೊಸ ಚಿಗುರು ಹಳೆ ಬೇರು ಕೊಡಿರಲು ಮರಸೊಬಗು" - ಇದು ಯಾವ ಕವಿಯ ಸಾಲು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="a"> ಅ) ಜಿ.ಎಸ್. ಶಿವರುದ್ರಪ್ಪ</label>
+                    <label><input type="radio" name="q11" value="b"> ಆ) ಡಿ.ವಿ.ಗುಂಡಪ್ಪ</label>
+                    <label><input type="radio" name="q11" value="c"> ಇ) ಕುವೆಂಪು</label>
+                    <label><input type="radio" name="q11" value="d"> ಈ) ದ.ರಾ.ಬೇಂದ್ರೆ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>12. ಇರುವೆಗಳು ಕಟ್ಟಿದ ಗೂಡು ಯಾವುದಕ್ಕೆ ಹುತ್ತವಾಗುವುದು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="a"> ಅ) ಇಲಿ</label>
+                    <label><input type="radio" name="q12" value="b"> ಆ) ಭಾವುಲಿ</label>
+                    <label><input type="radio" name="q12" value="c"> ಇ) ವಿಷಸರ್ಪ</label>
+                    <label><input type="radio" name="q12" value="d"> ಈ) ಮುಂಗುಸಿ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>13. ಹೊಸ ಚಿಗುರು... ಕೊಡಿರಲು ಮರಸೊಬಗು. (ಖಾಲಿ ಜಾಗವನ್ನು ತುಂಬಿರಿ)</h3>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="a"> ಅ) ಹೂವು</label>
+                    <label><input type="radio" name="q13" value="b"> ಆ) ಗಾಳಿ</label>
+                    <label><input type="radio" name="q13" value="c"> ಇ) ನೀರು</label>
+                    <label><input type="radio" name="q13" value="d"> ಈ) ಹಳೇ ಬೇರು</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>14. ವಿಷಸರ್ಪಗಳಿಗೆ ಯಾವುದರ ಗೂಡು ಹುತ್ತವಾಗುವುದು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="a"> ಅ) ಗೆದ್ದಲಿರುವೆ</label>
+                    <label><input type="radio" name="q14" value="b"> ಆ) ಇಲಿ</label>
+                    <label><input type="radio" name="q14" value="c"> ಇ) ಜೇಡ</label>
+                    <label><input type="radio" name="q14" value="d"> ಈ) ಕಾಗೆ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>15. ಕಣಕಣದಿ ಗೆದ್ದಲಿರುವೆಗಳು ಏನನ್ನು ಹೊರುವುವು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q15" value="a"> ಅ) ನೀರು</label>
+                    <label><input type="radio" name="q15" value="b"> ಆ) ಮಣ್ಣು</label>
+                    <label><input type="radio" name="q15" value="c"> ಇ) ಕಟ್ಟಿಗೆ</label>
+                    <label><input type="radio" name="q15" value="d"> ಈ) ಹುಲ್ಲು</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>16. ದೀನ ದುರ್ಬಲರಿಗೆ ಏನಾಗಬೇಕೆಂದು ಡಿ.ವಿ.ಜಿ. ಉದಾರಿಸಿದ್ದಾರೆ?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q16" value="a"> ಅ) ಉಪ್ಪು</label>
+                    <label><input type="radio" name="q16" value="b"> ಆ) ಬೆಲ್ಲ ಸಕ್ಕರೆ</label>
+                    <label><input type="radio" name="q16" value="c"> ಇ) ಕಲ್ಲು</label>
+                    <label><input type="radio" name="q16" value="d"> ಈ) ಗಿಡ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>17. ಕಷ್ಟಗಳ ಮಳೆಯ ವಿಧಿ ಸುರಿಯುವಾಗ ಏನಾಗಬೇಕೆಂದು ಡಿ.ವಿ.ಜಿ ತಿಳಿಸಿದ್ದಾರೆ?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q17" value="a"> ಅ) ಹಾವಾಗು</label>
+                    <label><input type="radio" name="q17" value="b"> ಆ) ಕಲ್ಲಾಗು</label>
+                    <label><input type="radio" name="q17" value="c"> ಇ) ಮಣ್ಣಾಗು</label>
+                    <label><input type="radio" name="q17" value="d"> ಈ) ಬೆಲ್ಲವಾಗು</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>18. ಎಲ್ಲಾರೊಳಗೆ ನಾವು ಏನಾಗಬೇಕೆಂದು ಡಿ.ವಿ.ಜಿ ತಿಳಿಸಿದ್ದಾರೆ.</h3>
+                <div class="options">
+                    <label><input type="radio" name="q18" value="a"> ಅ) ಒಂದಾಗ ಬೇಕು</label>
+                    <label><input type="radio" name="q18" value="b"> ಆ) ಹೋರಾಡಬೇಕು</label>
+                    <label><input type="radio" name="q18" value="c"> ಇ) ದೂರವಿರಬೇಕು</label>
+                    <label><input type="radio" name="q18" value="d"> ಈ) ಕುಳಿತುಕೊಳ್ಳಬೇಕು</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>19. ಡಿ.ವಿ.ಜಿ ಅವರ ಪ್ರಕಾರ, ಹುಲ್ಲಾಗು ಎಲ್ಲಿ?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q19" value="a"> ಅ) ಮನೆಯಲ್ಲಿ</label>
+                    <label><input type="radio" name="q19" value="b"> ಆ) ಸಮುದ್ರದಡಿ</label>
+                    <label><input type="radio" name="q19" value="c"> ಇ) ಬೆಟ್ಟದಡಿ</label>
+                    <label><input type="radio" name="q19" value="d"> ಈ) ಕಾಡಿನಲ್ಲಿ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>20. ೧೯೭೪ರಲ್ಲಿ ಭಾರತ ಸರ್ಕಾರ ಡಿ.ವಿ.ಜಿ ಅವರಿಗೆ ಯಾವ ಪ್ರಶಸ್ತಿ ನೀಡಿ ಗೌರವಿಸಿತು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q20" value="a"> ಅ) ಪದ್ಮಭೂಷಣ</label>
+                    <label><input type="radio" name="q20" value="b"> ಆ) ಪದ್ಮವಿಭೂಷಣ</label>
+                    <label><input type="radio" name="q20" value="c"> ಇ) ರಾಷ್ಟ್ರಕವಿ</label>
+                    <label><input type="radio" name="q20" value="d"> ಈ) ನಾಡೋಜ</label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">NKN</button>
+        </form>
+
+        <div id="score-card">
+            <h2>ನಿಮ್ಮ ಅಂಕಗಳು</h2>
+            <p id="score-result"></p>
+        </div>
+
+        <div class="footer">
+            <p>Developed by MicroIntel with AI</p>
+        </div>
+    </div>
+
+    <script>
+        // ರಸಪ್ರಶ್ನೆ ತರ್ಕ (JavaScript)
+        const correctAnswers = {
+            q1: 'a',  // ಮಂಕುತಿಮ್ಮ
+            q2: 'a',  // ದೇವನಹಳ್ಳಿ ವೆಂಕಟರಮಣಯ್ಯ ಗುಂಡಪ್ಪ
+            q3: 'a',  // ದೇವನಹಳ್ಳಿ
+            q4: 'c',  // ಪರಧರ್ಮ
+            q5: 'a',  // ಮಾತು
+            q6: 'a',  // ಮಾನವನ ಯತ್ನ
+            q7: 'a',  // ನಗುತ ಬಾಳು
+            q8: 'c',  // ಜೀವನತತ್ವ
+            q9: 'b',  // ೧೮೮೭
+            q10: 'a', // ಮಂಕುತಿಮ್ಮನ ಕಗ್ಗ
+            q11: 'b', // ಡಿ.ವಿ.ಗುಂಡಪ್ಪ
+            q12: 'c', // ವಿಷಸರ್ಪ
+            q13: 'd', // ಹಳೇ ಬೇರು
+            q14: 'a', // ಗೆದ್ದಲಿರುವೆ
+            q15: 'b', // ಮಣ್ಣು
+            q16: 'b', // ಬೆಲ್ಲ ಸಕ್ಕರೆ
+            q17: 'b', // ಕಲ್ಲಾಗು
+            q18: 'a', // ಒಂದಾಗ ಬೇಕು
+            q19: 'c', // ಬೆಟ್ಟದಡಿ
+            q20: 'a'  // ಪದ್ಮಭೂಷಣ
+        };
+
+        const form = document.getElementById('quiz-form');
+        const scoreCard = document.getElementById('score-card');
+        const scoreResult = document.getElementById('score-result');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // ಪುಟವನ್ನು ಮರುಲೋಡ್ ಮಾಡುವುದನ್ನು ತಡೆಯುತ್ತದೆ
+
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = `q${i}`;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                const questionBlock = document.querySelector(`input[name="${questionName}"]`).closest('.question-block');
+                
+                // ಹಿಂದಿನ ಬಣ್ಣಗಳನ್ನು ತೆಗೆದುಹಾಕು
+                questionBlock.querySelectorAll('.options label').forEach(label => {
+                    label.style.backgroundColor = '';
+                });
+
+                if (selectedOption) {
+                    // ಆಯ್ದ ಉತ್ತರ ಸರಿಯಾಗಿದ್ದರೆ
+                    if (selectedOption.value === correctAnswers[questionName]) {
+                        score++;
+                        // ಸರಿಯಾದ ಉತ್ತರಕ್ಕೆ ಹಸಿರು ಬಣ್ಣ ನೀಡುವುದು
+                        selectedOption.parentElement.style.backgroundColor = '#d4edda'; 
+                    } else {
+                        // ತಪ್ಪಾದ ಉತ್ತರಕ್ಕೆ ಕೆಂಪು ಬಣ್ಣ ನೀಡುವುದು
+                        selectedOption.parentElement.style.backgroundColor = '#f8d7da';
+                        // ಸರಿಯಾದ ಉತ್ತರಕ್ಕೆ ಹಸಿರು ಬಣ್ಣ ನೀಡುವುದು
+                        document.querySelector(`input[name="${questionName}"][value="${correctAnswers[questionName]}"]`).parentElement.style.backgroundColor = '#d4edda';
+                    }
+                } else {
+                    // ಉತ್ತರ ನೀಡಿಲ್ಲದಿದ್ದರೆ, ಸರಿಯಾದ ಉತ್ತರಕ್ಕೆ ಹಳದಿ ಬಣ್ಣ ನೀಡುವುದು
+                    document.querySelector(`input[name="${questionName}"][value="${correctAnswers[questionName]}"]`).parentElement.style.backgroundColor = '#fff3cd';
+                }
+            }
+
+            // ಅಂಕಪಟ್ಟಿಯನ್ನು ತೋರಿಸು
+            scoreResult.innerHTML = `ನೀವು **${totalQuestions}** ಪ್ರಶ್ನೆಗಳಲ್ಲಿ **${score}** ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿದ್ದೀರಿ.`;
+            scoreCard.style.display = 'block';
+
+            // ಬಟನ್ ಅನ್ನು ಡಿಸ್ಏಬಲ್ ಮಾಡು
+            document.querySelector('.submit-btn').disabled = true;
+        });
+    </script>
+</body>
+</html>
