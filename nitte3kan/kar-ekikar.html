@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಕರ್ನಾಟಕ ಏಕೀಕರಣ - ರಸಪ್ರಶ್ನೆ</title>
+    <style>
+        /* ವೆಬ್ ಪುಟದ ವಿನ್ಯಾಸ (CSS) */
+        body {
+            font-family: 'Nudi', sans-serif; /* ಕನ್ನಡ ಫಾಂಟ್ ಲಭ್ಯವಿಲ್ಲದಿದ್ದರೆ, ಸರಳ ಫಾಂಟ್ ಬಳಸಿ */
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .question-block {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #e9f7ff;
+        }
+
+        .question-block h3 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #d0e9ff;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+
+        #score-card {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 20px;
+            display: none; /* ಆರಂಭದಲ್ಲಿ ಅಂಕಪಟ್ಟಿ ಅಡಗಿರುತ್ತದೆ */
+            background-color: #f8f9fa;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+            color: #6c757d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>ಕರ್ನಾಟಕ ಏಕೀಕರಣ - ರಸಪ್ರಶ್ನೆ</h1>
+
+        <form id="quiz-form">
+            <div class="question-block">
+                <h3>1. ಪ್ರೊ. ಜಿ. ವೆಂಕಟಸುಬ್ಬಯ್ಯನವರ ಲೇಖನ ಯಾವುದು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="a"> ಅ) ಕರ್ನಾಟಕ ಏಕೀಕರಣ ಒಂದು ಅಪೂರ್ಾ ಚರಿತ್ರೆ</label>
+                    <label><input type="radio" name="q1" value="b"> ಆ) ಕರ್ನಾಟಕ ಏಕೀಕರಣ</label>
+                    <label><input type="radio" name="q1" value="c"> ಇ) ಕರ್ನಾಟಕ ಸಂಸ್ಕೃತಿ</label>
+                    <label><input type="radio" name="q1" value="d"> ಈ) ಕರ್ನಾಟಕ ಗತ ವೈಭವ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>2. ಕರ್ನಾಟಕ ಏಕೀಕರಣ ಒಂದು ಅಪೂವಾ ಚರಿತ್ರೆ ಲೇಖನ ಬರೆದವರು ಯಾರು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="a"> ಅ) ಪ್ರೊ. ಜಿ. ವೆಂಕಟಸುಬ್ಬಯ್ಯ</label>
+                    <label><input type="radio" name="q2" value="b"> ಆ) ಹಂಪನಾ</label>
+                    <label><input type="radio" name="q2" value="c"> ಇ) ಕುವೆಂಪು</label>
+                    <label><input type="radio" name="q2" value="d"> ಈ) ಡಿವಿಜಿ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>3. ೧೮೦೦ ರಲ್ಲಿ ಬಳ್ಳಾರಿ ಜಿಲ್ಲೆಯ ಕಲೆಕ್ಟರ್ ಆಗಿದ್ದವರು ಯಾರು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="a"> ಅ) ಸರ್. ಥಾಮಸ್ ಮನ್ರೋ</label>
+                    <label><input type="radio" name="q3" value="b"> ಆ) ಸರ್. ಥಾಮ್ಸ</label>
+                    <label><input type="radio" name="q3" value="c"> ಇ) ರಾಬರ್ಟ</label>
+                    <label><input type="radio" name="q3" value="d"> ಈ) ಕಾನಾವಾಲಿಸ್</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>4. ವಿದ್ಯಾವರ್ಧಕ ಸಂಘವು ಯಾವಾಗ ಸ್ಥಾಪನೆಯಾಯಿತು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="a"> ಅ) ೧೮೯೦</label>
+                    <label><input type="radio" name="q4" value="b"> ಆ) ೧೮೬೯</label>
+                    <label><input type="radio" name="q4" value="c"> ಇ) ೧೮೯೧</label>
+                    <label><input type="radio" name="q4" value="d"> ಈ) ೧೮೯೨</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>5. ವಿದ್ಯಾವರ್ಧಕ ಸಂಘವು ಎಲ್ಲಿ ಸ್ಥಾಪಿಸಲಾಯಿತು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="a"> ಅ) ಬೆಂಗಳೂರು</label>
+                    <label><input type="radio" name="q5" value="b"> ಆ) ಮೈಸೂರು</label>
+                    <label><input type="radio" name="q5" value="c"> ಇ) ಧಾರವಾಡ</label>
+                    <label><input type="radio" name="q5" value="d"> ಈ) ಕೀಲಾರ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>6. ವಿದ್ಯಾವರ್ಧಕ ಸಂಘವನ್ನು ಸ್ಥಾಪಿಸಿದವರು ಯಾರು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="a"> ಅ) ಜಿ. ವೆಂಕಟಸುಬ್ಬಯ್ಯ</label>
+                    <label><input type="radio" name="q6" value="b"> ಆ) ರಾ.ಹ. ದೇಶಪಾಂಡೆ</label>
+                    <label><input type="radio" name="q6" value="c"> ಇ) ಬಿ.ಎಂ.ಶ್ರೀ</label>
+                    <label><input type="radio" name="q6" value="d"> ಈ) ಮಾಸ್ತಿ</label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h3>7. ಆಲೂರು ವೆಂಕಟರಾಯರ ಪ್ರಮುಖ ಕೃತಿ ಯಾವುದು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="a"> ಅ) ಆದಿಪುರಾಣ</label>
+                    <label><input type="radio" name="q7" value="b"> ಆ) ಕವಿರಾಜ ಮಾರ್ಗ</label>
+                    <label><input type="radio" name="q7" value="c"> ಇ) ಆಡಳಿತ ಕನ್ನಡ</label>
+                    <label><input type="radio" name="q7" value="d"> ಈ) ಕರ್ನಾಟಕ ಗತ ವೈಭವ</label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h3>8. ಕರ್ನಾಟಕ ಗತ ವೈಭವ ಕೃತಿ ರಚಿಸಿದವರು ಯಾರು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="a"> ಅ) ಪಂಪ</label>
+                    <label><input type="radio" name="q8" value="b"> ಆ) ರನ್ನ</label>
+                    <label><input type="radio" name="q8" value="c"> ಇ) ಜನ್ನ</label>
+                    <label><input type="radio" name="q8" value="d"> ಈ) ಆಲೂರು ವೆಂಕಟರಾಯರು</label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h3>9. ೧೯೫೫ ರಲ್ಲಿ ನಡೆದ ಕನ್ನಡ ಸಾಹಿತ್ಯ ಪರಿಷತ್ತಿನ ಸಮ್ಮೇಳನದ ಅಧ್ಯಕ್ಷರು ಯಾರು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="a"> ಅ) ಶ್ರೀರಂಗರು</label>
+                    <label><input type="radio" name="q9" value="b"> ಆ) ರಾ.ಹ. ದೇಶಪಾಂಡೆ</label>
+                    <label><input type="radio" name="q9" value="c"> ಇ) ಬಿ.ಎಂ.ಶ್ರೀ</label>
+                    <label><input type="radio" name="q9" value="d"> ಈ) ಮಾಸ್ತಿ</label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h3>10. ಪ್ರೊ. ಜಿ. ವೆಂಕಟಸುಬ್ಬಯ್ಯನವರ ಬರೆದ ಕೃತಿಗಳು ಯಾವುವು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="a"> ಅ) ಇಗೀ ಕನ್ನಡ ಮತ್ತು ಸಾಮಾಜಿಕ ನಿಘಂಟು</label>
+                    <label><input type="radio" name="q10" value="b"> ಆ) ಕನ್ನಡ-ಕನ್ನಡ-ಇಂಗ್ಲಿಷ್ ನಿಘಂಟು</label>
+                    <label><input type="radio" name="q10" value="c"> ಇ) ಎರವಲು ಪದಕೋಶ ಮತ್ತು ನಿಘಂಟು ರಚನಾ ಶಾಸ್ತ್ರ</label>
+                    <label><input type="radio" name="q10" value="d"> ಈ) ಮೇಲಿನ ಎಲ್ಲವೂ</label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h3>11. ಪ್ರೊ. ಜಿ. ವೆಂಕಟಸುಬ್ಬಯ್ಯನವರು ಜನಿಸಿದುದ:</h3>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="a"> ಅ) ೧೯೧೩</label>
+                    <label><input type="radio" name="q11" value="b"> ಆ) ೧೯೧೨</label>
+                    <label><input type="radio" name="q11" value="c"> ಇ) ೧೯೧೪</label>
+                    <label><input type="radio" name="q11" value="d"> ಈ) ೧೯೧೧</label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h3>12. ಪ್ರೊ. ಜಿ. ವೆಂಕಟಸುಬ್ಬಯ್ಯನವರ ಹುಟ್ಟೂರು:</h3>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="a"> ಅ) ಮಂಡ್ಯ</label>
+                    <label><input type="radio" name="q12" value="b"> ಆ) ಮೈಸೂರು</label>
+                    <label><input type="radio" name="q12" value="c"> ಇ) ಗಂಗೆಯಂ</label>
+                    <label><input type="radio" name="q12" value="d"> ಈ) ಕೈಗೀನಹಳ್ಳಿ</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">NKN </button>
+        </form>
+
+        <div id="score-card">
+            <h2>ನಿಮ್ಮ ಅಂಕಗಳು</h2>
+            <p id="score-result"></p>
+        </div>
+        
+        <div class="footer">
+            <p>Developed by MicroIntel with AI</p>
+        </div>
+    </div>
+
+    <script>
+        // ರಸಪ್ರಶ್ನೆ ತರ್ಕ (JavaScript)
+        const correctAnswers = {
+            q1: 'a', // ಕರ್ನಾಟಕ ಏಕೀಕರಣ ಒಂದು ಅಪೂರ್ಾ ಚರಿತ್ರೆ
+            q2: 'a', // ಪ್ರೊ. ಜಿ. ವೆಂಕಟಸುಬ್ಬಯ್ಯ
+            q3: 'a', // ಸರ್. ಥಾಮಸ್ ಮನ್ರೋ
+            q4: 'a', // ೧೮೯೦
+            q5: 'c', // ಧಾರವಾಡ
+            q6: 'b', // ರಾ.ಹ. ದೇಶಪಾಂಡೆ
+            q7: 'd', // ಕರ್ನಾಟಕ ಗತ ವೈಭವ
+            q8: 'd', // ಆಲೂರು ವೆಂಕಟರಾಯರು
+            q9: 'a', // ಶ್ರೀರಂಗರು
+            q10: 'd', // ಮೇಲಿನ ಎಲ್ಲವೂ
+            q11: 'a', // ೧೯೧೩
+            q12: 'd'  // ಕೈಗೀನಹಳ್ಳಿ
+        };
+
+        const form = document.getElementById('quiz-form');
+        const scoreCard = document.getElementById('score-card');
+        const scoreResult = document.getElementById('score-result');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // ಪುಟವನ್ನು ಮರುಲೋಡ್ ಮಾಡುವುದನ್ನು ತಡೆಯುತ್ತದೆ
+
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            for (const question in correctAnswers) {
+                const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+
+                if (selectedOption) {
+                    // ಆಯ್ದ ಉತ್ತರ ಸರಿಯಾಗಿದ್ದರೆ
+                    if (selectedOption.value === correctAnswers[question]) {
+                        score++;
+                        // ಐಚ್ಛಿಕ: ಸರಿಯಾದ ಉತ್ತರಕ್ಕೆ ಹಸಿರು ಬಣ್ಣ ನೀಡುವುದು
+                        selectedOption.parentElement.style.backgroundColor = '#d4edda'; 
+                    } else {
+                        // ಐಚ್ಛಿಕ: ತಪ್ಪಾದ ಉತ್ತರಕ್ಕೆ ಕೆಂಪು ಬಣ್ಣ ನೀಡುವುದು
+                        selectedOption.parentElement.style.backgroundColor = '#f8d7da';
+                        // ಐಚ್ಛಿಕ: ಸರಿಯಾದ ಉತ್ತರಕ್ಕೆ ಹಸಿರು ಬಣ್ಣ ನೀಡುವುದು
+                        document.querySelector(`input[name="${question}"][value="${correctAnswers[question]}"]`).parentElement.style.backgroundColor = '#d4edda';
+                    }
+                } else {
+                    // ಉತ್ತರ ನೀಡಿಲ್ಲದಿದ್ದರೆ, ಸರಿಯಾದ ಉತ್ತರಕ್ಕೆ ಹಸಿರು ಬಣ್ಣ ನೀಡುವುದು
+                    document.querySelector(`input[name="${question}"][value="${correctAnswers[question]}"]`).parentElement.style.backgroundColor = '#fff3cd';
+                }
+            }
+
+            // ಅಂಕಪಟ್ಟಿಯನ್ನು ತೋರಿಸು
+            scoreResult.innerHTML = `ನೀವು **${totalQuestions}** ಪ್ರಶ್ನೆಗಳಲ್ಲಿ **${score}** ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿದ್ದೀರಿ.`;
+            scoreCard.style.display = 'block';
+
+            // ಬಟನ್ ಅನ್ನು ಡಿಸ್ಏಬಲ್ ಮಾಡು
+            document.querySelector('.submit-btn').disabled = true;
+        });
+    </script>
+</body>
+</html>

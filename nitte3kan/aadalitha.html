@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಆಡಳಿತ ಭಾಷೆಯಾಗಿ ಕನ್ನಡ - ರಸಪ್ರಶ್ನೆ</title>
+    <style>
+        /* ವೆಬ್ ಪುಟದ ವಿನ್ಯಾಸ (CSS) */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #8a2be2; /* Blue Violet */
+            border-bottom: 2px solid #8a2be2;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .question-block {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f7f3ff; /* Light purple background */
+        }
+
+        .question-block h3 {
+            margin-top: 0;
+            color: #4b0082; /* Indigo */
+        }
+
+        .options label {
+            display: block;
+            margin: 8px 0;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 3px;
+            transition: background-color 0.3s;
+        }
+
+        .options label:hover {
+            background-color: #e6e0f8;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #20b2aa; /* Light Sea Green */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #1a8b84;
+        }
+
+        #score-card {
+            margin-top: 30px;
+            padding: 20px;
+            border: 2px solid #8a2be2;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 20px;
+            display: none; /* ಆರಂಭದಲ್ಲಿ ಅಂಕಪಟ್ಟಿ ಅಡಗಿರುತ್ತದೆ */
+            background-color: #f8f9fa;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #ccc;
+            color: #6c757d;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>ಆಡಳಿತ ಭಾಷೆಯಾಗಿ ಕನ್ನಡ - ರಸಪ್ರಶ್ನೆ</h1>
+
+        <form id="quiz-form">
+            <div class="question-block">
+                <h3>1. ಆಡಳಿತ ಭಾಷೆಯಾಗಿ ಕನ್ನಡ ಲೇಖನ ಬರೆದವರು ಯಾರು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="a"> ಅ) ಡಾ. ಎಲ್ . ತಿಮ್ಮೇಶ್ ಮತ್ತು ಪ್ರೊ.ವಿ. ಕೇಶವಮೂರ್ತಿ</label>
+                    <label><input type="radio" name="q1" value="b"> ಆ) ತಿ.ನಂ.ಶ್ರೀ ಮತ್ತು ಬಿ.ಎಂ.ಶ್ರೀ</label>
+                    <label><input type="radio" name="q1" value="c"> ಇ) ಹಂಪಾ ನಾಗರಾಜಯ್ಯ ಮತ್ತು ಹಾ.ಮಾ.ನಾ</label>
+                    <label><input type="radio" name="q1" value="d"> ಈ) ವಿನೋಬಾ ಭಾವೆ ಮತ್ತು ಡಿ.ವಿ.ಜಿ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>2. ಆಡಳಿತ ಭಾಷೆಯಾಗಿ ಕನ್ನಡ ಲೇಖನ ಯಾವ ಪಠ್ಯಪುಸ್ತಕದಿಂದ ಆರಿಸಿಕೊಳ್ಳಲಾಗಿದೆ</h3>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="a"> ಅ) ಆಡಳಿತ ಕನ್ನಡ</label>
+                    <label><input type="radio" name="q2" value="b"> ಆ) ಬಳಕೆ ಕನ್ನಡ</label>
+                    <label><input type="radio" name="q2" value="c"> ಇ) ಸಿರಿ ಕನ್ನಡ</label>
+                    <label><input type="radio" name="q2" value="d"> ಈ) ಸಾಂಸ್ಕೃತಿಕ ಕನ್ನಡ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>3. ಕನ್ನಡ ಭಾಷೆಯನ್ನು ಸುಮಾರು ಎಷ್ಟು ಜನರ ಆಡುನುಡಿಯಾಗಿ ಬಳಸುತ್ತಾರೆ?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="a"> ಅ) ೫೦ ದಶಲಕ್ಷ</label>
+                    <label><input type="radio" name="q3" value="b"> ಆ) ೬೦ ದಶಲಕ್ಷ</label>
+                    <label><input type="radio" name="q3" value="c"> ಇ) ೭೦ ದಶಲಕ್ಷ</label>
+                    <label><input type="radio" name="q3" value="d"> ಈ) ೯೦ ದಶಲಕ್ಷ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>4. ಕನ್ನಡ ಲಿಪಿಯನ್ನು ಲಿಪಿಗಳ ರಾಣಿ ಎಂದು ಕರೆದವರು</h3>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="a"> ಅ) ಆಂಡಯ್ಯ</label>
+                    <label><input type="radio" name="q4" value="b"> ಆ) ಡಿ.ವಿ.ಜಿ</label>
+                    <label><input type="radio" name="q4" value="c"> ಇ) ವಿನೋಬಾ ಭಾವೆ</label>
+                    <label><input type="radio" name="q4" value="d"> ಈ) ಮುದ್ದಣ್ಣ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>5. ಕರ್ನಾಟಕ ರಾಜ್ಯದಲ್ಲಿ ಭಾಷಾ ಸೂತ್ರ ಯಾವುದು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q5" value="a"> ಅ) ತ್ರಿ ಭಾಷಾ</label>
+                    <label><input type="radio" name="q5" value="b"> ಆ) ದ್ವಿ ಭಾಷಾ</label>
+                    <label><input type="radio" name="q5" value="c"> ಇ) ಚತುರ್ ಭಾಷಾ</label>
+                    <label><input type="radio" name="q5" value="d"> ಈ) ಏಕ್ ಭಾಷಾ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>6. ಕನ್ನಡ ಭಾಷೆಯು ಯಾವ ಭಾಷೆಯಿಂದ ರೂಪುಗೊಂಡಿದೆ</h3>
+                <div class="options">
+                    <label><input type="radio" name="q6" value="a"> ಅ) ಖುರೋಷ್ಠಿ</label>
+                    <label><input type="radio" name="q6" value="b"> ಆ) ಬ್ರಾಹ್ಮಿ</label>
+                    <label><input type="radio" name="q6" value="c"> ಇ) ಸಂಸ್ಕೃತ</label>
+                    <label><input type="radio" name="q6" value="d"> ಈ) ದ್ರಾವಿಡ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>7. ಲಿಪಿಯುಳ್ಳ ಭಾಷೆ ಎಷ್ಟು ಕೌಶಲ್ಯಗಳನ್ನು ಹೊಂದಿರುತ್ತವೆ</h3>
+                <div class="options">
+                    <label><input type="radio" name="q7" value="a"> ಅ) 6</label>
+                    <label><input type="radio" name="q7" value="b"> ಆ) 8</label>
+                    <label><input type="radio" name="q7" value="c"> ಇ) 5</label>
+                    <label><input type="radio" name="q7" value="d"> ಈ) 4</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>8. ಜಗತ್ತಿನಲ್ಲಿ ಹೆಚ್ಚು ಮಂದಿ ಮಾತನಾಡು ಭಾಷೆಯ ನೆಲೆಯಲ್ಲಿ ಕನ್ನಡ ಭಾಷೆಗೆ ಎಷ್ಟನೇ ಸ್ಥಾನವಿದೆ.</h3>
+                <div class="options">
+                    <label><input type="radio" name="q8" value="a"> ಅ) ೨೭ ನೇ ಸ್ಥಾನ</label>
+                    <label><input type="radio" name="q8" value="b"> ಆ) ೨೯ ನೇ ಸ್ಥಾನ</label>
+                    <label><input type="radio" name="q8" value="c"> ಇ) ೨೮ ನೇ ಸ್ಥಾನ</label>
+                    <label><input type="radio" name="q8" value="d"> ಈ) ೨೬ ನೇ ಸ್ಥಾನ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>9. ಲಿಪಿ ಇಲ್ಲದ ಭಾಷೆಗಳಿಗೆ ಎಷ್ಟು ಕೌಶಲ್ಯಗಳಿರುತ್ತವೆ.</h3>
+                <div class="options">
+                    <label><input type="radio" name="q9" value="a"> ಅ) 6</label>
+                    <label><input type="radio" name="q9" value="b"> ಆ) 2</label>
+                    <label><input type="radio" name="q9" value="c"> ಇ) 5</label>
+                    <label><input type="radio" name="q9" value="d"> ಈ) 4</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>10. ಸಂವಿಧಾನದ.......ನೇ ಅನುಚ್ಛೇದದ ಅನುಸಾರ ಆಯಾ ರಾಜ್ಯಗಳಲ್ಲಿ ಬಳಕೆಯಾಗುವ ಭಾಷೆಗಳನ್ನೇ ಆಡಳಿತ ಭಾಷೆಯೆಂದು ತೀರ್ಮಾನಿಸಲಾಗಿದೆ.</h3>
+                <div class="options">
+                    <label><input type="radio" name="q10" value="a"> ಅ) ೩೪೩ ನೇ ಅನುಚ್ಛೇದ</label>
+                    <label><input type="radio" name="q10" value="b"> ಆ) ೨೪೧ ನೇ ಅನುಚ್ಛೇದ</label>
+                    <label><input type="radio" name="q10" value="c"> ಇ) ೩೪೦ ನೇ ಅನುಚ್ಛೇದ</label>
+                    <label><input type="radio" name="q10" value="d"> ಈ) ೩೪೨ ನೇ ಅನುಚ್ಛೇದ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>11. ೧೯೭೪ ರಲ್ಲಿ ಯಾವ ನ್ಯಾಯಾಲಯದ ವಾದ ಮತ್ತು ತೀರ್ಪಿನ ಭಾಷೆ ಕನ್ನಡದಲ್ಲೇ ಇರಬೇಕೆಂದು ತೀರ್ಮಾನಿಸಲಾಯಿತು.</h3>
+                <div class="options">
+                    <label><input type="radio" name="q11" value="a"> ಅ) ಉಚ್ಚ</label>
+                    <label><input type="radio" name="q11" value="b"> ಆ) ಸರ್ವೋಚ್ಚ</label>
+                    <label><input type="radio" name="q11" value="c"> ಇ) ಸಿವಿಲ್</label>
+                    <label><input type="radio" name="q11" value="d"> ಈ) ಜುಡಿಷಿಯಲ್ ಮ್ಯಾಜಿಸ್ಟ್ರೇಟ್</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>12. ಭಾರತ ಸಂವಿಧಾನ ಜಾರಿಯಾದದ್ದು ಯಾವಾಗ?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q12" value="a"> ಅ) 1950</label>
+                    <label><input type="radio" name="q12" value="b"> ಆ) 1947</label>
+                    <label><input type="radio" name="q12" value="c"> ಇ) 1949</label>
+                    <label><input type="radio" name="q12" value="d"> ಈ) 1848</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>13. ಕರ್ನಾಟಕದ ಆಡಳಿತ ಭಾಷೆ</h3>
+                <div class="options">
+                    <label><input type="radio" name="q13" value="a"> ಅ) ತುಳು</label>
+                    <label><input type="radio" name="q13" value="b"> ಆ) ಕೊಂಕಣಿ</label>
+                    <label><input type="radio" name="q13" value="c"> ಇ) ತಮಿಳು</label>
+                    <label><input type="radio" name="q13" value="d"> ಈ) ಕನ್ನಡ</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>14. ........... ರಂದು ಉಚ್ಚ ನ್ಯಾಯಾಲಯದ ಪರಿಧಿಯಲ್ಲಿರುವ ಎಲ್ಲಾ ಸಿವಿಲ್ ನ್ಯಾಯಾಲಯಗಳ ಭಾಷೆ ಕನ್ನಡವೇ ಆಗಿರಬೇಕೆಂದು ಆದೇಶಿಸಲಾಯಿತು.</h3>
+                <div class="options">
+                    <label><input type="radio" name="q14" value="a"> ಅ) 1979</label>
+                    <label><input type="radio" name="q14" value="b"> ಆ) 1980</label>
+                    <label><input type="radio" name="q14" value="c"> ಇ) 1978</label>
+                    <label><input type="radio" name="q14" value="d"> ಈ) 1977</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>15. ........... ರಲ್ಲಿ ಸಾರ್ವತ್ರಿಕವಾಗಿ ನ್ಯಾಯಾಲಯಗಳ ತೀರ್ಪಿನ ಭಾಷೆ ಕನ್ನಡವೇ ಆಗಿರಬೇಕೆಂದು ಅಂತಿಮ ಆಜ್ಞೆ ಹೊರಡಿಸಲಾಯಿತು.</h3>
+                <div class="options">
+                    <label><input type="radio" name="q15" value="a"> ಅ) 1979</label>
+                    <label><input type="radio" name="q15" value="b"> ಆ) 1980</label>
+                    <label><input type="radio" name="q15" value="c"> ಇ) 1978</label>
+                    <label><input type="radio" name="q15" value="d"> ಈ) 1977</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>16. ಆಡಳಿತ ಭಾಷೆಯ ಲಕ್ಷಣಗಳು ಯಾವುವು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q16" value="a"> ಅ) ಸರಳವಾಗಿರಬೇಕು</label>
+                    <label><input type="radio" name="q16" value="b"> ಆ) ಸ್ಪಷ್ಟತೆಯಿಂದ ಕೂಡಿರಬೇಕು</label>
+                    <label><input type="radio" name="q16" value="c"> ಇ) ವಾಕ್ಯ ಚಿಕ್ಕದಾಗಿರಬೇಕು</label>
+                    <label><input type="radio" name="q16" value="d"> ಈ) ಮೇಲಿನ ಎಲ್ಲಾವು</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>17. ಆಡಳಿತ ಭಾಷೆಯಿಂದ ಜನರಿಗೆ ಆಗುವ ಪ್ರಯೋಜನಗಳು</h3>
+                <div class="options">
+                    <label><input type="radio" name="q17" value="a"> ಅ) ಪಾರದರ್ಶಕವಾಗಿರುತ್ತದೆ</label>
+                    <label><input type="radio" name="q17" value="b"> ಆ) ಹೆಚ್ಚು ಸ್ಪಂದನಾಶೀಲವಾಗಿರುತ್ತದೆ</label>
+                    <label><input type="radio" name="q17" value="c"> ಇ) ಪರಸ್ಪರ ನಂಬಿಕೆ ಮತ್ತು ವಿಶ್ವಾಸ ಹೆಚ್ಚಿಸುತ್ತದೆ</label>
+                    <label><input type="radio" name="q17" value="d"> ಈ) ಮೇಲಿನ ಎಲ್ಲಾವು</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>18. ಸರ್ಕಾರ ಮತ್ತು ಜನರ ನಡುವೆ ಒಳ್ಳೆಯ ಹೊಂದಾಣಿಕೆ ಏರ್ಪಡುತ್ತದೆ.</h3>
+                <div class="options">
+                    <label><input type="radio" name="q18" value="a"> ಅ) ಆಡಳಿತ ಭಾಷೆಯ ಸಲಹೆ</label>
+                    <label><input type="radio" name="q18" value="b"> ಆ) ಆಡಳಿತ ಭಾಷೆಯ ಲಕ್ಷಣ</label>
+                    <label><input type="radio" name="q18" value="c"> ಇ) ಆಡಳಿತ ಭಾಷೆಯ ಪ್ರಯೋಜನ</label>
+                    <label><input type="radio" name="q18" value="d"> ಈ) ಯಾವುದೂ ಅಲ್ಲ</label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h3>19. ಭಾಷೆ ಶುದ್ಧವಾಗಿರಬೇಕು ಮತ್ತು ಎಲ್ಲರಿಗೂ ಅರ್ಥವಾಗುವಂತಿರಬೇಕು ಎನ್ನುವುದು</h3>
+                <div class="options">
+                    <label><input type="radio" name="q19" value="a"> ಅ) ಆಡಳಿತ ಭಾಷೆಯ ಪ್ರಯೋಜನ</label>
+                    <label><input type="radio" name="q19" value="b"> ಆ) ಆಡಳಿತ ಭಾಷೆಯ ಲಕ್ಷಣ</label>
+                    <label><input type="radio" name="q19" value="c"> ಇ) ಆಡಳಿತ ಭಾಷೆಯ ಸಲಹೆ</label>
+                    <label><input type="radio" name="q19" value="d"> ಈ) ಮೇಲಿನ ಎಲ್ಲಾವು</label>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <h3>20. ಕನ್ನಡ ಭಾಷೆಯು ಎಷ್ಟು ವರ್ಷಗಳ ಇತಿಹಾಸವಿದೆ</h3>
+                <div class="options">
+                    <label><input type="radio" name="q20" value="a"> ಅ) 2000</label>
+                    <label><input type="radio" name="q20" value="b"> ಆ) 1500</label>
+                    <label><input type="radio" name="q20" value="c"> ಇ) 2500</label>
+                    <label><input type="radio" name="q20" value="d"> ಈ) 2800</label>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <h3>21. ಬರೆಯುವ ಮತ್ತು ಓದುವ ಕೌಶಲ್ಯಗಳು ಇಲ್ಲದಿರು ಭಾಷೆಗಳು ಯಾವುವು?</h3>
+                <div class="options">
+                    <label><input type="radio" name="q21" value="a"> ಅ) ಲಿಪಿ ಇಲ್ಲದ</label>
+                    <label><input type="radio" name="q21" value="b"> ಆ) ಲಿಪಿ ಇರುವ</label>
+                    <label><input type="radio" name="q21" value="c"> ಇ) ಜನಪದ ಭಾಷೆ</label>
+                    <label><input type="radio" name="q21" value="d"> ಈ) ಆಡುನುಡಿ</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn">NKN</button>
+        </form>
+
+        <div id="score-card">
+            <h2>ನಿಮ್ಮ ಅಂಕಗಳು</h2>
+            <p id="score-result"></p>
+        </div>
+        
+        <div class="footer">
+            <p>Developed by MicroIntel with AI</p>
+        </div>
+    </div>
+
+    <script>
+        // ರಸಪ್ರಶ್ನೆ ತರ್ಕ (JavaScript)
+        const correctAnswers = {
+            q1: 'a',  // ಡಾ. ಎಲ್ . ತಿಮ್ಮೇಶ್ ಮತ್ತು ಪ್ರೊ.ವಿ. ಕೇಶವಮೂರ್ತಿ
+            q2: 'a',  // ಆಡಳಿತ ಕನ್ನಡ
+            q3: 'b',  // ೫೦ ದಶಲಕ್ಷ
+            q4: 'c',  // ವಿನೋಬಾ ಭಾವೆ
+            q5: 'a',  // ತ್ರಿ ಭಾಷಾ
+            q6: 'b',  // ದ್ರಾವಿಡ
+            q7: 'd',  // ೪
+            q8: 'b',  // ೨೭ ನೇ ಸ್ಥಾನ
+            q9: 'b',  // ೨
+            q10: 'a', // ೩೪೩ ನೇ ಅನುಚ್ಛೇದ
+            q11: 'd', // ಉಚ್ಚ
+            q12: 'a', // ೧೯೫೦ (ಸರಿಪಡಿಸಲಾಗಿದೆ)
+            q13: 'd', // ಕನ್ನಡ
+            q14: 'a', // ೧೯೭೪ (ಸರಿಪಡಿಸಲಾಗಿದೆ)
+            q15: 'b', // ೧೯೮೨ (ಸರಿಪಡಿಸಲಾಗಿದೆ)
+            q16: 'd', // ಮೇಲಿನ ಎಲ್ಲಾವು
+            q17: 'd', // ಮೇಲಿನ ಎಲ್ಲಾವು
+            q18: 'c', // ಆಡಳಿತ ಭಾಷೆಯ ಪ್ರಯೋಜನ
+            q19: 'b', // ಆಡಳಿತ ಭಾಷೆಯ ಲಕ್ಷಣ
+            q20: 'c', // ೨೦೦೦ (ಸರಿಪಡಿಸಲಾಗಿದೆ)
+            q21: 'a'  // ಲಿಪಿ ಇಲ್ಲದ
+        };
+
+        const form = document.getElementById('quiz-form');
+        const scoreCard = document.getElementById('score-card');
+        const scoreResult = document.getElementById('score-result');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // ಪುಟವನ್ನು ಮರುಲೋಡ್ ಮಾಡುವುದನ್ನು ತಡೆಯುತ್ತದೆ
+
+            let score = 0;
+            const totalQuestions = Object.keys(correctAnswers).length;
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = `q${i}`;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                const questionBlock = document.querySelector(`input[name="${questionName}"]`).closest('.question-block');
+                
+                // ಹಿಂದಿನ ಬಣ್ಣಗಳನ್ನು ತೆಗೆದುಹಾಕು
+                questionBlock.querySelectorAll('.options label').forEach(label => {
+                    label.style.backgroundColor = '';
+                });
+
+
+                if (selectedOption) {
+                    // ಆಯ್ದ ಉತ್ತರ ಸರಿಯಾಗಿದ್ದರೆ
+                    if (selectedOption.value === correctAnswers[questionName]) {
+                        score++;
+                        // ಸರಿಯಾದ ಉತ್ತರಕ್ಕೆ ಹಸಿರು ಬಣ್ಣ ನೀಡುವುದು
+                        selectedOption.parentElement.style.backgroundColor = '#d4edda'; 
+                    } else {
+                        // ತಪ್ಪಾದ ಉತ್ತರಕ್ಕೆ ಕೆಂಪು ಬಣ್ಣ ನೀಡುವುದು
+                        selectedOption.parentElement.style.backgroundColor = '#f8d7da';
+                        // ಸರಿಯಾದ ಉತ್ತರಕ್ಕೆ ಹಸಿರು ಬಣ್ಣ ನೀಡುವುದು
+                        document.querySelector(`input[name="${questionName}"][value="${correctAnswers[questionName]}"]`).parentElement.style.backgroundColor = '#d4edda';
+                    }
+                } else {
+                    // ಉತ್ತರ ನೀಡಿಲ್ಲದಿದ್ದರೆ, ಸರಿಯಾದ ಉತ್ತರಕ್ಕೆ ಹಳದಿ ಬಣ್ಣ ನೀಡುವುದು
+                    document.querySelector(`input[name="${questionName}"][value="${correctAnswers[questionName]}"]`).parentElement.style.backgroundColor = '#fff3cd';
+                }
+            }
+
+            // ಅಂಕಪಟ್ಟಿಯನ್ನು ತೋರಿಸು
+            scoreResult.innerHTML = `ನೀವು **${totalQuestions}** ಪ್ರಶ್ನೆಗಳಲ್ಲಿ **${score}** ಪ್ರಶ್ನೆಗಳಿಗೆ ಸರಿಯಾಗಿ ಉತ್ತರಿಸಿದ್ದೀರಿ.`;
+            scoreCard.style.display = 'block';
+
+            // ಬಟನ್ ಅನ್ನು ಡಿಸ್ಏಬಲ್ ಮಾಡು
+            document.querySelector('.submit-btn').disabled = true;
+        });
+    </script>
+</body>
+</html>
