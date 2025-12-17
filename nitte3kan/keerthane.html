@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಕೀರ್ತನೆಗಳು ರಸಪ್ರಶ್ನೆ (Keerthanegaḷu Quiz)</title>
+    <style>
+        :root {
+            --primary-color: #f39c12;
+            --accent-color: #e67e22;
+            --correct-color: #27ae60;
+            --wrong-color: #c0392b;
+            --bg-color: #fef7ec;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        .quiz-container {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 650px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quiz-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .quiz-header h1 {
+            margin: 0;
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+
+        .quiz-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .quiz-body {
+            padding: 25px;
+        }
+
+        .progress-bar {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .option-item {
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .option-item:hover {
+            background-color: #fdebd0;
+            border-color: #f9e2b1;
+        }
+
+        .option-item.correct {
+            background-color: #d4edda;
+            border-color: var(--correct-color);
+            color: var(--correct-color);
+        }
+
+        .option-item.correct::after {
+            content: "✓";
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+        }
+
+        .option-item.wrong {
+            background-color: #f8d7da;
+            border-color: var(--wrong-color);
+            color: var(--wrong-color);
+        }
+
+        .option-item.wrong::after {
+            content: "✗";
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+        }
+
+        .option-item.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .quiz-footer {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            background-color: #fafafa;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #c98511;
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .score-box {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        /* Result Screen */
+        .result-screen {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .result-screen h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .final-score {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+
+        .result-message {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        @media (max-width: 500px) {
+            .quiz-container { width: 95%; }
+            .quiz-header h1 { font-size: 1.4rem; }
+            .question-text { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <h1>ಕೀರ್ತನೆಗಳು ರಸಪ್ರಶ್ನೆ</h1>
+            <p>ಘಟಕ - ೨ (ಆಧುನಿಕ ಪೂರ್ವದ ಕಾವ್ಯ ಭಾಗ)</p>
+        </div>
+        <div class="quiz-body">
+            <div class="progress-bar">
+                ಪ್ರಶ್ನೆ <span id="current-question-num">1</span> / <span id="total-questions">44</span>
+            </div>
+            <div class="question-text" id="question-text">
+                Loading...
+            </div>
+            <ul class="options-list" id="options-list">
+                </ul>
+        </div>
+        <div class="quiz-footer">
+            <div class="score-box">ಅಂಕಗಳು (Score): <span id="current-score">0</span></div>
+            <button class="btn" id="next-btn" disabled>ಮುಂದಿನ ಪ್ರಶ್ನೆ (Next)</button>
+        </div>
+    </div>
+
+    <div id="result-screen" class="result-screen">
+        <h2>ರಸಪ್ರಶ್ನೆ ಪೂರ್ಣಗೊಂಡಿದೆ!</h2>
+        <p class="result-message">ನಿಮ್ಮ ಒಟ್ಟು ಅಂಕಗಳು:</p>
+        <div class="final-score"><span id="final-score-val">0</span> / <span id="total-score-val">0</span></div>
+        <p id="feedback-text" class="result-message"></p>
+        <button class="btn" onclick="location.reload()">ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ (Restart)</button>
+    </div>
+</div>
+
+<script>
+    // Quiz Data from the provided PDF 'keerthanegalu.pdf'
+    const quizData = [
+        {
+            q: "1. ಪುರಂದರ ದಾಸರ ಅಂಕಿತನಾಮ ಯಾವುದು",
+            options: ["a) ಕಾಗಿನೆಲೆಯಾದಿಕೇಶವ", "b) ಚನ್ನಮಲ್ಲಿಕಾರ್ಜುನ", "C) ರಾಮನಾಥ", "d) ಪುರಂದರ ವಿಠಲ"],
+            answer: 3 
+        },
+        {
+            q: "2. ಅದರಿಂದೇನು ಫಲ ಇದರಿಂದೇನು ಫಲ ಕೀರ್ತನೆಯ ರಚನಕಾರರು ಯಾರು?",
+            options: ["a) ಕನಕದಾಸರು", "b) ಹರಿದಾಸರು", "C) ಜಗನ್ನಾಥರು", "d) ಪುರಂದರದಾಸರು"],
+            answer: 3 
+        },
+        {
+            q: "3. ಹೃದಯದ ________ ತೊಳೆಯಲಾರದೆ ವ್ಯರ್ಥ.",
+            options: ["a) ಮಲ", "b) ಕೊಳೆ", "C) ಭಕ್ತಿ", "d) ಭಾವ"],
+            answer: 0 
+        },
+        {
+            q: "4. ತೊರೆಯೊಳು ________ ದುರಿತ ಪೋಗುವುದೇ.",
+            options: ["a) ಹಾಡಿದರೆ", "b) ಮರೆತರೆ", "C) ಕುಣಿದರೆ", "d) ಮಿಂದರೆ"],
+            answer: 3 
+        },
+        {
+            q: "5. ಕರ್ನಾಟಕ ಸಂಗೀತ ಪಿತಾಮಹ ಯಾರು?",
+            options: ["a) ಕನಕದಾಸರು", "b) ವ್ಯಾಸರಾಯರು", "C) ಹರಿದಾಸರು", "d) ಪುರಂದರದಾಸರು"],
+            answer: 3 
+        },
+        {
+            q: "6. ಹಲವು ಕಾಲ ಕಲ್ಲು ನೀರೊಳಗಿದ್ದರೆ ನೆನೆದು ________ ಆಗುವುದೇ?",
+            options: ["a) ಮಂಜು", "b) ಚಿನ್ನ", "C) ಅಮೃತ ಶಿಲೆ", "d) ಸ್ಪಟಿಕ"],
+            answer: 2
+        },
+        {
+            q: "7. ಪುರಂದರದಾಸರ ಇಷ್ಟದೇವರು",
+            options: ["a) ಪುರಂದರ ವಿಠಲ", "b) ಆದಿಕೇಶವ", "C) ಶಿವ", "d) ಗಣಪ"],
+            answer: 0 
+        },
+        {
+            q: "8. ಪ್ರಮುಖ ಕೀರ್ತನೆಕಾರರ ಹೆಸರು",
+            options: ["a) ಬಸವಣ್ಣ", "b) ಅಲ್ಲಮಪ್ರಭು", "C) ಅಕ್ಕಮಹಾದೇವಿ", "d) ಪುರಂದರದಾಸರು"],
+            answer: 3 
+        },
+        {
+            q: "9. ಪುರಂದರ ದಾಸರ ನುಡಿಯಂತೆ ಸ್ನಾನ ________ ಅನ್ನು ತೊಳೆಯಬೇಕು.",
+            options: ["a) ದೇಹವನ್ನು", "b) ಆಸೆಯನ್ನು", "C) ಮನಸ್ಸನ್ನು", "d) ಬುದ್ದಿಯನ್ನು"],
+            answer: 2 
+        },
+        {
+            q: "10. ನಿಯಮ, ವ್ರತಗಳಿರುವುದು ನಮ್ಮ ________ ಹೋಗಲಾಡಿಸುವ ಮೂಲ ಉದ್ದೇಶ.",
+            options: ["a) ತಮಸ್ಸು", "b) ಓ", "C) ಭಕ್ತಿ", "d) ಅರಿಷಡ್ವರ್ಗ"],
+            answer: 3 
+        },
+        {
+            q: "11. ________ ಹಾವನ್ನು ತನಗಿಷ್ಟ ಬಂದಂತೆ ಆಡಿಸುವನು.",
+            options: ["a) ದೇವರು", "b) ಡಾಂಬಿಕರು", "C) ಗಾರುಡಿಗ", "d) ಪುರೋಹಿತರು"],
+            answer: 2 
+        },
+        {
+            q: "12. ಪರರ ಹೆಂಡತಿ, ಪರರ ಧನ, ಪರರ ಹೊಗಳಿಕೆಗೆ ಆಸೆಪಟ್ಟು ನಾವು ಯಾವ ನದಿಯಲ್ಲಿ ________ ಪ್ರಯೋಜನವಿಲ್ಲ.",
+            options: ["a) ಈಜಿದರೂ", "b) ಹಾರಿದರೂ", "C) ದರ್ಶನ ಮಾಡಿದರೂ", "d) ಮುಳುಗಿದರೂ"],
+            answer: 3 
+        },
+        {
+            q: "13. ತಾಯಿ ತಂದೆಯನ್ನು ನೋಡಿಕೊಳ್ಳದೆ ಭಕ್ತರಂತೆ ವೇಷ ಧರಿಸಿ ಎಷ್ಟೇ ________ ಓದಿದರೂ ವ್ಯರ್ಥ.",
+            options: ["a) ಕವನ", "b) ಪುರಾಣ", "C) ಕಥೆ", "d) ವಿಮರ್ಶೆ"],
+            answer: 1 
+        },
+        {
+            q: "14. ________ ಕುರಿತು ದಾಸರು ಕಟ್ಟಿದ ಹಾಡುಗಳೇ ಕೀರ್ತನೆಗಳು.",
+            options: ["a) ಆದಿದೈವನನ್ನು", "b) ಅಂತ್ಯದೈವನನ್ನು", "C) ಕಾಯಕವನ್ನು", "d) ಅಸುರರನ್ನು"],
+            answer: 0 
+        },
+        {
+            q: "15. ಕೀರ್ತನೆಯಲ್ಲಿನ ಮುಖ್ಯ ಆಶಯ",
+            options: ["a) ಲಾಭ", "b) ಆಸೆ", "C) ಭಕ್ತಿ", "d) ಮನರಂಜನೆ"],
+            answer: 2 
+        },
+        {
+            q: "16. ಕೀರ್ತನೆಯಲ್ಲಿನ ಧಾತು / ಪ್ರಕಾರಗಳು",
+            options: ["a) ಪಲ್ಲವಿ", "b) ಅನುಪಲ್ಲವಿ", "C) ನುಡಿಗಳು", "d) ಪಲ್ಲವಿ, ಅನುಪಲ್ಲವಿ, ನುಡಿಗಳು"],
+            answer: 3 
+        },
+        {
+            q: "17. ಕೀರ್ತನೆಯು ಯಾವ ಸಾಹಿತ್ಯದಲ್ಲಿ ರಚಿಸಲ್ಪಟ್ಟಿದೆ.",
+            options: ["a) ಹಳಗನ್ನಡ", "b) ನಡುಗನ್ನಡ", "C) ಹೊಸಗನ್ನಡ", "d) ಆಧುನಿಕ ಕನ್ನಡ"],
+            answer: 1 
+        },
+        {
+            q: "18. ನೇಮವನು ತಾಳುವರು ದಾನವ ಮಾಡುವರು ಆದರೆ ________ ಮನದಲ್ಲಿದ್ದು ಅದನ್ನು ಬಿಡದೆ ಕಾಶಿಯಲಿ ಮುಳುಗಿದ ಫಲವೇನಯ್ಯ.",
+            options: ["a) ಭಕ್ತಿ", "b) ಕಾಮ, ಕ್ರೋಧ, ಮದ, ಮತ್ಸರ", "C) ತ್ಯಾಗ", "d) ಜೀವ"],
+            answer: 1 
+        },
+        {
+            q: "19. ಕರದಲ್ಲಿ ಜಪಮಾಲೆ ಎಣಿಸುತ್ತಾ ಬಾಯಲಿ ________ ಮಾಡುವರಯ್ಯಾ.",
+            options: ["a) ಧ್ಯಾನ", "b) ಯೋಗ", "C) ಪರನಿಂದೆ", "d) ಪರರನ್ನು ಹೊಗಳುವುದು"],
+            answer: 2 
+        },
+        {
+            q: "20. ಸರ್ವವ ತೊರೆದು ಹರಿಯ ಧ್ಯಾನ ಮಾಡಲು ವರವ ಕೊಡುವ ನಮ್ಮ ________",
+            options: ["a) ಪರಂದರ ವಿಠಲ", "b) ಪುರಂದರ ದಾಸ", "C) ಚನ್ನಮಲ್ಲಿಕಾರ್ಜುನ", "d) ಆದಿಕೇಶವ"],
+            answer: 0 // Based on context from later questions about Kanakadasa (Adikesava)
+        },
+        {
+            q: "21. ಕನಕದಾಸರು ಹುಟ್ಟಿದ ಸ್ಥಳ",
+            options: ["a) ಮೈಸೂರು", "b) ಹಾವೇರಿ", "C) ಶಿವಮೊಗ್ಗ", "d) ಧಾರವಾಡ ಜಿಲ್ಲೆಯ ಬಾಡಗ್ರಾಮ"],
+            answer: 3 
+        },
+        {
+            q: "22. ಕನಕದಾಸರ ಹಾಗೂ ಪುರಂದರ ದಾಸರ ಗುರುಗಳು",
+            options: ["a) ವ್ಯಾಸರಾಯರು", "b) ಗೋವಿಂದ ಭಟ್ಟರು", "C) ಬಸವಣ್ಣನವರು", "d) ರಾಮನಾಥರು"],
+            answer: 0 
+        },
+        {
+            q: "23. ಕನಕದಾಸರ ಮೂಲ ಹೆಸರು",
+            options: ["a) ಕನಕಪ್ಪ ನಾಯಕ", "b) ತಿಮ್ಮಪ್ಪ ನಾಯಕ", "C) ಶ್ರೀನಿವಾಸ ನಾಯಕ", "d) ಬೀರಪ್ಪ ನಾಯಕ"],
+            answer: 1 
+        },
+        {
+            q: "24. ಕನಕದಾಸರ ಅಂಕಿತನಾಮ",
+            options: ["a) ಕಾಗಿನೆಲೆಯಾದಿಕೇಶವ", "b) ಪುರಂದರ ವಿಠಲ", "C) ಚನ್ನಮಲ್ಲಿಕಾರ್ಜುನ", "d) ಕೂಡಲಸಂಗಮದೇವ"],
+            answer: 0 
+        },
+        {
+            q: "25. ತಲ್ಲಣ ಎಂದರೆ",
+            options: ["a) ಸಂತೋಷ", "b) ತಲ್ಲಿನ", "C) ತಳಮಳ", "d) ಕ್ರೋಧ"],
+            answer: 2 
+        },
+        {
+            q: "26. ಕನಕದಾಸರ ಕೃತಿಗಳಲ್ಲಿ ಜನತೆಯ ಮತ್ತು ಗಳನ್ನು ಖಂಡಿಸಿದ್ದಾರೆ.",
+            options: ["a) ಮೌಡ್ಯ, ಪೊಳ್ಳು ನಂಬಿಕೆ, ಕಂದಾಚಾರ ಮತ್ತು ವರ್ಣ ವ್ಯವಸ್ಥೆ", "b) ತಲ್ಲಣ, ಆಸೆ, ಸಂತೋಷ ಮತ್ತು ನೆಮ್ಮದಿ", "C) ದೈವ ಭಕ್ತಿ, ಜೀವನ, ನೆಮ್ಮದಿ ಮತ್ತು ಸಮಾಜ ವಿಮರ್ಶೆ", "d) ಕ್ರೋಧ, ಕಾಮ, ಮದ ಮತ್ತು ಮಾತ್ಸರ್ಯ"],
+            answer: 0 
+        },
+        {
+            q: "27. ವೃಕ್ಷ ಎಂದರೆ",
+            options: ["a) ದರ", "b) ಅಡವಿ", "C) ಮರ", "d) ಪ್ರಾಣಿ"],
+            answer: 2 
+        },
+        {
+            q: "28. ಹುಟ್ಟಿಸಿದ ಸ್ವಾಮಿ ತಾನು ಹೊಣೆಗಾರನಾಗಿರಲು ಸಲಹುವನು ಇದಕೆ ________",
+            options: ["a) ತಲ್ಲಣವಿಲ್ಲ", "b) ಅಂಜಿಕೆಯಿಲ್ಲ", "C) ಹೊಣೆಯಿಲ್ಲ", "d) ಸಂಶಯವಿಲ್ಲ"],
+            answer: 3 
+        },
+        {
+            q: "29. ಅಡವಿಯೊಳಗಾಡುವ ________ ಗಳಿಗೆಲ್ಲ ಅಡಿಗಡಿಗೆ ಆಹಾರ ಕೊಟ್ಟು ಹೆತ್ತ ತಾಯಿಯಂತೆ ಸಲಹುವನು ಸೃಷ್ಟಿಕರ್ತನು.",
+            options: ["a) ಕಪ್ಪೆ", "b) ಮೃಗ ಪಕ್ಷಿ", "C) ಹುಳ ಹುಪ್ಪಟೆ", "d) ಕಲ್ಲು"],
+            answer: 1 
+        },
+        {
+            q: "30. ಪವಳದ ಲತೆಗೆ ________ ಇಟ್ಟವರು ಯಾರು?",
+            options: ["a) ಹಸಿರು", "b) ಹಳದಿ", "C) ಕಪ್ಪು", "d) ಕೆಂಪು"],
+            answer: 3 
+        },
+        {
+            q: "31. ಜನನಿ ಎಂದರೆ",
+            options: ["a) ಅಜ್ಜಿ", "b) ತಾಯಿ", "C) ತಂದೆ", "d) ಮಗಳು"],
+            answer: 1 
+        },
+        {
+            q: "32. ಸವಿಮಾತಿನರಗಿಳಿಗೆ ________ ಬರೆದವರು ಯಾರು.",
+            options: ["a) ಹಸಿರು", "b) ಹಳದಿ", "C) ಕಪ್ಪು", "d) ಕೆಂಪು"],
+            answer: 0 
+        },
+        {
+            q: "33. ಬಲ್ಲಿದನು ಕಾಗಿನೆಲೆಯಾದಿಕೇಶವರಾಯ ಎಲ್ಲರನು ________ ಇದಕೆ ಸಂಶಯವಿಲ್ಲ.",
+            options: ["a) ಕೊಲ್ಲುವನು", "b) ಕೆಡಹುವನು", "C) ಕಷ್ಟ ಕೊಡುವನು", "d) ಸಲಹುವನು"],
+            answer: 3 
+        },
+        {
+            q: "34. \"ತಲ್ಲಣಿಸದಿರು ಕಂಡ್ಯಾ ತಾಳು ಮನವೆ\" ಇದರ ರಚನೆಕಾರರು ಯಾರು?",
+            options: ["a) ಪುರಂದರ ದಾಸರು", "b) ಕನಕದಾಸರು", "C) ಬಸವಣ್ಣನವರು", "d) ರಾಮನಾಥರು"],
+            answer: 1 
+        },
+        {
+            q: "35. ಇವರಲ್ಲಿ ಯಾರು ಕೀರ್ತನೆಕಾರರು?",
+            options: ["a) ಪುರಂದರ ದಾಸರು", "b) ಕನಕದಾಸರು", "C) ಶಿಶುನಾಳ ಶರೀಫರು", "d) a & b"],
+            answer: 3 
+        },
+        {
+            q: "36. ಕೀರ್ತನೆಕಾರರು ಜನತೆಗೆ ________ ಮಾರ್ಗದ ದಾರಿ ತೋರಿದ್ದಾರೆ.",
+            options: ["a) ಅಜ್ಞಾನ", "b) ವಿಜ್ಞಾನ", "c) ಸುಜ್ಞಾನ", "d) ಮಹಾಜ್ಞಾನ"],
+            answer: 2 
+        },
+        {
+            q: "37. ಕಾಮ, ಕ್ರೋಧ, ಮದ ________ ಬಿಡದೆ ಇಂಥ ನಾಯಿ ಕುನ್ನಿಗಳ ಕಂಡೊಳಗಿಟ್ಟುಕೊಂಡರೆ ಕಾಶಿಯಲಿ ಮುಳುಗಿದರೇನು ಫಲ.",
+            options: ["a) ಮತ್ಸರ", "b) ಚಳುವಳಿ", "C) ಪರನಿಂದೆ", "d) ವಾತ್ಸಲ್ಯ"],
+            answer: 0 
+        },
+        {
+            q: "38. ತಲ್ಲಣಿಸದಿರು ಕಂಡ್ಯ ತಾಳು ಮನವೆ ಕೀರ್ತನೆಯ ರಚನಕಾರರು ಯಾರು?",
+            options: ["a) ಕನಕದಾಸರು", "b) ಹರಿದಾಸರು", "C) ಜಗನ್ನಾಥರು", "d) ಪುರಂದರದಾಸರು"],
+            answer: 0 
+        },
+        {
+            q: "39. ಸರ್ವವ ತೊರೆದು ಹರಿಯ ಧ್ಯಾನ ಮಾಡಲು ವರವ ಕೊಡುವ ನಮ್ಮ ________",
+            options: ["a) ಪುರಂದರವಿಠಲ", "b) ಚನ್ನಮಲ್ಲಿಕಾರ್ಜುನ", "C) ಕಾಗಿನೆಲೆಯಾದಿಕೇಶವ", "d) ಕೂಡಲಸಂಗಮದೇವ"],
+            answer: 0
+        },
+        {
+            q: "40. ಕಲ್ಲಿನಲಿ ಹುಟ್ಟಿ ಕೂಗುವ ಕಪ್ಪೆಗಳಿಗೆಲ್ಲ ಅಲ್ಲಲ್ಲಿಗಾಹಾರ ತಂದೀವರಾರು ಇದು ಯಾರ ಕೀರ್ತನೆಯ ಸಾಲು",
+            options: ["a) ಪುರಂದರ ದಾಸರು", "b) ಕನಕದಾಸರು", "C) ಬಸವಣ್ಣನವರು", "d) ರಾಮನಾಥರು"],
+            answer: 1 
+        },
+        {
+            q: "41. ಕನಕದಾಸರು ತಮ್ಮ ಕೀರ್ತನೆಗಳಲ್ಲಿ ________ ಆಳದಲ್ಲಿ ಗೊಂದಲಗಳಿಗೆ ಉತ್ತರಗಳನ್ನು ಕೊಟ್ಟಿದ್ದಾರೆ.",
+            options: ["a) ಆತ್ಮದ", "b) ದೇವರ", "C) ಬುದ್ದಿಯ", "d) ಮನಸ್ಸಿನ"],
+            answer: 0 
+        },
+        {
+            q: "42. ________ ಎಂಬ ಗಾಢನಂಬಿಕೆಯಿಂದ ಕೀರ್ತನೆಗಳನ್ನು ರಚಿಸಿ ದಾಸರು ಹಾಡಿದರು.",
+            options: ["a) ಹರಿ ಸರ್ವೋತ್ತಮ", "b) ಹರ ಸರ್ವೋತ್ತಮ", "C) ವಿನಾಯಕನೇ ಉತ್ತಮ", "d) ಮನುಜನೇ ಮಹಾನುಭಾವ"],
+            answer: 0 
+        },
+        {
+            q: "43. ಅದರಿಂದೇನು ಫಲ ಇದರಿಂದೇನು ಫಲ ಈ ಕೀರ್ತನೆಯನ್ನು ಯಾರು ರಚಿಸಿದರು",
+            options: ["a) ಜಗನ್ನಾಥರು", "b) ಪುರಂದರದಾಸರು", "c) ಕನಕದಾಸರು", "d) ವ್ಯಾಸರಾಯರು"],
+            answer: 1 
+        },
+        {
+            q: "44. ತಲ್ಲಣಿಸದಿರು ಕಂಡ್ಯ ತಾಳು ಮನವೆ ಈ ಕೀರ್ತನೆಯನ್ನು ಯಾರು ರಚಿಸಿದರು",
+            options: ["a) ಜಗನ್ನಾಥರು", "b) ಪುರಂದರದಾಸರು", "c) ಕನಕದಾಸರು", "d) ವ್ಯಾಸರಾಯರು"],
+            answer: 2 
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    const quizScreen = document.getElementById('quiz-screen');
+    const resultScreen = document.getElementById('result-screen');
+    const questionTextEl = document.getElementById('question-text');
+    const optionsListEl = document.getElementById('options-list');
+    const currentScoreEl = document.getElementById('current-score');
+    const nextBtn = document.getElementById('next-btn');
+    const currentQNumEl = document.getElementById('current-question-num');
+    const totalQEl = document.getElementById('total-questions');
+    const finalScoreVal = document.getElementById('final-score-val');
+    const totalScoreVal = document.getElementById('total-score-val');
+    const feedbackText = document.getElementById('feedback-text');
+
+    function initQuiz() {
+        totalQEl.textContent = quizData.length;
+        totalScoreVal.textContent = quizData.length;
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        const currentData = quizData[currentQuestionIndex];
+        // Clean the question text and keep the sequential numbering for display
+        const cleanQuestion = currentData.q.replace(/^[0-9]+\.\s*/, '').replace(/[\-]+\s*$/, '');
+        questionTextEl.textContent = (currentQuestionIndex + 1) + ". " + cleanQuestion; 
+        currentQNumEl.textContent = currentQuestionIndex + 1;
+        
+        optionsListEl.innerHTML = '';
+        nextBtn.disabled = true;
+
+        currentData.options.forEach((option, index) => {
+            const li = document.createElement('li');
+            li.className = 'option-item';
+            // Clean up the option text (a) b) C) d))
+            const cleanOption = option.replace(/^[a-dA-D]\)\s*/, '');
+            li.textContent = option.replace(cleanOption, cleanOption.trim()); 
+            li.onclick = () => selectAnswer(index, li);
+            optionsListEl.appendChild(li);
+        });
+    }
+
+    function selectAnswer(selectedIndex, selectedLi) {
+        const currentData = quizData[currentQuestionIndex];
+        const correctIndex = currentData.answer;
+        const allOptions = optionsListEl.children;
+
+        // Disable clicks
+        for(let item of allOptions) {
+            item.classList.add('disabled');
+        }
+
+        if (selectedIndex === correctIndex) {
+            selectedLi.classList.add('correct');
+            score++;
+            currentScoreEl.textContent = score;
+        } else {
+            selectedLi.classList.add('wrong');
+            allOptions[correctIndex].classList.add('correct');
+        }
+
+        nextBtn.disabled = false;
+    }
+
+    nextBtn.onclick = () => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    };
+
+    function showResult() {
+        quizScreen.style.display = 'none';
+        resultScreen.style.display = 'block';
+        finalScoreVal.textContent = score;
+
+        const percentage = (score / quizData.length) * 100;
+        if (percentage === 100) {
+            feedbackText.textContent = "ಅದ್ಭುತ! ಪೂರ್ಣ ಅಂಕಗಳು! (Outstanding! Full Score!)";
+        } else if (percentage >= 75) {
+            feedbackText.textContent = "ಬಹಳ ಉತ್ತಮ! (Very Good!)";
+        } else if (percentage >= 50) {
+            feedbackText.textContent = "ಪರವಾಗಿಲ್ಲ, ಇನ್ನಷ್ಟು ಅಭ್ಯಾಸ ಮಾಡಿ. (Good effort, keep practicing)";
+        } else {
+            feedbackText.textContent = "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. (Try again)";
+        }
+    }
+
+    // Start
+    initQuiz();
+</script>
+
+</body>
+</html>
