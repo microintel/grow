@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಕುರುಡು ಕಾಂಚಾಣ ರಸಪ್ರಶ್ನೆ (Kurudu Kanchana Quiz)</title>
+    <style>
+        :root {
+            --primary-color: #8e44ad;
+            --accent-color: #9b59b6;
+            --correct-color: #27ae60;
+            --wrong-color: #c0392b;
+            --bg-color: #fdf2e9;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        .quiz-container {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 650px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quiz-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .quiz-header h1 {
+            margin: 0;
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+
+        .quiz-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .quiz-body {
+            padding: 25px;
+        }
+
+        .progress-bar {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .option-item {
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .option-item:hover {
+            background-color: #e8eaf6;
+            border-color: #d1d9ff;
+        }
+
+        .option-item.correct {
+            background-color: #d4edda;
+            border-color: var(--correct-color);
+            color: var(--correct-color);
+        }
+
+        .option-item.correct::after {
+            content: "✓";
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+        }
+
+        .option-item.wrong {
+            background-color: #f8d7da;
+            border-color: var(--wrong-color);
+            color: var(--wrong-color);
+        }
+
+        .option-item.wrong::after {
+            content: "✗";
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+        }
+
+        .option-item.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .quiz-footer {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            background-color: #fafafa;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #7d3c98;
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .score-box {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        /* Result Screen */
+        .result-screen {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .result-screen h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .final-score {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+
+        .result-message {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        @media (max-width: 500px) {
+            .quiz-container { width: 95%; }
+            .quiz-header h1 { font-size: 1.4rem; }
+            .question-text { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <h1>ಕುರುಡು ಕಾಂಚಾಣ ರಸಪ್ರಶ್ನೆ</h1>
+            <p>ಘಟಕ - ೩ (ಆಧುನಿಕ ಕಾವ್ಯ ಭಾಗ)</p>
+        </div>
+        <div class="quiz-body">
+            <div class="progress-bar">
+                ಪ್ರಶ್ನೆ <span id="current-question-num">1</span> / <span id="total-questions">18</span>
+            </div>
+            <div class="question-text" id="question-text">
+                Loading...
+            </div>
+            <ul class="options-list" id="options-list">
+                </ul>
+        </div>
+        <div class="quiz-footer">
+            <div class="score-box">ಅಂಕಗಳು (Score): <span id="current-score">0</span></div>
+            <button class="btn" id="next-btn" disabled>ಮುಂದಿನ ಪ್ರಶ್ನೆ (Next)</button>
+        </div>
+    </div>
+
+    <div id="result-screen" class="result-screen">
+        <h2>ರಸಪ್ರಶ್ನೆ ಪೂರ್ಣಗೊಂಡಿದೆ!</h2>
+        <p class="result-message">ನಿಮ್ಮ ಒಟ್ಟು ಅಂಕಗಳು:</p>
+        <div class="final-score"><span id="final-score-val">0</span> / <span id="total-score-val">0</span></div>
+        <p id="feedback-text" class="result-message"></p>
+        <button class="btn" onclick="location.reload()">ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ (Restart)</button>
+    </div>
+</div>
+
+<script>
+    // Quiz Data from the provided PDF 'kurudu.pdf'
+    const quizData = [
+        {
+            q: "16. ದತ್ತಾತ್ರೇಯ ರಾಮಚಂದ್ರ ಬೇಂದ್ರೆ ________ ಇಸವಿಯಲ್ಲಿ ಜನಿಸಿದರು.",
+            options: ["1787", "1887", "1896", "1936"],
+            answer: 2 // c) 1896
+        },
+        {
+            q: "17. ದ.ರಾ. ಬೇಂದ್ರೆಯವರ ಕಾವ್ಯನಾಮ ಯಾವುದು?",
+            options: ["ಅಂಬಿಕಾತನಯದತ್ತ", "ಶ್ರೀನಿವಾಸ", "ಮಹಂತಲಿಂಗ", "ತನಯರಾಮ"],
+            answer: 0 // a) Ambikatanayadatta
+        },
+        {
+            q: "18. ದ.ರಾ. ಬೇಂದ್ರೆಯವರ ಹುಟ್ಟೂರು ಯಾವುದು?",
+            options: ["ಹುಬ್ಬಳ್ಳಿ", "ಧಾರವಾಡ", "ಕೋಲಾರ", "ಮೈಸೂರು"],
+            answer: 1 // b) Dharwad
+        },
+        {
+            q: "19. ದ.ರಾ. ಬೇಂದ್ರೆಯವರ ಯಾವ ಕವನ ಸಂಗ್ರಹಕ್ಕೆ ಜ್ಞಾನಪೀಠ ಪ್ರಶಸ್ತಿ ದೊರೆಯಿತು?",
+            options: ["ಶ್ರೀ ರಾಮಾಯಣ ದರ್ಶನಂ", "ಚಿಕ್ಕವೀರ ರಾಜೇಂದ್ರ", "ನಾದಲೀಲೆ", "ನಾಕುತಂತಿ"],
+            answer: 3 // d) Nakutanti
+        },
+        {
+            q: "20. ದ.ರಾ. ಬೇಂದ್ರೆಯವರಿಗೆ ಯಾವ ವರ್ಷ ಜ್ಞಾನಪೀಠ ಪ್ರಶಸ್ತಿ ದೊರೆಯಿತು?",
+            options: ["1984", "1974", "1896", "1994"],
+            answer: 1 // b) 1974
+        },
+        {
+            q: "21. 'ಕುರುಡು ಕಾಂಚಾಣಾ' ಕವನವು ಯಾವ ಕವನಸಂಕಲನದಿಂದ ಆರಿಸಿಕೊಳ್ಳಲಾಗಿದೆ?",
+            options: ["ಮೇಘದೂತ", "ಸಖೀಗೀತ", "ನಾದಲೀಲೆ", "ಒಲವೇ ಬದುಕು"],
+            answer: 2 // c) Nadalila
+        },
+        {
+            q: "22. ಕುರುಡು ಕಾಂಚಾಣಾ ಕವನವು ಕಾಂಚಾಣದ _______ ಮೂರ್ತೀಕರಿಸುತ್ತದೆ.",
+            options: ["ವೈಭವವನ್ನು", "ದಯಾಳುತನವನ್ನು", "ಕ್ರೌರ್ಯವನ್ನು", "ಅಲಂಕಾರವನ್ನು"],
+            answer: 2 // c) Krourya
+        },
+        {
+            q: "23. _______ ಕುಣಿಯುತಲಿತ್ತೋ ಕಾಲಿಗೆ ಬಿದ್ದವರ ತುಳಿಯುತಲಿತ್ತೋ.",
+            options: ["ಆಟದ ಗೊಂಬೆ", "ಕುರುಡು ಜೀವ", "ಸಣ್ಣ ಕಂದಮ್ಮ", "ಕುರುಡು ಕಾಂಚಾಣಾ"],
+            answer: 3 // d) Kurudu Kanchana
+        },
+        {
+            q: "24. ಸಣ್ಣ ಕಂದಮ್ಮಗಳ _______ ತಣ್ಣನ್ನ ಜೋಮಾಲೆ ಕೊರಳೊಳಗಿತ್ತೋ.",
+            options: ["ಕಾಲೆಜ್ಜೆ", "ಕಣ್ಣಿನ ಕವಡೀಯ", "ಬಾಣಂತಿ ಯೆಲುಬು", "ಕೈ ಬೆರಳು"],
+            answer: 1 // b) Kannina kavadiya
+        },
+        {
+            q: "25. ಹ್ಯಾಂಗಾರೆ ಕುಣಿಕುಣಿದು _______ ನೆಡೆದಾಗ ಅಂಗಾತ ಬಿತ್ತೋ ಹೆಗಲಲಿ ಎತ್ತೋ.",
+            options: ["ಚೆಲ್ಲಾಟ", "ಕಳ್ಳಾಟ", "ಮಂಗಾಟ", "ಮೈಮಾಟ"],
+            answer: 2 // c) Mangata
+        },
+        {
+            q: "26. ಬಾಣಂತಿಯೆಲುಬ ಸಾಬಾಣದ ಬಿಳುಪಿನ ಕಾಣದ _______ ಕಾಲಾಗಾ ಇತ್ತೋ.",
+            options: ["ಕಣ್ಣೀನ ಕವಡಿ", "ಕಾಲೆಜ್ಜೆ", "ಕಾಲುಂಗುರ", "ಜೋಮಾಲೆ"],
+            answer: 1 // b) Kalejje
+        },
+        {
+            q: "27. ಬಡವರ ಒಡಲಿನ ಬಡ ಬಾನಲದಲಿ ಸುಡು ಸುಡು _______ ಕೈಯೊಳಗಿತ್ತೋ.",
+            options: ["ಜೀವ", "ಚೆಂಡು", "ಗದೆ", "ಪಂಜು"],
+            answer: 3 // d) Panju
+        },
+        {
+            q: "28. ಗುಡಿಯೊಳಗ ಗಣಣ, ಮಹಡಿಯೊಳಗ ತನನ, ಅಂಗಡಿಯೊಳಗ _______ ನುಡಿಗೊಡುತ್ತಿತ್ತೋ.",
+            options: ["ಝಣಝಣ (ಊಹಿಸಲಾಗಿದೆ)", "ಎರ", "ಮನನ", "ಗಣಗಣ"],
+            answer: 0 // a) Jhanajhana (Restored from poem context)
+        },
+        {
+            q: "29. ಕುರುಡು ಕಾಂಚಾಣದ ಕುಣಿತವು ಮಾಮೂಲು ಕುಣಿತವಲ್ಲ. ಅದು ಎಲ್ಲಾ _______ ಗಳ ಮೊತ್ತ.",
+            options: ["ಸಂಸ್ಕೃತಿ", "ಆಕೃತಿ", "ವಿಕೃತಿ", "ವಿಸ್ಮೃತಿ"],
+            answer: 2 // c) Vikruti
+        },
+        {
+            q: "30. ಬಡ ಬಾನಲ ಎಂದರೆ _______",
+            options: ["ಬಡತನ", "ಸಮುದ್ರದೊಳಗಿನ ಬೆಂಕಿ", "ಜೋತಾಡುವ ಮಾಲೆ", "ಸಾಬೂನು"],
+            answer: 1 // b) Samudradolagina benki
+        },
+        {
+            q: "31. ಜೋಮಾಲೆ ಎಂದರೆ _______",
+            options: ["ಬಡತನ", "ಸಮುದ್ರದೊಳಗಿನ ಬೆಂಕಿ", "ಜೋತಾಡುವ ಮಾಲೆ", "ಸಾಬೂನು"],
+            answer: 2 // c) Jotaduva male
+        },
+        {
+            q: "32. ಸಾಬಾಣ ಎಂದರೆ _______",
+            options: ["ಬಡತನ", "ಸಮುದ್ರದೊಳಗಿನ ಬೆಂಕಿ", "ಜೋತಾಡುವ ಮಾಲೆ", "ಸಾಬೂನು"],
+            answer: 3 // d) Sabunu
+        },
+        {
+            q: "33. 'ಹೊಸ ಚಿಗುರು ಹಳೆ ಬೇರು ಕೂಡಿರಲು ಮರಸೊಬಗು' ಇದು ಯಾವ ಕವಿಯ ಸಾಲು?",
+            options: ["ಶಿವರುದ್ರಪ್ಪ", "ಡಿ.ವಿ.ಗುಂಡಪ್ಪ", "ಕುವೆಂಪು", "ದ.ರಾ. ಬೇಂದ್ರೆ"],
+            answer: 1 // b) D.V. Gundappa
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    const quizScreen = document.getElementById('quiz-screen');
+    const resultScreen = document.getElementById('result-screen');
+    const questionTextEl = document.getElementById('question-text');
+    const optionsListEl = document.getElementById('options-list');
+    const currentScoreEl = document.getElementById('current-score');
+    const nextBtn = document.getElementById('next-btn');
+    const currentQNumEl = document.getElementById('current-question-num');
+    const totalQEl = document.getElementById('total-questions');
+    const finalScoreVal = document.getElementById('final-score-val');
+    const totalScoreVal = document.getElementById('total-score-val');
+    const feedbackText = document.getElementById('feedback-text');
+
+    function initQuiz() {
+        totalQEl.textContent = quizData.length;
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        const currentData = quizData[currentQuestionIndex];
+        questionTextEl.textContent = currentData.q;
+        currentQNumEl.textContent = currentQuestionIndex + 1;
+        
+        optionsListEl.innerHTML = '';
+        nextBtn.disabled = true;
+
+        currentData.options.forEach((option, index) => {
+            const li = document.createElement('li');
+            li.className = 'option-item';
+            li.textContent = option;
+            li.onclick = () => selectAnswer(index, li);
+            optionsListEl.appendChild(li);
+        });
+    }
+
+    function selectAnswer(selectedIndex, selectedLi) {
+        const currentData = quizData[currentQuestionIndex];
+        const correctIndex = currentData.answer;
+        const allOptions = optionsListEl.children;
+
+        // Disable clicks
+        for(let item of allOptions) {
+            item.classList.add('disabled');
+        }
+
+        if (selectedIndex === correctIndex) {
+            selectedLi.classList.add('correct');
+            score++;
+            currentScoreEl.textContent = score;
+        } else {
+            selectedLi.classList.add('wrong');
+            allOptions[correctIndex].classList.add('correct');
+        }
+
+        nextBtn.disabled = false;
+    }
+
+    nextBtn.onclick = () => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    };
+
+    function showResult() {
+        quizScreen.style.display = 'none';
+        resultScreen.style.display = 'block';
+        finalScoreVal.textContent = score;
+        totalScoreVal.textContent = quizData.length;
+
+        const percentage = (score / quizData.length) * 100;
+        if (percentage === 100) {
+            feedbackText.textContent = "ಅದ್ಭುತ! ಪೂರ್ಣ ಅಂಕಗಳು! (Outstanding!)";
+        } else if (percentage >= 75) {
+            feedbackText.textContent = "ಬಹಳ ಉತ್ತಮ! (Very Good!)";
+        } else if (percentage >= 50) {
+            feedbackText.textContent = "ಪರವಾಗಿಲ್ಲ, ಇನ್ನಷ್ಟು ಅಭ್ಯಾಸ ಮಾಡಿ. (Good effort)";
+        } else {
+            feedbackText.textContent = "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. (Keep practicing)";
+        }
+    }
+
+    // Start
+    initQuiz();
+</script>
+
+</body>
+</html>
