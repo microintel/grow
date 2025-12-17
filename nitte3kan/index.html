@@ -25,15 +25,6 @@ body{
   background:var(--bg);
 }
 
-header{
-  max-width:1100px;
-  margin:0 auto;
-  padding:28px 20px 0;
-  letter-spacing:.6rem;
-  font-weight:400;
-  font-size:42px;
-}
-
 .section{
   max-width:1100px;
   margin:10px;
@@ -46,7 +37,6 @@ header{
 
 h1,h3{margin:0;padding:0}
 h1{font-size:56px}
-p{margin:0}
 
 @media (max-width:640px){
   h1{font-size:40px}
@@ -58,13 +48,9 @@ p{margin:0}
   box-shadow:0 4px 8px rgba(0,0,0,.15);
   text-align:center;
   padding:10px;
-  background:transparent;
-  color:black;
-  transition:.3s;
   border:1px solid grey;
 }
 
-.lg{font-size:3rem;color:white}
 a{text-decoration:none;color:inherit}
 
 /* Footer */
@@ -96,73 +82,17 @@ a{text-decoration:none;color:inherit}
 <hr>
 
 <section class="section">
-
-  <div>
-    <a href="kar-ekikar.html" target="_blank">
-      <div class="cd"><h3>ಕರ್ನಾಟಕ ಏಕೀಕರಣ</h3></div>
-    </a>
-  </div>
-
-  <div>
-    <a href="aadalitha.html" target="_blank">
-      <div class="cd"><h3>aadalitha baasheyagi kannada</h3></div>
-    </a>
-  </div>
-
-  <div>
-    <a href="mankku.html" target="_blank">
-      <div class="cd"><h3>mankkuthimmana kagga</h3></div>
-    </a>
-  </div>
-
-  <div>
-    <a href="yugadi.html" target="_blank">
-      <div class="cd"><h3>yugadhi</h3></div>
-    </a>
-  </div>
-
-  <div>
-    <a href="kan-sams.html" target="_blank">
-      <div class="cd"><h3>karnataka samskruthi</h3></div>
-    </a>
-  </div>
-
-  <div>
-    <a href="vachana.html" target="_blank">
-      <div class="cd"><h3>vachanagalu</h3></div>
-    </a>
-  </div>
-
-  <div>
-    <a href="sirmvt.html" target="_blank">
-      <div class="cd"><h3>sir m vishweshwarayya</h3></div>
-    </a>
-  </div>
-
-  <div>
-    <a href="hosabaalu.html" target="_blank">
-      <div class="cd"><h3>hosabaalu geetha</h3></div>
-    </a>
-  </div>
-
-  <div>
-    <a href="kurudu.html" target="_blank">
-      <div class="cd"><h3>kurudu kaanchana</h3></div>
-    </a>
-  </div>
-
-  <div>
-    <a href="tatvapada.html" target="_blank">
-      <div class="cd"><h3>tatva paadagalu</h3></div>
-    </a>
-  </div>
-
-  <div>
-    <a href="keerthane.html" target="_blank">
-      <div class="cd"><h3>keerthanagalu</h3></div>
-    </a>
-  </div>
-
+  <div><a href="kar-ekikar.html" target="_blank"><div class="cd"><h3>ಕರ್ನಾಟಕ ಏಕೀಕರಣ</h3></div></a></div>
+  <div><a href="aadalitha.html" target="_blank"><div class="cd"><h3>aadalitha baasheyagi kannada</h3></div></a></div>
+  <div><a href="mankku.html" target="_blank"><div class="cd"><h3>mankkuthimmana kagga</h3></div></a></div>
+  <div><a href="yugadi.html" target="_blank"><div class="cd"><h3>yugadhi</h3></div></a></div>
+  <div><a href="kan-sams.html" target="_blank"><div class="cd"><h3>karnataka samskruthi</h3></div></a></div>
+  <div><a href="vachana.html" target="_blank"><div class="cd"><h3>vachanagalu</h3></div></a></div>
+  <div><a href="sirmvt.html" target="_blank"><div class="cd"><h3>sir m vishweshwarayya</h3></div></a></div>
+  <div><a href="hosabaalu.html" target="_blank"><div class="cd"><h3>hosabaalu geetha</h3></div></a></div>
+  <div><a href="kurudu.html" target="_blank"><div class="cd"><h3>kurudu kaanchana</h3></div></a></div>
+  <div><a href="tatvapada.html" target="_blank"><div class="cd"><h3>tatva paadagalu</h3></div></a></div>
+  <div><a href="keerthane.html" target="_blank"><div class="cd"><h3>keerthanagalu</h3></div></a></div>
 </section>
 
 <footer class="footer">
@@ -175,16 +105,18 @@ a{text-decoration:none;color:inherit}
 <script>
 document.getElementById("termsLink").onclick = function(){
   Swal.fire({
-    icon: 'info',
-    title: 'Terms & Conditions',
+    icon: 'warning',
+    title: 'Important Notice',
     html: `
-      <p style="font-size:14px;line-height:1.6">
-      This project is developed by <b>Microintel</b> using AI.<br><br>
-      It is created <b>only for practice and educational purposes</b>.<br>
-      Not intended for any illegal or harmful use.
+      <p style="font-size:14px;line-height:1.7">
+      This project is developed by <b>Microintel</b> .<br><br>
+      It is created <b>only for practice and educational purposes</b>.<br><br>
+      ⚠️ <b>MCQ answers may be incorrect.</b><br>
+      Please <b>double-check all answers</b> with textbooks.<br><br>
+      Not intended for any illegal, harmful, or misleading use.
       </p>
     `,
-    confirmButtonText: 'OK',
+    confirmButtonText: 'Understood',
     confirmButtonColor: '#3b82f6'
   });
 };
