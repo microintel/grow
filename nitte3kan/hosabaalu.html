@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಹೊಸಬಾಳಿನ ಗೀತೆ ರಸಪ್ರಶ್ನೆ (Hosabalina Geethe Quiz)</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --correct-color: #27ae60;
+            --wrong-color: #c0392b;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .quiz-container {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quiz-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .quiz-header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .quiz-body {
+            padding: 20px;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .option-item {
+            background-color: #ecf0f1;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .option-item:hover {
+            background-color: #d5dbdb;
+        }
+
+        .option-item.correct {
+            background-color: #d4edda;
+            border-color: var(--correct-color);
+            color: var(--correct-color);
+        }
+
+        .option-item.wrong {
+            background-color: #f8d7da;
+            border-color: var(--wrong-color);
+            color: var(--wrong-color);
+        }
+
+        .option-item.disabled {
+            pointer-events: none;
+        }
+
+        .quiz-footer {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+        }
+
+        .btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+
+        .score-box {
+            font-weight: bold;
+        }
+
+        /* Result Screen */
+        .result-screen {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .result-screen h2 {
+            color: var(--primary-color);
+        }
+
+        .final-score {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin: 20px 0;
+        }
+
+        @media (max-width: 500px) {
+            .quiz-header h1 { font-size: 1.2rem; }
+            .question-text { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <h1>ಹೊಸಬಾಳಿನ ಗೀತೆ ರಸಪ್ರಶ್ನೆ</h1>
+            <p>ಘಟಕ - ೩ (ಆಧುನಿಕ ಕಾವ್ಯ ಭಾಗ)</p>
+        </div>
+        <div class="quiz-body">
+            <div class="progress-bar" style="margin-bottom: 10px; font-size: 0.9rem; color: #7f8c8d;">
+                Question <span id="current-question-num">1</span> of <span id="total-questions">10</span>
+            </div>
+            <div class="question-text" id="question-text">
+                Loading question...
+            </div>
+            <ul class="options-list" id="options-list">
+                </ul>
+        </div>
+        <div class="quiz-footer">
+            <div class="score-box">Score: <span id="current-score">0</span></div>
+            <button class="btn" id="next-btn" disabled>Next Question</button>
+        </div>
+    </div>
+
+    <div id="result-screen" class="result-screen">
+        <h2>ರಸಪ್ರಶ್ನೆ ಮುಕ್ತಾಯ!</h2>
+        <p>ನಿಮ್ಮ ಅಂತಿಮ ಅಂಕಗಳು:</p>
+        <div class="final-score"><span id="final-score-val">0</span> / <span id="total-score-val">0</span></div>
+        <p id="feedback-text"></p>
+        <button class="btn" onclick="restartQuiz()">ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ (Restart)</button>
+    </div>
+</div>
+
+<script>
+    // Data extracted from the provided PDF content
+    const quizData = [
+        {
+            q: "33. ಕುಪ್ಪಳ್ಳಿ ವೆಂಕಟಪ್ಪ ಪುಟ್ಟಪ್ಪನವರ ಕಾವ್ಯನಾಮ ಯಾವುದು?",
+            options: ["ಅಂಬಿಕಾತನಯದತ್ತ", "ಶ್ರೀನಿವಾಸ", "ಚನ್ನಮಲ್ಲಿಕಾರ್ಜುನ", "ಕುವೆಂಪು"],
+            answer: 3
+        },
+        {
+            q: "34. 'ರಾಷ್ಟ್ರಕವಿ' ಎಂಬ ಬಿರುದಿಗೆ ಪಾತ್ರರಾದ ಕವಿ ಯಾರು?",
+            options: ["ಬಸವಣ್ಣ", "ಪಂಪ", "ದೊಡ್ಡರಂಗೇಗೌಡ", "ಕೆ.ವಿ. ಪುಟ್ಟಪ್ಪ"],
+            answer: 3
+        },
+        {
+            q: "35. ಕೆ.ವಿ.ಪುಟ್ಟಪ್ಪನವರು ಹುಟ್ಟಿದ್ದು ಎಲ್ಲಿ?",
+            options: ["ಧಾರವಾಡ", "ಬೆಂಗಳೂರು", "ಶಿವಮೊಗ್ಗ ಜಿಲ್ಲೆಯ ತೀರ್ಥಹಳ್ಳಿ ತಾಲೂಕಿನ ಕುಪ್ಪಳ್ಳಿ", "ಬಸವಕಲ್ಯಾಣ"],
+            answer: 2
+        },
+        {
+            q: "36. ಕುವೆಂಪುರವರ ಯಾವ ಮಹಾಕಾವ್ಯಕ್ಕೆ ಜ್ಞಾನಪೀಠ ಪ್ರಶಸ್ತಿ ದೊರೆಯಿತು?",
+            options: ["ಶ್ರೀ ರಾಮಾಯಣ ದರ್ಶನಂ", "ಚಿಕ್ಕವೀರ ರಾಜೇಂದ್ರ", "ನಾದಲೀಲೆ", "ನಾಕುತಂತಿ"],
+            answer: 0
+        },
+        {
+            q: "37. ಕೆ.ವಿ.ಪುಟ್ಟಪ್ಪನವರು ________ ಇಸವಿಯಲ್ಲಿ ಜನಿಸಿದರು.",
+            options: ["1914", "1904", "1804", "1924"],
+            answer: 1
+        },
+        {
+            q: "38. ಕನ್ನಡಕ್ಕೆ ಪ್ರಪ್ರಥಮ ಜ್ಞಾನಪೀಠ ಪ್ರಶಸ್ತಿ ತಂದುಕೊಟ್ಟವರು ಯಾರು?",
+            options: ["ಶಿವರಾಮ ಕಾರಂತರು", "ದ.ರಾ. ಬೇಂದ್ರೆ", "ಮಾಸ್ತಿ ವೆಂಕಟೇಶ ಅಯ್ಯಂಗಾರ್", "ಕೆ.ವಿ. ಪುಟ್ಟಪ್ಪ"],
+            answer: 3
+        },
+        {
+            q: "39. 'ಹೊಸಬಾಳಿನ ಗೀತೆ'ಯನ್ನು ಯಾವ ಕವನ ಸಂಕಲನದಿಂದ ಆರಿಸಿಕೊಳ್ಳಲಾಗಿದೆ?",
+            options: ["ಹೊಸಬಾಳಿನ ಜೀವನ", "ಕಾನೂರು ಹೆಗ್ಗಡತಿ", "ಕೋಗಿಲೆ ಮತ್ತು ಸೋವಿಯತ್ ರಷ್ಯಾ", "ಚಿತ್ರಾಂಗದಾ"],
+            answer: 2 
+        },
+        {
+            q: "40. 'ಸರ್ವರಿಗೆ _______! ಸರ್ವರಿಗೆ ______' ಎಂಬ ನವಯುಗವಾಣಿ.",
+            options: ["ಹೊಸಬಾಳು, ಸಮಪಾಲು", "ಸಮರಸ, ಸಮಾಧಾನ", "ದಾರಿದ್ರ, ದಳ್ಳುರಿ", "ಸಮಬಾಳು, ಸಮಪಾಲು"],
+            answer: 3
+        },
+        {
+            q: "41. ವಿಪ್ಲವ ಎಂದರೆ _________",
+            options: ["ಶಾಂತಿ", "ಸಮಾಧಾನ", "ಕ್ರಾಂತಿ", "ವಿವಾಹ"],
+            answer: 2
+        },
+        {
+            q: "42. ದೇವೇಂದ್ರನ ತೋಟ ಯಾವುದು?",
+            options: ["ಕೆಂಪುತೋಟ", "ಮಧುವನ", "ಶಾಂತಿವನ", "ನಂದನ"],
+            answer: 3
+        },
+        {
+            q: "43. ಯುಗಯುಗದ _______ ಬಾರದಿಂ ಬೆನ್ ಬಾಗಿ ಗೋಳಿಡುವ ಬಡಜನರೆ, ಏಳಿ ಏಳಿ.",
+            options: ["ದೀನ", "ದಾರಿದ್ರ", "ಕ್ರಾಂತಿ", "ಯುಕ್ತಿ"],
+            answer: 1
+        },
+        {
+            q: "44. ಶ್ರೀಮಂತರ ಶೋಷಣೆಯಿಂದ ಕುಗ್ಗಿದ ಸೋದರರೇ, ದಾನವರ ಸೀಳಲು ಬರುತಿಹಳು _______",
+            options: ["ಮಹಾ ಮಾತೆ", "ದೇವತೆ", "ವಿಪ್ಲವದ ಕಾಳಿ", "ಮಹಾಮಾರಿ"],
+            answer: 2
+        },
+        {
+            q: "45. ಮೂರ್ಖ ದಾನವರು ಯಾರಿಗೆ ಮರುಳಾದರು?",
+            options: ["ಮಾನಿನಿ", "ಯಾಮಿನಿ", "ಜನನಿ", "ಮೋಹಿನಿ"],
+            answer: 3
+        },
+        {
+            q: "46. ನಾಕ ಎಂದರೆ _______",
+            options: ["ನಾಯಕ", "ಸ್ವರ್ಗ", "ನರಕ", "ನಾಲಿಗೆ"],
+            answer: 1
+        },
+        {
+            q: "47. ಬಡ ಬಾನಲ ಎಂದರೆ ________",
+            options: ["ಸಮುದ್ರದೊಳಗಿನ ಬೆಂಕಿ", "ಬಾವಿಯ ನೀರು", "ಬಡವರ ಗಗನ", "ಬಡತನ"],
+            answer: 0
+        },
+        {
+            q: "48. ಕೂಲಿ ಮಾಡಿ ಬದುಕುವವರನ್ನು ________ ಎಂದು ಬೇಂದ್ರೆಯವರು ತಮ್ಮ ಕುರುಡು ಕಾಂಚಾಣ ಕಾವ್ಯದಲ್ಲಿ ಹೇಳಿದ್ದಾರೆ.",
+            options: ["ಶ್ರೀಮಂತರು", "ಕಂಬನಿ ಒರೆಸುವವರು", "ಬಾಣಂತಿಯರು", "ಕೂಲಿ ಕುಂಬಳಿಯವರು"],
+            answer: 3
+        },
+        {
+            q: "49. ಕುವೆಂಪುರವರನ್ನು ________ ಎಂದು ಕರೆಯಲಾಗಿದೆ.",
+            options: ["ತತ್ವ ಜ್ಞಾನಿ", "ಭಾಷಾ ಜ್ಞಾನಿ", "ರಸ ಋಷಿ", "ವಿಚಾರ ಜ್ಞಾನಿ"],
+            answer: 2
+        },
+        {
+            q: "50. ಕುವೆಂಪುರವರು ಯುವ ಪೀಳಿಗೆಗೆ ಯಾವ ಕರೆಯನ್ನು ನೀಡಿದ್ದಾರೆ?",
+            options: ["ವಿವೇಕ", "ಮೌಡ್ಯವನ್ನು ನೀಗುವ", "ಸತ್ಯ", "ಸಂಧಾನ"],
+            answer: 1
+        },
+        {
+            q: "51. ಕುವೆಂಪುರವರು ಯಾವ ಖಂಡಕಾವ್ಯ ರಚಿಸಿದ್ದಾರೆ?",
+            options: ["ಹೊಸಬಾಳಿನ ಜೀವನ", "ಕಾನೂರು ಹೆಗ್ಗಡತಿ", "ಕೋಗಿಲೆ ಮತ್ತು ಸೋವಿಯತ್ ರಷ್ಯಾ", "ಚಿತ್ರಾಂಗದಾ"],
+            answer: 3
+        },
+        {
+            q: "52. ಕುವೆಂಪುರವರ 'ಮಲೆಗಳಲ್ಲಿ ಮದುಮಗಳು' ಎಂಬುದು ಒಂದು _______",
+            options: ["ಕವನ", "ನಾಟಕ", "ಕಾದಂಬರಿ", "ಕಥೆ"],
+            answer: 2
+        },
+        {
+            q: "53. ಕುವೆಂಪುರವರ ಆತ್ಮ ಚರಿತ್ರೆಯ ಹೆಸರೇನು?",
+            options: ["ನೆನಪಿನ ದೋಣಿ", "ಮರೆಯುವ ದೋಣಿ", "ಹೆಬ್ಬಾಗಿಲ ದೋಣಿ", "ಮುಂಜಾನೆ"],
+            answer: 0
+        },
+        {
+            q: "54. ಯಾವ ಆಶ್ರಮ ಕುವೆಂಪುರವರಲ್ಲಿ ಅಡಗಿದ್ದ ಅಂತರ್ಗತ ಕಾವ್ಯ ಪ್ರತಿಭೆಗೆ ವೇದಿಕೆಯಾಯಿತು?",
+            options: ["ತುಮಕೂರಿನ ರಾಮಕೃಷ್ಣ ಆಶ್ರಮ", "ದಾವಣಗೆರೆಯ ರಾಮಕೃಷ್ಣ ಆಶ್ರಮ", "ಬೆಂಗಳೂರಿನ ರಾಮಕೃಷ್ಣ ಆಶ್ರಮ", "ಮೈಸೂರಿನ ರಾಮಕೃಷ್ಣ ಆಶ್ರಮ"],
+            answer: 3
+        },
+        {
+            q: "55. ಇಂದ್ರ ಸಿಂಹಾಸನಕೆ ಬಂತು _______",
+            options: ["ರಾಹು ಕಾಲ", "ಕೇತು ಕಾಲ", "ಶುಭ ಕಾಲ", "ಕೊನೆಗಾಲ"],
+            answer: 3
+        },
+        {
+            q: "56. ಶ್ರೀಮಂತರೊಡ್ಡುವಾ ಬಲೆ ನಿಮಗೆ _______",
+            options: ["ಕೃತ್ಯ", "ಮೃತ್ಯು", "ಸತ್ಯ", "ಮತ್ತು"],
+            answer: 1
+        },
+        {
+            q: "57. ಇಂದು ರಕ್ತದ ಬಿಂದು ಮುಂದೆ ಸೌಖ್ಯದ _______",
+            options: ["ಹಿಂದು", "ಕುಂದು", "ಸಿಂಧು", "ಒಂದು"],
+            answer: 2
+        },
+        {
+            q: "58. ಹೊಸ ಬಾಳಿನ ಗೀತೆಯ ಸಾರಾಂಶ _______",
+            options: ["ಶ್ರೀಮಂತರ ಶೋಷಣೆಯ ವಿರುದ್ಧ", "ವರ್ಣ-ವರ್ಗ ವ್ಯವಸ್ಥೆಯ ವಿರುದ್ಧ", "ತುಳಿತಕ್ಕೊಳಗಾದವರ ಜಾಗೃತಿಯ ಬಗ್ಗೆ", "ಮೇಲಿನ ಎಲ್ಲಾ ಆಯ್ಕೆಗಳು"],
+            answer: 3
+        },
+        {
+            q: "59. ನೆತ್ತರು ಎಂದರೆ _______",
+            options: ["ನೀರು", "ಕೆಸರು", "ರಕ್ತ", "ಪಾಯಸ"],
+            answer: 2
+        },
+        {
+            q: "60. ಹೊಸ ಬಾಳಿನ ಗೀತೆಯ ಉದ್ದೇಶ _______",
+            options: ["ವಿಲಾಸ ಜೀವನ ನಡೆಸುವುದು", "ಮದುವೆ ಮಾಡಿಕೊಂಡು ಹೊಸ ಜೀವನ ನಡೆಸುವುದು", "ಕೈಲಾಗದವರು ಕೀಳು ಹಣೆಬರಹವೆಂಬ ಮೌಡ್ಯದಿಂದ ಹೊರಬರುವುದು", "ಯಾವುದೂ ಅಲ್ಲ"],
+            answer: 2
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    const questionTextEl = document.getElementById('question-text');
+    const optionsListEl = document.getElementById('options-list');
+    const currentScoreEl = document.getElementById('current-score');
+    const nextBtn = document.getElementById('next-btn');
+    const currentQuestionNumEl = document.getElementById('current-question-num');
+    const totalQuestionsEl = document.getElementById('total-questions');
+    const quizScreen = document.getElementById('quiz-screen');
+    const resultScreen = document.getElementById('result-screen');
+    const finalScoreValEl = document.getElementById('final-score-val');
+    const totalScoreValEl = document.getElementById('total-score-val');
+    const feedbackTextEl = document.getElementById('feedback-text');
+
+    // Initialize Quiz
+    function initQuiz() {
+        currentQuestionIndex = 0;
+        score = 0;
+        currentScoreEl.textContent = score;
+        totalQuestionsEl.textContent = quizData.length;
+        quizScreen.style.display = 'block';
+        resultScreen.style.display = 'none';
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        const currentData = quizData[currentQuestionIndex];
+        questionTextEl.textContent = currentData.q;
+        currentQuestionNumEl.textContent = currentQuestionIndex + 1;
+        optionsListEl.innerHTML = '';
+        nextBtn.disabled = true;
+
+        currentData.options.forEach((option, index) => {
+            const li = document.createElement('li');
+            li.classList.add('option-item');
+            li.textContent = option;
+            li.onclick = () => selectOption(index, li);
+            optionsListEl.appendChild(li);
+        });
+    }
+
+    function selectOption(selectedIndex, selectedElement) {
+        const currentData = quizData[currentQuestionIndex];
+        const correctIndex = currentData.answer;
+        const allOptions = optionsListEl.children;
+
+        // Disable all options after selection
+        for (let option of allOptions) {
+            option.classList.add('disabled');
+        }
+
+        if (selectedIndex === correctIndex) {
+            selectedElement.classList.add('correct');
+            score++;
+            currentScoreEl.textContent = score;
+        } else {
+            selectedElement.classList.add('wrong');
+            // Highlight the correct answer
+            allOptions[correctIndex].classList.add('correct');
+        }
+
+        nextBtn.disabled = false;
+    }
+
+    nextBtn.onclick = () => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    };
+
+    function showResult() {
+        quizScreen.style.display = 'none';
+        resultScreen.style.display = 'block';
+        finalScoreValEl.textContent = score;
+        totalScoreValEl.textContent = quizData.length;
+
+        const percentage = (score / quizData.length) * 100;
+        if (percentage >= 80) {
+            feedbackTextEl.textContent = "ಅತ್ಯುತ್ತಮ! (Excellent!)";
+        } else if (percentage >= 50) {
+            feedbackTextEl.textContent = "ಉತ್ತಮ ಪ್ರಯತ್ನ! (Good Job!)";
+        } else {
+            feedbackTextEl.textContent = "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ! (Keep practicing!)";
+        }
+    }
+
+    function restartQuiz() {
+        initQuiz();
+    }
+
+    // Start the quiz on load
+    initQuiz();
+
+</script>
+
+</body>
+</html>
