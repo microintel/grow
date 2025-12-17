@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ತತ್ವಪದಗಳು ರಸಪ್ರಶ್ನೆ (Tatvapadagaḷu Quiz)</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --accent-color: #2980b9;
+            --correct-color: #27ae60;
+            --wrong-color: #c0392b;
+            --bg-color: #f4f6f7;
+            --card-bg: #ffffff;
+            --text-color: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        .quiz-container {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 650px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quiz-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .quiz-header h1 {
+            margin: 0;
+            font-size: 1.6rem;
+            margin-bottom: 5px;
+        }
+
+        .quiz-header p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .quiz-body {
+            padding: 25px;
+        }
+
+        .progress-bar {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .option-item {
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .option-item:hover {
+            background-color: #ebf5fb;
+            border-color: #bbdefb;
+        }
+
+        .option-item.correct {
+            background-color: #d4edda;
+            border-color: var(--correct-color);
+            color: var(--correct-color);
+        }
+
+        .option-item.correct::after {
+            content: "✓";
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+        }
+
+        .option-item.wrong {
+            background-color: #f8d7da;
+            border-color: var(--wrong-color);
+            color: var(--wrong-color);
+        }
+
+        .option-item.wrong::after {
+            content: "✗";
+            position: absolute;
+            right: 15px;
+            font-weight: bold;
+        }
+
+        .option-item.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .quiz-footer {
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            background-color: #fafafa;
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: transform 0.1s, background 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #2471a3;
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .score-box {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        /* Result Screen */
+        .result-screen {
+            display: none;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .result-screen h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .final-score {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+
+        .result-message {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        @media (max-width: 500px) {
+            .quiz-container { width: 95%; }
+            .quiz-header h1 { font-size: 1.4rem; }
+            .question-text { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div id="quiz-screen">
+        <div class="quiz-header">
+            <h1>ತತ್ವಪದಗಳು ರಸಪ್ರಶ್ನೆ</h1>
+            <p>ಆಧುನಿಕ ಪೂರ್ವದ ಕಾವ್ಯ ಭಾಗ</p>
+        </div>
+        <div class="quiz-body">
+            <div class="progress-bar">
+                ಪ್ರಶ್ನೆ <span id="current-question-num">1</span> / <span id="total-questions">16</span>
+            </div>
+            <div class="question-text" id="question-text">
+                Loading...
+            </div>
+            <ul class="options-list" id="options-list">
+                </ul>
+        </div>
+        <div class="quiz-footer">
+            <div class="score-box">ಅಂಕಗಳು (Score): <span id="current-score">0</span></div>
+            <button class="btn" id="next-btn" disabled>ಮುಂದಿನ ಪ್ರಶ್ನೆ (Next)</button>
+        </div>
+    </div>
+
+    <div id="result-screen" class="result-screen">
+        <h2>ರಸಪ್ರಶ್ನೆ ಪೂರ್ಣಗೊಂಡಿದೆ!</h2>
+        <p class="result-message">ನಿಮ್ಮ ಒಟ್ಟು ಅಂಕಗಳು:</p>
+        <div class="final-score"><span id="final-score-val">0</span> / <span id="total-score-val">0</span></div>
+        <p id="feedback-text" class="result-message"></p>
+        <button class="btn" onclick="location.reload()">ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ (Restart)</button>
+    </div>
+</div>
+
+<script>
+    // Quiz Data from the provided PDF 'thatva.pdf'
+    const quizData = [
+        {
+            q: "1. ತತ್ವಪದಕಾರರು ಸಮಾಜದ ಯಾವ ವ್ಯವಸ್ಥೆಯನ್ನು ವಿರೋಧಿಸಿದರು?",
+            options: ["a) ಶ್ರೇಣೀಕರಣ", "b) ವಾಣಿಜ್ಯಕರಣ", "C) ವ್ಯಾಕರಣ", "d) ಶುದ್ದೀಕರಣ"],
+            answer: 0 
+        },
+        {
+            q: "2. ತತ್ವಪದಕಾರರು ಜಾತಿ-ಜಾತಿಗಳ, ಧರ್ಮ- ಧರ್ಮಗಳ ನಡುವೆ ________ ಯಂತೆ ನಿರ್ವಹಿಸಿ ಸಮಾಜದ ಸುಸ್ಥಿತಿಯನ್ನು ಹಾರೈಸಿದರು.",
+            options: ["a) ತಡೆಗೋಡೆ", "b) ಭಾವೈಕ್ಯದ ಸೇತುವೆ", "C) ನದಿ", "d) ಪೂಜಾರಿ"],
+            answer: 1 
+        },
+        {
+            q: "3. ಶರಣರು ಶಿವನ ಭಕ್ತರು ಮತ್ತು ದಾಸರು ಹರಿಯ ಭಕ್ತರು. ಆದರೆ ________ಂಥ ನಿರ್ದಿಷ್ಟ ದೈವಪಂಥಗಳಿಗೆ ಸೀಮಿತವಾದವರಲ್ಲ.",
+            options: ["a) ತತ್ವಪದಕಾರರು", "b) ವಚನಕಾರರು", "C) ಕೀರ್ತನೆಗಾರರು", "d) b & c"],
+            answer: 0 
+        },
+        {
+            q: "4. ಇವರಲ್ಲಿ ಯಾರು ತತ್ವಪದಕಾರರು?",
+            options: ["a) ಕನಕದಾಸರು", "b) ಪುರಂದರದಾಸರು", "C) ಶಿಶುನಾಳ ಶರೀಫರು", "d) a & b ಇಬ್ಬರೂ"],
+            answer: 2 
+        },
+        {
+            q: "5. ಶಿಶುನಾಳ ಶರೀಫರ ಅಂಕಿತನಾಮ----",
+            options: ["a) ಕೂಡಲಸಂಗಮದೇವ", "b) ಪುರಂದರ ವಿಠಲ", "C) ಮಹಂತಲಿಂಗ", "d) ಶಿಶುನಾಳಧೀಶ"],
+            answer: 3 
+        },
+        {
+            q: "6. ಕನ್ನಡ ಸಾಹಿತ್ಯ ತತ್ವಪದಗಳ ರೂವಾರಿ ಯಾರು?",
+            options: ["a) ಕನಕದಾಸರು", "b) ಪುರಂದರದಾಸರು", "C) ಡಿ.ವಿ.ಗುಂಡಪ್ಪನವರು", "d) ಶಿಶುನಾಳ ಶರೀಫರು"],
+            answer: 3 
+        },
+        {
+            q: "7. ಶಿಶುನಾಳ ಶರೀಫರು ಹುಟ್ಟಿದ ಸ್ಥಳ ಯಾವುದು?",
+            options: ["a) ಶಿವಮೊಗ್ಗ ಜಿಲ್ಲೆಯ ತೀರ್ಥಹಳ್ಳಿಯ ಕುಪ್ಪಳ್ಳಿ", "b) ಹಾವೇರಿ ಜಿಲ್ಲೆಯ ಶಿಗ್ಗಾಂವಿಯ ಶಿಶುವಿನಹಾಳ", "C) ಧಾರವಾಡ ಜಿಲ್ಲೆಯ ಬಾಡಗ್ರಾಮ", "d) ಪುರಂದರಗಡ"],
+            answer: 1 
+        },
+        {
+            q: "8. ಶಿಶುನಾಳ ಶರೀಫರ ಗುರು ಯಾರು?",
+            options: ["a) ವ್ಯಾಸರಾಯರು", "b) ಗೋವಿಂದ ಭಟ್ಟರು", "C) ಬಸವಣ್ಣನವರು", "d) ರಾಮನಾಥರು"],
+            answer: 1 
+        },
+        {
+            q: "9. 'ಸಾವಿರ ಕೊಡಗಳ ಸುಟ್ಟು' ಈ ತತ್ವಪದದ ರಚನಕಾರರು ಯಾರು?",
+            options: ["a) ಪುರಂದರದಾಸರು", "b) ಕನಕದಾಸರು", "C) ಶಿಶುನಾಳ ಶರೀಫರು", "d) ಬಸವಣ್ಣನವರು"],
+            answer: 2 
+        },
+        {
+            q: "10. ಕುಂಬಾರರು ಏನು ಮಾಡುತ್ತಾರೆ?",
+            options: ["a) ಬೇಸಾಯ", "b) ಮರಗೆಲಸ", "C) ಚಪ್ಪಲಿ ತಯಾರಿಸುವುದು", "d) ಮಣ್ಣಿನ ಗಡಿಗೆ/ಕುಡಕಿ ಮಾಡಿವುದು"],
+            answer: 3 
+        },
+        {
+            q: "11. ಕುಂಬಾರಕಿ ________ ತುಂಬಿಕೊಂಡಿರುವಾಕಿ.",
+            options: ["a) ದೇಹವೆಲ್ಲಾ", "b) ಕಾಡೆಲ್ಲಾ", "C) ಬ್ರಹ್ಮಾಂಡವೆಲ್ಲಾ", "d) ಮನೆಯೆಲ್ಲಾ"],
+            answer: 2 
+        },
+        {
+            q: "12. ________ ಎಂಬ ತಿಗರಿಯ ಮಾಡಿ, ಸುತ್ತನು ತಿರುಗಿ ಗಡಗಿ ತಯಾರು ಮಾಡುವಾಕಿ.",
+            options: ["a) ನೂರರವತ್ತು (160)", "b) ಇನ್ನೂರರವತ್ತು", "C) ಮುನ್ನೂರರವತ್ತು", "d) ಸಾವಿರ"],
+            answer:  2
+        },
+        {
+            q: "13. ಆಚಾರ ಎಂಬ ತಿಗರಿಯ ಮಾಡಿ, ________ ಎಂಬ ಬಡಗಿಯ ಊರಿ.",
+            options: ["a) ಅರಿವು (ಜ್ಞಾನ)", "b) ಭಕ್ತಿ", "C) ತನು", "d) ಗುಣ"],
+            answer: 1
+        },
+        {
+            q: "14. ________ ಎಂಬುವ ಮಣ್ಣನು ತರಸಿ, ________ ಎಂಬ ನೀರನು ಹಣಿಸಿ ಮನ ಎಂಬ ಹುದಲನು ಕಲಸಿ ಗುಣ ಎಂಬುವ ಸೂಸನು ಹಾಕಿ.",
+            options: ["a) ಆಚಾರ, ಅರಿವು", "b) ಭಕ್ತಿ, ಧ್ಯಾನ", "C) ಚಿನ್ನ, ತನು", "d) ಗುಣ, ಗಂಧ"],
+            answer: 2 
+        },
+        {
+            q: "15. ________ ಎಂಬ ಆವಿಗೆ ಮುಚ್ಚಿ, ________ ಎಂಬ ಬೆಂಕಿಯ ಹಚ್ಚಿ ಸಾವಿರ ಕೊಡಗಳ ಸುಟ್ಟು ಸಂತಿಗೆ ಒಯ್ದು ಮಾರುವಾಕಿ.",
+            options: ["a) ಆಚಾರ, ಅರಿವು", "b) ಭಕ್ತಿ, ಧ್ಯಾನ", "C) ಚಿನ್ನ, ತನು", "d) ಗುಣ, ಗಂಧ"],
+            answer: 0
+        },
+        {
+            q: "16. ಕುಂಬಾರಕಿ ಎಲ್ಲಿ ಕುಡಕಿ, ಗಡಿಗೆಯನ್ನು ಮಾರುತ್ತಾಳೆ?",
+            options: ["a) ಪಟ್ಟಣದಲ್ಲಿ", "b) ನಗರದಲ್ಲಿ", "C) ಸಂತೆಯಲ್ಲಿ", "d) ಅಂಗಡಿಯಲ್ಲಿ"],
+            answer: 2 
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    const quizScreen = document.getElementById('quiz-screen');
+    const resultScreen = document.getElementById('result-screen');
+    const questionTextEl = document.getElementById('question-text');
+    const optionsListEl = document.getElementById('options-list');
+    const currentScoreEl = document.getElementById('current-score');
+    const nextBtn = document.getElementById('next-btn');
+    const currentQNumEl = document.getElementById('current-question-num');
+    const totalQEl = document.getElementById('total-questions');
+    const finalScoreVal = document.getElementById('final-score-val');
+    const totalScoreVal = document.getElementById('total-score-val');
+    const feedbackText = document.getElementById('feedback-text');
+
+    function initQuiz() {
+        totalQEl.textContent = quizData.length;
+        totalScoreVal.textContent = quizData.length;
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        const currentData = quizData[currentQuestionIndex];
+        // Clean the question text and use the sequential numbering for display
+        const cleanQuestion = currentData.q.replace(/^[0-9]+\.\s*/, '').replace(/[\-]+\s*$/, '');
+        questionTextEl.textContent = (currentQuestionIndex + 1) + ". " + cleanQuestion; 
+        currentQNumEl.textContent = currentQuestionIndex + 1;
+        
+        optionsListEl.innerHTML = '';
+        nextBtn.disabled = true;
+
+        currentData.options.forEach((option, index) => {
+            const li = document.createElement('li');
+            li.className = 'option-item';
+            li.textContent = option;
+            li.onclick = () => selectAnswer(index, li);
+            optionsListEl.appendChild(li);
+        });
+    }
+
+    function selectAnswer(selectedIndex, selectedLi) {
+        const currentData = quizData[currentQuestionIndex];
+        const correctIndex = currentData.answer;
+        const allOptions = optionsListEl.children;
+
+        // Disable clicks
+        for(let item of allOptions) {
+            item.classList.add('disabled');
+        }
+
+        if (selectedIndex === correctIndex) {
+            selectedLi.classList.add('correct');
+            score++;
+            currentScoreEl.textContent = score;
+        } else {
+            selectedLi.classList.add('wrong');
+            allOptions[correctIndex].classList.add('correct');
+        }
+
+        nextBtn.disabled = false;
+    }
+
+    nextBtn.onclick = () => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) {
+            loadQuestion();
+        } else {
+            showResult();
+        }
+    };
+
+    function showResult() {
+        quizScreen.style.display = 'none';
+        resultScreen.style.display = 'block';
+        finalScoreVal.textContent = score;
+
+        const percentage = (score / quizData.length) * 100;
+        if (percentage === 100) {
+            feedbackText.textContent = "ಅದ್ಭುತ! ಪೂರ್ಣ ಅಂಕಗಳು! (Outstanding! Full Score!)";
+        } else if (percentage >= 75) {
+            feedbackText.textContent = "ಬಹಳ ಉತ್ತಮ! (Very Good!)";
+        } else if (percentage >= 50) {
+            feedbackText.textContent = "ಪರವಾಗಿಲ್ಲ, ಇನ್ನಷ್ಟು ಅಭ್ಯಾಸ ಮಾಡಿ. (Good effort, keep practicing)";
+        } else {
+            feedbackText.textContent = "ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ. (Try again)";
+        }
+    }
+
+    // Start
+    initQuiz();
+</script>
+
+</body>
+</html>
