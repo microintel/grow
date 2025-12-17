@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ಸರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯ - MCQ ರಸಪ್ರಶ್ನೆ</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; background-color: #f4f4f9; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        h1 { text-align: center; color: #007bff; border-bottom: 2px solid #007bff; padding-bottom: 10px; margin-bottom: 30px; }
+        .question-block { margin-bottom: 25px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background-color: #fafafa; }
+        .question-block p { font-weight: bold; margin-bottom: 10px; color: #555; }
+        .options label { display: block; margin: 8px 0; cursor: pointer; padding: 8px; border-radius: 4px; transition: background-color 0.3s; }
+        .options label:hover { background-color: #e9ecef; }
+        
+        /* Submit Feedback Styles: Highlighting answers in the question block */
+        .options label.correct { 
+            background-color: #d4edda !important; /* Light Green */
+            border: 1px solid #c3e6cb;
+            font-weight: bold;
+        }
+        .options label.incorrect { 
+            background-color: #f8d7da !important; /* Light Red */
+            border: 1px solid #f5c6cb;
+        }
+
+        .submit-btn { display: block; width: 100%; padding: 10px; background-color: #28a745; color: white; border: none; border-radius: 5px; font-size: 18px; cursor: pointer; margin-top: 20px; }
+        .submit-btn:hover { background-color: #218838; }
+        
+        #results { 
+            margin-top: 30px; 
+            padding: 20px; 
+            border: 2px solid #007bff; 
+            border-radius: 8px; 
+            background-color: #e7f0ff; 
+            text-align: center; 
+            display: none; /* Initially hidden */
+        }
+        #results p { 
+            font-size: 28px; 
+            font-weight: bold; 
+            margin: 0;
+            color: #007bff; /* Highlight the score text */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>ಸರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯ ಕುರಿತಾದ MCQ ರಸಪ್ರಶ್ನೆ 🏆</h1>
+        <form id="quizForm">
+
+            <div class="question-block" data-q="q1">
+                <p>1. ಸ‌ರ್. ಎಂ.ವಿಶ್ವೇಶ್ವರಯ್ಯ-ವ್ಯಕ್ತಿ ಮತ್ತು ಐತಿಹ್ಯ ಲೇಖನ ಬರೆದವರು ಯಾರು?</p>
+                <div class="options">
+                    <input type="radio" id="q1a" name="q1" value="a"><label for="q1a">ಅ) ಕುವೆಂಪು</label>
+                    <input type="radio" id="q1b" name="q1" value="b"><label for="q1b">ಆ) ದ.ರಾ.ಬೇಂದೆ</label>
+                    <input type="radio" id="q1c" name="q1" value="c"><label for="q1c">ಇ) ಡಿ.ವಿ.ಜಿ</label>
+                    <input type="radio" id="q1d" name="q1" value="d"><label for="q1d">ಈ) ಎ.ಎನ್.ಮೂರ್ತಿರಾವ್</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q2">
+                <p>2. ಎ.ಎನ್.ಮೂರ್ತಿರಾವ್‌ರವರ ಯಾವ ಕೃತಿಗೆ ಕೇಂದ್ರ ಸಾಹಿತ್ಯ ಅಕಾಡೆಮಿ ಪ್ರಶಸ್ತಿ ಬಂದಿದೆ.</p>
+                <div class="options">
+                    <input type="radio" id="q2a" name="q2" value="a"><label for="q2a">ಅ) ಪತ್ರಗಳು ಚಿತ್ರಗಳು</label>
+                    <input type="radio" id="q2b" name="q2" value="b"><label for="q2b">ಆ) ಅಲೆಯುವ ಮನ</label>
+                    <input type="radio" id="q2c" name="q2" value="c"><label for="q2c">ಇ) ದೇವರು</label>
+                    <input type="radio" id="q2d" name="q2" value="d"><label for="q2d">ಈ) ಹಗಲುಗನಸು</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q3">
+                <p>3. ಎ. ಎನ್‌.ಮೂರ್ತಿರಾವ್‌ರವರು ಎಲ್ಲಿ ಇಂಗ್ಲೀಷ್ ಪ್ರೊಫೆಸರ್ ಆಗಿದ್ದರು</p>
+                <div class="options">
+                    <input type="radio" id="q3a" name="q3" value="a"><label for="q3a">ಅ) ಮೈಸೂರು ವಿಶ್ವವಿದ್ಯಾಲಯ</label>
+                    <input type="radio" id="q3b" name="q3" value="b"><label for="q3b">ಆ) ಬೆಂಗಳೂರು ವಿಶ್ವವಿದ್ಯಾಲಯ</label>
+                    <input type="radio" id="q3c" name="q3" value="c"><label for="q3c">ಇ) ಮಂಗಳೂರು ವಿಶ್ವವಿದ್ಯಾಲಯ</label>
+                    <input type="radio" id="q3d" name="q3" value="d"><label for="q3d">ಈ) ತುಮಕೂರು ವಿಶ್ವವಿದ್ಯಾಲಯ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q4">
+                <p>4. ಎ. ಎನ್‌.ಮೂರ್ತಿರಾವ್‌ರವರ ಪ್ರವಾಸ ಕಥನ ಯಾವುದು</p>
+                <div class="options">
+                    <input type="radio" id="q4a" name="q4" value="a"><label for="q4a">ಅ) ಅಪರ ವಯಸ್ಕನ ಅಮೇರಿಕಾ ಯಾತ್ರೆ</label>
+                    <input type="radio" id="q4b" name="q4" value="b"><label for="q4b">ಆ) ಅಲೆಯುವ ಮನ</label>
+                    <input type="radio" id="q4c" name="q4" value="c"><label for="q4c">ಇ) ದೇವರು</label>
+                    <input type="radio" id="q4d" name="q4" value="d"><label for="q4d">ಈ) ಹಗಲುಗನಸು</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q5">
+                <p>5. ಕೃಷ್ಣರಾಜಸಾಗರ ಅಣೆಕಟ್ಟು ಯಾರ ಕೊಡುಗೆ</p>
+                <div class="options">
+                    <input type="radio" id="q5a" name="q5" value="a"><label for="q5a">ಅ) ಸಿ.ವಿ. ರಾಮನ್</label>
+                    <input type="radio" id="q5b" name="q5" value="b"><label for="q5b">ಆ) ದಿವಾನ್‌ ಪೂರ್ಣಯ್ಯ</label>
+                    <input type="radio" id="q5c" name="q5" value="c"><label for="q5c">ಇ) ಸರ್. ಎಂ.ವಿಶೇಶ್ವರಯ್ಯ</label>
+                    <input type="radio" id="q5d" name="q5" value="d"><label for="q5d">ಈ) ಒಡೆಯರು</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q6">
+                <p>6. ಸ‌ರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ಮೈಸೂರು ಅರಮನೆಯಲ್ಲಿ ಯಾವ ಪದವಿಯಲ್ಲಿದ್ದರು</p>
+                <div class="options">
+                    <input type="radio" id="q6a" name="q6" value="a"><label for="q6a">ಅ) ದಿವಾನರು</label>
+                    <input type="radio" id="q6b" name="q6" value="b"><label for="q6b">ಆ) ತಂತ್ರಜ್ಞರು</label>
+                    <input type="radio" id="q6c" name="q6" value="c"><label for="q6c">ಇ) ಕೋಶಾಧಿಕಾರಿ</label>
+                    <input type="radio" id="q6d" name="q6" value="d"><label for="q6d">ಈ) ಸೇನಾಧಿಪತಿ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q7">
+                <p>7. ಸರ್. ಎಂ.ವಿಶ್ವೇಶ್ವರಯ್ಯನವರ ಹೂಟ್ಟೂರು ಯಾವುದು?</p>
+                <div class="options">
+                    <input type="radio" id="q7a" name="q7" value="a"><label for="q7a">ಅ) ಮುದ್ದೇನಹಳ್ಳಿ</label>
+                    <input type="radio" id="q7b" name="q7" value="b"><label for="q7b">ಆ) ಮಂಡ್ಯ</label>
+                    <input type="radio" id="q7c" name="q7" value="c"><label for="q7c">ಇ) ಮದ್ದೂರು</label>
+                    <input type="radio" id="q7d" name="q7" value="d"><label for="q7d">ಈ) ಮುದ್ದಯ್ಯನಹಳ್ಳಿ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q8">
+                <p>8. ಯಾವ ವರ್ಷದಲ್ಲಿ ಎಂ.ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ಸ್ವಂತ ಇಚ್ಛೆಯಿಂದ ದಿವಾನ್ ಪದವಿಗೆ ರಾಜೀನಾಮೆ ಸಲ್ಲಿಸಿದರು</p>
+                <div class="options">
+                    <input type="radio" id="q8a" name="q8" value="a"><label for="q8a">ಅ) 1919</label>
+                    <input type="radio" id="q8b" name="q8" value="b"><label for="q8b">ಆ) 1910</label>
+                    <input type="radio" id="q8c" name="q8" value="c"><label for="q8c">ಇ) 1918</label>
+                    <input type="radio" id="q8d" name="q8" value="d"><label for="q8d">ಈ) 1917</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q9">
+                <p>9. ಸರ್. ಎಂ.ವಿಶ್ವೇಶ್ವರಯ್ಯನವರ ಹುಟ್ಟು ಗುಣಗಳು ಯಾವುವು?</p>
+                <div class="options">
+                    <input type="radio" id="q9a" name="q9" value="a"><label for="q9a">ಅ) ಶಿಸ್ತು</label>
+                    <input type="radio" id="q9b" name="q9" value="b"><label for="q9b">ಆ) ತರ್ಕಬದ್ಧವಾದ ಆಲೋಚನೆ</label>
+                    <input type="radio" id="q9c" name="q9" value="c"><label for="q9c">ಇ) ಅ ಮತ್ತು ಆ</label>
+                    <input type="radio" id="q9d" name="q9" value="d"><label for="q9d">ಈ) ಯಾವುದು ಅಲ್ಲ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q10">
+                <p>10. ಸರ್. ಎಂ.ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ಜೋಗ್ ಜಲಪಾತ ನೋಡಿದಾಗ ಆಡಿದ ಮಾತು</p>
+                <div class="options">
+                    <input type="radio" id="q10a" name="q10" value="a"><label for="q10a">ಅ) ಅದ್ಭುತವಾಗಿದೆ</label>
+                    <input type="radio" id="q10b" name="q10" value="b"><label for="q10b">ಆ) ನಯನಮನೋಹರವಾಗಿದೆ</label>
+                    <input type="radio" id="q10c" name="q10" value="c"><label for="q10c">ಇ) ಆಕರ್ಷಕವಾಗಿದೆ</label>
+                    <input type="radio" id="q10d" name="q10" value="d"><label for="q10d">ಈ) ಎಷ್ಟೊಂದು ಶಕ್ತಿ ಪೋಲಾಗುತ್ತಿದೆ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q11">
+                <p>11. ಸರ್.ಎಂ.ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ಕಬ್ಬಿಣ ಮತ್ತು ಉಕ್ಕಿನ ಕಾರ್ಖಾನೆಯನ್ನು ಎಲ್ಲಿ ಸ್ಥಾಪಿಸಿದರು</p>
+                <div class="options">
+                    <input type="radio" id="q11a" name="q11" value="a"><label for="q11a">ಅ) ಭದ್ರಾವತಿ</label>
+                    <input type="radio" id="q11b" name="q11" value="b"><label for="q11b">ಆ) ಮೈಸೂರು</label>
+                    <input type="radio" id="q11c" name="q11" value="c"><label for="q11c">ಇ) ಮಂಗಳೂರು</label>
+                    <input type="radio" id="q11d" name="q11" value="d"><label for="q11d">ಈ) ಸಂಡೂರು</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q12">
+                <p>12. ದಿವಾನ್ ಪದವಿಗೆ ಆಯ್ಕೆಯಾದಾಗ ತಮ್ಮ ತಾಯಿ/ಸೋದರಮಾವನಿಗೆ ಎಂ.ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ತಿಳಿಸಿದ ಮಾತು</p>
+                <div class="options">
+                    <input type="radio" id="q12a" name="q12" value="a"><label for="q12a">ಅ) ಬಂದುಗಳಿಗೆ ನೌಕರಿ ಕೊಡಿಸಬೇಕೆಂದು ಶಿಫಾರಸ್ಸು ಮಾಡಬಾರದು</label>
+                    <input type="radio" id="q12b" name="q12" value="b"><label for="q12b">ಆ) ಲಂಚ ತೆಗೆದುಕೊಳ್ಳಬೇಕೆಂದು ಹೇಳಬಾರದು</label>
+                    <input type="radio" id="q12c" name="q12" value="c"><label for="q12c">ಇ) ಆಸ್ತಿ-ಅಂತಸ್ತು ಹೆಚ್ಚಿಸಬೇಕೆಂದು ಹೇಳಬಾರದು</label>
+                    <input type="radio" id="q12d" name="q12" value="d"><label for="q12d">ಈ) ಈ ಮೇಲಿನ ಎಲ್ಲಾ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q13">
+                <p>13. ದುಡಿದವನಿಗೆ ಪ್ರತಿಫಲ ದೊರೆಯಲೇ ಬೇಕು ಎಂಬ ತತ್ವವನ್ನು ರೂಡಿಸಿಕೊಂಡವರು</p>
+                <div class="options">
+                    <input type="radio" id="q13a" name="q13" value="a"><label for="q13a">ಅ) ಕೃಷ್ಣರಾಜ ಒಡೆಯರು</label>
+                    <input type="radio" id="q13b" name="q13" value="b"><label for="q13b">ಆ) ಸಿ.ವಿ. ರಾಮನ್</label>
+                    <input type="radio" id="q13c" name="q13" value="c"><label for="q13c">ಇ) ಸರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು</label>
+                    <input type="radio" id="q13d" name="q13" value="d"><label for="q13d">ಈ) ಎ.ಎನ್. ಮೂರ್ತಿರಾವ್</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q14">
+                <p>14. 'ಸ‌ರ್. ಎಂ.ವಿಶ್ವೇಶ್ವರಯ್ಯನವರನ್ನು ಕುರಿತು ಬಸ್ಸಿನ ಸಹ ಪ್ರಯಾಣಿಕನೊಬ್ಬ ಉದ್ಧರಿಸಿದ್ದು'</p>
+                <div class="options">
+                    <input type="radio" id="q14a" name="q14" value="a"><label for="q14a">ಅ) ಇದೆಲ್ಲ ಸರ್. ಎಂ.ವಿಶ್ವೇಶ್ವರಯ್ಯನವರ ಕೊಡುಗೆ</label>
+                    <input type="radio" id="q14b" name="q14" value="b"><label for="q14b">ಆ) ಇದೆಲ್ಲ ಮಾಡಿದ್ದು ಸರ್. ಎಂ.ವಿಶ್ವೇಶ್ವರಯ್ಯ</label>
+                    <input type="radio" id="q14c" name="q14" value="c"><label for="q14c">ಇ) ಇವೆಲ್ಲ ಸರ್. ಎಂ.ವಿಶ್ವೇಶ್ವರಯ್ಯನವರ ಶ್ರಮದ ಫಲ</label>
+                    <input type="radio" id="q14d" name="q14" value="d"><label for="q14d">ಈ) ಇವೆಲ್ಲಾ ಸರ್. ಎಂ.ವಿಶ್ವೇಶ್ವರಯ್ಯ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q15">
+                <p>15. ಸ‌ರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ಯಾವ ಜಿಲ್ಲೆಯ ಜನರಿಗೆ ಅನ್ನಬ್ರಹ್ಮ ಅವತಾರ ಪುರುಷನಾಗಿ ಕಾಣಿಸಿಕೊಂಡರು</p>
+                <div class="options">
+                    <input type="radio" id="q15a" name="q15" value="a"><label for="q15a">ಅ) ಮಂಡ್ಯ</label>
+                    <input type="radio" id="q15b" name="q15" value="b"><label for="q15b">ಆ) ಕೋಲಾರ</label>
+                    <input type="radio" id="q15c" name="q15" value="c"><label for="q15c">ಇ) ಶಿವಮೊಗ್ಗ</label>
+                    <input type="radio" id="q15d" name="q15" value="d"><label for="q15d">ಈ) ಮೈಸೂರು</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q16">
+                <p>16. ಪೂರ್ವ ಸಿದ್ಧತೆಯಿಲ್ಲದ ಭಾಷಣ ಅನರ್ಥವನ್ನು ಉಂಟುಮಾಡುತ್ತದೆ ಈ ಮಾತನ್ನು ಯಾವ ನಿದರ್ಶನದ ಮೂಲಕ ಸರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರ ಪೂರ್ವಸಿದ್ಧತೆಯ ವ್ಯಕ್ತಿತ್ವವನ್ನು ಲೇಖಕರು ಪ್ರಸ್ತುತಪಡಿಸಿದರು?</p>
+                <div class="options">
+                    <input type="radio" id="q16a" name="q16" value="a"><label for="q16a">ಅ) ಹಾಸನದ ಡಾಕ್ಟರೊಂದಿಗಿನ ಮಾತುಕತೆ</label>
+                    <input type="radio" id="q16b" name="q16" value="b"><label for="q16b">ಆ) ಕೃಷ್ಣರಾಜಸಾಗರ ಅಣೆಕಟ್ಟು ನಿರ್ಮಿಸುವ ಸಂದರ್ಭ</label>
+                    <input type="radio" id="q16c" name="q16" value="c"><label for="q16c">ಇ) ಮುದ್ದೇನಹಳ್ಳಿ ಶಾಲಾ ಮಕ್ಕಳಿಗೆ ಭಾಷಣ ಮಾಡಿದ ಪ್ರಸಂಗ</label>
+                    <input type="radio" id="q16d" name="q16" value="d"><label for="q16d">ಈ) ಮೈಸೂರಿನ ಯುವಕನಿಗೆ ಬ್ಲಾಸ್ಟ್ ಫರ್ನೆಸಿನ ಜವಾಬ್ದಾರಿ ವಹಿಸಿದ ಸಂದರ್ಭ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q17">
+                <p>17. ಸ‌ರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ಬಡವರು ತಮಗೆ ಅವಶ್ಯಕವಾದ ಸೇವೆಯಲ್ಲಾಕ್ಕೂ ಏನನ್ನು ಸುರಿಯಬೇಕು ಎಂದರು.</p>
+                <div class="options">
+                    <input type="radio" id="q17a" name="q17" value="a"><label for="q17a">ಅ) ಬೆವರು</label>
+                    <input type="radio" id="q17b" name="q17" value="b"><label for="q17b">ಆ) ರಕ್ತ</label>
+                    <input type="radio" id="q17c" name="q17" value="c"><label for="q17c">ಇ) ಹಣ</label>
+                    <input type="radio" id="q17d" name="q17" value="d"><label for="q17d">ಈ) ಶಿಫಾರಸ್ಸು</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q18">
+                <p>18. ಸ‌ರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ಯಾವ ಜಿಲ್ಲೆಯವರು</p>
+                <div class="options">
+                    <input type="radio" id="q18a" name="q18" value="a"><label for="q18a">ಅ) ಬೆಂಗಳೂರು</label>
+                    <input type="radio" id="q18b" name="q18" value="b"><label for="q18b">ಆ) ಮೈಸೂರು</label>
+                    <input type="radio" id="q18c" name="q18" value="c"><label for="q18c">ಇ) ಚಿಕ್ಕಬಳ್ಳಾಪುರ</label>
+                    <input type="radio" id="q18d" name="q18" value="d"><label for="q18d">ಈ) ಕೋಲಾರ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q19">
+                <p>19. ಸ‌ರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರಿಗೆ ಭಾರತ ಸರ್ಕಾರ ಯಾವ ಪ್ರಶಸ್ತಿ ನೀಡಿ ಗೌರವಿಸಿತ್ತು</p>
+                <div class="options">
+                    <input type="radio" id="q19a" name="q19" value="a"><label for="q19a">ಅ) ಭಾರತ ರತ್ನ</label>
+                    <input type="radio" id="q19b" name="q19" value="b"><label for="q19b">ಆ) ಕರ್ನಾಟಕ ರತ್ನ</label>
+                    <input type="radio" id="q19c" name="q19" value="c"><label for="q19c">ಇ) ಪದ್ಮಭೂಷಣ</label>
+                    <input type="radio" id="q19d" name="q19" value="d"><label for="q19d">ಈ) ಪದ್ಮವಿಭೂಷಣ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q20">
+                <p>20. ಸರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರ ಕೊಡುಗೆಗಳಲ್ಲಿ ಯಾವುದು ಅಲ್ಲ</p>
+                <div class="options">
+                    <input type="radio" id="q20a" name="q20" value="a"><label for="q20a">ಅ) ಕೃಷ್ಣರಾಜಸಾಗರ ಅಣೆಕಟ್ಟು</label>
+                    <input type="radio" id="q20b" name="q20" value="b"><label for="q20b">ಆ) ಭದ್ರಾವತಿಯ ಕಬ್ಬಿಣ ಮತ್ತು ಉಕ್ಕಿನ ಕಾರ್ಖಾನೆ</label>
+                    <input type="radio" id="q20c" name="q20" value="c"><label for="q20c">ಇ) ಮೈಸೂರು ಸಾಬೂನು ಕಾರ್ಖಾನೆ</label>
+                    <input type="radio" id="q20d" name="q20" value="d"><label for="q20d">ಈ) ಆಲಮಟ್ಟಿ ಅಣೆಕಟ್ಟು</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q21">
+                <p>21. ಸ‌ರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ಡಾಕ್ಟರ್‌ಗೆ ಕಳುಹಿಸಿದ ಚೆಕ್ಕು ಎಷ್ಟು ರೂಪಾಯಿಗಳು</p>
+                <div class="options">
+                    <input type="radio" id="q21a" name="q21" value="a"><label for="q21a">ಅ) 25</label>
+                    <input type="radio" id="q21b" name="q21" value="b"><label for="q21b">ಆ) 20</label>
+                    <input type="radio" id="q21c" name="q21" value="c"><label for="q21c">ಇ) 15</label>
+                    <input type="radio" id="q21d" name="q21" value="d"><label for="q21d">ಈ) 30</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q22">
+                <p>22. ಸ‌ರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ಪ್ರವಾಸ ಹೊರಟಾಗ ಅವರ ಟ್ರಂಕಲ್ಲಿ ಇರುತ್ತಿದ್ದ ವಸ್ತು</p>
+                <div class="options">
+                    <input type="radio" id="q22a" name="q22" value="a"><label for="q22a">ಅ) ಭಗವದ್ಗೀತೆ</label>
+                    <input type="radio" id="q22b" name="q22" value="b"><label for="q22b">ಆ) ರಾಮಾಯಣ</label>
+                    <input type="radio" id="q22c" name="q22" value="c"><label for="q22c">ಇ) ಮಹಾಭಾರತ</label>
+                    <input type="radio" id="q22d" name="q22" value="d"><label for="q22d">ಈ) ಪಂಪಭಾರತ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q23">
+                <p>23. ಎ. ಎನ್‌. ಮೂರ್ತಿರಾವ್‌ರವರ ಯಾವ ಕೃತಿ ಸಾರ್ವಜನಿಕರಲ್ಲಿ ಚರ್ಚೆಗೆ ಒಳಗಾಯಿತು</p>
+                <div class="options">
+                    <input type="radio" id="q23a" name="q23" value="a"><label for="q23a">ಅ) ಪತ್ರಗಳು ಚಿತ್ರಗಳು</label>
+                    <input type="radio" id="q23b" name="q23" value="b"><label for="q23b">ಆ) ಅಲೆಯುವ ಮನ</label>
+                    <input type="radio" id="q23c" name="q23" value="c"><label for="q23c">ಇ) ದೇವರು</label>
+                    <input type="radio" id="q23d" name="q23" value="d"><label for="q23d">ಈ) ಹಗಲುಗನಸು</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q24">
+                <p>24. ಯಾರ ಹುಟ್ಟಿದ ದಿನವನ್ನು ಇಂಜಿನಿಯರ್ ದಿನವನ್ನಾಗಿ ಆಚರಿಸಲಾಗುತ್ತಿದೆ</p>
+                <div class="options">
+                    <input type="radio" id="q24a" name="q24" value="a"><label for="q24a">ಅ) ಸರ್. ಸಿ.ವಿ. ರಾಮನ್</label>
+                    <input type="radio" id="q24b" name="q24" value="b"><label for="q24b">ಆ) ದಿವಾನ್‌ ಪೂರ್ಣಯ್ಯ</label>
+                    <input type="radio" id="q24c" name="q24" value="c"><label for="q24c">ಇ) ಸ‌ರ್. ಎಂ.ವಿಶೇಶ್ವರಯ್ಯ</label>
+                    <input type="radio" id="q24d" name="q24" value="d"><label for="q24d">ಈ) ಎ.ಎನ್‌ ಮೂರ್ತಿರಾವ್</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q25">
+                <p>25. ಎ. ಎನ್‌ ಮೂರ್ತಿರಾವ್‌ರವರ ಆತ್ಮಕಥನ ಹೆಸರಿಸಿ</p>
+                <div class="options">
+                    <input type="radio" id="q25a" name="q25" value="a"><label for="q25a">ಅ) ಸಂಜೆಗಣ್ಣಿನ ಹಿನ್ನೋಟ</label>
+                    <input type="radio" id="q25b" name="q25" value="b"><label for="q25b">ಆ) ಅಲೆಯುವ ಮನ</label>
+                    <input type="radio" id="q25c" name="q25" value="c"><label for="q25c">ಇ) ದೇವರು</label>
+                    <input type="radio" id="q25d" name="q25" value="d"><label for="q25d">ಈ) ಹಗಲುಗನಸು</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q26">
+                <p>26. ಎ. ಎನ್‌ ಮೂರ್ತಿರಾವ್ ಹುಟ್ಟಿದ ವರ್ಷ ಯಾವುದು?</p>
+                <div class="options">
+                    <input type="radio" id="q26a" name="q26" value="a"><label for="q26a">ಅ) 1900</label>
+                    <input type="radio" id="q26b" name="q26" value="b"><label for="q26b">ಆ) 1908</label>
+                    <input type="radio" id="q26c" name="q26" value="c"><label for="q26c">ಇ) 1890</label>
+                    <input type="radio" id="q26d" name="q26" value="d"><label for="q26d">ಈ) 1980</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q27">
+                <p>27. ಎ. ಎನ್‌ ಮೂರ್ತಿರಾವ್ ಹುಟ್ಟಿದ ಊರು ಯಾವುದು</p>
+                <div class="options">
+                    <input type="radio" id="q27a" name="q27" value="a"><label for="q27a">ಅ) ಹೆಬ್ಬಾಳ</label>
+                    <input type="radio" id="q27b" name="q27" value="b"><label for="q27b">ಆ) ನೆಲಮಂಗಲ</label>
+                    <input type="radio" id="q27c" name="q27" value="c"><label for="q27c">ಇ) ಅಕ್ಕಿಹೆಬ್ಬಾಳ</label>
+                    <input type="radio" id="q27d" name="q27" value="d"><label for="q27d">ಈ) ಚೆನ್ನಪಟ್ಟಣ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q28">
+                <p>28. ಸ‌ರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯ ವ್ಯಕ್ತಿ ಮತ್ತು ಐತಿಹ್ಯ ಲೇಖನ ಯಾವ ಕೃತಿಯಿಂದ ಆರಿಸಿಕೊಳ್ಳಲಾಗಿದೆ.</p>
+                <div class="options">
+                    <input type="radio" id="q28a" name="q28" value="a"><label for="q28a">ಅ) ಸಮಗ್ರ ಲಲಿತ ಪ್ರಬಂಧಗಳು</label>
+                    <input type="radio" id="q28b" name="q28" value="b"><label for="q28b">ಆ) ದೇವರು</label>
+                    <input type="radio" id="q28c" name="q28" value="c"><label for="q28c">ಇ) ಹಗಲುಗನಸು</label>
+                    <input type="radio" id="q28d" name="q28" value="d"><label for="q28d">ಈ) ಪತ್ರಗಳು ಚಿತ್ರಗಳು</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q29">
+                <p>29. ಸ‌ರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ಯಾವ ಸಂಸ್ಥಾನದ ದಿವಾನರಾಗಿದ್ದರು</p>
+                <div class="options">
+                    <input type="radio" id="q29a" name="q29" value="a"><label for="q29a">ಅ) ಮೈಸೂರು</label>
+                    <input type="radio" id="q29b" name="q29" value="b"><label for="q29b">ಆ) ಪಲ್ಲವರ</label>
+                    <input type="radio" id="q29c" name="q29" value="c"><label for="q29c">ಇ) ರಾಷ್ಟ್ರಕೂಟರು</label>
+                    <input type="radio" id="q29d" name="q29" value="d"><label for="q29d">ಈ) ಬೆಂಗಳೂರು</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q30">
+                <p>30. ಸರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರ ಜನ್ಮ ದಿನಾಚರಣೆಯನ್ನು ಏನೆಂದು ಆಚರಿಸಲಾಗುತ್ತದೆ</p>
+                <div class="options">
+                    <input type="radio" id="q30a" name="q30" value="a"><label for="q30a">ಅ) ಇಂಜಿನಿಯರ್ ದಿನ</label>
+                    <input type="radio" id="q30b" name="q30" value="b"><label for="q30b">ಆ) ರಾಜಕೀಯ ದಿನ</label>
+                    <input type="radio" id="q30c" name="q30" value="c"><label for="q30c">ಇ) ಸೇವಾ ದಿನ</label>
+                    <input type="radio" id="q30d" name="q30" value="d"><label for="q30d">ಈ) ರಾಷ್ಟ್ರೀಯ ದಿನ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q31">
+                <p>31. 'ಸ್ವಾಮಿ ಅವರಿಗೆ ಪೆಪ್ಪರ್ ಮೆಂಟ್ ಹಂಚಿದರೆ ಸಾಕೆ? ನಾಲ್ಕು ಬುದ್ಧಿ ಮಾತು ಅಪ್ಪಣೆ ಯಾಗಬೇಕು' ಎಂದವರು.</p>
+                <div class="options">
+                    <input type="radio" id="q31a" name="q31" value="a"><label for="q31a">ಅ) ವೃದ್ಧರೊಬ್ಬರು</label>
+                    <input type="radio" id="q31b" name="q31" value="b"><label for="q31b">ಆ) ದಾರಿಹೋಕರು</label>
+                    <input type="radio" id="q31c" name="q31" value="c"><label for="q31c">ಇ) ಶಿಕ್ಷಕರು</label>
+                    <input type="radio" id="q31d" name="q31" value="d"><label for="q31d">ಈ) ಅಪರಿಚಿತರು</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q32">
+                <p>32. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರಿಗೆ ಭಾರತ ಸರ್ಕಾರ ನೀಡಿದ ಉನ್ನತ ಪ್ರಶಸ್ತಿ ಯಾವುದು?</p>
+                <div class="options">
+                    <input type="radio" id="q32a" name="q32" value="a"><label for="q32a">ಅ) ಕರ್ನಾಟಕ ರತ್ನ</label>
+                    <input type="radio" id="q32b" name="q32" value="b"><label for="q32b">ಆ) ಪದ್ಮಭೂಷಣ</label>
+                    <input type="radio" id="q32c" name="q32" value="c"><label for="q32c">ಇ) ಪದ್ಮವಿಭೂಷಣ</label>
+                    <input type="radio" id="q32d" name="q32" value="d"><label for="q32d">ಈ) ಭಾರತ ರತ್ನ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q33">
+                <p>33. ಸ‌ರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ಯಾವ ಜಲಪಾತ ಕಂಡು 'ಎಷ್ಟೊಂದು ಶಕ್ತಿ ಪೋಲಾಗುತ್ತಿದೆ' ಎಂದರು.</p>
+                <div class="options">
+                    <input type="radio" id="q33a" name="q33" value="a"><label for="q33a">ಅ) ಜೋಗ್ ಜಲಪಾತ</label>
+                    <input type="radio" id="q33b" name="q33" value="b"><label for="q33b">ಆ) ಕೆ.ಆರ್.ಎಸ್</label>
+                    <input type="radio" id="q33c" name="q33" value="c"><label for="q33c">ಇ) ಮಾಗೋಡು ಜಲಪಾತ</label>
+                    <input type="radio" id="q33d" name="q33" value="d"><label for="q33d">ಈ) ಅಣಶಿ ಜಲಪಾತ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q34">
+                <p>34. ಸ‌ರ್. ಎಂ. ವಿಶ್ವೇಶ್ವರಯ್ಯನವರು ತಮ್ಮ ಊರಿನ ಶಾಲ ಮಕ್ಕಳಿಗೆ ಖರ್ಚು ಮಾಡಿದ ಹಣ</p>
+                <div class="options">
+                    <input type="radio" id="q34a" name="q34" value="a"><label for="q34a">ಅ) 10 ರೂ</label>
+                    <input type="radio" id="q34b" name="q34" value="b"><label for="q34b">ಆ) 15 ರೂ</label>
+                    <input type="radio" id="q34c" name="q34" value="c"><label for="q34c">ಇ) 20 ರೂ</label>
+                    <input type="radio" id="q34d" name="q34" value="d"><label for="q34d">ಈ) 25 ರೂ</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q35">
+                <p>35. "All this is Visvesvaraya" ಎಂದು ಯಾರು ಉದ್ಧರಿಸಿದರು?</p>
+                <div class="options">
+                    <input type="radio" id="q35a" name="q35" value="a"><label for="q35a">ಅ) ಸಹ ಪ್ರಯಾಣಿಕ</label>
+                    <input type="radio" id="q35b" name="q35" value="b"><label for="q35b">ಆ) ನನ್ನ ಪಕ್ಕದಲ್ಲಿ ಕುಳಿತಿದ್ದ ಪ್ರಯಾಣಿಕ</label>
+                    <input type="radio" id="q35c" name="q35" value="c"><label for="q35c">ಇ) ಪ್ರಯಾಣಿಕ</label>
+                    <input type="radio" id="q35d" name="q35" value="d"><label for="q35d">ಈ) ಕಂಡೆಕ್ಟರ್</label>
+                </div>
+            </div>
+
+            <div class="question-block" data-q="q36">
+                <p>36. ಎ. ಎನ್‌. ಮೂರ್ತಿರಾವ್‌ರವರ ಪೂರ್ಣ ಹೆಸರು:</p>
+                <div class="options">
+                    <input type="radio" id="q36a" name="q36" value="a"><label for="q36a">ಅ) ಅಕ್ಕಿಹೆಬ್ಬಾಳು ನರಸಿಹಮೂರ್ತಿ ರಾವ್</label>
+                    <input type="radio" id="q36b" name="q36" value="b"><label for="q36b">ಆ) ಎ. ಎನ್‌. ಮೂರ್ತಿರಾವ್</label>
+                    <input type="radio" id="q36c" name="q36" value="c"><label for="q36c">ಇ) ನರಸಿಂಹಮೂರ್ತಿ ರಾವ್</label>
+                    <input type="radio" id="q36d" name="q36" value="d"><label for="q36d">ಈ) ಅಕ್ಕಿಹೆಬ್ಬಾಳ ಮೂರ್ತಿರಾವ್</label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">ಫಲಿತಾಂಶಗಳನ್ನು ನೋಡಿ</button>
+        </form>
+
+        <div id="results">
+            <h2>🎉 ರಸಪ್ರಶ್ನೆ ಫಲಿತಾಂಶಗಳು 🎊</h2>
+            <p id="score-display">ನಿಮ್ಮ ಸ್ಕೋರ್: 0 / 36</p>
+        </div>
+    </div>
+
+    <script>
+        const correctAnswers = {
+            q1: 'd', q2: 'a', q3: 'a', q4: 'a', q5: 'c', q6: 'a', q7: 'a', q8: 'c', q9: 'c', q10: 'd',
+            q11: 'a', q12: 'a', q13: 'c', q14: 'd', q15: 'a', q16: 'c', q17: 'c', q18: 'c', q19: 'a', q20: 'd',
+            q21: 'a', q22: 'a', q23: 'c', q24: 'c', q25: 'a', q26: 'a', q27: 'c', q28: 'a', q29: 'a', q30: 'a',
+            q31: 'a', q32: 'd', q33: 'a', q34: 'd', 
+            q35: 'b', 
+            q36: 'a'
+        };
+
+        const totalQuestions = Object.keys(correctAnswers).length;
+        
+        // Initial setup for score display
+        const initialScoreDisplay = document.getElementById('score-display');
+        if (initialScoreDisplay) {
+            initialScoreDisplay.textContent = `ನಿಮ್ಮ ಸ್ಕೋರ್: 0 / ${totalQuestions}`;
+        }
+
+
+        document.getElementById('quizForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let score = 0;
+            
+            // 1. Reset feedback and enable inputs (if needed for re-submitting)
+            document.querySelectorAll('.options label').forEach(label => {
+                label.classList.remove('correct', 'incorrect');
+            });
+            document.querySelectorAll('input[type="radio"]').forEach(input => {
+                input.disabled = false;
+            });
+
+            for (const [qKey, cAnswer] of Object.entries(correctAnswers)) {
+                // Find the correct input element
+                const correctInput = document.getElementById(qKey + cAnswer);
+                
+                if (correctInput) {
+                    // Highlight Correct Answer (Green)
+                    const correctLabel = correctInput.closest('label');
+                    if (correctLabel) {
+                        correctLabel.classList.add('correct');
+                    }
+                }
+
+                const selectedOption = document.querySelector(`input[name="${qKey}"]:checked`);
+                
+                // Check and Highlight User's Selection
+                if (selectedOption) {
+                    const isCorrect = selectedOption.value === cAnswer;
+
+                    if (isCorrect) {
+                        score++; // Increment score
+                    } else {
+                        // Highlight incorrect choice in red
+                        const incorrectLabel = selectedOption.closest('label');
+                        if (incorrectLabel) {
+                            incorrectLabel.classList.add('incorrect');
+                        }
+                    }
+                    
+                    // Disable all radio buttons for this question after submission
+                    document.querySelectorAll(`input[name="${qKey}"]`).forEach(input => {
+                        input.disabled = true;
+                    });
+                }
+            }
+
+            // 3. Update and Show Score
+            const scoreDisplayElement = document.getElementById('score-display');
+            if (scoreDisplayElement) {
+                // Update the text content of the P tag directly
+                scoreDisplayElement.textContent = `ನಿಮ್ಮ ಸ್ಕೋರ್: ${score} / ${totalQuestions}`;
+            }
+
+            // Show the results div
+            document.getElementById('results').style.display = 'block';
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+
+            // Disable the submit button after one submission
+            document.querySelector('.submit-btn').disabled = true;
+        });
+    </script>
+
+</body>
+</html>
