@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>You are special!</title>
     <style>
-        /* CSS STYLES */
+        /* ALL PREVIOUS STYLES PRESERVED */
         :root {
             --primary-pink: #ff69b4;
             --dark-bg: #0d0111;
@@ -24,7 +24,6 @@
             overflow: hidden;
         }
 
-        /* Floating Hearts Background */
         .hearts-bg {
             position: absolute;
             width: 100%;
@@ -60,6 +59,7 @@
         }
 
         h1 { font-size: 2rem; color: var(--primary-pink); margin-bottom: 10px; }
+        .dedicated-text { font-size: 0.7rem; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
         p { color: #ccc; line-height: 1.5; }
 
         button {
@@ -77,7 +77,6 @@
 
         button:active { transform: scale(0.95); }
 
-        /* Progress Bar */
         .progress-container {
             width: 100%;
             height: 12px;
@@ -96,7 +95,6 @@
 
         #warning { color: #ffeb3b; font-weight: bold; font-size: 0.8rem; margin-top: 10px; }
 
-        /* List Items */
         .list-item {
             background: var(--card-bg);
             border: 1px solid #3d0552;
@@ -109,7 +107,6 @@
 
         .revealed { border-color: var(--primary-pink); color: var(--primary-pink); }
 
-        /* Note Card */
         .note-card {
             background: white;
             color: #333;
@@ -141,23 +138,24 @@
 
     <div class="container">
         <div id="screen1" class="screen">
+            <div class="dedicated-text">Dedicated to <span id="user-name-label">You</span></div>
             <div class="avatar-circle">😊</div>
-            <h1>Hey Beautiful</h1>
-            <p>Do you even know how cute you are?</p>
+            <h1 id="headline">Hey Beautiful</h1>
+            <p>Do you even know how <span id="adj-span">cute</span> you are?</p>
             <button onclick="startMeter()">Open My Heart 💖</button>
         </div>
 
         <div id="screen2" class="screen hidden">
-            <p>Measuring your cuteness...</p>
+            <p>Measuring your <span id="noun-span">cuteness</span>...</p>
             <div class="progress-container">
                 <div id="progress-fill"></div>
             </div>
             <h2 id="percent-text">0%</h2>
-            <p id="warning" class="hidden">⚠️ WARNING: TOO CUTE TO HANDLE</p>
+            <p id="warning" class="hidden">⚠️ WARNING: TOO <span id="upper-adj">CUTE</span> TO HANDLE</p>
         </div>
 
         <div id="screen3" class="screen hidden">
-            <h1>Just for you</h1>
+            <h1>Just for <span id="user-name-3">you</span></h1>
             <p>Tap each one to reveal</p>
             <div class="list-item" onclick="reveal(this, 0)">❤ Tap to reveal</div>
             <div class="list-item" onclick="reveal(this, 1)">❤ Tap to reveal</div>
@@ -167,21 +165,40 @@
 
         <div id="screen4" class="screen hidden">
             <div class="note-card">
-                <p><strong>I just wanted to tell you something...</strong></p>
-                <p>You really are special in a way that's hard to explain. There's a sweetness in the way you smile, and something genuine about you that just feels good to be around.</p>
+                <p><strong>To <span id="final-name">Special Someone</span>,</strong></p>
+                <p>I just wanted to tell you something... You really are special in a way that's hard to explain. There's a sweetness in the way you talk, and something genuine about you that just feels good to be around.</p>
                 <p>You'll always be special to me. ✨</p>
             </div>
         </div>
     </div>
 
     <script>
-        // JAVASCRIPT LOGIC
+        // --- PERSONALIZATION LOGIC ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const userName = urlParams.get('name') || "Special Someone";
+        const gender = (urlParams.get('gender') || "female").toLowerCase();
+
+        const isMale = (gender === 'male' || gender === 'm');
+        const adjective = isMale ? "Handsome" : "Cutie";
+        const simpleAdj = isMale ? "handsome" : "cute";
+        const nounAdj = isMale ? "handsomeness" : "cuteness";
+
+        // Update Text Elements
+        document.getElementById('user-name-label').innerText = userName;
+        document.getElementById('headline').innerText = `Hey ${adjective} ${userName}`;
+        document.getElementById('adj-span').innerText = simpleAdj;
+        document.getElementById('noun-span').innerText = nounAdj;
+        document.getElementById('upper-adj').innerText = simpleAdj.toUpperCase();
+        document.getElementById('user-name-3').innerText = userName;
+        document.getElementById('final-name').innerText = userName;
+
         const compliments = [
-            "You look adorable today",
-            "You have the sweetest vibe",
-            "You make everything feel special"
+            `You look amazing today, ${userName}`,
+            isMale ? "You have such a strong, kind vibe" : "You have the sweetest vibe",
+            "You make everything feel more special"
         ];
 
+        // --- PREVIOUS LOGIC PRESERVED ---
         let revealedCount = 0;
 
         function startMeter() {
@@ -223,7 +240,6 @@
             document.getElementById(screenId).classList.remove('hidden');
         }
 
-        // Simple Floating Hearts Background Effect
         function createHeart() {
             const heart = document.createElement('div');
             heart.innerHTML = '❤';
@@ -233,6 +249,7 @@
             heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
             heart.style.color = 'var(--primary-pink)';
             heart.style.transition = 'transform 5s linear, opacity 5s';
+            heart.style.zIndex = "-1";
             document.getElementById('hearts').appendChild(heart);
 
             setTimeout(() => {
@@ -246,3 +263,4 @@
     </script>
 </body>
 </html>
+
