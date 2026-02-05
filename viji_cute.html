@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You are special!</title>
+    <style>
+        /* CSS STYLES */
+        :root {
+            --primary-pink: #ff69b4;
+            --dark-bg: #0d0111;
+            --card-bg: #1a0224;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Floating Hearts Background */
+        .hearts-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .screen {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .hidden { display: none; }
+
+        .avatar-circle {
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            border: 4px solid var(--primary-pink);
+        }
+
+        h1 { font-size: 2rem; color: var(--primary-pink); margin-bottom: 10px; }
+        p { color: #ccc; line-height: 1.5; }
+
+        button {
+            background: var(--primary-pink);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+
+        button:active { transform: scale(0.95); }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 12px;
+            background: #222;
+            border-radius: 10px;
+            margin: 30px 0 10px;
+            overflow: hidden;
+        }
+
+        #progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff69b4, #ff1493);
+            transition: width 0.1s linear;
+        }
+
+        #warning { color: #ffeb3b; font-weight: bold; font-size: 0.8rem; margin-top: 10px; }
+
+        /* List Items */
+        .list-item {
+            background: var(--card-bg);
+            border: 1px solid #3d0552;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .revealed { border-color: var(--primary-pink); color: var(--primary-pink); }
+
+        /* Note Card */
+        .note-card {
+            background: white;
+            color: #333;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: left;
+            position: relative;
+        }
+
+        .note-card::before {
+            content: "💖";
+            position: absolute;
+            top: -15px;
+            left: 45%;
+            background: var(--primary-pink);
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hearts-bg" id="hearts"></div>
+
+    <div class="container">
+        <div id="screen1" class="screen">
+            <div class="avatar-circle">😊</div>
+            <h1>Hey Beautiful</h1>
+            <p>Do you even know how cute you are?</p>
+            <button onclick="startMeter()">Open My Heart 💖</button>
+        </div>
+
+        <div id="screen2" class="screen hidden">
+            <p>Measuring your cuteness...</p>
+            <div class="progress-container">
+                <div id="progress-fill"></div>
+            </div>
+            <h2 id="percent-text">0%</h2>
+            <p id="warning" class="hidden">⚠️ WARNING: TOO CUTE TO HANDLE</p>
+        </div>
+
+        <div id="screen3" class="screen hidden">
+            <h1>Just for you</h1>
+            <p>Tap each one to reveal</p>
+            <div class="list-item" onclick="reveal(this, 0)">❤ Tap to reveal</div>
+            <div class="list-item" onclick="reveal(this, 1)">❤ Tap to reveal</div>
+            <div class="list-item" onclick="reveal(this, 2)">❤ Tap to reveal</div>
+            <button id="next-btn" class="hidden" onclick="showNote()">One more thing →</button>
+        </div>
+
+        <div id="screen4" class="screen hidden">
+            <div class="note-card">
+                <p><strong>I just wanted to tell you something...</strong></p>
+                <p>You really are special in a way that's hard to explain. There's a sweetness in the way you smile, and something genuine about you that just feels good to be around.</p>
+                <p>You'll always be special to me. ✨</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JAVASCRIPT LOGIC
+        const compliments = [
+            "You look adorable today",
+            "You have the sweetest vibe",
+            "You make everything feel special"
+        ];
+
+        let revealedCount = 0;
+
+        function startMeter() {
+            showScreen('screen2');
+            let fill = document.getElementById('progress-fill');
+            let text = document.getElementById('percent-text');
+            let width = 0;
+            
+            let interval = setInterval(() => {
+                if (width >= 120) {
+                    clearInterval(interval);
+                    document.getElementById('warning').classList.remove('hidden');
+                    setTimeout(() => showScreen('screen3'), 2000);
+                } else {
+                    width++;
+                    fill.style.width = (width > 100 ? 100 : width) + '%';
+                    text.innerText = width + '%';
+                }
+            }, 40);
+        }
+
+        function reveal(el, index) {
+            if (!el.classList.contains('revealed')) {
+                el.innerText = compliments[index];
+                el.classList.add('revealed');
+                revealedCount++;
+                if (revealedCount === 3) {
+                    document.getElementById('next-btn').classList.remove('hidden');
+                }
+            }
+        }
+
+        function showNote() {
+            showScreen('screen4');
+        }
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+            document.getElementById(screenId).classList.remove('hidden');
+        }
+
+        // Simple Floating Hearts Background Effect
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤';
+            heart.style.position = 'absolute';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            heart.style.color = 'var(--primary-pink)';
+            heart.style.transition = 'transform 5s linear, opacity 5s';
+            document.getElementById('hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.style.transform = `translateY(-110vh) rotate(${Math.random() * 360}deg)`;
+                heart.style.opacity = '0';
+            }, 100);
+
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 500);
+    </script>
+</body>
+</html>
