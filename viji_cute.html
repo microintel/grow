@@ -130,6 +130,12 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        footer{
+        position:fixed;
+        bottom:10px;
+        color:grey;
+        }
     </style>
 </head>
 <body>
@@ -138,7 +144,6 @@
 
     <div class="container">
         <div id="screen1" class="screen">
-            <div class="dedicated-text">Dedicated to <span id="user-name-label">You</span></div>
             <div class="avatar-circle">😊</div>
             <h1 id="headline">Hey Beautiful</h1>
             <p>Do you even know how <span id="adj-span">cute</span> you are?</p>
@@ -160,6 +165,8 @@
             <div class="list-item" onclick="reveal(this, 0)">❤ Tap to reveal</div>
             <div class="list-item" onclick="reveal(this, 1)">❤ Tap to reveal</div>
             <div class="list-item" onclick="reveal(this, 2)">❤ Tap to reveal</div>
+            <div class="list-item" onclick="reveal(this, 3)">❤ Tap to reveal</div>
+            <div class="list-item" onclick="reveal(this, 4)">❤ Tap to reveal</div>
             <button id="next-btn" class="hidden" onclick="showNote()">One more thing →</button>
         </div>
 
@@ -171,7 +178,7 @@
             </div>
         </div>
     </div>
-
+<footer onclick="location.href='https://microintel.github.io/microintel/v1/micropro.html'">Developed By Microintel</footer>
     <script>
         // --- PERSONALIZATION LOGIC ---
         const urlParams = new URLSearchParams(window.location.search);
@@ -184,7 +191,7 @@
         const nounAdj = isMale ? "handsomeness" : "cuteness";
 
         // Update Text Elements
-        document.getElementById('user-name-label').innerText = userName;
+      //  document.getElementById('user-name-label').innerText = userName;
         document.getElementById('headline').innerText = `Hey ${adjective} ${userName}`;
         document.getElementById('adj-span').innerText = simpleAdj;
         document.getElementById('noun-span').innerText = nounAdj;
@@ -195,7 +202,9 @@
         const compliments = [
             `You look amazing today, ${userName}`,
             isMale ? "You have such a strong, kind vibe" : "You have the sweetest vibe",
-            "You make everything feel more special"
+            "You make everything feel more special",
+            `${userName} you looking so sexy`,
+            "you are beutiful"
         ];
 
         // --- PREVIOUS LOGIC PRESERVED ---
