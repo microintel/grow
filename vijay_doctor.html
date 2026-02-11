@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Case File - Confidential</title>
+    <style>
+        :root {
+            --bg-wash: #fcebed;      /* Soft pink background from video */
+            --card-white: #ffffff;   /* Main card */
+            --medical-red: #e4575e;  /* The specific button red */
+            --text-main: #333333;
+            --text-muted: #8e8e8e;
+            --success-green: #4caf50;
+            --ongoing-orange: #f0a030;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-wash);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* --- HEART ANIMATION ENGINE --- */
+        #heart-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating-heart {
+            position: absolute;
+            bottom: -50px;
+            color: var(--medical-red);
+            opacity: 0.6;
+            user-select: none;
+            animation: floatUp linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0; }
+            20% { opacity: 0.7; }
+            100% { transform: translateY(-110vh) rotate(360deg) scale(1.5); opacity: 0; }
+        }
+
+        /* --- MAIN UI CARD --- */
+        .case-card {
+            background: var(--card-white);
+            width: 90%;
+            max-width: 400px;
+            padding: 45px 35px;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .badge {
+            background: #fdf2f3;
+            color: #d97d81;
+            font-size: 11px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        h1 { font-size: 26px; font-weight: 800; margin: 0 0 30px 0; color: #333; }
+        h2 { font-size: 20px; font-weight: 700; margin-top: 0; margin-bottom: 15px; }
+
+        .info-field {
+            text-align: left;
+            margin-bottom: 22px;
+            border-bottom: 1.5px solid #f2f2f2;
+            padding-bottom: 6px;
+        }
+
+        .label {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .value {
+            font-size: 17px;
+            padding-top: 4px;
+            font-weight: 500;
+            color: #222;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-main {
+            background-color: var(--medical-red);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 6px 15px rgba(228, 87, 94, 0.25);
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn-main:hover { background-color: #d14a51; }
+        .btn-main:active { transform: scale(0.97); }
+
+        .btn-reject {
+            background-color: #f7f7f7;
+            color: #aaa;
+            box-shadow: none;
+            margin-top: 10px;
+        }
+
+        /* --- CONTENT STEPS --- */
+        .step { display: none; }
+        .step.active { display: block; animation: slideUp 0.5s ease-out; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        ul { text-align: left; padding-left: 15px; line-height: 2; font-size: 15px; color: #444; }
+        .sad-box { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
+        .sad-box img { width: 120px; height: 120px; border-radius: 15px; object-fit: cover; border: 2px solid #eee; }
+
+    </style>
+</head>
+<body>
+
+    <div id="heart-container"></div>
+
+    <div class="case-card">
+        
+        <div id="step1" class="step active">
+            <div class="badge">Confidential</div>
+            <h1>Patient Case File</h1>
+            <div class="info-field">
+                <div class="label">Patient</div>
+                <div class="value">One (1) very lucky boyfriend</div>
+            </div>
+            <div class="info-field">
+                <div class="label">Attending Physician</div>
+                <div class="value">Shweta Sarthy 🩺</div>
+            </div>
+            <button class="btn-main" onclick="nextStep(2)">Open Case</button>
+        </div>
+
+        <div id="step2" class="step">
+            <div class="badge" style="background:#fff4e5; color:var(--ongoing-orange);">Ongoing</div>
+            <h2>Chief Complaint</h2>
+            <p style="color: #555; line-height: 1.6;">Persistent warmth in the chest area when thinking about one incredibly intelligent, kind, and beautiful future doctor.</p>
+            <button class="btn-main" onclick="nextStep(3)">Review Symptoms</button>
+        </div>
+
+        <div id="step3" class="step">
+            <div class="badge" style="background:#e8f5e9; color:var(--success-green);">Well Documented</div>
+            <h2>Symptoms</h2>
+            <ul>
+                <li>Smiling for no reason</li>
+                <li>Feeling calm just by hearing your voice</li>
+                <li>Wanting to share every good moment with you</li>
+                <li>Complete certainty that you're my favorite person</li>
+            </ul>
+            <button class="btn-main" onclick="nextStep(4)">Assessment</button>
+        </div>
+
+        <div id="step4" class="step">
+            <div class="badge">Stable</div>
+            <h2>Assessment</h2>
+            <p style="font-size: 18px;">Condition appears<br><strong style="color:var(--medical-red);">chronic and irreversible</strong>.</p>
+            <p style="color:#666; font-size: 14px;">Patient reports feeling safe, supported, and genuinely happy in your presence.</p>
+            <button class="btn-main" onclick="nextStep(5)">Final Recommendation</button>
+        </div>
+
+        <div id="step5" class="step">
+            <div class="badge" style="background:#fce4ec; color:#e91e63;">High Priority</div>
+            <h2>Recommendation</h2>
+            <p style="font-size: 14px; color: #555;">Proceed with Valentine's Day together. Laugh a lot. Eat something good.</p>
+            <h3 style="margin: 25px 0 10px 0;">Will you be Patient's Valentine?</h3>
+            <button class="btn-main" onclick="nextStep(7)">Accept ❤️</button>
+            <button class="btn-main btn-reject" onclick="nextStep(6)">Reject ❌</button>
+        </div>
+
+        <div id="step6" class="step">
+            <h2 style="color: var(--medical-red); font-size: 18px;">Error 404: Option Not Found</h2>
+            <p style="font-size: 13px; color: #666;">Wait! Your medical license doesn't cover rejection of this specific patient.</p>
+            <div class="sad-box">
+                <img src="https://c.tenor.com/M6caLr6snrcAAAAC/tenor.gif" alt="Sad Baby">
+                <img src="https://c.tenor.com/jL5e3AdC7jIAAAAd/tenor.gif" alt="Sad Cat">
+            </div>
+            <p style="font-size: 13px; font-style: italic;">Please reconsider the correct medical procedure.</p>
+            <button class="btn-main" onclick="nextStep(7)">Accept ❤️</button>
+        </div>
+
+        <div id="step7" class="step">
+            <div class="badge" style="background:#e8f5e9; color:var(--success-green);">Approved</div>
+            <h1 style="color: var(--medical-red); margin-bottom: 5px;">Case Closed</h1>
+            <p><strong>Recommendation accepted.</strong></p>
+            <div style="background: #fafafa; padding: 20px; border-radius: 15px; margin: 20px 0;">
+                <p style="margin: 5px 0;"><strong>Prognosis:</strong> Extremely good.</p>
+                <p style="margin: 5px 0;">Thank you, Doctor 🤍</p>
+            </div>
+            <div style="font-size: 30px;">🩺✨🍷</div>
+        </div>
+
+    </div>
+
+    <script>
+        // --- HEART BACKGROUND LOGIC ---
+        const container = document.getElementById('heart-container');
+
+        function createHeart(isBurst = false) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤️';
+            
+            // Random horizontal position
+            heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Random size
+            const size = Math.random() * 20 + 10;
+            heart.style.fontSize = size + 'px';
+            
+            // Random duration
+            const duration = Math.random() * 3 + 3;
+            heart.style.animationDuration = duration + 's';
+
+            // If it's a burst, start them from the center area
+            if(isBurst) {
+                heart.style.left = (40 + Math.random() * 20) + 'vw';
+                heart.style.bottom = '50vh';
+                heart.style.animationDuration = '2s';
+            }
+
+            container.appendChild(heart);
+
+            // Remove from DOM after animation finishes
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        // Constant trickle of background hearts
+        setInterval(() => createHeart(false), 500);
+
+        // --- NAVIGATION LOGIC ---
+        function nextStep(stepNum) {
+            // Heart burst effect on click
+            for(let i=0; i<12; i++) {
+                setTimeout(() => createHeart(true), i * 50);
+            }
+
+            // Transition steps
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + stepNum).classList.add('active');
+        }
+    </script>
+</body>
+</html>
