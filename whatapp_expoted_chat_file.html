@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WhatsApp Chat Viewer</title>
+
+<style>
+:root{
+  --wa-green:#075e54;
+  --wa-light:#dcf8c6;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* header */
+.header{
+  background:var(--wa-green);
+  color:#fff;
+  padding:12px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:relative;
+}
+.contact{
+  font-size:18px;
+  font-weight:600;
+}
+.menu{
+  font-size:22px;
+  cursor:pointer;
+  user-select:none;
+}
+
+/* dropdown menu */
+.dropdown{
+  position:absolute;
+  right:10px;
+  top:50px;
+  background:#fff;
+  border:1px solid #ccc;
+  border-radius:6px;
+  overflow:hidden;
+  display:none;
+  z-index:20;
+  min-width:150px;
+}
+.dropdown div{
+  padding:10px;
+  cursor:pointer;
+}
+.dropdown div:hover{
+  background:#eee;
+}
+
+/* controls */
+.control{
+  padding:10px;
+  background:#fff;
+  border-bottom:1px solid #ccc;
+}
+
+/* chat */
+.chat{
+  flex:1;
+  overflow:auto;
+  padding:10px;
+  display:flex;
+  flex-direction:column;
+  background-size:cover;
+  background-position:center;
+}
+
+/* message bubbles */
+.message{
+  max-width:75%;
+  margin:6px 0;
+  padding:8px 10px;
+  border-radius:8px;
+  font-size:14px;
+  word-wrap:break-word;
+}
+.left{
+  background:#fff;
+  align-self:flex-start;
+}
+.right{
+  background:var(--wa-light);
+  align-self:flex-end;
+}
+
+.sender{
+  font-size:12px;
+  font-weight:bold;
+  color:var(--wa-green);
+  margin-bottom:2px;
+}
+.time{
+  font-size:10px;
+  text-align:right;
+  color:#666;
+  margin-top:3px;
+}
+
+/* media */
+img.media{
+  max-width:220px;
+  border-radius:6px;
+  cursor:pointer;
+}
+video{
+  max-width:220px;
+  border-radius:6px;
+}
+audio{
+  width:220px;
+}
+embed{
+  border:1px solid #ccc;
+  border-radius:6px;
+}
+
+/* fullscreen image viewer */
+.fullscreen{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:100;
+}
+.fullscreen img{
+  max-width:95%;
+  max-height:95%;
+}
+
+/* responsive */
+@media(max-width:600px){
+  .message{max-width:85%}
+  img.media,video,audio{max-width:180px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="contact" id="contactName">WhatsApp Chat Viewer</div>
+  <div class="menu" onclick="toggleMenu()">⋮</div>
+
+  <div class="dropdown" id="menuBox">
+    <div onclick="openNewChat()">Open New Chat</div>
+  </div>
+</div>
+
+<div class="control" id="controls">
+  <input type="file" id="files" multiple>
+  <br><br>
+  Sender:
+  <select id="sender"></select>
+
+  Receiver:
+  <select id="receiver"></select>
+
+  <button onclick="renderChat()">Open Chat</button>
+</div>
+
+<div class="chat" id="chat"></div>
+
+<script>
+
+/* storage */
+let messages=[]
+let mediaFiles={}
+
+/* random wallpapers */
+const wallpapers=[
+"https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+"https://images.unsplash.com/photo-1470770841072-f978cf4d019e",
+"https://images.unsplash.com/photo-1493246507139-91e8fad9978e",
+"https://images.unsplash.com/photo-1501785888041-af3ef285b470"
+]
+
+document.getElementById("chat").style.backgroundImage=
+"url("+wallpapers[Math.floor(Math.random()*wallpapers.length)]+")"
+
+/* menu */
+function toggleMenu(){
+  const m=document.getElementById("menuBox")
+  m.style.display=m.style.display==="block"?"none":"block"
+}
+
+function openNewChat(){
+  document.getElementById("controls").style.display="block"
+  document.getElementById("chat").innerHTML=""
+  document.getElementById("contactName").innerText="WhatsApp Chat Viewer"
+}
+
+/* file upload */
+document.getElementById("files").addEventListener("change",function(){
+
+  const files=this.files
+  let chatFile=null
+
+  mediaFiles={}
+  messages=[]
+
+  for(let f of files){
+    if(f.name.endsWith(".txt"))
+      chatFile=f
+    else
+      mediaFiles[f.name]=URL.createObjectURL(f)
+  }
+
+  if(!chatFile){
+    alert("Please include the WhatsApp .txt chat file")
+    return
+  }
+
+  const reader=new FileReader()
+
+  reader.onload=function(e){
+
+    const lines=e.target.result.split("\n")
+    const names=new Set()
+
+    lines.forEach(line=>{
+
+      const m=line.match(/^(.+?), (.+?) - (.+?): (.+)$/)
+
+      if(m){
+        let date=m[1]
+        let time=m[2]
+        let sender=m[3]
+        let msg=m[4]
+
+        names.add(sender)
+
+        messages.push({date,time,sender,msg})
+      }
+
+    })
+
+    populateNames(names)
+
+  }
+
+  reader.readAsText(chatFile)
+
+})
+
+function populateNames(names){
+
+  const s=document.getElementById("sender")
+  const r=document.getElementById("receiver")
+
+  s.innerHTML=""
+  r.innerHTML=""
+
+  names.forEach(n=>{
+    s.add(new Option(n,n))
+    r.add(new Option(n,n))
+  })
+
+}
+
+/* render chat */
+function renderChat(){
+
+  const sender=document.getElementById("sender").value
+  const receiver=document.getElementById("receiver").value
+
+  document.getElementById("controls").style.display="none"
+  document.getElementById("contactName").innerText=receiver
+
+  const chat=document.getElementById("chat")
+  chat.innerHTML=""
+
+  messages.forEach(m=>{
+
+    let bubble=document.createElement("div")
+    bubble.className="message "+(m.sender===sender?"right":"left")
+
+    let msg=parseMessage(m.msg)
+
+    bubble.innerHTML=
+    `<div class="sender">${m.sender}</div>
+     <div>${msg}</div>
+     <div class="time">${m.time}</div>`
+
+    chat.appendChild(bubble)
+
+  })
+
+  setTimeout(()=>chat.scrollTop=chat.scrollHeight,100)
+
+}
+
+/* message parser */
+function parseMessage(text){
+
+// make urls clickable
+text = text.replace(/(https?:\/\/[^\s]+)/g,
+'<a href="$1" target="_blank">$1</a>')
+
+for(let f in mediaFiles){
+
+if(text.includes(f)){
+
+let url = mediaFiles[f]
+
+/* IMAGE */
+if(f.startsWith("IMG-")){
+return `<img class="media" src="${url}" onclick="fullscreen(this.src)">`
+}
+
+/* VIDEO */
+if(f.startsWith("VID-")){
+return `<video controls src="${url}"></video>`
+}
+
+/* AUDIO */
+if(f.startsWith("AUD-")){
+return `<audio controls src="${url}"></audio>`
+}
+
+/* DOCUMENT */
+if(f.startsWith("DOC-")){
+return `
+<div style="width:220px">
+📄 Document<br>
+<a href="${url}" target="_blank">Open File</a>
+</div>`
+}
+
+}
+
+}
+
+if(text.includes("<Media omitted>"))
+return "📎 Media omitted"
+
+return text
+
+}
+
+/* fullscreen image */
+function fullscreen(src){
+
+  const d=document.createElement("div")
+  d.className="fullscreen"
+
+  d.innerHTML=`<img src="${src}">`
+
+  d.onclick=function(){
+    document.body.removeChild(d)
+  }
+
+  document.body.appendChild(d)
+
+}
+
+</script>
+
+</body>
+</html>
