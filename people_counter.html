@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI People Counter</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--card);
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h1 { margin-bottom: 0.5rem; font-size: 1.8rem; }
+        
+        .status-bar {
+            background: rgba(99, 102, 241, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            color: #94a3b8;
+        }
+
+        .upload-section {
+            border: 2px dashed #475569;
+            padding: 2rem;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0; left: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .count-display {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        #canvas-container {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            background: #000;
+            line-height: 0;
+        }
+
+        canvas {
+            width: 100% !important; /* Responsive width */
+            height: auto !important;
+        }
+
+        /* Responsive Tweaks */
+        @media (max-width: 600px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 1.4rem; }
+            .count-display { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>AI People Counter</h1>
+    <div id="status" class="status-bar">⚡ Initializing AI Engine...</div>
+
+    <div class="upload-section" id="dropzone">
+        <p>Click or Drag Image Here</p>
+        <input type="file" id="imageUpload" accept="image/*" disabled>
+    </div>
+
+    <div class="count-display" id="count">0</div>
+    <p style="margin-top:-10px; color: #94a3b8;">People Detected</p>
+
+    <div id="canvas-container">
+        <canvas id="canvas"></canvas>
+    </div>
+</div>
+
+<script>
+    const imageUpload = document.getElementById('imageUpload');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const status = document.getElementById('status');
+    const countDisplay = document.getElementById('count');
+    
+    let model;
+
+    // Load model with specific configuration for better accuracy
+    async function loadModel() {
+        try {
+            // "mobilenet_v2" is generally more accurate than v1
+            model = await cocoSsd.load({ base: 'mobilenet_v2' });
+            status.innerHTML = "✅ AI Ready. Upload a clear photo.";
+            status.style.color = "#4ade80";
+            imageUpload.disabled = false;
+        } catch (e) {
+            status.innerHTML = "❌ Error loading model.";
+        }
+    }
+
+    imageUpload.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const img = new Image();
+        img.src = URL.createObjectURL(file);
+        
+        img.onload = async () => {
+            // Set internal canvas resolution to match image
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+            
+            status.innerHTML = "⌛ Analyzing image details...";
+            
+            // Detect with high confidence threshold
+            const predictions = await model.detect(canvas);
+            
+            // Filter: Only 'person' and confidence > 40%
+            const people = predictions.filter(p => p.class === 'person' && p.score > 0.4);
+            
+            renderResults(img, people);
+        };
+    });
+
+    function renderResults(img, people) {
+        ctx.drawImage(img, 0, 0);
+        
+        people.forEach(person => {
+            // Draw Box
+            ctx.strokeStyle = "#6366f1";
+            ctx.lineWidth = Math.max(img.width / 200, 3); // Scale line thickness
+            ctx.strokeRect(...person.bbox);
+
+            // Draw Label background
+            ctx.fillStyle = "#6366f1";
+            const labelY = person.bbox[1] > 40 ? person.bbox[1] - 10 : 10;
+            ctx.fillRect(person.bbox[0], labelY - 25, 120, 30);
+
+            // Draw text
+            ctx.fillStyle = "white";
+            ctx.font = "bold 18px sans-serif";
+            ctx.fillText("Person " + Math.round(person.score * 100) + "%", person.bbox[0] + 5, labelY - 5);
+        });
+
+        countDisplay.innerText = people.length;
+        status.innerHTML = `✅ Analysis complete! Found ${people.length} people.`;
+    }
+
+    loadModel();
+</script>
+
+</body>
+</html>
