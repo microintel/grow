@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Multi Subject Attendance Predictor</title>
+<style>
+    body {
+        font-family: Arial;
+        background: #0f172a;
+        color: white;
+        padding: 20px;
+    }
+    .box {
+        max-width: 700px;
+        margin: auto;
+        background: #1e293b;
+        padding: 20px;
+        border-radius: 10px;
+    }
+    input, button {
+        width: 100%;
+        padding: 10px;
+        margin: 6px 0;
+    }
+    button {
+        background: #22c55e;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+    .subject {
+        background: #0f172a;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 8px;
+    }
+    table {
+        width: 100%;
+        margin-top: 15px;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #334155;
+        padding: 6px;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<div class="box">
+    <h2></h2>Multi Subject Attendance Predictor</h2>
+
+    <div id="subjects"></div>
+
+    <button onclick="addSubject()">➕ Add Subject</button>
+    <button onclick="calculate()">Calculate All</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+
+let subjectCount = 0;
+
+function addSubject() {
+    subjectCount++;
+
+    let div = document.createElement("div");
+    div.className = "subject";
+    div.innerHTML = `
+        <h3>Subject ${subjectCount}</h3>
+        <input type="number" placeholder="Attended" class="attended">
+        <input type="number" placeholder="Absent" class="absent">
+        <input type="number" placeholder="Target %" class="target" value="85">
+    `;
+
+    document.getElementById("subjects").appendChild(div);
+}
+
+function calculate() {
+    let subjects = document.querySelectorAll(".subject");
+
+    let html = "<h3> Results</h3>";
+
+    subjects.forEach((sub, index) => {
+
+        let attended = parseInt(sub.querySelector(".attended").value) || 0;
+        let absent = parseInt(sub.querySelector(".absent").value) || 0;
+        let target = parseFloat(sub.querySelector(".target").value) || 85;
+
+        let total = attended + absent;
+
+        html += `<h4>Subject ${index + 1}</h4>`;
+        html += `<table>
+            <tr><th>+Classes</th><th>Total</th><th>Attended</th><th>%</th></tr>`;
+
+        let x = 0;
+
+        while (x <= 30) {
+            let a = attended + x;
+            let t = total + x;
+            let percent = (a / t) * 100;
+
+            html += `<tr>
+                <td>${x}</td>
+                <td>${t}</td>
+                <td>${a}</td>
+                <td>${percent.toFixed(2)}</td>
+            </tr>`;
+
+            if (percent >= target) break;
+
+            x++;
+        }
+
+        html += `</table>`;
+    });
+
+    document.getElementById("result").innerHTML = html;
+}
+
+</script>
+
+</body>
+</html>
