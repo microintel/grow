@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QA Question Bank</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#121212;
+color:#fff;
+margin:0;
+padding:0;
+}
+
+header{
+padding:15px;
+text-align:center;
+font-size:22px;
+font-weight:bold;
+background:#1f1f1f;
+}
+
+.search-box{
+padding:15px;
+}
+
+.search-box input{
+width:100%;
+padding:10px;
+border:none;
+border-radius:8px;
+font-size:16px;
+}
+
+.container{
+padding:10px;
+}
+
+.card{
+background:#1e1e1e;
+margin-bottom:12px;
+padding:12px;
+border-radius:10px;
+cursor:pointer;
+}
+
+.category{
+font-size:12px;
+color:#bbb;
+margin-bottom:5px;
+}
+
+.question{
+font-size:16px;
+}
+
+.answer{
+display:none;
+margin-top:10px;
+color:#00e676;
+font-weight:bold;
+}
+
+footer{
+text-align:center;
+padding:15px;
+font-size:14px;
+background:#1f1f1f;
+margin-top:20px;
+}
+
+footer a{
+color:#4fc3f7;
+text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>Software Testing Q&A</header>
+
+<div class="search-box">
+<input type="text" id="search" placeholder="Search question...">
+</div>
+
+<div class="container" id="questionList"></div>
+
+<footer>
+<a href="https://microintel.in" target="_blank">
+Developed by Microintel
+</a>
+</footer>
+
+<script>
+
+const data = [
+{
+category:"Black Box",
+question:"It is possible to use Decision table testing, which is a type of software testing that examines how a system responds to various input combinations. Select True or False.",
+answer:"True"
+},
+{
+category:"Black Box",
+question:"Identify the technique that is used when there is input in terms of range or size.",
+answer:"Boundary Value Analysis"
+},
+{
+category:"Bug Life Cycle",
+question:"Identify the logic used in the image below:",
+answer:"Defective Life Cycle"
+},
+{
+category:"Bug Life Cycle",
+question:"Select the correct statement that is related to the Priority in the bug life cycle. Statement 1: Priority is basically a parameter that decides the order in which we should fix the defects. Statement 2: Priority is basically a parameter that denotes the total impact of a given defect on any software.",
+answer:"Statement 1 is True"
+},
+{
+category:"Bug Life Cycle",
+question:"__________is an error, flaw, or fault in the design or development of computer software that causes it to produce an incorrect in unintended ways.",
+answer:"Software Bug"
+},
+{
+category:"SDLC",
+question:"Select the disadvantage of using the V-Model.",
+answer:"It Can't handle dynamic Changes"
+},
+{
+category:"SDLC",
+question:"Choose the option that is the set of instructions or programs documented to perform a particular task.",
+answer:"Software"
+},
+{
+category:"SDLC",
+question:"Which of the following is a preliminary exploration of a proposed project or undertaking to determine its merits and viability?",
+answer:"Feasibility Study"
+},
+{
+category:"SDLC",
+question:"Select the correct statement that is related to the Verification in SDLC Model.",
+answer:"Statement 1 is True"
+},
+{
+category:"SDLC",
+question:"Select the incorrect statement(s) related to the SDLC.",
+answer:"Only 3"
+},
+{
+category:"SDLC",
+question:"Identify the logic used in the image below.",
+answer:"Software Development Life Cycle"
+},
+{
+category:"SDLC",
+question:"Choose the software type that performs operations or functionalities based on Use inputs is called Application software.",
+answer:"Application Software"
+},
+{
+category:"SDLC",
+question:"Identify the type of SDLC model used in the image below that is preferable for small applications, clear requirements and routine projects.",
+answer:"Waterfall Model"
+},
+{
+category:"SDLC",
+question:"Choose the SDLC model that is preferred for big projects and when requirements are not clear where the application develop in terms of increments.",
+answer:"Incremental Model"
+},
+{
+category:"Test Case",
+question:"Choose the option in the test case where the user action is generally drafted from FRS Document.",
+answer:"Step Description"
+},
+{
+category:"Test Case",
+question:"Choose the type of Test cases that is with Valid data Or Valid Flow.",
+answer:"Positive Test Cases"
+},
+{
+category:"Test Case",
+question:"Select the correct statement that is related to the Test Case.",
+answer:"Statement 1 is True"
+},
+{
+category:"Testing Types",
+question:"Choose the option that is the process of designing and developing software or products that can be adapted to different languages and cultures.",
+answer:"L10N Testing"
+},
+{
+category:"Testing Types",
+question:"Choose the option in SDLC that provides a rational way to separate high-level test objectives from the actual test activities needed to meet those goals.",
+answer:"Test Strategy"
+},
+{
+category:"Testing Types",
+question:"Which of the following is a type of software testing where Test cases that is not created in advance but testers check the system on the fly?",
+answer:"Exploratory Testing"
+},
+{
+category:"Testing Types",
+question:"Choose the option that is when a test is performed again on a specific feature not functional during the previous test to check for its functionality.",
+answer:"Retesting"
+},
+{
+category:"Testing Types",
+question:"Choose the testing level that is also known as component testing and is performed by the developer using a white box test on the individual component.",
+answer:"Unit Testing"
+},
+{
+category:"Testing Types",
+question:"Select the method in the incremental approach on integration testing that we use drivers when the main module is not available/under construction.",
+answer:"Bottom-up"
+},
+{
+category:"Testing Types",
+question:"Which of the following is an assessment used to ensure a software application is properly working across different browsers, databases, operating systems (OS), mobile devices, networks and hardware?",
+answer:"Compatibility test"
+},
+{
+category:"Testing Types",
+question:"Choose the testing type that is the testing team tries to find extra features in the application build with respect to customer requirements.",
+answer:"Ad-hoc Testing"
+},
+{
+category:"Testing Types",
+question:"Identify the testing type that is used for planning software testing which is performed without initial test case documentation.",
+answer:"Ad-hoc Testing"
+},
+{
+category:"Testing Types",
+question:"Select the testing type that is also known as requirement testing.",
+answer:"Functional Testing"
+},
+{
+category:"Testing Types",
+question:"__________ is the process of evaluating and verifying that a software product does what it is supposed to do.",
+answer:"Software Testing"
+},
+{
+category:"Testing Types",
+question:"Select the disadvantage of using Exploratory Testing.",
+answer:"Tests cannot be reviewed"
+},
+{
+category:"Testing Types",
+question:"Choose the testing type to form the system we collect those components and verify interphase between these components is called integration testing.",
+answer:"Integration Testing"
+},
+{
+category:"Testing Types",
+question:"Identify the logic used in the image below that we use STUB when the sub-module is unavailable/under construction.",
+answer:"Top-down"
+},
+{
+category:"Testing Types",
+question:"It is possible to use the validation method that is to ensure that there are no Bugs in the application and Software/project/product Developed as per requirements.",
+answer:"False"
+},
+{
+category:"Traceability Matrix",
+question:"Choose the benefit of using the Requirement Traceability Matrix.",
+answer:"To check the coverage of functionality"
+},
+{
+category:"Traceability Matrix",
+question:"It is possible to use the Requirement Traceability Matrix that is a document that maps and traces user requirement with test cases.",
+answer:"True"
+}
+];
+
+const container=document.getElementById("questionList");
+
+function display(list){
+
+container.innerHTML="";
+
+list.forEach(q=>{
+
+const card=document.createElement("div");
+card.className="card";
+
+card.innerHTML=`
+<div class="category">${q.category}</div>
+<div class="question">${q.question}</div>
+<div class="answer">Answer: ${q.answer}</div>
+`;
+
+card.onclick=()=>{
+const ans=card.querySelector(".answer");
+ans.style.display=ans.style.display==="block"?"none":"block";
+};
+
+container.appendChild(card);
+
+});
+
+}
+
+display(data);
+
+document.getElementById("search").addEventListener("input",function(){
+
+const value=this.value.toLowerCase();
+
+const filtered=data.filter(q=>
+q.question.toLowerCase().includes(value)
+);
+
+display(filtered);
+
+});
+
+</script>
+
+</body>
+</html>
