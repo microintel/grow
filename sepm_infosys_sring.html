@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Question Bank</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background:#0f172a;
+color:white;
+margin:0;
+padding:10px;
+}
+
+h1{
+text-align:center;
+font-size:22px;
+margin-bottom:10px;
+}
+
+#search{
+width:100%;
+padding:12px;
+border-radius:8px;
+border:none;
+font-size:16px;
+margin-bottom:15px;
+background:#1e293b;
+color:white;
+}
+
+.card{
+background:#1e293b;
+padding:15px;
+border-radius:10px;
+margin-bottom:12px;
+box-shadow:0 2px 6px rgba(0,0,0,0.4);
+cursor:pointer;
+}
+
+.q{
+font-weight:bold;
+font-size:16px;
+}
+
+.options{
+margin-top:8px;
+padding-left:15px;
+color:#cbd5f5;
+}
+
+.options div{
+padding:3px 0;
+}
+
+.answer{
+display:none;
+margin-top:10px;
+color:#4ade80;
+font-weight:bold;
+}
+
+footer{
+text-align:center;
+padding:15px;
+margin-top:20px;
+color:#94a3b8;
+font-size:14px;
+}
+
+footer a{
+color:#38bdf8;
+text-decoration:none;
+font-weight:bold;
+}
+
+footer a:hover{
+text-decoration:underline;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Software Testing Question Bank</h1>
+
+<input id="search" placeholder="Search question or number...">
+
+<div id="container"></div>
+
+<footer>
+Developed by <a href="https://microintel.github.io/microintel/v1/micropro.html" target="_blank">Microintel</a>
+</footer>
+
+<script>
+
+let questions = [
+{"question_number":"Q2","question":"Identify the correct non-functional requirement?","options":["Maintainability","Portability","Robustness","all of the bove"],"answer":"all of the bove"},
+{"question_number":"Q3","question":"Choose the right choice correct measure for correctness?","options":["Defects per KLOC","$ per KLOC","Errors per KLOC","Exception per KLOC"],"answer":"Defects per KLOC"},
+{"question_number":"Q4","question":"The fault based testing technique is?","options":["Stress Testing","Mutation Testing","Beta Testing","Unit Testing"],"answer":"Mutation Testing"},
+{"question_number":"Q5","question":"The term which is not related to testing?","options":["Test bot","Test failure","Test case","error"],"answer":"Test bot"},
+{"question_number":"Q6","question":"Choose the right choice the correct testing technique is?","options":["Unit Testing","System Testing","Collaboration Testing","Integration Testing"],"answer":"Unit Testing"},
+{"question_number":"Q7","question":"Choose the following are types of code review?","options":["Code inspection","Code Walkthrough","Code development","only 1 & 2"],"answer":"only 1 & 2"},
+{"question_number":"Q8","question":"The term which is used to define testing?","options":["Evaluating deliverables to find errors","A stage of all projects","Finding broken code","Testing broken code"],"answer":"Evaluating deliverables to find errors"},
+{"question_number":"Q9","question":"The environment in which we can perform alpha testing?","options":["Developer's end","user's end","Design","Deployment end"],"answer":"Developer's end"},
+{"question_number":"Q10","question":"Choose the right choice which represent the key objective of integration testing?","options":["Design errors","Procedure errors","Interface errors","Business errors"],"answer":"Interface errors"},
+{"question_number":"Q11","question":"Choose the best time when regression testing should be done ?","options":["After the software has been modified","when the environment has been modified","As frequently as possible","only 1 & 2"],"answer":"only 1 & 2"},
+
+{"question_number":"Q12","question":"The cyclomatic complexity is?","options":["Grey-box testing","Black box testing","white box testing","Fault tolerance"],"answer":"white box testing"},
+{"question_number":"Q13","question":"The correct option among the following which is not included in SRS?","options":["Design solutions","External interfaces","Performance","Functionality"],"answer":"Design solutions"},
+{"question_number":"Q14","question":"The challenges in testing is ?","options":["Training in testing","Building relationships with developers","communication with user about testing","all of the bove"],"answer":"all of the bove"},
+{"question_number":"Q15","question":"Choose the right choice for functional type testing?","options":["Exception testing","Object testing","App testint","memory testing"],"answer":"Object testing"},
+{"question_number":"Q16","question":"Choose the right choice for non-functional type testing?","options":["Securitty Testing","Concurrency Testing","Smoke testing","only 1 & 2"],"answer":"only 1 & 2"},
+
+{"question_number":"Q17","question":"When wolud the testing have been stopped?","options":["when all the issues resolving","when the dead line completed","when all the test cases passed","when code pushed to git"],"answer":"when the dead line completed"},
+{"question_number":"Q18","question":"Choose the right choice for the testing have been stopped?","options":["when all the issues resolving","when the dead line completed","when all the test cases passed","when code pushed to git"],"answer":"when the dead line completed"},
+{"question_number":"Q19","question":"Choose the following is a form of functional testing?","options":["Performance testing","Boundary value analysis","Security level testing","use case testing"],"answer":"use case testing"},
+{"question_number":"Q20","question":"Select which of the following is not a fundamental test process?","options":["Requirement analysis","reporting","implementation & execution","test planing"],"answer":"reporting"},
+{"question_number":"Q21","question":"The following is not a black box technique?","options":["Linear code sequence and Jump","Boundary value analysis","Syntax testing","state transition testing"],"answer":"Linear code sequence and Jump"},
+{"question_number":"Q22","question":"Choose the correct option what should be done in the kick off phase of a formal review?","options":["Follow up meetings","Explaining all objective","Individual meeting","Fixing defects found"],"answer":"Explaining all objective"},
+{"question_number":"Q23","question":"Select impact analysis is used in which of the following?","options":["Maintainance testing","component testing","non-functional system testing","user acceptance testing"],"answer":"component testing"},
+{"question_number":"Q24","question":"Choose the right choice what is used as a measure of code coverage?","options":["Time spent testing","Trends and analysis","Test effectiveness","Defects"],"answer":"Test effectiveness"},
+{"question_number":"Q25","question":"The RE represent ________?","options":["Risk Extent","Risk Evaluation","Risk Exposure","Risk Expand"],"answer":"Risk Exposure"},
+{"question_number":"Q26","question":"The regular expression elements are?","options":["{ }","|","[ ]","$"],"answer":"[ ]"},
+
+{"question_number":"Q27","question":"The testing done without planning and documentation is called?","options":["Adhoc testing","Regression testing","Unit testing","automation testing"],"answer":"Adhoc testing"},
+{"question_number":"Q28","question":"The acceptance testing is also known as?","options":["Beta testing","Alpha testing","White-box testing","Grey-box testing"],"answer":"Beta testing"},
+{"question_number":"Q29","question":"The following is non-functional testing?","options":["Performance testing","Unit testing","integration testing","Regression testing"],"answer":"Performance testing"},
+{"question_number":"Q30","question":"The Beta testing is done at _______ ?","options":["Client side","user's end","developers end","system side"],"answer":"user's end"},
+{"question_number":"Q31","question":"The behavioral testing is _______?","options":["Black-box testing","white-box testing","grey-box testing","automation testing"],"answer":"Black-box testing"},
+{"question_number":"Q32","question":"The following is black-box testing?","options":["Code path analysis","Basic path analysis","Boundary value analysis","xpath analysis"],"answer":"Boundary value analysis"},
+{"question_number":"Q33","question":"The following is not used in measuring the size of the software?","options":["size of module","KLOC","Function points","lines of code in functions"],"answer":"size of module"},
+{"question_number":"Q34","question":"The ITG stands for?","options":["Independent Test Group","Integrated Test Group","Interlock Test Group","Internal Test Group"],"answer":"Independent Test Group"},
+{"question_number":"Q35","question":"By collecting _______ during software testing, it is possible to develop meaningful guidelines to halt the testing.","options":["Testing time","metrics","Failure intensity","bugs"],"answer":"metrics"},
+{"question_number":"Q36","question":"Choose the normally considered as an adjunct to the coding step is?","options":["Regression testing","Completion of testing","Integration testing","Unit tetsing"],"answer":"Unit tetsing"},
+
+{"question_number":"Q37","question":"If the objects focus on focus on the problem domain, then we are concerned with.","options":["Design and Object Oriented Analysis","Object Oriented Analysis","Object Oriented Design","Procedure Oriented Design"],"answer":"Object Oriented Design"},
+
+{"question_number":"Q39","question":"Choose the right choice who is responsible for Unit testing?","options":["Customers","Developers","Users","Business team"],"answer":"Developers"},
+{"question_number":"Q40","question":"The following categories can white-box testing be classified?","options":["Error guessing technique","Structural Testing","Design based testing","View based testing"],"answer":"Structural Testing"},
+{"question_number":"Q41","question":"The simplest model of SDLC?","options":["Spiral","Agile","RAD","Waterfall"],"answer":"Waterfall"},
+{"question_number":"Q42","question":"Choose the correct option among the following, the software consists of?","options":["Program + Hardware manuals","Program + documentation operating procedures","Instruction + Hardware manuals","set of programs"],"answer":"Program + documentation operating procedures"},
+{"question_number":"Q43","question":"The following is the most important feature of the spiral model?","options":["Time management","Risk Management","Quality Management","Effecienct Management"],"answer":"Risk Management"},
+{"question_number":"Q44","question":"The total phases of RAD software model is___.","options":["5","3","4","2"],"answer":"4"},
+{"question_number":"Q45","question":"The incorrect phase of the prototype model?","options":["Engineer product","Prototype refinement","Quick Design","Coding"],"answer":"Engineer product"},
+{"question_number":"Q46","question":"The following is the first step of SDLC?","options":["Primary Investigating and Analysis","Testing","Design","Coding"],"answer":"Primary Investigating and Analysis"},
+{"question_number":"Q47","question":"Choose the following is the fourth generation language?","options":["C++","Perl","UNIX shell","CLI"],"answer":"Perl"},
+{"question_number":"Q48","question":"Choose the correct option which refers to internal software equality?","options":["Usability","Reusability","Reliability","Scalability"],"answer":"Reusability"},
+{"question_number":"Q49","question":"The following is model selection based upon?","options":["Requirements","Projects type and associated risks","Development teams and users","all of the above"],"answer":"all of the above"},
+{"question_number":"Q50","question":"The following models will not result in the desired output when user participates is not involved?","options":["Spiral and RAD","Prototyping and Spiral","RAD and Prototyping","Waterfall"],"answer":"RAD and Prototyping"},
+{"question_number":"Q51","question":"Choose the correct software Metrics?","options":["Process metrics","Quality metrics","Complexity metrics","all of the above"],"answer":"all of the above"},
+{"question_number":"Q52","question":"Choose the incorrect software model?","options":["Manufacturing","Process","Method","Tools"],"answer":"Manufacturing"},
+{"question_number":"Q53","question":"The following is not included in the efficiency of a software product?","options":["Responsiveness","Memory utilization'","Processing time","licensing"],"answer":"licensing"},
+{"question_number":"Q54","question":"Choose the two dimensions of the spiral model?","options":["Angular, Diagonal","Radial, Angular","Diagonal, Angular","Diagonal, Perpendicular"],"answer":"Radial, Angular"},
+{"question_number":"Q55","question":"The SRS document is also known as ____ Specification.","options":["Grey-box","Black-box","White-box","Single-box"],"answer":"Black-box"},
+{"question_number":"Q56","question":"A model that is the demo implementation of the system?","options":["Agile","Incremental","Prototype","Waterfall"],"answer":"Prototype"},
+
+{"question_number":"Q57","question":"The maintainance is the final phase in water fall model?","options":["True","False"],"answer":"True"},
+{"question_number":"Q58","question":"A stage in which individual components are integrated and ensured that they error free to meet customer requirements?","options":["Design","Implementation","Testing","Coding"],"answer":"Testing"},
+{"question_number":"Q59","question":"The ______ is a step in which design is translated into machine readable form?","options":["Coding","Debugging","Conversion","Development"],"answer":"Coding"},
+{"question_number":"Q60","question":"The customer requirements are broken down into logical modules for ease of _________.","options":["Implementation","editing","design","Inheritance"],"answer":"Implementation"},
+{"question_number":"Q61","question":"Choose the right choice who do you call a technical person who is capable of understanding the basic requirements?","options":["Engineer","Stakeholder","Analyst","Team leader"],"answer":"Analyst"},
+{"question_number":"Q62","question":"A step in water fall model that involves a meeting with the customer to understand the requirements?","options":["Implementation","Requirement Gathering","Customer Review","SRS"],"answer":"Requirement Gathering"},
+{"question_number":"Q63","question":"The tasks for individual who plans and directs the work.","options":["Project Manager","Team Leader","Programmer","Stakeholder"],"answer":"Project Manager"},
+{"question_number":"Q64","question":"A planned programm if work that requires a definitive amount of time effort and planning to complete.","options":["Project","Porblem","Program","Process"],"answer":"Project"},
+{"question_number":"Q65","question":"The methodology in which project management process where step by step?","options":["Spiral","Prototyping","Waterfall","Incremental"],"answer":"Waterfall"},
+
+{"question_number":"Q67","question":"The incremental model is proposed _______.","options":["UP","UML","OO","OD"],"answer":"UP"},
+{"question_number":"Q69","question":"The advantages of the iterative model is.","options":["Simploer to manage","Divided work load","Early revenue generation","all of the bove"],"answer":"all of the bove"},
+{"question_number":"Q70","question":"The PSP activity isolates requirements and size and resource estimates are the part of?","options":["Development","High level design","Planning","High level design review"],"answer":"Planning"},
+{"question_number":"Q71","question":"The following model is based on prototyping and iterative development?","options":["RAD Model","Waterfall model","Spiral Model","V-Shaped Model"],"answer":"Spiral Model"},
+{"question_number":"Q72","question":"In RAD which phase is used for adding, modifying, deleting or retreiving data object?","options":["Data modeling","Process modeling","Testng","Business modeling"],"answer":"Data modeling"},
+{"question_number":"Q73","question":"The following is the high speed adaptation of the linear sequential model in which RAD is achieved by using by using component based construction?","options":["RAD Model","Waterfall model","Spiral Model","Agile model"],"answer":"RAD Model"},
+{"question_number":"Q74","question":"The model suitable for project requiring shorter development time is?","options":["RAD model","Decremental model","Waterfall model","Incremental model"],"answer":"RAD model"},
+{"question_number":"Q75","question":"The computer software is build and support by ?","options":["Electrical Engineers","Software Engineers","Telecommunication Engineers","Hardware Engineers"],"answer":"Software Engineers"},
+{"question_number":"Q76","question":"The AOCE uses a concept of horizontal slices through vertically decomposed software components called?","options":["aspects","slices","process","concerns"],"answer":"slices"},
+{"question_number":"Q77","question":"The \"V\" model is ?","options":["SDLC Model","Test Level","Test Design","Test Type"],"answer":"SDLC Model"},
+{"question_number":"Q78","question":"The Integration testing is ?","options":["Test Type","SDLC Model","Test level","Test Design"],"answer":"Test level"},
+{"question_number":"Q79","question":"The Functional testing is ?","options":["Test Type","SDLC Model","Test level","Test Design"],"answer":"Test Type"},
+{"question_number":"Q80","question":"The decision table testing is ?","options":["White box test design technique","Black box test design technique","Experience based test design technique","Grey box test design technique"],"answer":"Black box test design technique"}
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+let container=document.getElementById("container");
+
+function render(list){
+
+container.innerHTML="";
+
+list.forEach(q=>{
+
+let card=document.createElement("div");
+card.className="card";
+
+let html=`<div class="q">${q.question_number} : ${q.question}</div>`;
+
+html+=`<div class="options">`;
+
+q.options.forEach(o=>{
+html+=`<div>• ${o}</div>`;
+});
+
+html+=`</div>`;
+
+html+=`<div class="answer">Answer : ${q.answer}</div>`;
+
+card.innerHTML=html;
+
+card.onclick=()=>{
+let ans=card.querySelector(".answer");
+ans.style.display=ans.style.display==="block"?"none":"block";
+};
+
+container.appendChild(card);
+
+});
+
+}
+
+render(questions);
+
+document.getElementById("search").addEventListener("input",function(){
+
+let value=this.value.toLowerCase();
+
+let filtered=questions.filter(q=>
+
+q.question.toLowerCase().includes(value) ||
+q.question_number.toLowerCase().includes(value)
+
+);
+
+render(filtered);
+
+});
+
+</script>
+
+</body>
+</html>
