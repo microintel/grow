@@ -23,7 +23,7 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Times New Roman', sans-serif;
     background: var(--bg);
     color: var(--text);
     height: 100dvh;
@@ -74,7 +74,7 @@
     font-size: 28px;
   }
   .login-card h1 {
-    font-family: 'Syne', sans-serif;
+    font-family: 'Times New Roman', sans-serif;
     font-size: 2rem;
     font-weight: 800;
     letter-spacing: -0.03em;
@@ -626,30 +626,16 @@
 </head>
 <body>
 
-<!-- Config Modal -->
-<div id="config-modal" class="show">
-  <div class="config-card">
-    <h2>🔥 Firebase Setup</h2>
-    <p>Enter your Firebase project credentials. You can find these in the Firebase console under <strong>Project Settings → General → Your apps → Firebase SDK snippet</strong>.</p>
-    <div class="field"><label>API Key</label><input id="cfg-apiKey" placeholder="AIzaSy..." value="AIzaSyBSI_abM0w-9eWlT1M4zIDM76pkfGoYAfA"/></div>
-    <div class="field"><label>Auth Domain</label><input id="cfg-authDomain" placeholder="your-project.firebaseapp.com" value="milkshake-cc6fd.firebaseapp.com"/></div>
-    <div class="field"><label>Project ID</label><input id="cfg-projectId" placeholder="your-project-id" value="milkshake-cc6fd"/></div>
-    <div class="field"><label>Storage Bucket</label><input id="cfg-storageBucket" placeholder="your-project.appspot.com" value="milkshake-cc6fd.firebasestorage.app"/></div>
-    <div class="field"><label>Messaging Sender ID</label><input id="cfg-messagingSenderId" placeholder="123456789" value="884602072895" /></div>
-    <div class="field"><label>App ID</label><input id="cfg-appId" placeholder="1:123:web:abc123" value="1:884602072895:web:146682f24c209ad6712d8a" /></div>
-    <button id="save-config-btn">Connect to Firebase →</button>
-  </div>
-</div>
 
 <!-- Login Screen -->
 <div id="login-screen" style="display:none;">
   <div class="login-card">
-    <div class="logo-mark">🔥</div>
-    <h1>Welcome to<br/><span>Ember</span> Chat</h1>
-    <p>Real-time messaging, powered by Firebase. Sign in to join the conversation.</p>
+    <div class="logo-mark"></div>
+    <h1>Welcome to<br/><span>Saraswathi</span></h1>
+    <p>Real-time messaging.</p>
     <button id="google-login-btn">
       <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20H24v8h11.3C33.6 33.1 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.5 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20c11 0 19.7-8 19.7-20 0-1.3-.1-2.7-.1-4z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.6 16 19 13 24 13c3 0 5.8 1.1 7.9 3l5.7-5.7C34 6.5 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-1.9 13.5-5l-6.2-5.2C29.5 35.6 26.9 36.5 24 36.5c-5.2 0-9.6-3.5-11.2-8.3l-6.5 5C9.7 40 16.4 44 24 44z"/><path fill="#1976D2" d="M43.6 20H24v8h11.3c-.8 2.3-2.3 4.3-4.3 5.7l6.2 5.2C41 35.3 44 30 44 24c0-1.3-.1-2.7-.4-4z"/></svg>
-      Continue with Google
+      Nkn with Google
     </button>
   </div>
 </div>
@@ -730,6 +716,7 @@
 <!-- Firebase SDK -->
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+
 import {
   getAuth,
   signInWithPopup,
@@ -737,6 +724,7 @@ import {
   signOut,
   onAuthStateChanged
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+
 import {
   getFirestore,
   collection,
@@ -745,47 +733,118 @@ import {
   query,
   orderBy,
   serverTimestamp,
-  doc,
-  setDoc,
-  getDoc,
-  getDocs,
   limit
 } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
 
 // ── State ──
 let app, auth, db, currentUser = null;
 let currentChannel = null;
 let unsubMessages = null;
 
+
+// ── Firebase Config ──
+const firebaseConfig = {
+  apiKey: "AIzaSyBSI_abM0w-9eWlT1M4zIDM76pkfGoYAfA",
+  authDomain: "milkshake-cc6fd.firebaseapp.com",
+  projectId: "milkshake-cc6fd",
+  storageBucket: "milkshake-cc6fd.firebasestorage.app",
+  messagingSenderId: "884602072895",
+  appId: "1:884602072895:web:146682f24c209ad6712d8a"
+};
+
+
+// ── Init Firebase ──
+app = initializeApp(firebaseConfig);
+auth = getAuth(app);
+db = getFirestore(app);
+
+
 // ── Default channels ──
 const DEFAULT_CHANNELS = [
-  { id: 'general',    name: 'General',    icon: '💬', desc: 'General conversation for everyone' },
-  { id: 'random',     name: 'Random',     icon: '🎲', desc: 'Off-topic and random fun' },
-  { id: 'announcements', name: 'Announcements', icon: '📣', desc: 'Important updates' },
+  {
+    id: 'general',
+    name: 'General',
+    icon: '💬',
+    desc: 'General conversation for everyone'
+  },
+  {
+    id: 'random',
+    name: 'Random',
+    icon: '🎲',
+    desc: 'Off-topic and random fun'
+  },
+  {
+    id: 'announcements',
+    name: 'Announcements',
+    icon: '📣',
+    desc: 'Important updates'
+  },
 ];
+
+
+// ── Show Login ──
+document.getElementById('login-screen').style.display = 'flex';
+
+
+// ── Auth State ──
+onAuthStateChanged(auth, user => {
+  if (user) {
+    currentUser = user;
+    startApp();
+  } else {
+    currentUser = null;
+    document.getElementById('app').classList.remove('visible');
+    document.getElementById('login-screen').style.display = 'flex';
+  }
+});
+
 
 // ── Helpers ──
 function showToast(msg, dur = 3000) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), dur);
+
+  setTimeout(() => {
+    t.classList.remove('show');
+  }, dur);
 }
 
 function formatTime(ts) {
   if (!ts) return '';
+
   const d = ts.toDate ? ts.toDate() : new Date(ts);
-  return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  return d.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
 }
 
 function formatDay(ts) {
   if (!ts) return '';
+
   const d = ts.toDate ? ts.toDate() : new Date(ts);
+
   const today = new Date();
-  const yesterday = new Date(); yesterday.setDate(today.getDate() - 1);
-  if (d.toDateString() === today.toDateString()) return 'Today';
-  if (d.toDateString() === yesterday.toDateString()) return 'Yesterday';
-  return d.toLocaleDateString([], { month: 'long', day: 'numeric', year: 'numeric' });
+
+  const yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+
+  if (d.toDateString() === today.toDateString()) {
+    return 'Today';
+  }
+
+  if (d.toDateString() === yesterday.toDateString()) {
+    return 'Yesterday';
+  }
+
+  return d.toLocaleDateString([], {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
+  });
 }
 
 function autoResize(ta) {
@@ -793,55 +852,27 @@ function autoResize(ta) {
   ta.style.height = Math.min(ta.scrollHeight, 120) + 'px';
 }
 
-// ── Config modal ──
-document.getElementById('save-config-btn').addEventListener('click', () => {
-  const cfg = {
-    apiKey:            document.getElementById('cfg-apiKey').value.trim(),
-    authDomain:        document.getElementById('cfg-authDomain').value.trim(),
-    projectId:         document.getElementById('cfg-projectId').value.trim(),
-    storageBucket:     document.getElementById('cfg-storageBucket').value.trim(),
-    messagingSenderId: document.getElementById('cfg-messagingSenderId').value.trim(),
-    appId:             document.getElementById('cfg-appId').value.trim(),
-  };
-  if (!cfg.apiKey || !cfg.authDomain || !cfg.projectId) {
-    showToast('⚠️ Please fill in at least API Key, Auth Domain, and Project ID.');
-    return;
-  }
-  initFirebase(cfg);
-});
-
-function initFirebase(cfg) {
-  try {
-    app  = initializeApp(cfg);
-    auth = getAuth(app);
-    db   = getFirestore(app);
-    document.getElementById('config-modal').classList.remove('show');
-    document.getElementById('login-screen').style.display = 'flex';
-
-    onAuthStateChanged(auth, user => {
-      if (user) {
-        currentUser = user;
-        startApp();
-      } else {
-        currentUser = null;
-        document.getElementById('app').classList.remove('visible');
-        document.getElementById('login-screen').style.display = 'flex';
-      }
-    });
-  } catch(e) {
-    showToast('❌ Firebase init failed: ' + e.message);
-  }
+function escapeHtml(str) {
+  return str
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
 }
 
-// ── Google login ──
+
+// ── Google Login ──
 document.getElementById('google-login-btn').addEventListener('click', async () => {
   try {
     const provider = new GoogleAuthProvider();
+
     await signInWithPopup(auth, provider);
+
   } catch(e) {
     showToast('Login failed: ' + e.message);
   }
 });
+
 
 // ── Logout ──
 document.getElementById('logout-btn').addEventListener('click', async () => {
@@ -849,93 +880,165 @@ document.getElementById('logout-btn').addEventListener('click', async () => {
   showToast('Signed out.');
 });
 
+
 // ── Start App ──
 function startApp() {
+
   document.getElementById('login-screen').style.display = 'none';
+
   document.getElementById('app').classList.add('visible');
 
-  // User strip
   const wrap = document.getElementById('sidebar-avatar-wrap');
+
   if (currentUser.photoURL) {
-    wrap.innerHTML = `<img src="${currentUser.photoURL}" class="avatar" alt="avatar"/>`;
+
+    wrap.innerHTML =
+      `<img src="${currentUser.photoURL}" class="avatar" alt="avatar"/>`;
+
   } else {
-    const init = (currentUser.displayName || 'U')[0].toUpperCase();
-    wrap.innerHTML = `<div class="avatar-placeholder">${init}</div>`;
+
+    const init =
+      (currentUser.displayName || 'U')[0].toUpperCase();
+
+    wrap.innerHTML =
+      `<div class="avatar-placeholder">${init}</div>`;
   }
+
   document.getElementById('sidebar-username').textContent =
-    currentUser.displayName || currentUser.email || 'User';
+    currentUser.displayName ||
+    currentUser.email ||
+    'User';
 
   renderChannelList();
+
   selectChannel(DEFAULT_CHANNELS[0]);
 }
 
-// ── Channel list ──
+
+// ── Channel List ──
 function renderChannelList(filter = '') {
+
   const list = document.getElementById('channel-list');
+
   list.innerHTML = '';
+
   const channels = DEFAULT_CHANNELS.filter(c =>
     c.name.toLowerCase().includes(filter.toLowerCase())
   );
+
   channels.forEach(ch => {
+
     const item = document.createElement('div');
-    item.className = 'channel-item' + (currentChannel?.id === ch.id ? ' active' : '');
-    item.dataset.id = ch.id;
+
+    item.className =
+      'channel-item' +
+      (currentChannel?.id === ch.id ? ' active' : '');
+
     item.innerHTML = `
       <div class="ch-icon">${ch.icon}</div>
+
       <div class="ch-info">
         <div class="ch-name">${ch.name}</div>
-        <div class="ch-preview" id="preview-${ch.id}">Loading…</div>
-      </div>`;
+
+        <div class="ch-preview"
+             id="preview-${ch.id}">
+          Loading…
+        </div>
+      </div>
+    `;
+
     item.addEventListener('click', () => {
       closeSidebar();
       selectChannel(ch);
     });
+
     list.appendChild(item);
+
     loadChannelPreview(ch.id);
   });
 }
 
+
+// ── Channel Preview ──
 async function loadChannelPreview(channelId) {
-  if (!db) return;
+
   try {
-    const q = query(collection(db, 'channels', channelId, 'messages'), orderBy('createdAt', 'desc'), limit(1));
+
+    const q = query(
+      collection(db, 'channels', channelId, 'messages'),
+      orderBy('createdAt', 'desc'),
+      limit(1)
+    );
+
     onSnapshot(q, snap => {
-      const el = document.getElementById(`preview-${channelId}`);
+
+      const el =
+        document.getElementById(`preview-${channelId}`);
+
       if (!el) return;
-      if (snap.empty) { el.textContent = 'No messages yet'; return; }
+
+      if (snap.empty) {
+        el.textContent = 'No messages yet';
+        return;
+      }
+
       const msg = snap.docs[0].data();
-      const name = (msg.displayName || 'Unknown').split(' ')[0];
+
+      const name =
+        (msg.displayName || 'Unknown').split(' ')[0];
+
       const text = msg.text || '';
-      el.textContent = `${name}: ${text.substring(0, 28)}${text.length > 28 ? '…' : ''}`;
+
+      el.textContent =
+        `${name}: ${text.substring(0, 28)}${text.length > 28 ? '…' : ''}`;
     });
+
   } catch(e) {}
 }
 
-document.getElementById('channel-search').addEventListener('input', e => {
+
+// ── Search ──
+document.getElementById('channel-search')
+.addEventListener('input', e => {
   renderChannelList(e.target.value);
 });
 
-// ── Select channel ──
+
+// ── Select Channel ──
 function selectChannel(ch) {
+
   currentChannel = ch;
-  renderChannelList(document.getElementById('channel-search').value);
+
+  renderChannelList(
+    document.getElementById('channel-search').value
+  );
 
   document.getElementById('chat-header-icon').textContent = ch.icon;
+
   document.getElementById('chat-header-name').textContent = ch.name;
+
   document.getElementById('chat-header-desc').textContent = ch.desc;
 
   document.getElementById('msg-input').disabled = false;
+
   document.getElementById('send-btn').disabled = false;
-  document.getElementById('msg-input').placeholder = `Message #${ch.name.toLowerCase()}…`;
+
+  document.getElementById('msg-input').placeholder =
+    `Message #${ch.name.toLowerCase()}…`;
+
   document.getElementById('empty-state').style.display = 'none';
 
   if (unsubMessages) unsubMessages();
+
   listenMessages(ch.id);
 }
 
-// ── Listen messages ──
+
+// ── Listen Messages ──
 function listenMessages(channelId) {
-  const msgsWrap = document.getElementById('messages-wrap');
+
+  const msgsWrap =
+    document.getElementById('messages-wrap');
 
   const q = query(
     collection(db, 'channels', channelId, 'messages'),
@@ -944,22 +1047,37 @@ function listenMessages(channelId) {
   );
 
   unsubMessages = onSnapshot(q, snap => {
-    // Clear existing messages (keep empty-state)
-    const existing = msgsWrap.querySelectorAll('.msg-row, .day-divider');
+
+    const existing =
+      msgsWrap.querySelectorAll('.msg-row, .day-divider');
+
     existing.forEach(e => e.remove());
 
     let lastDay = null;
+
     snap.forEach(docSnap => {
-      const msg = { id: docSnap.id, ...docSnap.data() };
-      const day = msg.createdAt ? formatDay(msg.createdAt) : null;
+
+      const msg = {
+        id: docSnap.id,
+        ...docSnap.data()
+      };
+
+      const day =
+        msg.createdAt ? formatDay(msg.createdAt) : null;
 
       if (day && day !== lastDay) {
+
         const div = document.createElement('div');
+
         div.className = 'day-divider';
+
         div.innerHTML = `<span>${day}</span>`;
+
         msgsWrap.appendChild(div);
+
         lastDay = day;
       }
+
       msgsWrap.appendChild(buildBubble(msg));
     });
 
@@ -967,95 +1085,180 @@ function listenMessages(channelId) {
   });
 }
 
-// ── Build bubble ──
+
+// ── Build Bubble ──
 function buildBubble(msg) {
+
   const isMe = msg.uid === currentUser?.uid;
+
   const row = document.createElement('div');
-  row.className = `msg-row ${isMe ? 'me' : 'them'}`;
+
+  row.className =
+    `msg-row ${isMe ? 'me' : 'them'}`;
 
   const avatarHtml = isMe ? '' : (
     msg.photoURL
-      ? `<img src="${msg.photoURL}" class="msg-avatar" />`
-      : `<div class="msg-avatar-ph">${(msg.displayName || '?')[0].toUpperCase()}</div>`
+      ? `<img src="${msg.photoURL}" class="msg-avatar"/>`
+      : `<div class="msg-avatar-ph">
+           ${(msg.displayName || '?')[0].toUpperCase()}
+         </div>`
   );
 
   row.innerHTML = `
     ${avatarHtml}
+
     <div class="msg-content">
-      ${!isMe ? `<div class="msg-sender">${msg.displayName || 'Unknown'}</div>` : ''}
-      <div class="bubble">${escapeHtml(msg.text || '')}</div>
-      <div class="bubble-time">${formatTime(msg.createdAt)}</div>
-    </div>`;
+
+      ${!isMe
+        ? `<div class="msg-sender">
+             ${msg.displayName || 'Unknown'}
+           </div>`
+        : ''}
+
+      <div class="bubble">
+        ${escapeHtml(msg.text || '')}
+      </div>
+
+      <div class="bubble-time">
+        ${formatTime(msg.createdAt)}
+      </div>
+
+    </div>
+  `;
+
   return row;
 }
 
-function escapeHtml(str) {
-  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
 
-// ── Send message ──
+// ── Send Message ──
 async function sendMessage() {
-  const input = document.getElementById('msg-input');
+
+  const input =
+    document.getElementById('msg-input');
+
   const text = input.value.trim();
-  if (!text || !currentChannel || !currentUser) return;
+
+  if (!text || !currentChannel || !currentUser) {
+    return;
+  }
 
   input.value = '';
+
   autoResize(input);
+
   document.getElementById('send-btn').disabled = true;
 
   try {
-    await addDoc(collection(db, 'channels', currentChannel.id, 'messages'), {
-      text,
-      uid:         currentUser.uid,
-      displayName: currentUser.displayName || currentUser.email || 'User',
-      photoURL:    currentUser.photoURL || null,
-      createdAt:   serverTimestamp(),
-    });
+
+    await addDoc(
+      collection(db, 'channels', currentChannel.id, 'messages'),
+      {
+        text,
+        uid: currentUser.uid,
+        displayName:
+          currentUser.displayName ||
+          currentUser.email ||
+          'User',
+
+        photoURL: currentUser.photoURL || null,
+
+        createdAt: serverTimestamp(),
+      }
+    );
+
   } catch(e) {
+
     showToast('Failed to send: ' + e.message);
+
   } finally {
+
     document.getElementById('send-btn').disabled = false;
+
     input.focus();
   }
 }
 
-document.getElementById('send-btn').addEventListener('click', sendMessage);
 
-document.getElementById('msg-input').addEventListener('keydown', e => {
+// ── Send Button ──
+document.getElementById('send-btn')
+.addEventListener('click', sendMessage);
+
+
+// ── Enter Key ──
+document.getElementById('msg-input')
+.addEventListener('keydown', e => {
+
   if (e.key === 'Enter' && !e.shiftKey) {
+
     e.preventDefault();
+
     sendMessage();
   }
 });
 
-document.getElementById('msg-input').addEventListener('input', function() {
+
+// ── Auto Resize ──
+document.getElementById('msg-input')
+.addEventListener('input', function() {
   autoResize(this);
 });
 
-// ── New channel (add a custom channel) ──
-document.getElementById('new-channel-btn').addEventListener('click', () => {
+
+// ── New Channel ──
+document.getElementById('new-channel-btn')
+.addEventListener('click', () => {
+
   const name = prompt('Enter channel name:');
+
   if (!name) return;
-  const id = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
-  const icons = ['🌟','🎯','🚀','💡','🎨','🏆','🎵','🌊'];
-  const icon = icons[Math.floor(Math.random() * icons.length)];
-  DEFAULT_CHANNELS.push({ id, name, icon, desc: `${name} channel` });
+
+  const id = name
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
+
+  const icons =
+    ['🌟','🎯','🚀','💡','🎨','🏆','🎵','🌊'];
+
+  const icon =
+    icons[Math.floor(Math.random() * icons.length)];
+
+  DEFAULT_CHANNELS.push({
+    id,
+    name,
+    icon,
+    desc: `${name} channel`
+  });
+
   renderChannelList();
+
   showToast(`#${name} created!`);
 });
 
-// ── Mobile sidebar ──
-document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-  document.getElementById('sidebar').classList.add('open');
-  document.getElementById('sidebar-overlay').classList.add('show');
+
+// ── Mobile Sidebar ──
+document.getElementById('mobile-menu-btn')
+.addEventListener('click', () => {
+
+  document.getElementById('sidebar')
+    .classList.add('open');
+
+  document.getElementById('sidebar-overlay')
+    .classList.add('show');
 });
 
 function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('sidebar-overlay').classList.remove('show');
+
+  document.getElementById('sidebar')
+    .classList.remove('open');
+
+  document.getElementById('sidebar-overlay')
+    .classList.remove('show');
 }
 
-document.getElementById('sidebar-overlay').addEventListener('click', closeSidebar);
+document.getElementById('sidebar-overlay')
+.addEventListener('click', closeSidebar);
+
 </script>
 </body>
 </html>
