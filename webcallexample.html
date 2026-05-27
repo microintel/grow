@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual WebRTC File Signaling</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0f0f0f;
+      color: #00ff88;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      gap: 20px;
+    }
+
+    .card {
+      background: #1b1b1b;
+      border: 1px solid #00ff88;
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+    }
+
+    button,
+    input {
+      margin: 8px 0;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    button {
+      background: #00ff88;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    input[type="file"] {
+      width: 100%;
+      background: #111;
+      color: white;
+      border: 1px solid #00ff88;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    pre {
+      background: #111;
+      padding: 12px;
+      border-radius: 10px;
+      overflow: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-top: 10px;
+      color: white;
+      max-height: 200px;
+    }
+
+    .status {
+      margin-top: 10px;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Manual WebRTC Voice Call</h1>
+
+  <div class="container">
+
+    <div class="card">
+      <h2>Step 1 - Start Microphone</h2>
+      <button onclick="startMicrophone()">Start Microphone</button>
+      <audio id="localAudio" autoplay muted></audio>
+    </div>
+
+    <div class="card">
+      <h2>Caller Side</h2>
+      <button onclick="createOffer()">Create Offer File</button>
+      <button onclick="downloadOffer()">Download Offer</button>
+
+      <input type="file" id="answerFile" accept="application/json" />
+      <button onclick="importAnswer()">Import Answer</button>
+
+      <pre id="offerData"></pre>
+    </div>
+
+    <div class="card">
+      <h2>Receiver Side</h2>
+
+      <input type="file" id="offerFile" accept="application/json" />
+      <button onclick="importOffer()">Import Offer</button>
+
+      <button onclick="createAnswer()">Create Answer File</button>
+      <button onclick="downloadAnswer()">Download Answer</button>
+
+      <pre id="answerData"></pre>
+    </div>
+
+    <div class="card">
+      <h2>Connection</h2>
+      <div class="status" id="connectionStatus">Not Connected</div>
+      <audio id="remoteAudio" autoplay></audio>
+    </div>
+
+  </div>
+
+  <script>
+    let pc;
+    let localStream;
+    let pendingOffer;
+    let offerJSON;
+    let answerJSON;
+
+    async function startMicrophone() {
+      try {
+        localStream = await navigator.mediaDevices.getUserMedia({
+          audio: true
+        });
+
+        document.getElementById('localAudio').srcObject = localStream;
+
+        createPeerConnection();
+
+        localStream.getTracks().forEach(track => {
+          pc.addTrack(track, localStream);
+        });
+
+        alert('Microphone started');
+      } catch (err) {
+        console.error(err);
+        alert('Microphone permission denied');
+      }
+    }
+
+    function createPeerConnection() {
+      pc = new RTCPeerConnection({
+        iceServers: [
+          {
+            urls: 'stun:stun.l.google.com:19302'
+          }
+        ]
+      });
+
+      pc.ontrack = (event) => {
+        document.getElementById('remoteAudio').srcObject = event.streams[0];
+      };
+
+      pc.onconnectionstatechange = () => {
+        document.getElementById('connectionStatus').innerText =
+          'Connection: ' + pc.connectionState;
+      };
+    }
+
+    async function waitForIceComplete() {
+      return new Promise(resolve => {
+        if (pc.iceGatheringState === 'complete') {
+          resolve();
+        } else {
+          function checkState() {
+            if (pc.iceGatheringState === 'complete') {
+              pc.removeEventListener(
+                'icegatheringstatechange',
+                checkState
+              );
+              resolve();
+            }
+          }
+
+          pc.addEventListener(
+            'icegatheringstatechange',
+            checkState
+          );
+        }
+      });
+    }
+
+    async function createOffer() {
+      const offer = await pc.createOffer();
+
+      await pc.setLocalDescription(offer);
+
+      await waitForIceComplete();
+
+      offerJSON = {
+        type: pc.localDescription.type,
+        sdp: pc.localDescription.sdp
+      };
+
+      document.getElementById('offerData').textContent =
+        JSON.stringify(offerJSON, null, 2);
+
+      alert('Offer created');
+    }
+
+    function downloadOffer() {
+      if (!offerJSON) {
+        alert('Create offer first');
+        return;
+      }
+
+      const blob = new Blob(
+        [JSON.stringify(offerJSON, null, 2)],
+        { type: 'application/json' }
+      );
+
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'offer.json';
+      a.click();
+    }
+
+    async function importOffer() {
+      const file = document.getElementById('offerFile').files[0];
+
+      if (!file) {
+        alert('Select offer file');
+        return;
+      }
+
+      const text = await file.text();
+
+      pendingOffer = JSON.parse(text);
+
+      await pc.setRemoteDescription(
+        new RTCSessionDescription(pendingOffer)
+      );
+
+      document.getElementById('answerData').textContent =
+        JSON.stringify(pendingOffer, null, 2);
+
+      alert('Offer imported');
+    }
+
+    async function createAnswer() {
+      const answer = await pc.createAnswer();
+
+      await pc.setLocalDescription(answer);
+
+      await waitForIceComplete();
+
+      answerJSON = {
+        type: pc.localDescription.type,
+        sdp: pc.localDescription.sdp
+      };
+
+      document.getElementById('answerData').textContent =
+        JSON.stringify(answerJSON, null, 2);
+
+      alert('Answer created');
+    }
+
+    function downloadAnswer() {
+      if (!answerJSON) {
+        alert('Create answer first');
+        return;
+      }
+
+      const blob = new Blob(
+        [JSON.stringify(answerJSON, null, 2)],
+        { type: 'application/json' }
+      );
+
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'answer.json';
+      a.click();
+    }
+
+    async function importAnswer() {
+      const file = document.getElementById('answerFile').files[0];
+
+      if (!file) {
+        alert('Select answer file');
+        return;
+      }
+
+      const text = await file.text();
+
+      const answer = JSON.parse(text);
+
+      await pc.setRemoteDescription(
+        new RTCSessionDescription(answer)
+      );
+
+      alert('Answer imported');
+    }
+  </script>
+</body>
+</html>
