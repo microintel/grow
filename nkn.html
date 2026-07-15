@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Local Notification Demo</title>
+</head>
+<body>
+  <button onclick="showNotification()">Send Notification</button>
+
+  <script>
+    function showNotification() {
+      if (!("Notification" in window)) {
+        alert("This browser doesn't support notifications.");
+        return;
+      }
+
+      if (Notification.permission === "granted") {
+        new Notification("Hello!", {
+          body: "This is a local push notification.",
+          icon: "https://via.placeholder.com/64"
+        });
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then(permission => {
+          if (permission === "granted") {
+            new Notification("Hello!", {
+              body: "This is a local push notification.",
+              icon: "https://via.placeholder.com/64"
+            });
+          }
+        });
+      } else {
+        alert("Notifications are blocked. Enable them in browser settings.");
+      }
+    }
+  </script>
+</body>
+</html>
