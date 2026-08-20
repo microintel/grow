@@ -100,6 +100,44 @@
     padding:20px;
   }
 
+  .consent{
+    position:absolute;
+    inset:0;
+    z-index:10;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(5,8,7,.9);
+    padding:24px;
+  }
+  .consent-box{
+    max-width:360px;
+    text-align:center;
+    border:1px solid var(--accent-dim);
+    background:#0d1210;
+    padding:26px 22px;
+  }
+  .consent-title{
+    font-family:var(--mono);
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    font-size:13px;
+    color:var(--accent);
+    margin:0 0 12px;
+  }
+  .consent-body{
+    font-size:14px;
+    line-height:1.5;
+    color:#c7cfc9;
+    margin:0 0 20px;
+  }
+  .consent-actions{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
   .count-badge{
     position:absolute;
     top:14px;
@@ -188,6 +226,16 @@
 <main>
   <div class="stage" id="stage">
     <div class="hint" id="hint">Press <b>Start camera</b> to begin. Detection model loads first (~1–2s).</div>
+    <div class="consent" id="consent" style="display:none;">
+      <div class="consent-box">
+        <p class="consent-title">Allow camera access?</p>
+        <p class="consent-body">This page needs your camera to detect and count faces. Video is processed locally in your browser and is never uploaded or recorded.</p>
+        <div class="consent-actions">
+          <button id="consentAllow">Allow camera</button>
+          <button id="consentDeny" class="secondary">Not now</button>
+        </div>
+      </div>
+    </div>
     <div class="count-badge" id="countBadge" style="display:none;">
       <span class="num" id="countNum">0</span>
       <span class="label" id="countLabel">faces detected</span>
@@ -224,6 +272,9 @@
   const startBtn = document.getElementById('startBtn');
   const stopBtn = document.getElementById('stopBtn');
   const hint = document.getElementById('hint');
+  const consent = document.getElementById('consent');
+  const consentAllow = document.getElementById('consentAllow');
+  const consentDeny = document.getElementById('consentDeny');
   const statusPill = document.getElementById('statusPill');
   const countBadge = document.getElementById('countBadge');
   const countNum = document.getElementById('countNum');
@@ -247,8 +298,16 @@
     await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
   }
 
+  function askPermission(){
+    hint.style.display = 'none';
+    consent.style.display = 'flex';
+    setStatus('awaiting permission', false);
+  }
+
   async function start(){
+    consent.style.display = 'none';
     startBtn.disabled = true;
+    hint.style.display = 'flex';
     hint.textContent = 'Loading face detection model…';
     try{
       await loadModels();
@@ -344,7 +403,14 @@
     requestAnimationFrame(detectLoop);
   }
 
-  startBtn.addEventListener('click', start);
+  startBtn.addEventListener('click', askPermission);
+  consentAllow.addEventListener('click', start);
+  consentDeny.addEventListener('click', () => {
+    consent.style.display = 'none';
+    hint.style.display = 'flex';
+    hint.textContent = 'Camera access declined. Press "Start camera" whenever you\'re ready.';
+    setStatus('idle', false);
+  });
   stopBtn.addEventListener('click', stop);
   window.addEventListener('beforeunload', () => { if (stream) stream.getTracks().forEach(t => t.stop()); });
 })();
