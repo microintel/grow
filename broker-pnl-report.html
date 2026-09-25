@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BlackRoad Ledger — Equity P&amp;L Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root{
+    --bg:#000000; --panel:#0A0A0C; --panel-2:#111114; --card:rgba(255,255,255,0.035);
+    --line:rgba(255,255,255,0.12); --line-soft:rgba(255,255,255,0.07);
+    --text:#F5F6F8; --muted:#8B8F98; --faint:#54575F;
+    --gain:#34D399; --gain-bg:rgba(52,211,153,0.10);
+    --loss:#FB7185; --loss-bg:rgba(251,113,133,0.10);
+    --accent:#4F8CFF; --accent-2:#8B5CF6; --accent-soft:rgba(79,140,255,0.12);
+    --gold:#D8B36A;
+    --radius-sm:8px; --radius:14px; --radius-lg:20px;
+    --serif:"Source Serif 4", Georgia, serif;
+    --sans:"Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono:"JetBrains Mono", monospace;
+  }
+  *{box-sizing:border-box;}
+  html,body{background:var(--bg);}
+  body{margin:0; color:var(--text); font-family:var(--sans); min-height:100vh; -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(79,140,255,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(139,92,246,0.08), transparent 55%),
+      #000000;
+  }
+  .topbar{
+    position:sticky; top:0; z-index:5; display:flex; align-items:center; justify-content:space-between;
+    padding:18px 22px; border-bottom:1px solid var(--line-soft); background:rgba(0,0,0,0.75); backdrop-filter:blur(10px);
+  }
+  .tb-brand{font-family:var(--serif); font-size:16px; font-weight:700; letter-spacing:.01em;}
+  .tb-brand span{background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .tb-sub{font-size:11px; color:var(--muted); margin-top:2px;}
+  .tb-pill{font-size:10px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--gold); border:1px solid rgba(216,179,106,0.35); background:rgba(216,179,106,0.08); padding:4px 10px; border-radius:20px;}
+  .wrap{max-width:880px; margin:0 auto; padding:26px 18px 70px;}
+
+  /* ---------- Upload panel ---------- */
+  .upload-card{
+    background:linear-gradient(180deg, var(--card), rgba(255,255,255,0.015));
+    border:1px solid var(--line-soft); border-radius:var(--radius-lg);
+    padding:38px 24px; text-align:center; margin-top:12px;
+  }
+  .upload-card.drag{border-color:var(--accent); background:var(--accent-soft);}
+  .upload-icon{
+    width:54px; height:54px; border-radius:50%; background:var(--accent-soft); color:var(--accent);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 16px; border:1px solid rgba(79,140,255,0.25);
+  }
+  .upload-title{font-family:var(--serif); font-size:20px; font-weight:700; margin-bottom:7px;}
+  .upload-sub{font-size:13px; color:var(--muted); max-width:440px; margin:0 auto 22px; line-height:1.6;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; border:none; border-radius:var(--radius-sm);
+    font-family:var(--sans); font-size:13.5px; font-weight:600; padding:11px 20px; cursor:pointer; transition:opacity .15s, transform .1s;
+  }
+  .btn:active{transform:scale(.98);}
+  .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#fff;}
+  .btn-primary:hover{opacity:.9;}
+  .btn-ghost{background:var(--card); color:var(--text); border:1px solid var(--line-soft);}
+  .btn-ghost:hover{background:rgba(255,255,255,0.06);}
+  .file-hint{font-size:11px; color:var(--faint); margin-top:16px;}
+  #fileInput{display:none;}
+  .parse-error{
+    margin-top:16px; background:var(--loss-bg); color:var(--loss); border:1px solid rgba(251,113,133,0.25); border-radius:var(--radius-sm);
+    padding:11px 14px; font-size:12.5px; text-align:left; display:none;
+  }
+
+  /* ---------- Loaded years strip ---------- */
+  .years-strip{display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; display:none;}
+  .year-chip{display:flex; align-items:center; gap:8px; background:var(--card); border:1px solid var(--line-soft); border-radius:20px; padding:7px 12px 7px 14px; font-size:12px;}
+  .year-chip b{color:var(--text); font-weight:700;}
+  .year-chip .yc-pnl{font-family:var(--mono); font-weight:700;}
+  .year-chip .yc-x{cursor:pointer; color:var(--faint); width:16px; height:16px; display:flex; align-items:center; justify-content:center; border-radius:50%;}
+  .year-chip .yc-x:hover{background:var(--loss-bg); color:var(--loss);}
+  .add-year-btn{border:1px dashed var(--line); background:transparent; color:var(--muted); font-size:12px; padding:7px 14px; border-radius:20px; cursor:pointer;}
+  .add-year-btn:hover{color:var(--text); border-color:var(--accent);}
+
+  /* ---------- Action bar (screen only) ---------- */
+  .action-bar{display:flex; align-items:center; justify-content:space-between; gap:10px; margin:18px 0 6px; flex-wrap:wrap;}
+  .action-bar .fname{font-size:12.5px; color:var(--muted);}
+  .action-btns{display:flex; gap:8px;}
+
+  /* ---------- Report "paper" preview (also the print content) ---------- */
+  :root{ --gutter: clamp(16px, 5vw, 34px); }
+  .report-wrap{display:none;}
+  .paper{
+    background:#fff; color:#17181A; border-radius:16px; overflow:hidden;
+    box-shadow:0 30px 70px -25px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04); margin-bottom:28px; position:relative;
+  }
+  .pr-header{
+    background:linear-gradient(125deg,#0B1220 0%, #1F3A93 45%, #4F8CFF 100%); color:#fff;
+    padding:clamp(20px,5vw,30px) var(--gutter) 22px; position:relative; overflow:hidden;
+  }
+  .pr-header::after{content:''; position:absolute; right:-60px; top:-80px; width:220px; height:220px; border-radius:50%; background:rgba(255,255,255,0.06);}
+  .pr-header::before{content:''; position:absolute; left:0; right:0; bottom:0; height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);}
+  .pr-brand-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; gap:10px;}
+  .pr-brand{font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; opacity:.85;}
+  .pr-brand-mark{width:26px; height:26px; flex-shrink:0; border-radius:7px; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.25); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-weight:700; font-size:13px;}
+  .pr-title{font-family:var(--serif); font-size:clamp(19px,5vw,25px); font-weight:700; margin:0 0 5px 0; line-height:1.2; word-break:break-word;}
+  .pr-sub{font-size:11.5px; color:rgba(255,255,255,0.85); margin:1px 0;}
+  .pr-client{display:none; font-size:11.5px; color:rgba(255,255,255,0.85); margin-top:10px; gap:16px; row-gap:4px; flex-wrap:wrap;}
+  .pr-client b{color:#fff; font-weight:600;}
+
+  .pr-grid{display:grid; grid-template-columns:repeat(3,1fr); margin:0 var(--gutter); border-top:1px solid #E7E9EC; border-bottom:1px solid #E7E9EC;}
+  .pr-cell{padding:14px clamp(10px,3vw,18px); border-left:1px solid #E7E9EC; min-width:0;}
+  .pr-cell:nth-child(3n+1){border-left:none;}
+  .pr-cell:nth-child(n+4){border-top:1px solid #E7E9EC;}
+  .pr-lbl{font-size:9.5px; color:#6B7078; text-transform:uppercase; letter-spacing:.06em; font-weight:700; margin-bottom:6px;}
+  .pr-val{font-family:var(--serif); font-size:clamp(14px,4vw,17px); font-weight:700; color:#17181A; font-variant-numeric:tabular-nums; overflow-wrap:break-word;}
+  .pr-val.pos{color:#1C9A5B;} .pr-val.neg{color:#D54B5A;}
+
+  /* P&L composition bar */
+  .pl-bar-wrap{margin:22px var(--gutter) 0;}
+  .pl-bar-title{font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:#6B7078; margin-bottom:8px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:4px;}
+  .pl-bar{display:flex; height:10px; border-radius:6px; overflow:hidden; background:#EEF0F3;}
+  .pl-bar .seg{height:100%;}
+  .pl-bar .seg.gross-pos{background:#1C9A5B;} .pl-bar .seg.gross-neg{background:#D54B5A;}
+  .pl-bar .seg.charges{background:#D8A63A;}
+  .pl-legend{display:flex; gap:14px; row-gap:6px; margin-top:8px; font-size:9.5px; color:#6B7078; flex-wrap:wrap;}
+  .pl-legend .dot{display:inline-block; width:7px; height:7px; border-radius:2px; margin-right:5px;}
+
+  .pr-section-lbl{
+    font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; color:#2F6FE0;
+    margin:24px var(--gutter) 8px; padding-top:2px; display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+  }
+  .pr-badge{font-size:9.5px; text-transform:none; letter-spacing:0; font-weight:700; padding:2px 9px; border-radius:20px;}
+  .pr-badge.ok{background:rgba(28,154,91,0.12); color:#1C9A5B;}
+  .pr-badge.warn{background:rgba(213,75,90,0.12); color:#D54B5A;}
+
+  .pr-table-wrap{margin:0 var(--gutter) 4px; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .pr-table{width:100%; border-collapse:collapse; font-size:10.8px; white-space:nowrap;}
+  .pr-table thead th{
+    text-align:left; padding:9px 9px; font-size:9.5px; text-transform:uppercase; letter-spacing:.03em;
+    color:#2F6FE0; font-weight:700; border-bottom:1.5px solid #1F3A93;
+  }
+  .pr-table td{padding:6px 9px; border-bottom:1px solid #E7E9EC; color:#2A2C30;}
+  .pr-table td.num, .pr-table th.num{text-align:right; font-variant-numeric:tabular-nums;}
+  .pr-table tr.total-row td{font-weight:700; border-top:1.5px solid #1F3A93; background:#F5F7FB;}
+  .pr-pos{color:#1C9A5B; font-weight:700;} .pr-neg{color:#D54B5A; font-weight:700;}
+  .pr-empty{font-size:11.5px; color:#6B7078; padding:14px var(--gutter); text-align:left;}
+
+  .pr-mismatch{margin:0 var(--gutter) 4px; font-size:10.5px; color:#8D6A1C; background:rgba(213,158,28,0.12); border-radius:8px; padding:8px 11px;}
+
+  .pr-footer{
+    margin:24px var(--gutter) 0; padding:14px 0 24px; border-top:1px solid #E7E9EC;
+    font-size:9.5px; color:#8D9198; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px;
+  }
+  .pr-footer-brand{font-weight:700; color:#2F6FE0;}
+
+  /* Combined multi-year table */
+  .yr-table{border-collapse:collapse; margin:0 var(--gutter); width:calc(100% - (var(--gutter) * 2)); min-width:420px; font-size:11.5px;}
+  .yr-table th{text-align:right; padding:9px 10px; font-size:9.5px; text-transform:uppercase; letter-spacing:.03em; color:#2F6FE0; font-weight:700; border-bottom:1.5px solid #1F3A93;}
+  .yr-table th:first-child, .yr-table td:first-child{text-align:left;}
+  .yr-table td{padding:8px 10px; border-bottom:1px solid #E7E9EC; text-align:right; font-variant-numeric:tabular-nums;}
+  .yr-table tr.grand td{font-weight:700; border-top:1.5px solid #1F3A93; background:#F5F7FB;}
+
+  /* ---------- Small screens ---------- */
+  @media (max-width:560px){
+    .topbar{padding:14px 16px;}
+    .tb-brand{font-size:14px;}
+    .wrap{padding:18px 12px 56px;}
+    .upload-card{padding:28px 16px;}
+    .upload-title{font-size:17px;}
+    .action-bar{gap:8px;}
+    .action-btns{width:100%; flex-wrap:wrap;}
+    .action-btns .btn{flex:1 1 auto; justify-content:center;}
+    .pr-grid{grid-template-columns:repeat(2,1fr);}
+    .pr-cell:nth-child(3n+1){border-left:1px solid #E7E9EC;}
+    .pr-cell:nth-child(odd){border-left:none;}
+    .pr-cell:nth-child(n+3){border-top:1px solid #E7E9EC;}
+    .pr-table{font-size:10.2px;}
+  }
+  @media (max-width:380px){
+    .pr-grid{grid-template-columns:1fr;}
+    .pr-cell{border-left:none !important; border-top:1px solid #E7E9EC;}
+    .pr-cell:first-child{border-top:none;}
+  }
+
+  @media print{
+    @page{ margin:14mm 16mm; }
+    *{ -webkit-print-color-adjust:exact; print-color-adjust:exact; color-adjust:exact; }
+    html, body{ background:#fff !important; }
+    .topbar, .upload-card, .action-bar, .years-strip, .no-print{ display:none !important; }
+    .wrap{max-width:none; padding:0; margin:0;}
+    .paper{box-shadow:none; border-radius:0; margin-bottom:0;}
+    .paper + .paper{ page-break-before:always; }
+    .pr-client{display:flex;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <div class="tb-brand">BlackRoad <span>· Ledger</span></div>
+    <div class="tb-sub">Equity P&amp;L report generator</div>
+  </div>
+  <div class="tb-pill">Equity Only</div>
+</div>
+
+<div class="wrap">
+
+  <div class="upload-card no-print" id="uploadCard">
+    <div class="upload-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="M12 12v9"/><path d="m16 16-4-4-4 4"/></svg>
+    </div>
+    <div class="upload-title">Upload broker P&amp;L Excel file(s)</div>
+    <div class="upload-sub">Drop the broker P&amp;L export (.xlsx). Only the <b>Equity P&amp;L</b> sheet is read — any F&amp;O P&amp;L sheet in the same file is ignored. Add one file per financial year to get a combined, multi‑year summary.</div>
+    <button class="btn btn-primary" id="pickBtn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+      Choose Excel file(s)
+    </button>
+    <input type="file" id="fileInput" multiple accept=".xlsx,.xls,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+    <div class="file-hint">Nothing is uploaded anywhere — files are read and the report is built entirely in this browser tab.</div>
+    <div class="parse-error" id="parseError"></div>
+  </div>
+
+  <div class="years-strip no-print" id="yearsStrip"></div>
+
+  <div class="action-bar no-print" id="actionBar" style="display:none;">
+    <div class="fname" id="fnameText"></div>
+    <div class="action-btns">
+      <label class="btn btn-ghost" id="addMoreBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+        Add another year
+      </label>
+      <button class="btn btn-ghost" id="resetBtn">Start over</button>
+      <button class="btn btn-primary" id="printBtn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+        Print / Save as PDF
+      </button>
+    </div>
+  </div>
+
+  <div class="report-wrap" id="reportWrap"></div>
+
+</div>
+
+<script>
+/* =====================================================================
+   Parsing: reads the label/value + transaction-table layout that
+   broker Equity P&L exports use — client info block, a totals summary
+   block, then one or more "Scrip Symbol" transaction tables ending in
+   a Total row. F&O P&L sheets (or any non-equity sheet) are skipped
+   entirely and never parsed or shown.
+   ===================================================================== */
+const SUMMARY_LABELS = ['Total Gross PnL','Total Brokerage','Total GST','Total Exchange Service Tax',
+  'Total Turnover Tax','Total SEBI Charges','Total Stamp Duty','Total STT','Total Other Charges',
+  'Total IPFT Charges','Net PnL','Intraday Net PnL'];
+const CLIENT_LABELS = ['Client Name','Client Id','PAN','Date Of Download'];
+const RANGE_LABELS = ['From Date','To Date'];
+const SKIP_SUM_HEADERS = ['scrip symbol','company name','avg buy price','avg sell price'];
+const CHARGE_LABELS = ['Total Brokerage','Total GST','Total Exchange Service Tax','Total Turnover Tax',
+  'Total SEBI Charges','Total Stamp Duty','Total STT','Total Other Charges','Total IPFT Charges'];
+
+function num(v){
+  if(v === '' || v === null || v === undefined) return null;
+  const n = typeof v === 'number' ? v : parseFloat(String(v).replace(/,/g,'').trim());
+  return isNaN(n) ? null : n;
+}
+function isRestEmpty(row){ return row.slice(1).every(c => String(c ?? '').trim() === ''); }
+// Like isRestEmpty, but ignores column 1 (the value cell) — used for label/value rows
+// such as "Net PnL" | 12345, where only columns beyond the value need to be blank.
+function isValueRowClean(row){ return row.slice(2).every(c => String(c ?? '').trim() === ''); }
+function fmtMoney(n){
+  if(n === null || n === undefined || isNaN(n)) return '—';
+  return '₹' + Number(n).toLocaleString('en-IN', {minimumFractionDigits:2, maximumFractionDigits:2});
+}
+function fmtSigned(n){
+  if(n === null || n === undefined || isNaN(n)) return '—';
+  const s = n > 0 ? '+' : '';
+  return s + fmtMoney(n);
+}
+function esc(s){ return String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function parseSheet(name, rows){
+  const client = {}, range = {}, summary = [], tables = [];
+  let currentSection = '';
+  for(let i = 0; i < rows.length; i++){
+    const row = rows[i].map(c => (c === undefined || c === null) ? '' : c);
+    const c0 = String(row[0] ?? '').trim();
+    if(!c0) continue;
+
+    if(CLIENT_LABELS.includes(c0) && isValueRowClean(row)){ client[c0] = row[1]; continue; }
+    if(RANGE_LABELS.includes(c0) && isValueRowClean(row)){ range[c0] = row[1]; continue; }
+    if(SUMMARY_LABELS.includes(c0) && isValueRowClean(row)){ summary.push({ label: c0, value: num(row[1]) }); continue; }
+
+    if(c0 === 'Scrip Symbol'){
+      const headerRow = row.slice();
+      const dataRows = [];
+      let totalRow = null;
+      let j = i + 1;
+      for(; j < rows.length; j++){
+        const r = rows[j].map(c => (c === undefined || c === null) ? '' : c);
+        const first = String(r[0] ?? '').trim();
+        const rowAllEmpty = r.every(c => String(c ?? '').trim() === '');
+        if(rowAllEmpty) continue;
+        if(first === 'Total'){ totalRow = r; j++; break; }
+        dataRows.push(r);
+      }
+      tables.push({ section: currentSection, headers: headerRow, dataRows, totalRow });
+      i = j - 1;
+      continue;
+    }
+    if(isRestEmpty(row)) currentSection = c0;
+  }
+  return { name, client, range, summary, tables };
+}
+
+function crossCheckTable(t){
+  if(!t.totalRow || t.dataRows.length === 0) return null;
+  const mismatches = [];
+  let checked = 0;
+  t.headers.forEach((h, idx) => {
+    const hl = String(h ?? '').toLowerCase().trim();
+    if(!hl || SKIP_SUM_HEADERS.some(s => hl.includes(s))) return;
+    const vals = t.dataRows.map(r => num(r[idx]));
+    if(vals.some(v => v === null)) return;
+    const reported = num(t.totalRow[idx]);
+    if(reported === null) return;
+    checked++;
+    const computed = vals.reduce((a,b) => a+b, 0);
+    const diff = Math.round((computed - reported) * 100) / 100;
+    if(Math.abs(diff) > 0.05) mismatches.push({ header: h, computed, reported, diff });
+  });
+  return { checked, mismatches, ok: mismatches.length === 0 };
+}
+
+function yearSummary(sheets){
+  let netTotal = 0, grossTotal = 0, chargesTotal = 0, txnCount = 0, hasNet = false;
+  sheets.forEach(s => {
+    s.summary.forEach(item => {
+      if(item.value === null) return;
+      if(item.label === 'Net PnL' || item.label === 'Intraday Net PnL'){ netTotal += item.value; hasNet = true; }
+      else if(item.label === 'Total Gross PnL') grossTotal += item.value;
+      else if(CHARGE_LABELS.includes(item.label)) chargesTotal += item.value;
+    });
+    s.tables.forEach(t => txnCount += t.dataRows.length);
+  });
+  return { netTotal, grossTotal, chargesTotal, txnCount, hasNet };
+}
+
+/* =====================================================================
+   Rendering
+   ===================================================================== */
+function renderTable(t){
+  const headers = t.headers;
+  const lastIdx = headers.length - 1;
+  const check = crossCheckTable(t);
+
+  const theadHTML = `<tr>${headers.map((h,idx) => `<th class="${idx>0?'num':''}">${esc(h)}</th>`).join('')}</tr>`;
+
+  const rowsHTML = t.dataRows.length ? t.dataRows.map(r => `
+    <tr>${headers.map((h, idx) => {
+      if(idx === 0) return `<td>${esc(r[idx])}</td>`;
+      const n = num(r[idx]);
+      if(n === null) return `<td>${esc(r[idx])}</td>`;
+      const cls = idx === lastIdx ? (n >= 0 ? 'num pr-pos' : 'num pr-neg') : 'num';
+      return `<td class="${cls}">${fmtMoney(n)}</td>`;
+    }).join('')}</tr>
+  `).join('') : '';
+
+  const totalHTML = t.totalRow ? `
+    <tr class="total-row">${headers.map((h, idx) => {
+      if(idx === 0) return `<td>Total</td>`;
+      const n = num(t.totalRow[idx]);
+      if(n === null) return `<td></td>`;
+      const cls = idx === lastIdx ? (n >= 0 ? 'num pr-pos' : 'num pr-neg') : 'num';
+      return `<td class="${cls}">${fmtMoney(n)}</td>`;
+    }).join('')}</tr>
+  ` : '';
+
+  if(!t.dataRows.length){
+    return `<div class="pr-section-lbl">${esc(t.section || 'Transactions')}</div><div class="pr-empty">No transactions in this section.</div>`;
+  }
+  const badge = check ? (check.ok
+    ? `<span class="pr-badge ok">✓ Verified — ${check.checked} totals recalculated</span>`
+    : `<span class="pr-badge warn">⚠ ${check.mismatches.length} total${check.mismatches.length===1?'':'s'} off</span>`) : '';
+  const mismatchHTML = (check && !check.ok) ? `
+    <div class="pr-mismatch">Recalculated from the row data and compared to this sheet's own Total row —
+      ${check.mismatches.map(m => `<b>${esc(m.header)}</b>: computed ${fmtMoney(m.computed)} vs reported ${fmtMoney(m.reported)} (${fmtSigned(m.diff)})`).join('; ')}.
+    </div>` : '';
+
+  return `
+    <div class="pr-section-lbl">${esc(t.section || 'Transactions')} ${badge}</div>
+    ${mismatchHTML}
+    <div class="pr-table-wrap">
+      <table class="pr-table"><thead>${theadHTML}</thead><tbody>${rowsHTML}${totalHTML}</tbody></table>
+    </div>`;
+}
+
+function renderPlBar(summaryMap){
+  const gross = summaryMap['Total Gross PnL'] ?? 0;
+  const charges = CHARGE_LABELS.reduce((a,l) => a + (summaryMap[l] ?? 0), 0);
+  const net = summaryMap['Net PnL'] ?? (gross - charges);
+  const base = Math.max(Math.abs(gross), Math.abs(charges), Math.abs(net), 1);
+  const grossPct = Math.min(100, Math.abs(gross) / base * 100);
+  const chargePct = Math.min(100, Math.abs(charges) / base * 100);
+  return `
+    <div class="pl-bar-wrap">
+      <div class="pl-bar-title"><span>P&amp;L composition</span><span>relative to largest figure</span></div>
+      <div class="pl-bar"><div class="seg ${gross>=0?'gross-pos':'gross-neg'}" style="width:${grossPct}%"></div></div>
+      <div class="pl-bar" style="margin-top:5px;"><div class="seg charges" style="width:${chargePct}%"></div></div>
+      <div class="pl-legend">
+        <span><span class="dot" style="background:${gross>=0?'#1C9A5B':'#D54B5A'}"></span>Gross P&amp;L ${fmtSigned(gross)}</span>
+        <span><span class="dot" style="background:#D8A63A"></span>Charges &amp; taxes ${fmtMoney(charges)}</span>
+        <span><span class="dot" style="background:${net>=0?'#1C9A5B':'#D54B5A'}"></span>Net P&amp;L ${fmtSigned(net)}</span>
+      </div>
+    </div>`;
+}
+
+function renderSheet(s, generatedAt, yearLabel){
+  const summaryMap = {};
+  s.summary.forEach(item => { summaryMap[item.label] = item.value; });
+  const pnlLabelsToShow = [
+    ['Total Gross PnL','Gross P&amp;L'],
+    ['Total Brokerage','Brokerage'],
+    ['Total GST','GST'],
+    ['Total STT','STT'],
+    ['Net PnL','Net P&amp;L'],
+    ['Intraday Net PnL','Intraday Net P&amp;L'],
+  ].filter(([key]) => summaryMap[key] !== undefined);
+
+  const gridHTML = pnlLabelsToShow.map(([key, label]) => {
+    const v = summaryMap[key];
+    const isPnl = key === 'Net PnL' || key === 'Intraday Net PnL' || key === 'Total Gross PnL';
+    const cls = isPnl ? (v >= 0 ? 'pos' : 'neg') : '';
+    return `<div class="pr-cell"><div class="pr-lbl">${label}</div><div class="pr-val ${cls}">${fmtMoney(v)}</div></div>`;
+  }).join('');
+
+  const clientBits = [];
+  if(s.client['Client Name']) clientBits.push(`<b>${esc(s.client['Client Name'])}</b>`);
+  if(s.client['Client Id']) clientBits.push(`ID ${esc(s.client['Client Id'])}`);
+  if(s.client['PAN']) clientBits.push(`PAN ${esc(s.client['PAN'])}`);
+
+  const rangeText = (s.range['From Date'] || s.range['To Date'])
+    ? `${esc(s.range['From Date'] || '—')} to ${esc(s.range['To Date'] || '—')}` : '';
+
+  const tablesHTML = s.tables.map(renderTable).join('');
+
+  return `
+    <div class="paper">
+      <div class="pr-header">
+        <div class="pr-brand-row">
+          <div class="pr-brand">BlackRoad · Equity P&amp;L Report</div>
+          <div class="pr-brand-mark">BR</div>
+        </div>
+        <div class="pr-title">${esc(s.name)}${yearLabel ? ` — ${esc(yearLabel)}` : ''}</div>
+        ${rangeText ? `<div class="pr-sub">Period: ${rangeText}</div>` : ''}
+        <div class="pr-sub">Generated ${generatedAt}</div>
+        ${clientBits.length ? `<div class="pr-client">${clientBits.map(b=>`<span>${b}</span>`).join('')}</div>` : ''}
+      </div>
+      ${gridHTML ? `<div class="pr-grid">${gridHTML}</div>` : ''}
+      ${renderPlBar(summaryMap)}
+      ${tablesHTML}
+      <div class="pr-footer">
+        <span>Informational only, not investment advice. Equity segment only — F&amp;O excluded.</span>
+        <span class="pr-footer-brand">BlackRoad</span>
+      </div>
+    </div>`;
+}
+
+function renderMultiYearSummary(years, generatedAt){
+  const rows = years.map(y => ({ label: y.label, ...yearSummary(y.sheets) }));
+  const grand = rows.reduce((a,r) => ({
+    grossTotal:a.grossTotal+r.grossTotal, chargesTotal:a.chargesTotal+r.chargesTotal,
+    netTotal:a.netTotal+r.netTotal, txnCount:a.txnCount+r.txnCount
+  }), {grossTotal:0, chargesTotal:0, netTotal:0, txnCount:0});
+
+  const cells = [
+    ['Financial years combined', years.length, ''],
+    ['Total transactions', grand.txnCount, ''],
+    ['Combined gross P&amp;L', fmtMoney(grand.grossTotal), grand.grossTotal>=0?'pos':'neg'],
+    ['Combined charges &amp; taxes', fmtMoney(grand.chargesTotal), ''],
+    ['Combined net P&amp;L', fmtMoney(grand.netTotal), grand.netTotal>=0?'pos':'neg'],
+  ];
+
+  const rowsHTML = rows.map(r => `
+    <tr>
+      <td>${esc(r.label)}</td>
+      <td>${r.txnCount}</td>
+      <td class="${r.grossTotal>=0?'pr-pos':'pr-neg'}">${fmtMoney(r.grossTotal)}</td>
+      <td>${fmtMoney(r.chargesTotal)}</td>
+      <td class="${r.netTotal>=0?'pr-pos':'pr-neg'}">${fmtMoney(r.netTotal)}</td>
+    </tr>`).join('');
+
+  return `
+    <div class="paper">
+      <div class="pr-header">
+        <div class="pr-brand-row">
+          <div class="pr-brand">BlackRoad · Equity P&amp;L Report</div>
+          <div class="pr-brand-mark">BR</div>
+        </div>
+        <div class="pr-title">Multi-Year Combined Summary</div>
+        <div class="pr-sub">Equity segment only — F&amp;O excluded from every figure below</div>
+        <div class="pr-sub">Generated ${generatedAt}</div>
+      </div>
+      <div class="pr-grid">
+        ${cells.map(([label,val,cls]) => `<div class="pr-cell"><div class="pr-lbl">${label}</div><div class="pr-val ${cls}">${val}</div></div>`).join('')}
+      </div>
+      <div class="pr-section-lbl">Year-by-year breakdown</div>
+      <div class="pr-table-wrap">
+        <table class="yr-table">
+          <thead><tr><th style="text-align:left;">Financial year</th><th>Txns</th><th>Gross P&amp;L</th><th>Charges</th><th>Net P&amp;L</th></tr></thead>
+          <tbody>${rowsHTML}
+            <tr class="grand"><td>All years combined</td><td>${grand.txnCount}</td>
+              <td class="${grand.grossTotal>=0?'pr-pos':'pr-neg'}">${fmtMoney(grand.grossTotal)}</td>
+              <td>${fmtMoney(grand.chargesTotal)}</td>
+              <td class="${grand.netTotal>=0?'pr-pos':'pr-neg'}">${fmtMoney(grand.netTotal)}</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pr-footer">
+        <span>Every total was independently recalculated from row-level data and checked against each file's own totals.</span>
+        <span class="pr-footer-brand">BlackRoad</span>
+      </div>
+    </div>`;
+}
+
+/* =====================================================================
+   Wiring — supports multiple files, one per financial year. Only sheets
+   whose name contains "equity" are parsed; F&O (or any other) sheet in
+   the same workbook is skipped.
+   ===================================================================== */
+const uploadCard = document.getElementById('uploadCard');
+const fileInput = document.getElementById('fileInput');
+const pickBtn = document.getElementById('pickBtn');
+const actionBar = document.getElementById('actionBar');
+const fnameText = document.getElementById('fnameText');
+const reportWrap = document.getElementById('reportWrap');
+const parseError = document.getElementById('parseError');
+const resetBtn = document.getElementById('resetBtn');
+const printBtn = document.getElementById('printBtn');
+const yearsStrip = document.getElementById('yearsStrip');
+const addMoreBtn = document.getElementById('addMoreBtn');
+
+let loadedYears = []; // [{label, fname, sheets}]
+
+pickBtn.addEventListener('click', () => fileInput.click());
+addMoreBtn.addEventListener('click', () => fileInput.click());
+fileInput.addEventListener('change', () => { handleFiles(Array.from(fileInput.files)); fileInput.value=''; });
+
+['dragover','dragenter'].forEach(evt => uploadCard.addEventListener(evt, e => { e.preventDefault(); uploadCard.classList.add('drag'); }));
+['dragleave','drop'].forEach(evt => uploadCard.addEventListener(evt, e => { e.preventDefault(); uploadCard.classList.remove('drag'); }));
+uploadCard.addEventListener('drop', e => handleFiles(Array.from(e.dataTransfer.files)));
+
+resetBtn.addEventListener('click', () => {
+  loadedYears = [];
+  reportWrap.style.display = 'none'; reportWrap.innerHTML = '';
+  actionBar.style.display = 'none';
+  yearsStrip.style.display = 'none'; yearsStrip.innerHTML = '';
+  uploadCard.style.display = 'block';
+});
+printBtn.addEventListener('click', () => window.print());
+
+function handleFiles(files){
+  if(!files.length) return;
+  parseError.style.display = 'none';
+  let remaining = files.length;
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try{
+        const wb = XLSX.read(new Uint8Array(e.target.result), { type: 'array' });
+        const equitySheetNames = wb.SheetNames.filter(n => /equity/i.test(n));
+        if(!equitySheetNames.length) throw new Error(`No "Equity P&L" sheet found in ${file.name} — F&O-only files are skipped.`);
+        const sheets = equitySheetNames
+          .map(name => parseSheet(name, XLSX.utils.sheet_to_json(wb.Sheets[name], { header: 1, defval: '' })))
+          .filter(s => s.summary.length || s.tables.length);
+        if(!sheets.length) throw new Error(`Equity P&L sheet in ${file.name} had no recognizable P&L data.`);
+        const range = sheets[0].range;
+        const label = (range['From Date'] || range['To Date'])
+          ? `${range['From Date']||'—'} to ${range['To Date']||'—'}`
+          : `File ${loadedYears.length + 1}`;
+        loadedYears.push({ label, fname: `File ${loadedYears.length + 1}`, sheets });
+      }catch(err){
+        parseError.textContent = err.message || `Couldn't read ${file.name} as a broker P&L export.`;
+        parseError.style.display = 'block';
+      }finally{
+        remaining--;
+        if(remaining === 0) buildReport();
+      }
+    };
+    reader.onerror = () => { remaining--; parseError.textContent = `Could not read ${file.name}.`; parseError.style.display='block'; if(remaining===0) buildReport(); };
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+function renderYearsStrip(){
+  if(!loadedYears.length){ yearsStrip.style.display='none'; return; }
+  yearsStrip.style.display = 'flex';
+  yearsStrip.innerHTML = loadedYears.map((y, idx) => {
+    const sum = yearSummary(y.sheets);
+    return `<div class="year-chip"><b>${esc(y.label)}</b><span class="yc-pnl" style="color:${sum.netTotal>=0?'#34D399':'#FB7185'}">${fmtSigned(sum.netTotal)}</span><span class="yc-x" data-idx="${idx}">✕</span></div>`;
+  }).join('') + `<button class="add-year-btn" id="stripAddBtn">+ Add another year</button>`;
+  yearsStrip.querySelectorAll('.yc-x').forEach(el => el.addEventListener('click', () => {
+    loadedYears.splice(Number(el.dataset.idx), 1);
+    if(loadedYears.length) buildReport(); else resetBtn.click();
+  }));
+  document.getElementById('stripAddBtn').addEventListener('click', () => fileInput.click());
+}
+
+function buildReport(){
+  if(!loadedYears.length) return;
+  const generatedAt = new Date().toLocaleString('en-IN', { day:'2-digit', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+  let html = loadedYears.length > 1 ? renderMultiYearSummary(loadedYears, generatedAt) : '';
+  loadedYears.forEach(y => { y.sheets.forEach(s => { html += renderSheet(s, generatedAt, loadedYears.length>1 ? y.label : ''); }); });
+  reportWrap.innerHTML = html;
+  reportWrap.style.display = 'block';
+  uploadCard.style.display = 'none';
+  actionBar.style.display = 'flex';
+  fnameText.textContent = loadedYears.length === 1 ? `Loaded ${loadedYears[0].fname}` : `${loadedYears.length} financial years loaded`;
+  renderYearsStrip();
+}
+</script>
+</body>
+</html>
