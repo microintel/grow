@@ -1,0 +1,326 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>MONQ50</title><meta name="color-scheme" content="dark">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:#000;color:#fff;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{max-width:860px;margin:auto;padding:28px 20px 8px}
+h1{margin:0 0 6px;font-size:28px;letter-spacing:-.02em}header p{margin:0;color:#8a8f98}
+#q{width:100%;margin-top:16px;padding:12px 0;border:0;border-bottom:1px solid #333;background:#000;color:#fff;font-size:17px;outline:none;border-radius:0}
+#g{max-width:860px;margin:auto;padding:24px 20px 80px}
+.co{padding:44px 0 8px}
+.top{display:flex;align-items:center;gap:20px}
+.lg{width:96px;height:96px;border-radius:24px;flex:none;position:relative;overflow:hidden;display:grid;place-items:center;color:#fff;font-weight:700;font-size:30px}
+.lg img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;padding:12px}
+.n{font-weight:700;font-size:24px;line-height:1.15;letter-spacing:-.01em}.r{color:#8a8f98;font-size:13px;margin-top:4px}
+.w{margin-left:auto;font-weight:700;font-size:26px;white-space:nowrap}
+.t{font-size:12px;text-transform:uppercase;letter-spacing:.12em;color:#8a8f98;margin:24px 0 10px}
+ul{margin:0;padding-left:20px;color:#e6e8ec}li{margin:5px 0}li::marker{color:#666}
+.cu{display:flex;flex-wrap:wrap;gap:22px 18px}
+.k{width:84px;text-align:center;font-size:12px;line-height:1.25;color:#cfd3da}
+.k .lg{width:64px;height:64px;border-radius:16px;font-size:20px;margin:0 auto 8px}.k .lg img{padding:8px}
+@media(max-width:520px){.lg{width:72px;height:72px;font-size:24px}.n{font-size:20px}.w{font-size:20px}}
+.top{color:inherit;text-decoration:none}.ar{color:#666;font-size:.7em}.top:hover .ar{color:#fff}
+.k{cursor:pointer}.k:hover{color:#fff}.k:hover .lg{outline:2px solid #fff;outline-offset:2px}
+#m{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:24px;z-index:9;text-align:center}
+#m.o{display:flex}#mc{max-width:460px;max-height:86vh;overflow:auto;padding:4px}#mc ul{text-align:left;margin:0 0 22px;color:#e6e8ec;font-size:15px}#mc .lg{margin:0 auto 18px;width:96px;height:96px}
+#mc h3{margin:0 0 10px;font-size:26px}#mc p{margin:0 0 14px;color:#d4d7dd;font-size:17px}
+#mc a{display:inline-block;background:#fff;color:#000;text-decoration:none;font-weight:650;padding:11px 22px;border-radius:99px}
+#x{position:absolute;top:calc(env(safe-area-inset-top,0px) + 14px);right:20px;background:none;border:0;color:#fff;font-size:30px;cursor:pointer}
+footer{max-width:860px;margin:auto;padding:24px 20px 56px;text-align:center;color:#8a8f98;font-size:13px;letter-spacing:.06em}
+</style></head><body>
+<header><h1>MONQ50</h1><p>50 positions: logos, how each makes money, and named customers.</p><input id="q" placeholder="Search company..." type="search"></header>
+<div id="g"></div>
+<footer>Developed by Microintel</footer>
+<div id="m"><button id="x" aria-label="Close">×</button><div id="mc"></div></div>
+<script>
+const D=`eBay~3.91~ebay.com~Online marketplace; takes a fee on each sale|Extra revenue: payments, Promoted Listings ads, shipping labels|Focus categories: collectibles, auto parts, refurbished~Dell Refurbished,Best Buy Outlet,PSA-graded card dealers
+Flex~3.22~flex.com~Contract electronics manufacturer (EMS)|Designs and builds products per customer program|Growth: data-center power and cooling~Nvidia,Cisco,HPE,Lenovo
+Revolution Medicines~3.07~revmed.com~Clinical-stage cancer biotech (RAS(ON) inhibitors)|No product sales yet; funded by equity and royalty financing|Value = pipeline success and future drug launches~Royalty Pharma (funder),Pancreatic/lung cancer patients,MD Anderson (trial site)
+United Airlines Holdings~3.04~united.com~Ticket sales: economy, premium, business cabins|MileagePlus loyalty and co-brand credit cards|Cargo and ancillary fees~Chase (co-brand card),Star Alliance (Lufthansa, ANA),Business travelers
+Natera~2.96~natera.com~Cell-free DNA tests: Panorama, Signatera, Prospera|Billed to insurers, labs and patients per test|Volume + reimbursement drive growth~OB-GYNs,Oncologists,AstraZeneca (pharma testing)
+Credo Technology Group~2.95~credosemi.com~High-speed connectivity chips and active electrical cables|Sold to hyperscalers and AI cluster builders|Revenue follows design wins and volume ramps~Amazon (AWS),Microsoft,xAI
+Elbit Systems~2.91~elbitsystems.com~Israeli defense electronics, drones, munitions, C4I|Multi-year government contracts|Large export share~Israel MoD/IDF,US DoD (Elbit America),Brazil,Philippines
+Kimberly-Clark~2.80~kimberly-clark.com~Consumer staples: Huggies, Kleenex, Cottonelle, Kotex|Sold through retailers; brand and pricing power|Professional (workplace) segment~Walmart,Costco,Target,Amazon
+Steel Dynamics~2.80~steeldynamics.com~Electric-arc-furnace steel mini-mills|Also metals recycling and fabrication|Profit = steel price minus scrap cost~Toyota Tsusho,Auto stampers,Steel service centers
+NetApp~2.72~netapp.com~Enterprise storage and data management (ONTAP)|Hardware + subscriptions + support|Cloud services inside hyperscalers~AWS (FSx for ONTAP),Microsoft Azure,Google Cloud
+Expedia~2.60~expediagroup.com~Online travel: Expedia, Hotels.com, Vrbo|Commission on bookings plus advertising|B2B travel platform for partners~Marriott,Hilton,Delta,Lufthansa
+Medline~2.56~medline.com~Makes and distributes medical supplies|Private-label products plus logistics|Sold in bulk to health systems~HCA Healthcare,Ascension,Nursing homes,Surgery centers
+Casey's General Stores~2.49~caseys.com~Convenience stores in small Midwest towns|Profit from prepared food (pizza), grocery, fuel|Own distribution center~Retail shoppers (IA, MO, IL),Casey's Rewards members
+ON Semiconductor~2.47~onsemi.com~Power and sensing chips: silicon carbide, image sensors|Markets: EVs, industrial, AI data-center power|Long design-win cycles~Volkswagen,Zeekr,Nvidia
+Illumina~2.39~illumina.com~DNA sequencers (NovaSeq) sold to labs|Recurring consumables (razor/blade model)|Software and services~Broad Institute,Wellcome Sanger,Natera
+Biogen~2.31~biogen.com~Neurology drugs: Leqembi, Spinraza, Skyclarys|Royalties, e.g. Roche's Ocrevus|Sold via wholesalers and specialty pharmacies~Eisai,Roche,McKesson,Cardinal Health
+Fiserv~2.22~fiserv.com~Payments: Clover POS, merchant acquiring|Core processing software for banks|Fees per transaction and per account~Wells Fargo (merchant alliance),Community banks,Clover small merchants
+MongoDB~2.09~mongodb.com~Document database; Atlas cloud is usage-billed|Enterprise Advanced is a license|Subscription revenue~Toyota,Verizon,Bosch
+Verisign~2.04~verisign.com~Registry operator for .com and .net|Annual fee per domain via registrars|Price-capped, very sticky renewals~GoDaddy,Squarespace,Namecheap
+Cognizant Technology Solutions~2.03~cognizant.com~IT services, consulting, outsourcing|Time-and-materials or fixed-price projects|Healthcare and financial focus~Elevance Health,Banks,Insurers
+Royalty Pharma~2.00~royaltypharma.com~Buys royalties on drug sales|Funds biotech R&D in exchange for future royalties|Diversified portfolio~Vertex (Trikafta),Biogen,Revolution Medicines,Cytokinetics
+J.B. Hunt Transport Services~1.98~jbhunt.com~Intermodal: rail line-haul plus own trucks|Dedicated contract fleets|Last-mile delivery~BNSF (rail partner),Large retailers,Consumer-goods shippers
+Verisk Analytics~1.97~verisk.com~Insurance data and analytics (ISO, Xactware)|Subscription, embedded in insurer workflows|Catastrophe and claims tools~State Farm,Allstate,Progressive
+Zoom Video Communications~1.96~zoom.us~Subscription seats: Meetings, Phone, Contact Center|AI Companion add-ons|Self-serve and enterprise sales~Uber,Stanford,Verizon (reseller)
+Tower Semiconductor~1.91~towersemi.com~Specialty foundry: analog, RF, silicon photonics|Makes wafers for fabless chip designers|Fab-access deals~Intel,Skyworks
+Dollar Tree~1.89~dollartree.com~Variety discount stores at low price points|Sources cheap goods in volume|Sold Family Dollar~Value shoppers,Hershey,P&G
+Zscaler~1.89~zscaler.com~Zero-trust cloud security (SaaS)|Per-user subscriptions|Replaces VPN and firewalls~Siemens,Schneider Electric
+Argenx~1.82~argenx.com~Vyvgart for autoimmune disease (myasthenia gravis, CIDP)|Sold via specialty pharmacies|Pipeline in more autoimmune indications~Zai Lab,Medison,Halozyme (tech partner)
+First Solar~1.75~firstsolar.com~Thin-film solar modules made in the US|Multi-year supply contracts|Benefits from US manufacturing tax credits~NextEra Energy,Lightsource bp,Invenergy
+Expand Energy~1.74~expandenergy.com~Largest US natural gas producer|Sells gas and NGLs, some LNG-linked contracts|Profit tied to gas prices~Delfin LNG,Gunvor
+Ulta Beauty~1.72~ulta.com~Beauty retail: mass + prestige, plus salons|Ulta Rewards loyalty|Shop-in-shop at Target~L'Oreal,Estee Lauder,e.l.f.,Target (partner)
+United Therapeutics~1.70~unither.com~Pulmonary hypertension drugs: Tyvaso, Remodulin, Orenitram|Organ-manufacturing research|Specialty pharmacy sales~Accredo,CVS Specialty
+Liberty Media Formula One~1.70~formula1.com~Owns Formula 1|Revenue: broadcast rights, sponsorship, race promoter fees|Pays prize money to teams~Apple TV,Sky,Rolex,Heineken,Aramco
+Insmed~1.65~insmed.com~Arikayce (lung infection) and Brinsupri (bronchiectasis)|Specialty pharma sales|Pipeline in lung disease~Accredo,Pulmonologists
+FTAI Aviation~1.63~ftaiaviation.com~Leases and trades aircraft engines (CFM56, V2500)|Module repair and used-parts sales|Aftermarket focus~Airlines,Lessors,MRO shops
+Affirm Holdings~1.62~affirm.com~Buy-now-pay-later loans|Merchant fees, interest, loan sales|Affirm Card for consumers~Amazon,Shopify,Apple Pay,Peloton
+MKS~1.55~mks.com~Subsystems for chip-making tools: gas, power, lasers|Plus specialty chemicals (Atotech)|OEM supply plus aftermarket~Applied Materials,Lam Research,Tokyo Electron
+MACOM Technology Solutions~1.48~macom.com~Analog, RF and photonic chips for optical networks|Design wins at module makers|Telecom and data-center demand~Innolight,Coherent,Avnet (distributor)
+GlobalFoundries~1.44~gf.com~Specialty foundry: 22FDX, RF, auto chips|Wafer sales with long-term agreements|Non-China supply chain angle~AMD,Qualcomm,NXP,GM
+Sterling Infrastructure~1.42~strlco.com~Site development for data centers and warehouses|Road/bridge work; residential slabs|Fixed-price and unit-price contracts~Texas DOT,Data-center developers,Homebuilders
+AST SpaceMobile~1.36~ast-science.com~Satellites that connect directly to ordinary phones|Wholesale access sold to carriers|Government contracts too~AT&T,Verizon,Vodafone,Rakuten
+Super Micro Computer~1.32~supermicro.com~AI/GPU server systems, liquid cooling|Built around Nvidia and AMD chips|Low-margin, high-volume~CoreWeave,xAI
+Akamai Technologies~1.29~akamai.com~Content delivery and security|Cloud computing (Linode)|Usage and subscription billing~Adobe,Airbnb,Banks,Streamers
+Atlassian~1.25~atlassian.com~Jira, Confluence, Trello software|Cloud subscriptions plus Marketplace apps|Land-and-expand sales~NASA,Visa,Dropbox
+Nextpower~1.04~nextpower.com~Solar trackers, foundations, software (ex-Nextracker)|Sold to developers and EPC contractors|Project-based orders~NextEra,AES,Primoris
+EchoStar~1.03~echostar.com~Spectrum owner; sold licenses to AT&T and SpaceX|Hughes satellite internet|DISH TV and Boost Mobile~AT&T,SpaceX,Hughes subscribers
+IREN~1.02~iren.com~Bitcoin mining shifting to AI cloud GPUs|Sells GPU compute under contracts|Owns data centers and power~Microsoft (AI cloud contract)
+Fox Corporation (Class A)~0.90~foxcorporation.com~Fox News, Fox Sports, Fox broadcast, Tubi|Advertising plus carriage/retransmission fees|Live sports and news focus~Advertisers,Comcast,YouTube TV,NFL
+Fox Corporation (Class B)~0.88~foxcorporation.com~Same company as Class A|Voting share class|Same business model~Same as Class A
+BioNTech~—~biontech.de~mRNA vaccine Comirnaty (shared with Pfizer)|Oncology: bispecific antibodies, mRNA cancer therapies|Revenue from vaccine contracts and partnerships~Pfizer,Bristol Myers Squibb,Governments (EU, US)`;
+const M={'skyworks':'skyworks.com','dell':'dell.com','best buy':'bestbuy.com','psa':'psacard.com','nvidia':'nvidia.com','cisco':'cisco.com','hpe':'hpe.com','lenovo':'lenovo.com','royalty pharma':'royaltypharma.com','md anderson':'mdanderson.org','chase':'chase.com','star alliance':'staralliance.com','astrazeneca':'astrazeneca.com','aws':'amazon.com','amazon':'amazon.com','google cloud':'google.com','microsoft':'microsoft.com','xai':'x.ai','israel mod':'mod.gov.il','us dod':'defense.gov','walmart':'walmart.com','costco':'costco.com','target':'target.com','toyota tsusho':'toyota-tsusho.com','toyota':'toyota.com','marriott':'marriott.com','hilton':'hilton.com','delta':'delta.com','lufthansa':'lufthansa.com','hca':'hcahealthcare.com','ascension':'ascension.org','volkswagen':'vw.com','zeekr':'zeekrlife.com','broad':'broadinstitute.org','sanger':'sanger.ac.uk','natera':'natera.com','eisai':'eisai.com','roche':'roche.com','mckesson':'mckesson.com','cardinal':'cardinalhealth.com','wells fargo':'wellsfargo.com','clover':'clover.com','verizon':'verizon.com','bosch':'bosch.com','godaddy':'godaddy.com','squarespace':'squarespace.com','namecheap':'namecheap.com','elevance':'elevancehealth.com','vertex':'vrtx.com','biogen':'biogen.com','revolution':'revmed.com','cytokinetics':'cytokinetics.com','bnsf':'bnsf.com','state farm':'statefarm.com','allstate':'allstate.com','progressive':'progressive.com','uber':'uber.com','stanford':'stanford.edu','intel':'intel.com','hershey':'thehersheycompany.com','p&g':'pg.com','siemens':'siemens.com','schneider':'se.com','zai lab':'zailab.com','halozyme':'halozyme.com','nextera':'nexteraenergy.com','lightsource':'lightsourcebp.com','invenergy':'invenergy.com','delfin':'delfinlng.com','gunvor':'gunvorgroup.com',"l'oreal":'loreal.com','estee':'elcompanies.com','e.l.f.':'elfbeauty.com','accredo':'accredo.com','cvs':'cvsspecialty.com','apple':'apple.com','sky':'sky.com','rolex':'rolex.com','heineken':'heineken.com','aramco':'aramco.com','shopify':'shopify.com','peloton':'onepeloton.com','applied materials':'appliedmaterials.com','lam research':'lamresearch.com','tokyo electron':'tel.com','innolight':'innolight.com.cn','coherent':'coherent.com','avnet':'avnet.com','amd':'amd.com','qualcomm':'qualcomm.com','nxp':'nxp.com','gm':'gm.com','texas dot':'txdot.gov','vodafone':'vodafone.com','rakuten':'rakuten.com','at&t':'att.com','coreweave':'coreweave.com','adobe':'adobe.com','airbnb':'airbnb.com','nasa':'nasa.gov','visa':'visa.com','dropbox':'dropbox.com','aes':'aes.com','primoris':'primoris.com','spacex':'spacex.com','hughes':'hughes.com','comcast':'comcast.com','youtube':'youtube.com','nfl':'nfl.com','pfizer':'pfizer.com','bristol':'bms.com'};
+const key=x=>{x=x.toLowerCase();for(const k in M){if(k.length<=3?new RegExp('\b'+k+'\b').test(x):x.includes(k))return k}return null};
+const dom=x=>{const k=key(x);return k?M[k]:null};
+const B2=Object.fromEntries(`skyworks:RF chips in iPhones and Android phones are the core|Also sells to auto, IoT and broadband
+dell:Segments: Infrastructure (AI servers, storage) and Client (PCs)|Sells to enterprises, governments, consumers; adds services and financing
+best buy:~1,000 stores plus online; appliances, phones, computers, gaming|Extra income: Geek Squad services, memberships, retail ads
+psa:Grades cards on a 1-10 scale; faster tiers cost more|Graded slabs often resell for more, driving demand
+nvidia:Data Center (AI GPUs, networking) is the biggest segment|Sells chips, DGX systems, CUDA software, NVLink/InfiniBand|Fabless: TSMC manufactures
+cisco:Switches, routers, security, Webex, Splunk (bought 2024)|Shifting to subscriptions; sells via channel partners
+hpe:Segments: Server, Hybrid Cloud, Networking, Financial Services|GreenLake turns hardware into pay-per-use
+lenovo:Segments: Intelligent Devices, Infrastructure, Solutions and Services|Among the largest PC makers worldwide
+royalty pharma:Earns a % of sales on drugs like Trikafta and Tysabri|Also funds drug development for future royalties
+md anderson:Part of University of Texas system in Houston|Revenue: patient care, grants, philanthropy; large trial program
+chase:Part of JPMorgan: consumer, cards, commercial lending|Earns interest spread, card interchange; co-brand cards with airlines
+star alliance:Founded 1997 with ~25 airlines incl. United, Lufthansa, ANA|Members share miles, lounges and routes
+astrazeneca:Big sellers: Farxiga, Tagrisso, Imfinzi, Enhertu (with Daiichi)|Heavy R&D; patent expiries are the key risk
+aws:Biggest cloud provider: EC2, S3, databases, Bedrock AI|Pay-as-you-go plus committed contracts; most of Amazon's profit
+amazon:Segments: North America, International, AWS|Marketplace fees, Prime and advertising are high-margin
+google cloud:Part of Alphabet: Compute, BigQuery, Vertex AI, Workspace|Usage billing plus committed-spend contracts
+microsoft:Segments: Productivity, Intelligent Cloud (Azure), Personal Computing|Mostly recurring subscriptions
+xai:Founded 2023; Grok is built into X|Revenue: X Premium, enterprise API; large GPU cluster in Memphis
+israel mod:Funds IDF equipment and munitions from the state budget|Buys from Israeli firms like Elbit plus US-funded imports
+us dod:Largest defense budget in the world|Awards fixed-price and cost-plus contracts to prime contractors
+walmart:Segments: Walmart US, International, Sam's Club|Low prices on volume; growing ads, marketplace, membership
+costco:Membership fees drive most profit|Sells near cost; Kirkland Signature private label
+target:Apparel, home, food, beauty; many owned brands|Revenue from stores, digital and Target Circle ads
+toyota tsusho:Toyota group trading arm: metals, auto parts, chemicals|Minority investor in Steel Dynamics' Texas mill
+toyota:Largest carmaker by volume; hybrid strength|Earns from vehicles, financing and parts
+marriott:Mostly franchise and management fees|Bonvoy loyalty and credit card income
+hilton:Asset-light: fees on room revenue|Brands: Hampton, Hilton Garden Inn, Conrad; Hilton Honors
+delta:Revenue: tickets, loyalty (Amex), cargo, a refinery|Hubs: Atlanta, Detroit, Minneapolis, Salt Lake City, NYC
+lufthansa:Group: Lufthansa, Swiss, Austrian, Brussels, Eurowings|Also Lufthansa Technik (maintenance), catering
+hca:~190 hospitals in US and UK|Paid per admission by insurers, Medicare, Medicaid
+ascension:One of the largest US nonprofit systems|Revenue from patient care; surplus reinvested
+volkswagen:Brands: VW, Audi, Porsche, Skoda, Bentley, Lamborghini|Revenue: cars, financial services, software
+zeekr:Under Geely; sells EVs in China and exports|Direct-to-consumer model; rivals Tesla and NIO
+broad:MIT and Harvard institute with large sequencing center|Funded by grants, philanthropy, pharma deals
+sanger:Genome institute in Cambridgeshire|Funded mainly by Wellcome and UK grants
+natera:Segments: Women's health, Oncology, Organ health|Bills insurers; Signatera used in pharma trials
+eisai:Leqembi co-developed with Biogen|Other drugs: Lenvima (cancer), Fycompa (epilepsy)
+roche:Divisions: Pharmaceuticals and Diagnostics|Top drugs: Ocrevus, Hemlibra, Tecentriq; owns Genentech
+mckesson:Segments: US Pharmaceutical, Prescription Technology, Medical-Surgical|Thin margins on huge volume; one of the "big three" distributors
+cardinal:Segments: Pharmaceutical, Global Medical Products|One of the US "big three" drug distributors
+wells fargo:Segments: Consumer, Commercial, Investment Banking, Wealth|Earns net interest income and fees
+clover:Sells POS hardware plus monthly software|Takes a % of each card payment via Fiserv
+verizon:Segments: Consumer and Business|Monthly wireless, fiber and enterprise fees
+bosch:Mobility Solutions is the largest unit|Also industrial technology and home appliances; foundation-owned
+godaddy:Domains, hosting, website tools, commerce payments|Largest registrar; sells to small businesses
+squarespace:Plans for sites, domains, commerce, email|Taken private by Permira in 2024
+namecheap:Low-cost domains, hosting, privacy add-ons|Margin from volume and upsells
+elevance:Runs Anthem plans and Carelon care services|Earns premiums from employers, Medicare, Medicaid
+vertex:Trikafta/Alyftrek treat most cystic fibrosis patients|Pipeline: pain (Journavx), sickle cell (Casgevy)
+biogen:Revenue: MS franchise, Spinraza, Leqembi, royalties|Fighting generics; relies on Eisai and Roche partners
+revolution:No product sales yet; RAS(ON) pipeline|Funded by equity and Royalty Pharma
+cytokinetics:Aficamten (heart drug) first approved in 2025|Financing includes Royalty Pharma deal
+bnsf:Hauls containers, coal, grain, autos|Berkshire-owned; ~32,000 route miles in 28 states
+state farm:Mutual company: auto, home, life, bank|Sold through ~19,000 exclusive agents
+allstate:Auto and home insurance plus protection services|Sells via agents and direct
+progressive:Sells auto direct and through independent agents|Telematics (Snapshot) pricing
+uber:Segments: Mobility, Delivery, Freight|Takes cut of trips and orders, plus ads and Uber One
+stanford:Revenue: tuition, endowment, research grants, medical center|Spinouts include Google and HP
+intel:Segments: Client computing, Data center, Foundry|Makes chips for others via Intel Foundry
+hershey:Brands: Hershey's, Reese's, Kit Kat (US)|Sold through Walmart, Costco and others
+p&g:Brands: Tide, Pampers, Gillette, Oral-B|Sold via retailers; pricing and innovation drive margin
+siemens:Units: Digital Industries, Smart Infrastructure, Mobility|Sells automation, software, rail gear
+schneider:Sells electrical gear, software, automation|Strong in data-center power and cooling
+zai lab:Licenses Western drugs for China|Sells in China, e.g. Vyvgart from argenx
+halozyme:Royalties on ENHANZE products (Darzalex Faspro, Vyvgart Hytrulo)|Also an auto-injector business
+nextera:Segments: Florida Power & Light and NextEra Energy Resources|Builds wind, solar, storage; signs long power contracts
+lightsource:Develops utility solar and storage worldwide|Owned by bp; sells power via contracts
+invenergy:Private: wind, solar, gas, storage, transmission|Based in Chicago; sells to utilities and corporates
+delfin:Floating LNG export vessels off Louisiana|Sells LNG under long-term deals
+gunvor:Trades crude, products, LNG, power|Profit from price spreads and logistics
+l'oreal:Divisions: Consumer, Luxury, Dermatological, Professional|Brands: Maybelline, Lancome, La Roche-Posay
+estee:Brands: Estee Lauder, MAC, Clinique, La Mer|Sold in department stores, travel retail, online
+e.l.f.:Cheap color cosmetics and skincare|Key retailers: Walmart, Target, Ulta
+accredo:Part of Cigna's Evernorth|Dispenses specialty drugs for rare and chronic conditions
+cvs:Segments: Health Care Benefits (Aetna), Health Services (Caremark), Pharmacy|Earns premiums, drug-benefit fees, retail sales
+apple:iPhone, Mac, iPad, wearables, plus services (App Store, iCloud)|Services carry higher margins
+sky:Pay-TV and broadband in UK, Italy, Germany|Owned by Comcast
+rolex:Private and vertically integrated; limited supply|Sells only via authorized dealers
+heineken:Brands: Heineken, Amstel, Tiger, Desperados|Sells beer and cider in many countries
+aramco:Upstream, downstream and chemicals|Profit follows oil prices; large dividends
+shopify:Subscriptions, payments take rate, apps|Merchants from startups to big brands
+peloton:Bikes, treadmills and subscriptions|Subscriptions earn higher margin
+applied materials:Deposition, etch, inspection equipment|Customers: TSMC, Samsung, Intel
+lam research:Etch and deposition tools|Recurring service revenue from installed base
+tokyo electron:Coater/developers, etch, deposition|Customers: TSMC, Samsung, Intel
+innolight:Makes 400G and 800G optical modules|Big supplier to hyperscalers
+coherent:Segments: Networking, Materials, Lasers|Makes transceivers and industrial lasers
+avnet:Distributes chips and components, plus design support|Thin margin on volume
+amd:Segments: Data Center, Client, Gaming, Embedded|Rivals Nvidia and Intel
+qualcomm:Segments: QCT (chips) and QTL (licensing)|Expanding into auto and PC
+nxp:Segments: Automotive, Industrial/IoT, Mobile, Comms Infrastructure|Customers include Bosch and Continental
+gm:Brands: Chevrolet, Buick, GMC, Cadillac|Earns from vehicles and GM Financial
+texas dot:Plans and builds Texas highways|Awards contracts through competitive bids
+vodafone:Operates in Europe and Africa (Vodacom)|Revenue: mobile, broadband, enterprise
+rakuten:Segments: Internet Services, Fintech, Mobile|Marketplace, bank, card
+at&t:Segments: Communications (mobile, fiber) and Latin America|Revenue: mobile plans, fiber
+coreweave:Rents Nvidia GPUs under long-term contracts|Customers include Microsoft, OpenAI, Meta
+adobe:Segments: Digital Media, Digital Experience|Subscriptions: Photoshop, Acrobat, Firefly
+airbnb:Service fees from hosts and guests|Revenue = % of booking value
+nasa:Funds missions through contracts|Contractors include Boeing, SpaceX, Lockheed
+visa:Tiny fee on each card transaction|No lending risk; asset-light
+dropbox:Subscriptions for storage, Sign, Dash|Revenue from individuals and teams
+aes:Segments: Renewables, Utilities, Energy Infrastructure|Sells power under long-term contracts
+primoris:Segments: Utilities, Energy/Renewables|Builds solar, pipelines, power lines
+spacex:Launch (Falcon 9) and Starlink subscriptions|Starlink is a growing share
+hughes:EchoStar segment selling satellite broadband|Customers: enterprises, governments, consumers
+comcast:Segments: Connectivity (Xfinity), Content (NBCU, Peacock), Parks|Revenue: broadband, TV, ads, theme parks
+youtube:Revenue: ads, YouTube TV, Premium, Shorts|Part of Alphabet
+nfl:Revenue shared across 32 teams|Media rights, sponsors, NFL+, tickets
+pfizer:Products: Comirnaty, Eliquis (with BMS), oncology|Seagen deal added cancer ADCs
+bristol:Products: Opdivo, Eliquis, Revlimid (declining)|Pipeline includes Cobenfy`.split('\n').map(l=>{const i=l.indexOf(':');return[l.slice(0,i),l.slice(i+1).split('|')]}));
+const B=Object.fromEntries(`skyworks:Chips for phone radios (RF front-ends); sold to phone makers like Apple
+dell:PCs, servers and storage, sold direct and through partners
+best buy:US electronics retailer; earns on products, services and memberships
+psa:Grades and authenticates trading cards; fee per card
+nvidia:GPUs, AI systems and software for data centers, gaming, cars
+cisco:Networking and security gear plus software subscriptions
+hpe:Servers, storage, networking and GreenLake cloud subscriptions
+lenovo:PC and server maker (ThinkPad); also Motorola phones
+royalty pharma:Buys royalties on other companies' drug sales
+md anderson:Cancer hospital and research center; patient care plus clinical trials
+chase:Bank (JPMorgan): interest, card fees, payments income
+star alliance:Airline alliance sharing lounges, miles and routes
+astrazeneca:Drugmaker in oncology, rare disease, respiratory, heart
+aws:Cloud computing rented by usage: compute, storage, databases
+amazon:Online retail, AWS cloud, advertising, Prime subscriptions
+google cloud:Cloud infrastructure and AI services billed by usage
+microsoft:Windows, Office, Azure cloud, LinkedIn, gaming
+xai:AI lab behind Grok; sells subscriptions and API access
+israel mod:Government buyer of weapons, drones and electronics
+us dod:Largest defense buyer; awards multi-year contracts
+walmart:Largest US retailer; low-price groceries and general goods
+costco:Membership warehouse club; fees plus thin product margins
+target:US general-merchandise retailer with owned brands
+toyota tsusho:Trading and logistics arm of Toyota group (steel, parts)
+toyota:Car maker: vehicles, financing, parts
+marriott:Hotel franchisor and manager; fees from branded hotels
+hilton:Hotel brand franchisor; fees plus loyalty program
+delta:US airline: tickets, loyalty, American Express deal
+lufthansa:European airline group with maintenance and catering units
+hca:Largest US hospital operator; paid by insurers and patients
+ascension:Nonprofit US hospital system
+volkswagen:Car group: VW, Audi, Porsche and more
+zeekr:Chinese premium EV brand owned by Geely
+broad:Genomics research institute funded by grants and partners
+sanger:UK genome research institute funded by Wellcome
+natera:Genetic testing lab: prenatal, cancer, transplant
+eisai:Japanese drugmaker; Biogen's partner on Leqembi
+roche:Swiss drugmaker and diagnostics leader
+mckesson:Drug wholesaler selling to pharmacies and hospitals
+cardinal:Drug and medical-product distributor
+wells fargo:US bank: lending, deposits, wealth, cards
+clover:Fiserv's POS system for small merchants
+verizon:US wireless and broadband carrier; subscription revenue
+bosch:Industrial group: auto parts, tools, appliances
+godaddy:Domain seller plus web hosting subscriptions
+squarespace:Website builder subscriptions
+namecheap:Budget domain registrar and hosting
+elevance:Health insurer (Anthem): premiums plus care services
+vertex:Cystic fibrosis drugmaker (Trikafta)
+biogen:Neurology drugmaker: Leqembi, Spinraza
+revolution:Cancer biotech developing RAS inhibitors
+cytokinetics:Heart-disease biotech; royalty and financing deals
+bnsf:Western US freight railroad owned by Berkshire Hathaway
+state farm:Largest US auto and home insurer
+allstate:US insurer: auto, home, life
+progressive:US auto insurer; sells direct and via agents
+uber:Ride and delivery marketplace; takes a cut of fares
+stanford:Private university: tuition, endowment, research grants
+intel:Chip designer and manufacturer
+hershey:Chocolate and snack maker
+p&g:Consumer brands: Tide, Pampers, Gillette
+siemens:Industrial tech: automation, grids, medical imaging
+schneider:Energy management and automation equipment
+zai lab:China-based biotech licensing global drugs
+halozyme:Licenses ENHANZE drug-delivery tech; earns royalties
+nextera:Largest US renewable generator plus Florida utility
+lightsource:Solar and storage developer owned by bp
+invenergy:Private developer of wind, solar, gas and storage
+delfin:Developing floating LNG export projects
+gunvor:Commodity trader in oil, gas and power
+l'oreal:Cosmetics giant: Maybelline, Lancome, Kiehl's
+estee:Prestige beauty: Estee Lauder, MAC, Clinique
+e.l.f.:Affordable cosmetics sold via Target, Ulta, Walmart
+accredo:Specialty pharmacy for complex drugs (Cigna/Evernorth)
+cvs:Pharmacy chain, insurer (Aetna) and PBM
+apple:iPhone, Mac, services, App Store
+sky:European pay-TV and broadband (owned by Comcast)
+rolex:Luxury watchmaker selling via authorized retailers
+heineken:Brewer: Heineken, Amstel, Tiger
+aramco:Saudi oil giant: crude, refining, chemicals
+shopify:E-commerce platform: subscriptions and payments
+peloton:Connected fitness: hardware plus subscriptions
+applied materials:Chip-making equipment maker
+lam research:Etch and deposition equipment for chipmakers
+tokyo electron:Japanese chip-making equipment maker
+innolight:Chinese optical transceiver maker for data centers
+coherent:Lasers and optical components
+avnet:Electronic-component distributor
+amd:CPUs and GPUs for PCs and data centers
+qualcomm:Phone chips (Snapdragon) plus patent licensing
+nxp:Automotive and industrial chips
+gm:US carmaker: Chevrolet, GMC, Cadillac
+texas dot:State road agency that awards construction contracts
+vodafone:European and African mobile carrier
+rakuten:Japanese e-commerce, fintech and mobile
+at&t:US wireless and fiber provider
+coreweave:GPU cloud for AI; rents compute
+adobe:Creative Cloud, Acrobat, marketing software subscriptions
+airbnb:Lodging marketplace; fees on bookings
+nasa:US space agency; buys launch, software, research
+visa:Card payment network; fee per transaction
+dropbox:File storage subscriptions
+aes:Power utility and renewable developer
+primoris:Contractor for utilities, pipelines and solar
+spacex:Rockets and Starlink satellite internet
+hughes:Satellite broadband provider (EchoStar)
+comcast:Cable, broadband and NBCUniversal
+youtube:Video platform: ads plus YouTube TV subscriptions
+nfl:Football league: media rights and sponsorships
+pfizer:Drugmaker: Comirnaty, oncology, vaccines
+bristol:Drugmaker: Opdivo, Eliquis, cell therapy`.split('\n').map(l=>{const i=l.indexOf(':');return[l.slice(0,i),l.slice(i+1)]}));
+const logo=(n,d,sz)=>`<div class="lg" style="background:hsl(${Math.abs(hue(n))},55%,42%)">${n.replace(/[^A-Za-z]/g,'').slice(0,2).toUpperCase()}${d?`<img alt="" src="https://www.google.com/s2/favicons?domain=${d}&sz=${sz}" onerror="this.remove()">`:''}</div>`;
+const EX=['Fee stack: ~13% take rate on sales, plus per-order fee|Sellers pay extra for Promoted Listings ads|Authenticity checks for sneakers, watches, trading cards|Rivals: Amazon, Etsy, Facebook Marketplace', 'Two segments: Flex Agility Solutions and Flex Reliability Solutions|Components are passed through to customers, so margins are thin|Nextracker spun off in 2023', 'Lead drug: daraxonrasib in pancreatic cancer (late-stage trials)|Also zoldonrasib and elironrasib in the pipeline|Royalty Pharma funding deal of up to $2B (2025)|Main cost: R&D, no profits yet', 'Hubs: Chicago, Houston, Newark, Denver, San Francisco, Washington|Most revenue is passengers; loyalty and cargo add the rest|Polaris business class and Basic Economy split price tiers|Biggest costs: fuel and labor', 'Tests: Panorama (prenatal), Horizon (carrier), Signatera (cancer MRD), Prospera (transplant)|Paid by insurers, some patients pay out of pocket|Signatera is the main growth driver', 'Products: AEC cables, optical DSPs, retimers, PCIe, SerDes IP|Fabless, so chips are made by outside foundries|Few customers account for most revenue', 'Segments: Aerospace, C4I and cyber, ISTAR, Land, Munitions|Products: Hermes drones, PULS rocket artillery, Iron Fist protection|Listed on Nasdaq and Tel Aviv', 'Segments: Personal Care, Consumer Tissue, K-C Professional|Brands: Huggies, Kleenex, Cottonelle, Scott, Kotex, Depend|Profit levers: pulp cost, pricing, productivity', 'Segments: steel operations, metals recycling, fabrication, aluminum|Mills in Indiana, Texas and Mississippi|Scrap and electricity are key costs', 'Products: ONTAP, StorageGRID, all-flash arrays, BlueXP|Keystone: storage sold as a monthly service|Revenue split between products and support/cloud', 'Segments: Consumer (Expedia, Hotels.com, Vrbo), B2B, trivago stake|Merchant model collects payment; agency model earns commission|OneKey loyalty across brands|Rivals: Booking, Airbnb', 'Large med-surg supplier: gloves, wound care, surgical packs, IV|Own Medline-brand products plus distribution|Recently listed on public markets', 'Profit pools: fuel cents per gallon, in-store sales, prepared food|Prepared food has the highest margin|Bought Fikes (CEFCO) in 2024', 'Segments: Power Solutions, Analog and Mixed-Signal, Intelligent Sensing|Makes silicon carbide from substrate to module|Long-term supply deals with prepayments', 'Instruments: NovaSeq X, NextSeq, MiSeq|Consumables make up most revenue|Spun off GRAIL in 2024; China restrictions are a risk', "Products: Leqembi, Spinraza, Skyclarys, Tysabri|Collaboration revenue from Roche's Ocrevus|Pays R&D from mature MS franchise cash flow", 'Segments: Merchant Solutions, Financial Solutions|Clover is SaaS plus payment processing|Bought First Data in 2019', 'Atlas cloud is the largest share of revenue|Developers adopt first, enterprise sales follow|Rivals: Postgres, Oracle, AWS DocumentDB', '170M+ domain names registered across .com and .net|.com price increases are capped by US Commerce Dept agreement|Also runs internet root server and DDoS services', 'Segments: Financial Services, Health Sciences, Products and Resources, Communications/Media|Most staff are in India|Bought Belcan (engineering) in 2024', 'Revenue = royalty receipts; cystic fibrosis drugs are the biggest|Two types: buy existing royalties, or fund development for royalties|Small team, very high margins', 'Segments: Intermodal, Dedicated, Integrated Capacity, Final Mile, Truckload|Owns a large fleet of containers|Fuel surcharges and rail rates drive profit', 'Segments: Underwriting and Rating; Claims|Products: ISO rating data, Xactimate, aerial imagery|Subscriptions renew at very high rates', 'Two buckets: Enterprise and Online|Platform: Meetings, Team Chat, Phone, Rooms, Contact Center, Workvivo|AI Companion included in paid plans', 'Fabs in Israel, California, Texas and Japan|Silicon photonics for optical transceivers|Other lines: power management, RF SOI, SiGe', 'Dollar Tree banner only, after Family Dollar sale|Now multi-price, with items above the old $1.25 cap|Heavy import exposure, so tariffs matter', 'Products: ZIA (internet), ZPA (private apps), Digital Experience|Add-ons: data protection, AI security|Sells through channel partners', 'Vyvgart IV and Vyvgart Hytrulo (subcutaneous, uses Halozyme ENHANZE)|Indications: myasthenia gravis, CIDP, more in review|Sales in US, Japan and Europe', 'Makes CdTe thin-film panels, not silicon|Plants in Ohio, Alabama, Louisiana and India|Tax credit (45X) is a big profit boost|Multi-year gigawatt backlog', 'Basins: Haynesville and Appalachia|Revenue: natural gas, NGLs, a little oil|Hedges protect cash flow|Formed by Chesapeake and Southwestern merger (2024)', 'Segments: Beauty retail and Salon services|Sells own Ulta Beauty Collection brand|Loyalty program has tens of millions of members', 'Top drugs: Tyvaso, Remodulin, Orenitram|Xenotransplantation: gene-edited pig organs (Revivicor)|Pipeline: ralinepag', 'Revenue streams: media rights, race promotion, sponsorship|Pays prize money to the 10 teams|Also owns MotoGP via Dorna', 'Products: Arikayce (rare lung infection), Brinsupri (bronchiectasis)|Brinsupri is first-in-class DPP1 inhibitor|Still investing heavily in R&D', 'Segments: Aerospace Products and Aviation Leasing|Buys engines, takes them apart, resells parts and modules|Sold infrastructure arm to focus on aviation', 'Revenue: merchant fees, interest income, gain on sale, servicing|Underwrites every purchase individually|0% APR promos are paid for by merchants', 'Segments: Vacuum Solutions, Photonics, Materials Solutions|Sells to chip tool makers and circuit board makers|Cycles with wafer fab equipment spending', 'Segments: Data Center, Telecom, Industrial and Defense|Chips: drivers, TIAs, lasers for 100G to 800G optics|Own fab in Lowell, Massachusetts', 'Fabs in New York, Vermont, Dresden and Singapore|Sells specialty nodes: 22FDX, RF SOI, silicon photonics|Receives CHIPS Act funding', 'Segments: E-Infrastructure, Transportation, Building Solutions|Revenue follows backlog|Based in The Woodlands, Texas', 'Satellites: BlueBird (large phased arrays)|Shares subscriber revenue with carrier partners|Also pursues US government contracts', 'Modular Building Block design speeds custom servers|Buyers: enterprises, cloud providers, AI factories|Margins pressured by price competition', 'Biggest line: security (DDoS, app and API protection)|Also compute (Linode) and content delivery|Bundles sold to enterprises', 'Products: Jira, Confluence, Bitbucket, Trello, Loom|Free tier plus paid cloud plans|Marketplace takes a cut of third-party apps', 'Products: NX Horizon trackers, foundations, eBOS|Software: TrueCapture|Spun out of Flex in 2023', 'Spectrum sale deals with AT&T and SpaceX|Business lines: Hughes broadband, DISH TV, Boost Mobile|Moving to a lighter asset base', 'Sites: data centers in Texas and British Columbia|AI cloud rents Nvidia Blackwell GPUs|Power from renewables', 'Segments: Cable Network Programming and Television|Brands: Fox News, Fox Business, FS1, Tubi, Big Ten rights|Class A shares have no votes', 'Class B shares carry the votes|Profit rights equal to Class A', 'Acquired CureVac in 2025|BMS collaboration on BNT327 (PD-L1 x VEGF)|Vaccine sales falling after COVID peak'];
+const g=document.getElementById('g');
+const rows=D.split('\n').map((l,i)=>{const[a,b,c,d,e]=l.split('~');return{i:i+1,n:a,w:b,d:c,m:d.split('|').concat((EX[i]||'').split('|')),c:e.split(',')}});
+const hue=s=>[...s].reduce((h,c)=>h*31+c.charCodeAt(0)|0,7)%360;
+function render(f){g.innerHTML='';rows.filter(r=>r.n.toLowerCase().includes(f)).forEach(r=>{
+const el=document.createElement('div');el.className='co';
+el.innerHTML=`<a class="top" href="https://${r.d}" target="_blank" rel="noopener">${logo(r.n,r.d,256)}<div><div class="n">${r.n} <span class="ar">↗</span></div><div class="r">#${r.i} · ${r.d}</div></div><div class="w">${r.w==='—'?'—':r.w+'%'}</div></a><div class="t">Business model</div><ul>${r.m.filter(Boolean).map(x=>`<li>${x}</li>`).join('')}</ul><div class="t">Named customers</div><div class="cu">${r.c.map(x=>`<div class="k" data-n="${x}">${logo(x,dom(x),128)}${x}</div>`).join('')}</div>`;
+g.appendChild(el)})}
+render('');document.getElementById('q').oninput=e=>render(e.target.value.toLowerCase());
+const m=document.getElementById('m'),mc=document.getElementById('mc');
+g.addEventListener('click',e=>{const k=e.target.closest('.k');if(!k)return;const n=k.dataset.n,kk=key(n),d=kk&&M[kk];
+mc.innerHTML=logo(n,d,256)+`<h3>${n}</h3><p>${(kk&&B[kk])||'Customer group rather than a single company, so there is no one website.'}</p>${(B2[kk]||[]).length?'<ul>'+B2[kk].map(x=>`<li>${x}</li>`).join('')+'</ul>':''}`+(d?`<a href="https://${d}" target="_blank" rel="noopener">Open website ↗</a>`:'');m.classList.add('o')});
+m.onclick=e=>{if(e.target===m||e.target.id==='x')m.classList.remove('o')};
+document.onkeydown=e=>{if(e.key==='Escape')m.classList.remove('o')};
+</script></body></html>
